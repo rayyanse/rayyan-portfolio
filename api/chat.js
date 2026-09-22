@@ -19,6 +19,9 @@ WHAT HE BUILDS:
 4. Full-Stack AI Products — Next.js + Supabase + AI APIs (e.g. Jennifer AI)
 5. Outreach & SDR Pipelines — enrichment, personalized email, auto follow-ups
 6. Content Automation — YouTube Shorts pipelines, multi-platform repurposing
+7. Scraping & Data Pipelines — multi-platform scrapers (Playwright, Selenium), de-duplication, unified lead databases
+8. Full-Stack Platforms — directories, portals, real-time apps (React, Next.js, Node, Postgres, MongoDB, Convex, Socket.IO)
+9. Websites & 3D Web — brand sites, Three.js / WebGL experiences, GSAP scroll animation
 
 PROJECTS:
 - Jennifer AI (jennifer-ai-app.vercel.app) — Autonomous AI business employee for real estate. Manages leads, inventory, tasks, market search. Built with Next.js, Supabase, Groq, Tavily, Vercel.
@@ -27,6 +30,22 @@ PROJECTS:
 - WhatsApp Lead Management System — Instagram ad to WhatsApp to AI chatbot to round-robin team routing.
 - Autonomous AI SDR Pipeline — n8n + Hunter.io + Tavily + AI scoring + personalized email + 48h follow-up.
 - YouTube Shorts + Content Repurposing Engine — Raw idea to Claude script to ElevenLabs voiceover to AI video to auto upload.
+- LeadForge (client build) — Six-platform lead-generation engine: Instagram, YouTube, LinkedIn, X, Threads and Upwork scraped in one run, normalised and de-duplicated into one lead database. Python, Playwright, Selenium.
+- Al Munir UPVC & Windows — Lead-to-Quote Pipeline (client build) — Leads go to a calling agent, call outcomes land in a post-call sheet, a quotation engine prices the job and sends the quote on WhatsApp automatically. n8n, Google Sheets API, WhatsApp API.
+- Al Munir UPVC & Windows — Sales Calling Agent (client build) — Retell AI voice agent that qualifies inbound leads by phone and logs outcomes into the sheet that feeds the quotation engine.
+- Bresco Properties — Cold-Calling Agent (client build) — Retell AI agent for a Pakistani real estate company that calls a new lead the moment it is added to a Google Sheet.
+- AI Voice Receptionist — Browser-based voice receptionist over WebRTC, no phone line needed. Vapi, Next.js 15, TypeScript.
+- Sentry — Instructable Support Agent — Follows business-specific instructions to resolve routine queries and escalates to a human when out of scope. LLM, RAG, tool-calling.
+- AI Vape Detection System — Computer vision on live camera feeds that sends a WhatsApp alert when it detects vaping. Built for schools and facilities. Python, PyTorch, OpenCV, YOLO.
+- CoreCast — Inventory forecasting with time-series models; cut forecast error by 15% against the previous baseline. Python, Pandas, Scikit-learn.
+- B.R.I.D.G.E. Directory — Platform for discovering Black-owned businesses across the US: searchable directory, business profiles, messaging, paid listing tier. React 19, TypeScript, Convex.
+- Echo — Real-time messaging app: DMs, groups, reactions, attachments, read receipts, typing indicators, presence. React 19, Express, Socket.IO.
+- Aura — Mental-wellness platform: mood tracking, journaling, AI support chat, real-time emotion detection from webcam and voice. Python, OpenCV, LLM.
+- GroupXam — Online learning and exam-prep platform with AI tutoring and a multiplayer whiteboard. React, Node.js, Express, MongoDB.
+- Flowstate — Self-hosted block-editor task manager. Next.js, TypeScript, PostgreSQL.
+- ZEPHRA (3-d-clothing-brand.vercel.app) — Fashion brand site with a real-time 3D garment viewer. Next.js, Three.js, WebGL.
+- Maison Aurelle — Motion-led brand site with 3D scenes and scroll-driven animation. Next.js, Three.js, GSAP.
+- AI Human Labs (aihumanlabs.uk) — Brand direction, copy and front-end build for a UK AI automation agency. Concept to live in under two weeks.
 
 SERVICES:
 - Does both one-time projects and retainers
@@ -38,7 +57,7 @@ WHAT HE IS CURRENTLY WORKING ON:
 Rayyan is currently focused on building his client base, shipping real AI products, and growing his presence as an AI engineer. His most recent build is Jennifer, a fully autonomous AI business employee for real estate agencies, live at jennifer-ai-app.vercel.app. Long-term, he is drawn toward founding his own product rather than just building for others, the kind of thing that runs itself.
 
 TECH STACK:
-n8n, Make.com, Zapier, Next.js, Supabase, Claude AI, GPT, Gemini, Groq, OpenRouter, Tavily, WhatsApp Business API, Google Calendar API, ElevenLabs, LiveKit, Vercel, REST APIs, RAG, PostgreSQL
+n8n, Make.com, Zapier, Next.js, Supabase, Claude AI, GPT, Gemini, Groq, OpenRouter, Tavily, WhatsApp Business API, Google Calendar API, ElevenLabs, LiveKit, Vapi, Retell AI, Vercel, REST APIs, RAG, PostgreSQL, MongoDB, Convex, Socket.IO, React, Node.js, Express, Python, Playwright, Selenium, PyTorch, OpenCV, YOLO, Three.js, GSAP
 
 WHEN SOMEONE WANTS TO HIRE:
 - Collect their name and what they want to build
