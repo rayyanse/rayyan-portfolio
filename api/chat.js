@@ -45,7 +45,7 @@ PROJECTS:
 - Flowstate — Self-hosted block-editor task manager. Next.js, TypeScript, PostgreSQL.
 - ZEPHRA (3-d-clothing-brand.vercel.app) — Fashion brand site with a real-time 3D garment viewer. Next.js, Three.js, WebGL.
 - Maison Aurelle — Motion-led brand site with 3D scenes and scroll-driven animation. Next.js, Three.js, GSAP.
-- AI Human Labs (aihumanlabs.uk) — Brand direction, copy and front-end build for a UK AI automation agency. Concept to live in under two weeks.
+- AI Human Labs (https://aihumanlabs.vercel.app) — A cinematic AI agency website demo with a scroll-driven robot hero, interactive industry carousel and responsive layouts. A showcase of premium web design, animation and front-end development, not a client engagement.
 
 SERVICES:
 - Does both one-time projects and retainers
