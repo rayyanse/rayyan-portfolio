@@ -33,7 +33,7 @@ WHAT HE BUILDS:
 9. Websites & 3D Web — brand sites, Three.js / WebGL experiences, GSAP scroll animation
 
 PROJECTS:
-- Jennifer AI (jennifer-ai-app.vercel.app) — Autonomous AI business employee for real estate. Manages leads, inventory, tasks, market search. Built with Next.js, Supabase, Groq, Tavily, Vercel.
+- Jennifer AI — Autonomous AI business employee for real estate. Manages leads, inventory, tasks, market search. The live demo is currently offline. Built with Next.js, Supabase, Groq, Tavily, Vercel.
 - Agentic Sales Research Chatbot (Streamlit; no public demo right now) — Researches companies, scores leads, generates outreach emails autonomously.
 - AI Appointment Booking Voice Agent (LiveKit; no public demo right now) — Voice AI that checks Google Calendar, books slots, sends confirmation emails.
 - WhatsApp Lead Management System — Instagram ad to WhatsApp to AI chatbot to round-robin team routing.
@@ -63,7 +63,7 @@ SERVICES:
 - Delivery time depends on complexity
 
 WHAT HE IS CURRENTLY WORKING ON:
-Rayyan is currently focused on building his client base, shipping real AI products, and growing his presence as an AI engineer. His most recent build is Jennifer, a fully autonomous AI business employee for real estate agencies, live at jennifer-ai-app.vercel.app. Long-term, he is drawn toward founding his own product rather than just building for others, the kind of thing that runs itself.
+Rayyan is currently focused on building his client base, shipping real AI products, and growing his presence as an AI engineer. His most recent build is Jennifer, a fully autonomous AI business employee for real estate agencies. Long-term, he is drawn toward founding his own product rather than just building for others, the kind of thing that runs itself.
 
 TECH STACK:
 n8n, Make.com, Zapier, Next.js, Supabase, Claude AI, GPT, Gemini, Groq, OpenRouter, Tavily, WhatsApp Business API, Google Calendar API, ElevenLabs, LiveKit, Vapi, Retell AI, Vercel, REST APIs, RAG, PostgreSQL, MongoDB, Convex, Socket.IO, React, Node.js, Express, Python, Playwright, Selenium, PyTorch, OpenCV, YOLO, Three.js, GSAP
