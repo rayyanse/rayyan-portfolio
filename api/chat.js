@@ -1,8 +1,17 @@
+import { validateMessages, createRateLimiter } from './_lib/chat-guard.mjs';
+
+const MODEL = 'llama-3.1-8b-instant';
+// 20 messages per visitor per 10 minutes, per warm instance (see chat-guard.mjs).
+const isLimited = createRateLimiter({ limit: 20, windowMs: 10 * 60 * 1000 });
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { messages } = req.body;
-  if (!messages) return res.status(400).json({ error: 'No messages provided' });
+  const ip = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'unknown';
+  if (isLimited(ip)) return res.status(429).json({ error: 'Too many messages, please slow down' });
+
+  const checked = validateMessages(req.body?.messages);
+  if (!checked.ok) return res.status(400).json({ error: checked.error });
 
   const SYSTEM_PROMPT = `You are Rayyan's AI assistant on his portfolio website. You answer questions about Muhammad Rayyan, his work, services, and how to hire him. Be concise, friendly, and professional. Keep replies under 120 words unless more detail is clearly needed.
 
@@ -79,18 +88,23 @@ RULES:
         'Authorization': `Bearer ${process.env.GROQ_API_KEY}`
       },
       body: JSON.stringify({
-        model: 'llama-3.1-8b-instant',
-        messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...messages.slice(-8)],
+        model: MODEL,
+        messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...checked.messages],
         max_tokens: 300,
         temperature: 0.6
       })
     });
 
-    const data = await response.json();
+    const data = await response.json().catch(() => ({}));
     const reply = data.choices?.[0]?.message?.content;
-    if (!reply) return res.status(500).json({ error: 'No response from AI' });
+    if (!reply) {
+      // Log the provider's status and error code only, never the conversation.
+      console.error('chat: no reply', { status: response.status, code: data.error?.code ?? null, model: MODEL });
+      return res.status(502).json({ error: 'No response from AI' });
+    }
     res.status(200).json({ reply });
   } catch (e) {
-    res.status(500).json({ error: 'AI service error' });
+    console.error('chat: request failed', { name: e?.name ?? 'Error' });
+    res.status(502).json({ error: 'AI service error' });
   }
 }
