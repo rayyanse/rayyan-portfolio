@@ -34,8 +34,8 @@ WHAT HE BUILDS:
 
 PROJECTS:
 - Jennifer AI (jennifer-ai-app.vercel.app) — Autonomous AI business employee for real estate. Manages leads, inventory, tasks, market search. Built with Next.js, Supabase, Groq, Tavily, Vercel.
-- Agentic Sales Research Chatbot (live on Streamlit) — Researches companies, scores leads, generates outreach emails autonomously.
-- AI Appointment Booking Voice Agent (live on LiveKit) — Voice AI that checks Google Calendar, books slots, sends confirmation emails.
+- Agentic Sales Research Chatbot (Streamlit; no public demo right now) — Researches companies, scores leads, generates outreach emails autonomously.
+- AI Appointment Booking Voice Agent (LiveKit; no public demo right now) — Voice AI that checks Google Calendar, books slots, sends confirmation emails.
 - WhatsApp Lead Management System — Instagram ad to WhatsApp to AI chatbot to round-robin team routing.
 - Autonomous AI SDR Pipeline — n8n + Hunter.io + Tavily + AI scoring + personalized email + 48h follow-up.
 - YouTube Shorts + Content Repurposing Engine — Raw idea to Claude script to ElevenLabs voiceover to AI video to auto upload.
