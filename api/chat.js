@@ -1,6 +1,6 @@
 import { validateMessages, createRateLimiter } from './_lib/chat-guard.mjs';
+import { generateReply } from './_lib/gemini.mjs';
 
-const MODEL = 'llama-3.1-8b-instant';
 // 20 messages per visitor per 10 minutes, per warm instance (see chat-guard.mjs).
 const isLimited = createRateLimiter({ limit: 20, windowMs: 10 * 60 * 1000 });
 
@@ -80,29 +80,23 @@ RULES:
 - If unsure, say "Best to ask Rayyan directly on WhatsApp: +92 321 8234852"
 - Always end hiring-related messages with WhatsApp CTA`;
 
-  try {
-    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.GROQ_API_KEY}`
-      },
-      body: JSON.stringify({
-        model: MODEL,
-        messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...checked.messages],
-        max_tokens: 300,
-        temperature: 0.6
-      })
-    });
+  if (!process.env.GEMINI_API_KEY) {
+    console.error('chat: GEMINI_API_KEY is not set');
+    return res.status(503).json({ error: 'AI service not configured' });
+  }
 
-    const data = await response.json().catch(() => ({}));
-    const reply = data.choices?.[0]?.message?.content;
-    if (!reply) {
+  try {
+    const result = await generateReply({
+      apiKey: process.env.GEMINI_API_KEY,
+      systemPrompt: SYSTEM_PROMPT,
+      messages: checked.messages,
+    });
+    if (result.error) {
       // Log the provider's status and error code only, never the conversation.
-      console.error('chat: no reply', { status: response.status, code: data.error?.code ?? null, model: MODEL });
+      console.error('chat: no reply', result.error);
       return res.status(502).json({ error: 'No response from AI' });
     }
-    res.status(200).json({ reply });
+    res.status(200).json({ reply: result.reply });
   } catch (e) {
     console.error('chat: request failed', { name: e?.name ?? 'Error' });
     res.status(502).json({ error: 'AI service error' });
