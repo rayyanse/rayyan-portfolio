@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { validateMessages, createRateLimiter, MAX_MESSAGES, MAX_CHARS } from '../api/_lib/chat-guard.mjs';
+import { validateMessages, createRateLimiter, MAX_MESSAGES, MAX_CHARS } from '../api/_lib/chat-guard.js';
 
 const user = (content = 'hi') => ({ role: 'user', content });
 const bot = (content = 'hello') => ({ role: 'assistant', content });

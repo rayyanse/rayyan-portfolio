@@ -1,7 +1,7 @@
-import { validateMessages, createRateLimiter } from './_lib/chat-guard.mjs';
-import { generateReply } from './_lib/gemini.mjs';
+import { validateMessages, createRateLimiter } from './_lib/chat-guard.js';
+import { generateReply } from './_lib/gemini.js';
 
-// 20 messages per visitor per 10 minutes, per warm instance (see chat-guard.mjs).
+// 20 messages per visitor per 10 minutes, per warm instance (see chat-guard.js).
 const isLimited = createRateLimiter({ limit: 20, windowMs: 10 * 60 * 1000 });
 
 export default async function handler(req, res) {

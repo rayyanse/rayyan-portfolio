@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { toGeminiRequest, readReply, generateReply, MODELS } from '../api/_lib/gemini.mjs';
+import { toGeminiRequest, readReply, generateReply, MODELS } from '../api/_lib/gemini.js';
 
 const msgs = [
   { role: 'user', content: 'hi' },
