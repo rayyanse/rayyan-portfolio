@@ -705,7 +705,7 @@ setTimeout(function(){if(!window.__motionOK){d.classList.remove('js-motion','boo
       <div class="net-kpis">
         <div class="kpi hot" data-hi><b data-count="9" data-suffix="s">9s</b><span>First reply to a new lead</span></div>
         <div class="kpi" data-hi><b>24/7</b><span>Agents on shift</span></div>
-        <div class="kpi" data-hi><b data-count="22">22</b><span>Systems shipped</span></div>
+        <div class="kpi" data-hi><b data-count="21">21</b><span>Systems shipped</span></div>
         <div class="kpi" data-hi><b>0</b><span>Manual CRM updates</span></div>
       </div>
     </div>
@@ -785,7 +785,7 @@ setTimeout(function(){if(!window.__motionOK){d.classList.remove('js-motion','boo
   <div class="container">
     <div class="head rv">
       <div class="label">Selected work</div>
-      <h2>Twenty-two systems, shipped. Two you can open and try right now.</h2>
+      <h2>Twenty-one systems, shipped. Two you can open and try right now.</h2>
       <p class="lede">Agents, voice systems, scraping pipelines, platforms and websites. Filter by what you need built — each one shows the problem, the stack, and whether you can go use it today.</p>
     </div>
 
@@ -988,18 +988,6 @@ setTimeout(function(){if(!window.__motionOK){d.classList.remove('js-motion','boo
           <p>A voice receptionist that runs in the browser. It answers, holds a natural conversation and routes the caller over WebRTC, with no phone line needed.</p>
           <div class="proj-foot">
             <div class="stackline"><span>Vapi</span><span>Next.js 15</span><span>TypeScript</span><span>WebRTC</span></div>
-          </div>
-        </div>
-      </article>
-
-      <article class="card proj rv" data-cat="voice">
-        <div class="proj-viz" data-viz="munircall"></div>
-        <div class="proj-in">
-          <span class="tag g">Client build</span>
-          <h3>Al Munir UPVC — Sales Calling Agent</h3>
-          <p>The voice half of the lead-to-quote system. It qualifies inbound leads over the phone, captures their requirements in conversation and logs the outcome into the sheet that feeds the quotation engine.</p>
-          <div class="proj-foot">
-            <div class="stackline"><span>Retell AI</span><span>Voice AI</span><span>Sheets API</span></div>
           </div>
         </div>
       </article>
@@ -1406,11 +1394,6 @@ receptionist:()=>
   G('s-pop',1.6,Rc(222,22,82,18,'vp',null,5,'style="stroke:#3B7DE0"')+T(230,34,'→ bookings','sm ac'))+
   T(160,118,'webrtc · no phone line','sm lo s-in',.2,MID),
 
-munircall:()=>
-  T(18,16,'LIVE CALL · AL MUNIR','sm lo')+wave(18,48,5.9,40,20,2)+
-  T(18,76,'width 6 ft · height 4 ft','hi s-type',.3)+T(18,90,'sliding · 3 units · DHA','hi s-type',.9)+
-  G('s-in',1.5,Rc(18,102,284,22,'vp',null,5)+T(28,116,'6x4','sm hi')+T(84,116,'sliding','sm hi')+T(156,116,'3 units','sm hi')+T(292,116,'✓ logged','sm gn',null,END)),
-
 sentry:()=>
   Rc(18,12,96,116,'vp',null,8)+T(28,28,'rules.md','sm ac')+
   T(28,46,'refunds < 14 days','sm lo s-in',.1)+T(28,60,'no legal advice','sm lo s-in',.2)+T(28,74,'billing → human','sm lo s-in',.3)+Rc(28,86,60,3,'vg s-gx',.4,1.5)+Rc(28,94,48,3,'vg s-gx',.5,1.5)+
@@ -1545,7 +1528,7 @@ function heroIntro(){
 function boot(){
   if(!root.classList.contains('booting')){ heroIntro(); return; }
   const log=$('#bootLog'), bar=$('#bootBar'), pct=$('#bootPct'), el=$('#boot');
-  const steps=[[.1,'mounting agents'],[.36,'wiring 22 systems'],[.64,'opening network'],[.9,'handshake ok']];
+  const steps=[[.1,'mounting agents'],[.36,'wiring 21 systems'],[.64,'opening network'],[.9,'handshake ok']];
   let shown=0, p=0, loaded=document.readyState==='complete', done=false;
   addEventListener('load',()=>{ loaded=true; },{once:true});
   const t0=performance.now();
