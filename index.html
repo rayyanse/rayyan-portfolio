@@ -49,7 +49,10 @@
 <meta name="theme-color" content="#05070C" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Fonts load without blocking the first paint; text shows in the fallback font until they arrive. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"></noscript>
 <style>
 /* ============ RESET ============ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -508,6 +511,7 @@ footer{border-top:1px solid var(--line);padding-block:34px}
    which is set before first paint and never set for prefers-reduced-motion. */
 .js-motion .rv:not(.in){opacity:0}
 .js-motion [data-hi]{opacity:0}
+.js-motion .hero .lede{opacity:1}
 .js-motion .hero h1 .ln>span{transform:translateY(110%)}
 .intro-done [data-hi]{opacity:1!important}
 .intro-done .hero h1 .ln>span{transform:none!important}
@@ -1583,7 +1587,8 @@ function heroIntro(){
   tl.fromTo('.hero h1 .ln>span',{yPercent:110},{yPercent:0,duration:1.15,stagger:.09},0)
     .fromTo('.status',{opacity:0,y:10},{opacity:1,y:0,duration:.7},.05)
     .call(()=>scramble($('#heroGrad'),950),null,.5)
-    .fromTo('.hero .lede',{opacity:0,y:16,filter:'blur(6px)'},{opacity:1,y:0,filter:'blur(0px)',duration:.9},.45)
+    // No fade on the lede: it's the page's largest element, and Google only counts it as loaded once it's visible.
+    .fromTo('.hero .lede',{y:16,filter:'blur(6px)'},{y:0,filter:'blur(0px)',duration:.9},.45)
     .fromTo('.hero-actions>*',{opacity:0,y:14},{opacity:1,y:0,duration:.8,stagger:.08},.6)
     .fromTo('.proof .chip',{opacity:0,y:10},{opacity:1,y:0,duration:.7,stagger:.06},.75)
     .fromTo('.net-frame,.net-read,.net .live-tag',{opacity:0},{opacity:1,duration:.6,stagger:.08},.9)
