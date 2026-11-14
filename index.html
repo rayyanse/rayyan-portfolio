@@ -628,6 +628,19 @@ footer{border-top:1px solid var(--line);padding-block:34px}
 .typing span:nth-child(3){animation-delay:.32s}
 @keyframes bounce{0%,60%,100%{transform:translateY(0);opacity:.45}30%{transform:translateY(-5px);opacity:1}}
 @media(max-width:520px){.chat-bubble{bottom:18px;right:18px}.chat-panel{bottom:84px;right:18px}}
+
+/* film player: a card's "Watch" button opens its walkthrough film in a modal with sound */
+.watch svg{width:13px;height:13px}
+.film-modal{padding:0;border:0;background:transparent;max-width:none;max-height:none;width:100vw;height:100vh;color:var(--text)}
+.film-modal::backdrop{background:rgba(5,7,12,.82);backdrop-filter:blur(10px)}
+.film-modal[open]{display:grid;place-items:center}
+.film-box{position:relative;width:min(1200px,calc(100vw - 32px));animation:film-in .35s cubic-bezier(.16,1,.3,1)}
+.film-box video{display:block;width:100%;aspect-ratio:16/9;border-radius:14px;background:#000;box-shadow:0 40px 120px -20px rgba(0,0,0,.9),0 0 0 1px var(--line)}
+.film-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-weight:600}
+.film-close{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:rgba(17,23,38,.8);color:var(--text);font-size:22px;line-height:1;cursor:pointer}
+.film-close:hover{border-color:var(--blue-400)}
+@keyframes film-in{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.film-box{animation:none}}
 </style>
 <script>/* motion flags, set before first paint */
 (function(){var d=document.documentElement;
@@ -796,6 +809,7 @@ setTimeout(function(){if(!window.__motionOK){d.classList.remove('js-motion','boo
           <span class="tag v"><span class="dot"></span>Flagship build</span>
           <div class="flag-title">
             <h3>Jennifer — Autonomous AI Business Employee</h3>
+            <button type="button" class="btn btn-ghost btn-sm watch" data-film="jennifer" data-title="Jennifer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch how it works</button>
           </div>
           <p>An AI business assistant for real estate agencies. It manages leads, scores intent, tracks follow-ups, searches live market data, keeps property inventory current, and delivers a daily business briefing — all through natural conversation.</p>
           <div class="mini">
@@ -842,6 +856,7 @@ setTimeout(function(){if(!window.__motionOK){d.classList.remove('js-motion','boo
           </ul>
           <div class="proj-foot">
             <div class="stackline"><span>Streamlit</span><span>Agentic AI</span><span>Web Search</span><span>RAG</span></div>
+            <button type="button" class="btn btn-ghost btn-sm watch" data-film="research" data-title="Agentic Sales Research Chatbot"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch how it works</button>
           </div>
         </div>
       </article>
@@ -858,6 +873,7 @@ setTimeout(function(){if(!window.__motionOK){d.classList.remove('js-motion','boo
           </ul>
           <div class="proj-foot">
             <div class="stackline"><span>LiveKit</span><span>Voice AI</span><span>Calendar API</span><span>Email</span></div>
+            <button type="button" class="btn btn-ghost btn-sm watch" data-film="booking" data-title="AI Appointment Booking Voice Agent"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch how it works</button>
           </div>
         </div>
       </article>
@@ -870,6 +886,7 @@ setTimeout(function(){if(!window.__motionOK){d.classList.remove('js-motion','boo
           <p>A fashion brand site built around a real-time 3D garment viewer. Visitors pick a silhouette and turn the piece around in the browser. There's no product photography anywhere on the page.</p>
           <div class="proj-foot">
             <div class="stackline"><span>Next.js</span><span>Three.js</span><span>WebGL</span><span>React</span></div>
+            <button type="button" class="btn btn-ghost btn-sm watch" data-film="zephra" data-title="ZEPHRA"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch demo</button>
             <a href="https://3-d-clothing-brand.vercel.app" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Open site<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
           </div>
         </div>
@@ -883,6 +900,7 @@ setTimeout(function(){if(!window.__motionOK){d.classList.remove('js-motion','boo
           <p>A cinematic AI agency website demo with a scroll-driven robot hero, interactive industry carousel and responsive layouts. Built to showcase premium web design, animation and front-end development.</p>
           <div class="proj-foot">
             <div class="stackline"><span>React</span><span>Vite</span><span>3D</span><span>SPA</span></div>
+            <button type="button" class="btn btn-ghost btn-sm watch" data-film="humanlabs" data-title="AI Human Labs"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch demo</button>
             <a href="https://aihumanlabs.vercel.app" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">View demo<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
           </div>
         </div>
@@ -900,6 +918,7 @@ setTimeout(function(){if(!window.__motionOK){d.classList.remove('js-motion','boo
           </ul>
           <div class="proj-foot">
             <div class="stackline"><span>Python</span><span>Playwright</span><span>Groq</span><span>Claude</span><span>Supabase</span><span>Next.js</span></div>
+            <button type="button" class="btn btn-ghost btn-sm watch" data-film="leadforge" data-title="LeadForge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch how it works</button>
           </div>
         </div>
       </article>
@@ -917,6 +936,7 @@ setTimeout(function(){if(!window.__motionOK){d.classList.remove('js-motion','boo
           </ul>
           <div class="proj-foot">
             <div class="stackline"><span>n8n</span><span>Apify</span><span>Retell AI</span><span>Google Sheets</span><span>PDF.co</span><span>WhatsApp Cloud API</span><span>Claude</span></div>
+            <button type="button" class="btn btn-ghost btn-sm watch" data-film="almunir" data-title="Al Munir UPVC"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch how it works</button>
           </div>
         </div>
       </article>
@@ -965,6 +985,7 @@ setTimeout(function(){if(!window.__motionOK){d.classList.remove('js-motion','boo
           </ul>
           <div class="proj-foot">
             <div class="stackline"><span>n8n</span><span>Hunter.io</span><span>Tavily</span><span>Claude</span></div>
+            <button type="button" class="btn btn-ghost btn-sm watch" data-film="sdr" data-title="Autonomous AI SDR Pipeline"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch how it works</button>
           </div>
         </div>
       </article>
@@ -1016,6 +1037,7 @@ setTimeout(function(){if(!window.__motionOK){d.classList.remove('js-motion','boo
           <p>Computer vision on live camera feeds that sends a WhatsApp alert the moment it spots vaping. Built for schools and managed facilities.</p>
           <div class="proj-foot">
             <div class="stackline"><span>Python</span><span>PyTorch</span><span>OpenCV</span><span>YOLO</span><span>WhatsApp API</span></div>
+            <button type="button" class="btn btn-ghost btn-sm watch" data-film="vape" data-title="AI Vape Detection System"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch how it works</button>
           </div>
         </div>
       </article>
@@ -1076,6 +1098,7 @@ setTimeout(function(){if(!window.__motionOK){d.classList.remove('js-motion','boo
           <p>A block-editor task manager built on one rule: work flows down the hierarchy and nothing gets lost. Fully self-hosted, with no cloud account and no API keys.</p>
           <div class="proj-foot">
             <div class="stackline"><span>Next.js</span><span>TypeScript</span><span>PostgreSQL</span></div>
+            <button type="button" class="btn btn-ghost btn-sm watch" data-film="flowstate" data-title="Flowstate"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch how it works</button>
           </div>
         </div>
       </article>
@@ -1795,6 +1818,28 @@ function init(){
   else if(window.__heroGo) go();
   else { addEventListener('hero:intro',go,{once:true}); setTimeout(go,5000); draw(performance.now()); }
 }
+</script>
+
+<dialog class="film-modal" id="film-modal" aria-label="Project film">
+  <div class="film-box">
+    <div class="film-head"><span id="film-title"></span><button type="button" class="film-close" aria-label="Close film">&times;</button></div>
+    <video id="film-video" controls playsinline preload="none"></video>
+  </div>
+</dialog>
+<script>
+(function(){
+  var m=document.getElementById('film-modal'),v=document.getElementById('film-video'),tt=document.getElementById('film-title'),opener=null;
+  if(!m||!m.showModal)return;
+  function close(){m.close()}
+  m.addEventListener('close',function(){v.pause();v.removeAttribute('src');v.load();if(opener)opener.focus()});
+  m.addEventListener('click',function(e){if(e.target===m)close()});
+  m.querySelector('.film-close').addEventListener('click',close);
+  document.querySelectorAll('.watch').forEach(function(b){b.addEventListener('click',function(){
+    var f=b.getAttribute('data-film');opener=b;tt.textContent=b.getAttribute('data-title');
+    v.poster='films/'+f+'.jpg';v.src='films/'+f+'.mp4';m.showModal();
+    var p=v.play();if(p&&p.catch)p.catch(function(){});
+  })});
+})();
 </script>
 </body>
 </html>
