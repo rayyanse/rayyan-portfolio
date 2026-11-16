@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "rayyan-portfolio-psi.vercel.app" }],
+      "destination": "https://rayyankhan.dev/$1",
+      "permanent": true
+    }
+  ]
+}
