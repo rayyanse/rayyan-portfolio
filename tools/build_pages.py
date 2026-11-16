@@ -21,6 +21,8 @@ WHATSAPP = "https://wa.me/923218234852"
 ROOT = Path(__file__).resolve().parent.parent
 # Publish date of these pages and their films (VideoObject uploadDate, sitemap lastmod).
 FILM_DATE = "2026-11-16"
+# Pages written by hand (not by this script) that still belong in sitemap.xml: (path, lastmod).
+HAND_PAGES = [("/seo-ray", "2026-11-16"), ("/privacy", "2026-11-16")]
 SAMPLE = "Walkthrough film · names and numbers are sample data"
 # Films with light (white UI) posters get a dimmed, blue-tinted hero treatment so they sit in the dark layout.
 LIGHT_FILMS = {"almunir", "booking", "flowstate"}
@@ -873,9 +875,11 @@ def main() -> None:
 
 
 def write_sitemap() -> None:
-    """Every generated page. lastmod is the build date (FILM_DATE), bump it when content changes."""
+    """Every generated page, plus the hand-written pages in HAND_PAGES. lastmod is the build date
+    (FILM_DATE) for generated pages; bump it when content changes."""
     paths = ["/", "/projects"] + [f"/{s['slug']}" for s in SERVICES] + [f"/work/{c['slug']}" for c in CASES]
-    urls = "".join(f"  <url>\n    <loc>{SITE}{p}</loc>\n    <lastmod>{FILM_DATE}</lastmod>\n  </url>\n" for p in paths)
+    entries = [(p, FILM_DATE) for p in paths] + HAND_PAGES
+    urls = "".join(f"  <url>\n    <loc>{SITE}{p}</loc>\n    <lastmod>{d}</lastmod>\n  </url>\n" for p, d in entries)
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + "</urlset>\n"
     (ROOT / "sitemap.xml").write_text(xml, encoding="utf-8")
 
