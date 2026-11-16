@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SEO-Ray: website audits and search setup | Rawaiz Tech</title>
+<meta name="description" content="SEO-Ray checks how Google and AI assistants read a website, writes plain-English and developer reports, and sets the site up in Google Search Console and Bing." />
+<link rel="canonical" href="https://rayyankhan.dev/seo-ray" />
+<link rel="icon" href="/favicon.ico" sizes="32x32 48x48" />
+<link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<meta property="og:title" content="SEO-Ray by Rawaiz Tech" />
+<meta property="og:description" content="Website audits for Google and AI search, with the Search Console and Bing setup done for you." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://rayyankhan.dev/seo-ray" />
+<meta property="og:image" content="https://rayyankhan.dev/seo-ray-report.jpg" />
+<meta name="theme-color" content="#05070C" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "SEO-Ray",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Windows, macOS, Linux",
+  "url": "https://rayyankhan.dev/seo-ray",
+  "description": "Audits how Google and AI assistants read a website and sets the site up in Google Search Console, Bing Webmaster Tools and IndexNow.",
+  "author": { "@id": "https://rayyankhan.dev/#person" },
+  "publisher": { "@type": "Person", "@id": "https://rayyankhan.dev/#person", "name": "Agha Muhammad Rayyan Khan" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+:root{
+  --void:#05070C;--bg:#0A0E17;--surface:rgba(17,23,38,.62);--line:rgba(107,166,245,.10);--line-2:rgba(107,166,245,.20);
+  --text:#EEF3FB;--muted:#97A6C0;--dim:#76839F;--cyan:#6BA6F5;--blue-400:#3B7DE0;--blue-500:#1E4FA8;--blood-500:#B01327;
+  --display:'Space Grotesk',system-ui,sans-serif;--body:'Inter',system-ui,-apple-system,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;
+  --ease-out:cubic-bezier(.16,1,.3,1);--max:1180px;--pad:clamp(20px,5vw,40px);
+}
+body{font-family:var(--body);background:var(--void);color:var(--text);line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.field{position:fixed;inset:0;z-index:-2;pointer-events:none}
+.field::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(148,163,184,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.045) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse 90% 60% at 50% 0%,#000 10%,transparent 75%)}
+.field::after{content:'';position:absolute;width:760px;height:760px;top:-320px;right:-240px;border-radius:50%;filter:blur(100px);background:radial-gradient(circle,rgba(59,125,224,.26),transparent 68%)}
+.grain{position:fixed;inset:-50%;z-index:-1;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--pad)}
+
+header.top{position:sticky;top:0;z-index:10;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(5,7,12,.6);border-bottom:1px solid var(--line);transition:padding .4s var(--ease-out)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.mark{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:var(--muted)}
+.mark b{color:var(--text);font-weight:500}
+nav.links{display:flex;gap:22px;font-size:14px;color:var(--muted)}
+nav.links a{text-decoration:none;transition:color .2s}
+nav.links a:hover{color:var(--text)}
+
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(32px,5vw,72px);align-items:center;padding-block:clamp(64px,9vw,120px) clamp(56px,7vw,96px)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan)}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(40px,6.2vw,76px);line-height:1.02;letter-spacing:-.035em;margin:18px 0 22px;margin-left:-.04em}
+.lede{font-size:clamp(17px,1.6vw,19px);color:var(--muted);max-width:34em}
+.facts{display:flex;gap:28px;margin-top:34px;flex-wrap:wrap}
+.facts div{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.facts strong{display:block;font-family:var(--display);font-size:30px;letter-spacing:-.02em;color:var(--text);text-transform:none;font-weight:500}
+.paper{position:relative;margin-right:calc(var(--pad) * -1.6);border-radius:14px;padding:22px 22px 10px;background:#FAFAF7;box-shadow:0 40px 90px -30px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.06);transform:rotate(1.2deg);will-change:transform}
+.paper img{border-radius:4px}
+.paper figcaption{font-family:var(--mono);font-size:11px;color:#6b7280;letter-spacing:.06em;padding:10px 2px 6px}
+
+section.block{padding-block:clamp(56px,7vw,96px);border-top:1px solid var(--line)}
+.split{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:clamp(28px,5vw,80px)}
+h2{font-family:var(--display);font-weight:600;font-size:clamp(28px,3.4vw,42px);letter-spacing:-.025em;line-height:1.1}
+.sub{color:var(--dim);font-size:14px;margin-top:12px;max-width:22em}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.checks li{list-style:none;padding:18px 0;border-bottom:1px solid var(--line);padding-right:24px}
+.checks b{display:block;font-weight:600;font-size:16px;margin-bottom:4px}
+.checks span{color:var(--muted);font-size:15px}
+
+.scopes{display:grid;gap:14px}
+.scope{background:var(--surface);border:1px solid var(--line-2);border-radius:14px;padding:22px 24px;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+.scope code{font-family:var(--mono);font-size:12px;color:var(--cyan);word-break:break-all}
+.scope h3{font-family:var(--display);font-size:19px;font-weight:600;margin:6px 0 8px;letter-spacing:-.01em}
+.scope p{color:var(--muted);font-size:15px}
+.never{margin-top:22px;padding:20px 24px;border-left:2px solid var(--blood-500);background:rgba(176,19,39,.06);border-radius:0 12px 12px 0}
+.never b{font-weight:600}
+.never p{color:var(--muted);font-size:15px;margin-top:6px}
+.limited{margin-top:22px;font-size:15px;color:var(--muted)}
+.limited a,.contact a,.prose a{color:var(--cyan);text-decoration-color:rgba(107,166,245,.35);text-underline-offset:3px}
+.contact{color:var(--muted);font-size:16px}
+.contact p+p{margin-top:12px}
+
+footer{border-top:1px solid var(--line);padding-block:28px;font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:.06em}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{text-decoration:none;color:var(--muted)}
+
+/* entrance + scroll reveal */
+.rise{opacity:0;transform:translateY(24px);filter:blur(8px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out),filter .9s var(--ease-out)}
+.rise.in{opacity:1;transform:none;filter:none}
+@media (prefers-reduced-motion:reduce){.rise{opacity:1;transform:none;filter:none;transition:none}.paper{transform:none}}
+
+@media (max-width:860px){
+  .hero,.split{grid-template-columns:1fr}
+  .paper{margin-right:0;transform:none}
+  .checks{grid-template-columns:1fr}
+  nav.links{gap:16px}
+}
+nav.links a{white-space:nowrap}
+@media (max-width:520px){.mark .by,nav.links .wide{display:none}}
+</style>
+</head>
+<body>
+<div class="field" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="/"><b>SEO-Ray</b><span class="by"> · Rawaiz Tech</span></a>
+    <nav class="links" aria-label="Page">
+      <a href="#google-data" class="wide">Google data</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/">Rayyan Khan</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div>
+      <p class="eyebrow rise">SEO-Ray · built by Rawaiz Tech</p>
+      <h1 class="rise">See your website the way Google and AI assistants do.</h1>
+      <p class="lede rise">SEO-Ray crawls a site, measures its speed on a phone, checks what Google has indexed and whether ChatGPT-style assistants can read it, then writes two reports: one in plain English for the owner, one with the exact fixes for the developer. With the owner's permission it also sets the site up in Google Search Console and Bing.</p>
+      <div class="facts rise">
+        <div><strong>77 → 98</strong>our own site, one fix pass</div>
+        <div><strong>4.3 → 2.0 s</strong>phone load time</div>
+        <div><strong>2</strong>reports per audit</div>
+      </div>
+    </div>
+    <figure class="paper rise" id="paper">
+      <img src="/seo-ray-report.jpg" width="1588" height="1180" alt="A page from an SEO-Ray report for rayyankhan.dev: category scores (technical health 100, speed 100, AI visibility 94, on-page 88, content 54, structured data 100, name on Google 42), a score trend, and counts of 0 critical, 4 important and 7 minor findings." loading="eager" />
+      <figcaption>A real SEO-Ray owner report, rayyankhan.dev, 16 Nov 2026</figcaption>
+    </figure>
+  </div>
+
+  <section class="block">
+    <div class="wrap split">
+      <div class="rise">
+        <h2>What it checks</h2>
+        <p class="sub">Every rule is checked against Google's own documentation before it goes in.</p>
+      </div>
+      <ul class="checks rise">
+        <li><b>Technical health</b><span>Robots rules, redirects, canonical tags, sitemaps, HTTPS, broken pages.</span></li>
+        <li><b>Speed on a phone</b><span>Google's real-visitor data where it exists, Lighthouse lab runs where it doesn't.</span></li>
+        <li><b>What Google indexed</b><span>Which pages Google has, and which it skipped and why.</span></li>
+        <li><b>AI assistants</b><span>Whether AI search bots are allowed in, and whether Gemini knows the business.</span></li>
+        <li><b>Your name on Google</b><span>What people see when they search the owner's or the business's name.</span></li>
+        <li><b>Structured data</b><span>Schema markup validated against schema.org and Google's required fields.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="google-data">
+    <div class="wrap split">
+      <div class="rise">
+        <h2>What SEO-Ray does with your Google account</h2>
+        <p class="sub">Only if you choose to connect it. You sign in on Google's own screen and can disconnect at any time.</p>
+      </div>
+      <div class="rise">
+        <div class="scopes">
+          <div class="scope">
+            <code>https://www.googleapis.com/auth/webmasters</code>
+            <h3>Search Console: view and manage your verified sites</h3>
+            <p>Used to add your website to Search Console, submit its sitemap, and read its search performance (searches, clicks, impressions, positions) and Google's index status for its key pages. That data goes into the reports for your site and nowhere else. The read-only permission can't add a site or submit a sitemap, which is why this one is needed.</p>
+          </div>
+          <div class="scope">
+            <code>https://www.googleapis.com/auth/siteverification</code>
+            <h3>Site verification: manage the sites you control</h3>
+            <p>Used to get a verification code for the domain you asked us to set up and to ask Google to confirm it, after SEO-Ray publishes the code as a DNS record. Nothing else is verified or changed.</p>
+          </div>
+          <div class="scope">
+            <code>openid · email</code>
+            <h3>Your Google account email</h3>
+            <p>Used to label the connection, so we know which account belongs to which website.</p>
+          </div>
+        </div>
+        <div class="never">
+          <b>What SEO-Ray never does</b>
+          <p>It doesn't read Gmail, Drive, Calendar or any other Google data, doesn't sell or share your data, doesn't use it for advertising, and doesn't use it to train AI models. It only works on the websites you ask us to work on.</p>
+        </div>
+        <p class="limited">SEO-Ray's use and transfer of information received from Google APIs to any other app will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including the Limited Use requirements. Details are in the <a href="/privacy">privacy policy</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap split">
+      <div class="rise"><h2>Who runs it</h2></div>
+      <div class="contact rise">
+        <p>SEO-Ray is built and run by Agha Muhammad Rayyan Khan, trading as Rawaiz Tech, an AI systems engineer in Lahore, Pakistan. We use it to audit and set up websites for the owners who ask us to.</p>
+        <p>Questions, or want your data removed: <a href="mailto:seo@rayyankhan.dev">seo@rayyankhan.dev</a>. Read the <a href="/privacy">privacy policy</a>.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Agha Muhammad Rayyan Khan · Rawaiz Tech</span>
+    <span><a href="/privacy">Privacy policy</a> · <a href="mailto:seo@rayyankhan.dev">seo@rayyankhan.dev</a></span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const items = [...document.querySelectorAll('.rise')];
+  if (reduce || !('IntersectionObserver' in window)) { items.forEach((el) => el.classList.add('in')); return; }
+  // Hero items enter in a stagger; the rest reveal as they scroll into view.
+  const heroItems = items.filter((el) => el.closest('.hero'));
+  heroItems.forEach((el, i) => setTimeout(() => el.classList.add('in'), 120 + i * 110));
+  const io = new IntersectionObserver((entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -10% 0px' });
+  items.filter((el) => !heroItems.includes(el)).forEach((el) => io.observe(el));
+  // The report page drifts and straightens slightly as you scroll past it.
+  const paper = document.getElementById('paper');
+  let ticking = false;
+  addEventListener('scroll', () => {
+    if (ticking || innerWidth < 860) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const p = Math.min(scrollY / 600, 1);
+      paper.style.transform = `translateY(${p * -28}px) rotate(${1.2 - p * 1.2}deg)`;
+      ticking = false;
+    });
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>
