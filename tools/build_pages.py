@@ -281,46 +281,32 @@ FILTERS = [("all", "Everything"), ("automation", "Automation"), ("ai", "AI & age
            ("platforms", "Platforms"), ("web", "Websites"), ("data", "Data & ML")]
 CHAT_WIDGET = (ROOT / "tools" / "chat_widget.html").read_text(encoding="utf-8")
 
-# Homepage showreel: the framed screen in the hero cycles through these films.
-# start = second to start from (skips each film's title card), all checked by eye.
-REEL = [
-    {"film": "jennifer", "name": "Jennifer", "href": "/work/jennifer", "start": 9},
-    {"film": "bresco-teaser", "poster": "bresco", "name": "Bresco Properties", "href": "/work/bresco", "start": 10},
-    {"film": "walead", "name": "WhatsApp Lead Management System", "href": "/work/whatsapp-lead-system", "start": 12},
-    {"film": "leadforge", "name": "LeadForge", "href": "/projects#leadforge", "start": 10},
-]
-
-# Homepage "What I build" (on paper). The original homepage's five, plus WhatsApp automation (now its own service page).
+# Homepage "What I build": the original homepage's five, plus WhatsApp automation (now its own service page).
+# viz = the project scene (assets/scenes.js) the viewer shows for it.
 CAPABILITIES = [
     ("Workflow Automation", "Automated pipelines that connect your tools and move data without a human copy-pasting between tabs.",
-     ["n8n, Make.com and Zapier workflows", "Error handling, retries and failure alerts", "Sheets, Notion, CRMs, email and REST APIs"], "/ai-agents-automation"),
+     ["n8n, Make.com and Zapier workflows", "Error handling, retries and failure alerts", "Sheets, Notion, CRMs, email and REST APIs"], "/ai-agents-automation", "munirquote"),
     ("AI Agents & Chatbots", "Assistants that understand the request, decide what to do, and actually execute it against your systems.",
-     ["RAG over your own business knowledge base", "Lead qualification and intent scoring", "Tool-calling with real action execution"], "/ai-agents-automation"),
+     ["RAG over your own business knowledge base", "Lead qualification and intent scoring", "Tool-calling with real action execution"], "/ai-agents-automation", "research"),
     ("Voice & Booking Systems", "Voice agents that answer the phone, hold a real conversation, check the calendar and book the slot.",
-     ["Live Google Calendar availability checks", "Confirmation emails and reminder sequences", "WhatsApp and email follow-up on no-shows"], "/ai-voice-agents"),
+     ["Live Google Calendar availability checks", "Confirmation emails and reminder sequences", "WhatsApp and email follow-up on no-shows"], "/ai-voice-agents", "receptionist"),
     ("WhatsApp Automation", "Leads from ads, Facebook groups and Excel sheets get a reply on WhatsApp in seconds, routed to the right person in the same chat.",
-     ["Instant replies in English, Urdu and Roman Urdu", "Round-robin routing to online agents", "One inbox for every agent's number"], "/whatsapp-automation"),
+     ["Instant replies in English, Urdu and Roman Urdu", "Round-robin routing to online agents", "One inbox for every agent's number"], "/whatsapp-automation", "whatsapp"),
     ("Full-Stack Platforms", "The product around the intelligence: dashboards, directories, portals and real-time apps, built so someone else can maintain them.",
-     ["Next.js, React and Node with Postgres, Mongo or Convex", "Auth, roles and row-level permissions", "Real-time sockets, presence and live updates"], None),
+     ["Next.js, React and Node with Postgres, Mongo or Convex", "Auth, roles and row-level permissions", "Real-time sockets, presence and live updates"], None, "bresco"),
     ("Websites & 3D Web", "Brand sites and launch pages, from a single-page site to a 3D product viewer that runs in the browser.",
-     ["Brand direction, copy and front-end build", "Three.js, WebGL and GSAP scroll-driven motion", "Fast and responsive on real phones, not just a desktop screen"], None),
+     ["Brand direction, copy and front-end build", "Three.js, WebGL and GSAP scroll-driven motion", "Fast and responsive on real phones, not just a desktop screen"], None, "aurelle"),
 ]
+
+
+# Motion start states only when motion is allowed; cleared after 2.5 s if GSAP never arrives.
+MOTION_FLAG = "(function(){var d=document.documentElement;if(!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('js-motion');setTimeout(function(){if(!window.__motionOK)d.classList.remove('js-motion')},2500)}})();"
 
 
 def head(title: str, description: str, path: str, image: str, schema: list[dict], frame_left: str,
-         og_type: str = "article", preload: str | None = None, boot: bool = False) -> str:
-    """boot=True (homepage only) adds the first-visit boot screen and the drifting ambient field."""
-    boot_flag = """
-/* Boot screen once per session (homepage). site.js runs it and clears the flag; a 4.5 s cap keeps a failed script from hiding the page. */
-(function(){var d=document.documentElement;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var b=false;try{b=!sessionStorage.getItem('booted')}catch(e){}if(b){d.classList.add('booting');setTimeout(function(){d.classList.remove('booting')},4500)}})();""" if boot else ""
-    boot_html = f"""<div class="boot" id="boot" data-systems="{len(PROJECTS)}" aria-hidden="true"><div class="boot-in">
-  <div class="boot-brand"><span class="brand-mark">MR</span><span>RAYYAN / SYSTEMS</span></div>
-  <ol class="boot-log" id="bootLog"></ol>
-  <div class="boot-bar"><i id="bootBar"></i></div>
-  <div class="boot-meta"><span id="bootPct">000</span><span>LAHORE · PK</span></div>
-</div></div>
-<div class="field" aria-hidden="true"><div class="orb a"></div><div class="orb b"></div><div class="orb c"></div></div>
-""" if boot else ""
+         og_type: str = "article", preload: str | None = None) -> str:
+    """The dark layout's head, top bar and menu (archive, case studies, service pages).
+    The light homepage has its own: home_head()."""
     url = f"{SITE}{path}"
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -347,7 +333,7 @@ def head(title: str, description: str, path: str, image: str, schema: list[dict]
 </script>
 <script>
 /* Motion start states only when motion is allowed; cleared if GSAP never arrives. */
-(function(){{var d=document.documentElement;if(!matchMedia('(prefers-reduced-motion: reduce)').matches){{d.classList.add('js-motion');setTimeout(function(){{if(!window.__motionOK)d.classList.remove('js-motion')}},2500)}}}})();{boot_flag}
+{MOTION_FLAG}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -356,7 +342,7 @@ def head(title: str, description: str, path: str, image: str, schema: list[dict]
 <link rel="stylesheet" href="/assets/chat.css" />
 </head>
 <body>
-{boot_html}<div class="grain" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
 <div class="frame bl" aria-hidden="true">{frame_left}</div>
 <div class="frame br" aria-hidden="true"><b id="framePct">00%</b> &nbsp;SCROLLED</div>
 <header class="topbar" id="topbar">
@@ -469,16 +455,9 @@ def next_teaser(kind: str, href: str, title: str, sub: str, poster: str) -> str:
 </a>"""
 
 
-def cta(heading: str, anchor: str | None = None, ways: bool = False) -> str:
-    """Closing call to action. On the homepage it carries id="contact" and the three ways to reach Rayyan."""
-    idattr = f' id="{anchor}"' if anchor else ""
-    way_list = f"""
-    <ul class="ways container" data-rv>
-      <li><a href="mailto:{EMAIL}"><span class="mono">Email</span>{EMAIL}</a></li>
-      <li><a href="https://www.linkedin.com/in/rayyan45/" target="_blank" rel="noopener"><span class="mono">LinkedIn</span>linkedin.com/in/rayyan45</a></li>
-      <li><a href="{WHATSAPP}" target="_blank" rel="noopener"><span class="mono">WhatsApp</span>+92 321 8234852</a></li>
-    </ul>""" if ways else ""
-    return f"""<section class="cta"{idattr} aria-labelledby="cta-h">
+def cta(heading: str) -> str:
+    """Closing call to action on the dark pages."""
+    return f"""<section class="cta" aria-labelledby="cta-h">
   <div class="container cta-grid">
     <div data-rv>
       <div class="label">Work with me</div>
@@ -489,7 +468,7 @@ def cta(heading: str, anchor: str | None = None, ways: bool = False) -> str:
       <a href="mailto:{EMAIL}" class="btn btn-primary">Book a free audit{ARROW}</a>
       <a href="{WHATSAPP}" target="_blank" rel="noopener" class="btn btn-ghost">Message on WhatsApp</a>
     </div>
-  </div>{way_list}
+  </div>
 </section>
 """
 
@@ -666,163 +645,311 @@ def service_page(s: dict) -> str:
 
 
 
-# ------------------------------------------------------------------ homepage
+# ------------------------------------------------------------------ homepage (light edition)
+# Its own stylesheet (assets/home.css) and script (assets/home.js); the other pages keep site.css.
 
 HOME_TITLE = f"{NAME}, AI Automation Engineer in Lahore"
 HOME_DESC = f"{NAME} builds AI agents, voice assistants and automation pipelines that run business operations without manual work."
 STACK = ["n8n", "Make.com", "Claude", "Gemini", "Groq", "OpenRouter", "LiveKit", "ElevenLabs", "Tavily", "WhatsApp API",
          "Google Calendar", "Supabase", "Next.js", "Three.js", "Python"]
-CHIPS = ["n8n / Make / Zapier", "AI agents + RAG", "Voice + WhatsApp"]
 SCENES_JS = '<script src="/assets/scenes.js" defer></script>\n'
 NET_JS = '<script type="module" src="/assets/net.js"></script>\n'
+# 400 x 400 for now (LinkedIn size). A bigger original can replace it with no layout change.
+PHOTO = "/assets/agha-muhammad-rayyan-khan.webp"
+PHOTO_JPG = "/assets/agha-muhammad-rayyan-khan.jpg"
+PHOTO_ALT = f"{NAME}, AI systems engineer in Lahore"
+# Homepage order of the case studies: the flagship first, as the full-width card.
+HOME_CASES = ["jennifer", "call-stream", "al-munir", "bresco", "whatsapp-lead-system"]
+TINTS = ["t-a", "t-b", "t-c", "t-d", "t-e"]
+# The feed beside the photo starts with these three (home.js rotates more in). Sample events, decorative.
+FEED = [("WA", "lead.inbound", "New WhatsApp lead, replied in 9s"),
+        ("AI", "ai.qualify", "Intent 87/100, routed to an agent"),
+        ("CRM", "crm.sync", "Contact and notes written")]
+NAV = [("#work", "Work"), ("#services", "Services"), ("#process", "Process"), ("/projects", "All projects")]
+
+
+def home_head(schema: list[dict]) -> str:
+    url = f"{SITE}/"
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{e(HOME_TITLE)}</title>
+<meta name="description" content="{e(HOME_DESC)}" />
+<link rel="canonical" href="{url}" />
+<link rel="icon" href="/favicon.ico" sizes="32x32 48x48" />
+<link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<meta property="og:title" content="{NAME}, AI Systems &amp; Automation Engineer" />
+<meta property="og:description" content="{e(HOME_DESC)}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{url}" />
+<meta property="og:site_name" content="{NAME}" />
+<meta property="og:image" content="{SITE}/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#F3F4F6" />
+<link rel="preload" as="image" href="{PHOTO}" type="image/webp" fetchpriority="high" />
+<script type="application/ld+json">
+{json.dumps({"@context": "https://schema.org", "@graph": schema}, indent=1, ensure_ascii=False)}
+</script>
+<script>
+{MOTION_FLAG}
+/* Boot screen once per session. home.js runs it and clears the flag; a 4.5 s cap keeps a failed script from hiding the page. */
+(function(){{var d=document.documentElement;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var b=false;try{{b=!sessionStorage.getItem('booted')}}catch(e){{}}if(b){{d.classList.add('booting');setTimeout(function(){{d.classList.remove('booting')}},4500)}}}})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="/assets/home.css" />
+<link rel="stylesheet" href="/assets/chat.css" />
+</head>
+<body>
+<div class="boot" id="boot" data-systems="{len(PROJECTS)}" aria-hidden="true"><div class="boot-in">
+  <div class="boot-brand"><img src="{PHOTO}" alt="" width="30" height="30" /><span>RAYYAN / SYSTEMS</span></div>
+  <ol class="boot-log" id="bootLog"></ol>
+  <div class="boot-bar"><i id="bootBar"></i></div>
+  <div class="boot-meta"><span id="bootPct">000</span><span>LAHORE · PK</span></div>
+</div></div>
+<div class="grain" aria-hidden="true"></div>
+<header class="pill" id="pill">
+  <a href="/" class="pill-brand" aria-label="{NAME}, home"><img src="{PHOTO}" alt="" width="34" height="34" /><span>Rayyan Khan</span></a>
+  <nav class="pill-links" aria-label="Main">{''.join(f'<a href="{h}">{t}</a>' for h, t in NAV)}<span class="pill-ind" aria-hidden="true"></span></nav>
+  <a href="#contact" class="pill-cta"><span class="dot" aria-hidden="true"></span><span class="t">Work with me</span></a>
+  <button type="button" class="pill-menu" aria-expanded="false" aria-controls="sheet" aria-label="Open menu"><i></i></button>
+</header>
+<nav class="sheet" id="sheet" aria-label="Site menu">
+  {''.join(f'<a href="{h}">{t}</a>' for h, t in NAV)}<a href="#contact">Contact</a>
+  <small>Services</small>{''.join(f'<a href="/{s["slug"]}" style="font-size:1.3rem">{e(SERVICE_NAMES[s["slug"]])}</a>' for s in SERVICES)}
+</nav>
+<main>
+"""
 
 
 def home_hero() -> str:
-    """Copy on the left, a framed screen on the right playing a showreel of real films.
-    The first film's poster is the LCP and is visible from the first paint; the films load
-    on desktop after `load` (assets/site.js). The blurred ambient copy behind is decorative."""
-    first = REEL[0]
-    reel = e(json.dumps([{"src": f"/films/{r['film']}.mp4", "poster": f"/films/{r.get('poster', r['film'])}.jpg",
-                          "name": r["name"], "href": r["href"], "start": r["start"]} for r in REEL]))
-    glass = [("9s", "First reply to a new lead")]
-    g = "".join(
-        f'<div class="glass g{i+1}" data-depth="{0.5 + i * 0.4:.2f}"><span class="mono">{"At a glance" if i == 0 else "And"}</span><b>{e(v)}</b><span>{e(l)}</span></div>'
-        for i, (v, l) in enumerate(glass))
-    chips = "".join(f'<span class="chip">{e(c)}</span>' for c in CHIPS)
+    films = len({p["film"] for p in PROJECTS if p["film"]})
+    stats = [(len(PROJECTS), "Systems shipped"), (films, "Walkthrough films"), (len(CASES), "Full case studies")]
+    dl = "".join(f'<div><dt data-count="{v}">{v}</dt><dd>{e(l)}</dd></div>' for v, l in stats)
+    notes = "".join(f'<div class="note n{i+1}"><i>{e(a)}</i><div><b>{e(b)}</b><span>{e(c)}</span></div></div>' for i, (a, b, c) in enumerate(FEED))
     return f"""
-<section class="xhero home" aria-labelledby="h1">
-  <div class="xhero-bg" aria-hidden="true"><img class="amb" src="/films/{first['film']}.jpg" alt="" width="1280" height="720" /></div>
-  <div class="xhero-shade" aria-hidden="true"></div>
-  <div class="net" id="net" aria-hidden="true">
-    <canvas id="netCanvas"></canvas>
-    <div class="net-read"><span>sys / network</span><span>rot <b id="nrRot">000.0</b>°</span><span>links <b id="nrLinks">000</b></span><span>events <b id="nrEv">0000</b></span></div>
-    <span class="live-tag"><span class="pulse"></span>live</span>
-    <div class="hud">
-      <div class="hud-tag"><i></i><b>lead.inbound</b><span>new lead · WhatsApp</span></div>
-      <div class="hud-tag"><i></i><b>ai.qualify</b><span>intent 87/100</span></div>
-      <div class="hud-tag"><i></i><b>crm.sync</b><span>contact + notes written</span></div>
-      <div class="hud-tag"><i></i><b>dispatch</b><span>call booked 14:30</span></div>
+<section class="hero" aria-labelledby="h1">
+  <div class="container">
+    <div class="hero-panel">
+      <div class="hero-copy">
+        <div class="status" data-hi><span class="pulse" aria-hidden="true"></span>Available for AI automation projects</div>
+        <h1 id="h1"><span class="ln"><span>AI systems that</span></span> <span class="ln"><span>run the work</span></span> <span class="ln"><span class="dim">while you sleep.</span></span></h1>
+        <p class="lede">I'm {NAME}, an AI systems engineer in Lahore. I build <strong>AI agents, voice assistants, WhatsApp bots and automation pipelines</strong> that answer leads, qualify them, update your CRM and hand your team the next action.</p>
+        <div class="actions" data-hi><a href="#work" class="btn btn-ink">See the systems{ARROW}</a><a href="#contact" class="btn btn-line">Book a free automation audit</a></div>
+        <dl class="stats" data-hi>{dl}</dl>
+      </div>
+      <div class="hero-vis">
+        <span class="tagline t1" aria-hidden="true" data-depth="0.4">n8n · Claude · Gemini</span>
+        <span class="tagline t2" aria-hidden="true" data-depth="0.5">Urdu + English</span>
+        <figure class="me">
+          <img src="{PHOTO}" alt="{e(PHOTO_ALT)}" width="400" height="400" fetchpriority="high" />
+          <figcaption><span><b>Rayyan</b> · Lahore, PK</span><span class="live"><span class="pulse red" aria-hidden="true"></span>systems live</span></figcaption>
+        </figure>
+        <div class="feed" aria-hidden="true" data-depth="1">{notes}</div>
+      </div>
     </div>
   </div>
-  <div class="floaters" aria-hidden="true">{g}</div>
-  <div class="screen-wrap"><figure class="screen" data-depth="0.55" data-reel="{reel}">
-    <div class="screen-in">
-      <img src="/films/{first['film']}.jpg" alt="Still from the {e(first['name'])} walkthrough film" fetchpriority="high" width="1280" height="720" />
-      <video muted playsinline preload="none" aria-hidden="true"></video>
-    </div>
-    <figcaption><span class="rec" aria-hidden="true"></span><span>Now playing</span> <a href="{first['href']}">{e(first['name'])}</a><span class="reel-n" aria-hidden="true">01 / {len(REEL):02d}</span></figcaption>
-  </figure></div>
-  <div class="container xhero-in">
-    <div class="status" data-hi><span class="pulse"></span>Available for AI automation projects</div>
-    <div id="h1">{h1(['AI systems that', '<span class="grad">run the work</span>', 'while you sleep.'])}</div>
-    <p class="lede" data-hi>I'm {NAME}, an AI systems engineer in Lahore. I build <strong>AI agents, voice assistants, automation pipelines and full-stack dashboards</strong> that answer leads, qualify them, update your CRM and hand your team the next action, without anyone touching a keyboard.</p>
-    <div class="actions" data-hi><a href="#work" class="btn btn-primary">See the systems{ARROW}</a><a href="#contact" class="btn btn-ghost">Book a free automation audit</a></div>
-    <div class="chips" data-hi>{chips}</div>
-    <p class="film-note" data-hi style="margin-top:16px">{SAMPLE}</p>
-  </div>
+  {marquee(STACK)}
 </section>"""
 
 
-def home_cases() -> str:
-    rows = []
-    for c in CASES:
-        rows.append(f"""      <li data-rv><a class="ci" href="/work/{c['slug']}">
-        <span class="ci-n">{case_no(c['slug'])}</span>
-        <span class="ci-t"><b>{e(c['name'])}</b><small>{e(c['kind'])}</small></span>
-        <span class="ci-d">{e(c['description'])}</span>
-        <span class="ci-thumb"><img src="/films/{c['film']}.jpg" alt="Still from the {e(c['name'])} walkthrough film" loading="lazy" width="1280" height="720" /><video data-src="/films/{c.get('hero_film', c['film'])}.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></span>
-        <span class="ci-go" aria-hidden="true">{ARROW}</span>
-      </a></li>""")
+def home_work() -> str:
+    cards = []
+    for i, slug in enumerate(HOME_CASES):
+        c = CASE_BY[slug]
+        hero_film = c.get("hero_film", c["film"])
+        stack = " / ".join(c["chips"][:4])
+        cards.append(f"""      <article class="work{' feat' if i == 0 else ''}" data-rv>
+        <div class="stage {TINTS[i]}">
+          <div class="meta" aria-hidden="true"><span>Case {case_no(slug)}</span><span>{'Flagship' if i == 0 else e(c['kind'].split(' · ')[0])}</span></div>
+          <div class="screen{' phone' if c['tall'] else ''}">
+            <img src="/films/{c['film']}.jpg" alt="Still from the {e(c['name'])} walkthrough film" loading="lazy" width="{720 if c['tall'] else 1280}" height="{1280 if c['tall'] else 720}" />
+            <video data-src="/films/{hero_film}.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+          </div>
+        </div>
+        <div class="work-body">
+          <span class="kind">{e(c['kind'])}</span>
+          <h3>{e(c['name'])}</h3>
+          <span class="go" aria-hidden="true">{ARROW}</span>
+          <p>{e(c['description'])}</p>
+          <span class="stack">{e(stack)}</span>
+        </div>
+        <a href="/work/{slug}" aria-label="Read the {e(c['name'])} case study"></a>
+      </article>""")
     return f"""
-<section id="work" class="cases" aria-labelledby="cases-h">
+<section id="work" class="sec" aria-labelledby="work-h">
   <div class="container">
     <div class="sec-head">
-      <div><div class="label" data-rv>Case studies</div><h2 id="cases-h" data-rv>Five builds, told start to finish.</h2></div>
-      <p class="lede" data-rv>The problem, how it works, the decisions behind it, and a film of it running. Pick one.</p>
+      <div><div class="label" data-rv>Case studies · {len(CASES):02d}</div><h2 id="work-h" data-rv>Selected <span class="dim">work.</span></h2></div>
+      <div class="side"><p class="lede" data-rv>Five builds, told start to finish: the problem, how it works, the decisions behind it, and a film of it running.</p></div>
     </div>
-    <ol class="case-index">
-{chr(10).join(rows)}
-    </ol>
+    <div class="works">
+{chr(10).join(cards)}
+    </div>
+    <div class="works-foot" data-rv><p>Plus {len(PROJECTS) - len(CASES)} more: agents, voice systems, scrapers, platforms and websites.</p><a href="/projects" class="btn btn-line">See all {len(PROJECTS)} projects{ARROW}</a></div>
   </div>
 </section>"""
 
 
-def home_capabilities() -> str:
+def home_band() -> str:
+    films = len({p["film"] for p in PROJECTS if p["film"]})
+    nums = [(len(PROJECTS), "Systems shipped"), (films, "Walkthrough films"), (24, "Hours a day they answer")]
+    nums_html = "".join(f'<div><dt data-count="{v}" data-suffix="{"/7" if v == 24 else ""}">{v}{"/7" if v == 24 else ""}</dt><dd>{e(l)}</dd></div>' for v, l in nums)
+    return f"""
+<section class="band" aria-labelledby="band-h">
+  <div class="container band-in">
+    <div>
+      <div class="label" data-rv>Under the hood</div>
+      <h2 id="band-h" data-rv>One network. <span class="dim">Every lead through it.</span></h2>
+      <p class="lede" data-rv>A lead comes in, an agent qualifies it, the CRM gets written and someone on your team gets the next step. The same loop sits under every system here, tuned to the business.</p>
+      <dl class="band-nums" data-rv>{nums_html}</dl>
+    </div>
+    <div class="net" id="net" aria-hidden="true">
+      <canvas id="netCanvas"></canvas>
+      <div class="net-read"><span>sys / network</span><span>rot <b id="nrRot">000.0</b>°</span><span>links <b id="nrLinks">000</b></span><span>events <b id="nrEv">0000</b></span></div>
+      <span class="live-tag"><span class="pulse red"></span>live</span>
+      <div class="hud">
+        <div class="hud-tag"><i></i><b>lead.inbound</b><span>new lead · WhatsApp</span></div>
+        <div class="hud-tag"><i></i><b>ai.qualify</b><span>intent 87/100</span></div>
+        <div class="hud-tag"><i></i><b>crm.sync</b><span>contact + notes written</span></div>
+        <div class="hud-tag"><i></i><b>dispatch</b><span>call booked 14:30</span></div>
+      </div>
+    </div>
+  </div>
+</section>"""
+
+
+def home_build() -> str:
     items = []
-    for i, (t, p, pts, href) in enumerate(CAPABILITIES):
-        more = f'<a class="cap-more" href="{href}">{e(SERVICE_NAMES[href.strip("/")])} {ARROW_SM}</a>' if href else ""
+    for i, (t, p, pts, href, viz) in enumerate(CAPABILITIES):
+        svc = f'<a class="svc" href="{href}">{e(SERVICE_NAMES[href.strip("/")])} {ARROW_SM}</a>' if href else ""
         lis = "".join(f"<li>{e(x)}</li>" for x in pts)
-        items.append(f'<li data-rv><span class="n">{i+1:02d}</span><h3>{e(t)}</h3><p>{e(p)}</p><ul>{lis}</ul>{more}</li>')
+        items.append(f"""<li class="cap" data-viz="{viz}" data-rv>
+        <button type="button" aria-expanded="false" aria-controls="cap{i}"><span class="n">{i+1:02d}</span><h3>{e(t)}</h3><p>{e(p)}</p></button>
+        <div class="more" id="cap{i}"><div><ul>{lis}</ul>{svc}</div></div>
+        <span class="bar" aria-hidden="true"><i></i></span>
+      </li>""")
+    first = CAPABILITIES[0]
     return f"""
-<section id="services" class="paper" aria-labelledby="svc-h">
+<section id="services" class="sec" aria-labelledby="svc-h">
   <div class="container">
     <div class="sec-head">
-      <div><div class="label" data-rv>What I build</div><h2 id="svc-h" data-rv>Systems that remove repetitive work, not demos that impress once.</h2></div>
-      <p class="lede" data-rv>Anyone can wire a chatbot that answers a question. I build the boring part underneath: the retries, the edge cases, the CRM writes, the thing that still works on a Sunday at 3am.</p>
+      <div><div class="label" data-rv>What I build</div><h2 id="svc-h" data-rv>Systems, <span class="dim">not demos.</span></h2></div>
+      <div class="side"><p class="lede" data-rv>Anyone can wire a chatbot that answers a question. I build the boring part underneath: the retries, the edge cases, the CRM writes, the thing that still works on a Sunday at 3am.</p></div>
     </div>
-    <ul class="offer caps">{''.join(items)}</ul>
+    <div class="build">
+      <ul class="caps">{''.join(items)}</ul>
+      <div class="viewer" aria-hidden="true">
+        <div class="viewer-top"><b id="vName">{e(first[0])}</b><span id="vNum">01 / {len(CAPABILITIES):02d}</span></div>
+        <div class="proj-viz" data-viz="{first[4]}"></div>
+        <div class="vfoot"><span>A scene drawn from a real build</span><span>Pick one on the left</span></div>
+      </div>
+    </div>
   </div>
 </section>"""
-
-
-def project_tile(p: dict) -> str:
-    """A small card for the homepage 'more builds' track: the project's animated scene, links into the archive."""
-    return f"""<a class="pcard" href="/projects#{p['slug']}">
-        <div class="proj-viz" data-viz="{p['viz']}"></div>
-        <div class="pc-body"><div class="pc-kind">{e(p['tag'])}</div><h3>{e(p['title'])}</h3><p>{e(p['text'])}</p><span class="more">See it in the archive {ARROW_SM}</span></div>
-      </a>"""
 
 
 def home_more() -> str:
     case_paths = {f"/work/{c['slug']}" for c in CASES}
-    more = [p for p in PROJECTS if p["film"] and p.get("case") not in case_paths]
-    rest = len(PROJECTS) - len(CASES) - len(more)
-    tiles = "".join(project_tile(p) for p in more)
-    end = f"""<a class="pcard all" href="/projects"><div class="pc-body"><span class="big">{len(PROJECTS)}</span><h3>Every project, in one place.</h3><p>The {len(more)} above, {rest} more without a film, and the {len(CASES)} case studies. Filter by what you need built.</p><span class="more">Open the archive {ARROW_SM}</span></div></a>"""
+    more = [p for p in PROJECTS if p["film"] and p.get("case") not in case_paths and p.get("viz")]
+    tiles = "".join(f"""<a class="tile" href="/projects#{p['slug']}">
+        <div class="proj-viz" data-viz="{p['viz']}"></div>
+        <div class="tile-body"><span class="kind">{e(p['tag'])}</span><h3>{e(p['title'])}</h3><p>{e(p['text'])}</p><span class="more">See it in the archive {ARROW_SM}</span></div>
+      </a>""" for p in more)
+    end = f"""<a class="tile all" href="/projects"><div class="tile-body"><span class="big">{len(PROJECTS)}</span><h3>Every project, in one place.</h3><p>Filter by what you need built: automation, agents, voice, platforms, websites.</p><span class="more">Open the archive {ARROW_SM}</span></div></a>"""
     return f"""
-<section class="proof" aria-labelledby="more-h">
-  <div class="container proof-head sec-head">
-    <div><div class="label" data-rv>More builds</div><h2 id="more-h" data-rv>{len(more)} more, each with a film.</h2></div>
-    <p class="lede" data-rv>Agents, voice systems, scraping pipelines and live sites. Two of them you can open and try right now.</p>
+<section class="sec" style="padding-top:0" aria-labelledby="more-h">
+  <div class="container">
+    <div class="sec-head">
+      <div><div class="label" data-rv>More builds</div><h2 id="more-h" data-rv>{len(more)} more, <span class="dim">each with a film.</span></h2></div>
+      <div class="side"><p class="lede" data-rv>Agents, voice systems, scraping pipelines and live sites. Swipe through, or open the archive.</p><div class="track-nav" data-rv><button type="button" class="prev" aria-label="Previous projects">{ARROW}</button><button type="button" aria-label="Next projects">{ARROW}</button></div></div>
+    </div>
   </div>
-  <div class="track-wrap"><div class="track">{tiles}{end}</div></div>
+  <div class="track">{tiles}{end}</div>
 </section>"""
+
+
+def home_process() -> str:
+    proc = "".join(f'<li data-rv><b>{n}</b><h3>{e(t)}</h3><p>{e(p)}</p></li>' for n, t, p in PROCESS)
+    return f"""
+<section id="process" class="sec" style="padding-top:0" aria-labelledby="proc-h">
+  <div class="container">
+    <div class="sec-head">
+      <div><div class="label" data-rv>How I work</div><h2 id="proc-h" data-rv>Simple process. <span class="dim">Clear handoff.</span></h2></div>
+      <div class="side"><p class="lede" data-rv>The goal isn't just a system that works. It's one you understand well enough to explain to your own team without calling me.</p></div>
+    </div>
+    <ol class="proc">{proc}</ol>
+  </div>
+</section>"""
+
+
+def home_contact() -> str:
+    return f"""
+<section id="contact" class="contact" aria-labelledby="contact-h">
+  <div class="container">
+    <div class="contact-panel">
+      <div class="label" data-rv>Work with me</div>
+      <h2 id="contact-h" data-rv style="margin-top:18px">Got a process someone repeats every day? <span class="dim">That's the one.</span></h2>
+      <div class="contact-grid">
+        <div data-rv>
+          <p class="lede">Send me the workflow, your tool stack, or just describe the manual thing that eats your week. I'll tell you what can be automated, what shouldn't be, and what the first useful version looks like.</p>
+          <a class="mail" href="mailto:{EMAIL}">{EMAIL}</a>
+          <div class="ways"><a href="{WHATSAPP}" target="_blank" rel="noopener">WhatsApp +92 321 8234852</a><a href="https://www.linkedin.com/in/rayyan45/" target="_blank" rel="me noopener">LinkedIn</a><a href="https://github.com/rayyanse" target="_blank" rel="me noopener">GitHub</a></div>
+        </div>
+        <div class="contact-acts" data-rv>
+          <a href="mailto:{EMAIL}?subject=Free%20automation%20audit" class="btn btn-red">Book a free audit{ARROW}</a>
+          <button type="button" class="btn btn-line copy" data-copy="{EMAIL}">Copy email<span class="toast" role="status">Copied. Talk soon.</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>"""
+
+
+def home_foot() -> str:
+    work = "".join(f'<a href="/work/{c["slug"]}">{e(c["name"])}</a>' for c in CASES)
+    serv = "".join(f'<a href="/{s["slug"]}">{e(SERVICE_NAMES[s["slug"]])}</a>' for s in SERVICES)
+    return f"""</main>
+<footer>
+  <div class="container">
+    <div class="foot">
+      <div><div class="me-line"><img src="{PHOTO}" alt="" width="40" height="40" loading="lazy" />{NAME}</div><p class="lede" style="font-size:.9rem;margin-top:14px">AI systems that do real work. {len(PROJECTS)} shipped, most with a walkthrough film.</p></div>
+      <div><h3>Case studies</h3>{work}</div>
+      <div><h3>Services</h3>{serv}<a href="/projects">All {len(PROJECTS)} projects</a></div>
+      <div><h3>Elsewhere</h3><a href="mailto:{EMAIL}">Email</a><a href="https://www.linkedin.com/in/rayyan45/" rel="me noopener" target="_blank">LinkedIn</a><a href="https://github.com/rayyanse" rel="me noopener" target="_blank">GitHub</a><a href="/seo-ray">SEO-Ray</a></div>
+    </div>
+    <div class="foot-base"><span>© 2026 {NAME}</span><span>AI systems engineer · Lahore, PK · remote</span></div>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="{LENIS}" defer></script>
+{SCENES_JS}<script src="/assets/home.js" defer></script>
+{NET_JS}{CHAT_WIDGET}<script src="/assets/chat.js" defer></script>
+</body>
+</html>
+"""
 
 
 def home_page() -> str:
     schema = [
         {"@type": "Person", "@id": f"{SITE}/#person", "name": NAME,
          "alternateName": ["Muhammad Rayyan Khan", "Agha Rayyan", "Muhammad Rayyan", "Rayyan Khan"],
-         "url": f"{SITE}/", "image": f"{SITE}/og.png", "jobTitle": "AI Systems & Automation Engineer",
+         "url": f"{SITE}/", "image": f"{SITE}{PHOTO_JPG}", "jobTitle": "AI Systems & Automation Engineer",
          "description": "Builds AI agents, voice assistants, automation pipelines and full-stack dashboards for businesses.",
          "address": {"@type": "PostalAddress", "addressLocality": "Lahore", "addressCountry": "PK"},
          "knowsAbout": ["AI agents", "Voice AI", "Workflow automation", "n8n", "WhatsApp automation", "Retrieval-augmented generation"],
          "sameAs": ["https://www.linkedin.com/in/rayyan45/", "https://github.com/rayyanse"]},
         {"@type": "WebSite", "@id": f"{SITE}/#website", "url": f"{SITE}/", "name": NAME, "publisher": {"@id": f"{SITE}/#person"}},
         {"@type": "ItemList", "name": "Case studies", "itemListElement": [
-            {"@type": "ListItem", "position": i + 1, "url": f"{SITE}/work/{c['slug']}", "name": c["name"]} for i, c in enumerate(CASES)]},
+            {"@type": "ListItem", "position": i + 1, "url": f"{SITE}/work/{s}", "name": CASE_BY[s]["name"]} for i, s in enumerate(HOME_CASES)]},
     ]
-    proc = "".join(f'<li data-rv><b>{n}</b><h3>{e(t)}</h3><p>{e(p)}</p></li>' for n, t, p in PROCESS)
-    page = head(HOME_TITLE, HOME_DESC, "/", f"{SITE}/og.png", schema, "RAYYAN / SYSTEMS &nbsp;·&nbsp; LAHORE, PK",
-                og_type="website", preload=f"/films/{REEL[0]['film']}.jpg", boot=True)
-    page = page.replace(f'<meta property="og:title" content="{e(HOME_TITLE)}" />',
-                        f'<meta property="og:title" content="{NAME}, AI Systems &amp; Automation Engineer" />', 1)
-    films = len({p["film"] for p in PROJECTS if p["film"]})
-    return page + home_hero() + "\n" + marquee(STACK) + home_cases() + home_capabilities() + nums_band(
-        "Track record", "The work, counted",
-        [(str(len(PROJECTS)), "Systems shipped"), (str(films), "Walkthrough films"), (str(len(CASES)), "Full case studies")]
-    ) + home_more() + f"""
-
-<section id="process" aria-labelledby="proc-h">
-  <div class="container">
-    <div class="sec-head">
-      <div><div class="label" data-rv>How I work</div><h2 id="proc-h" data-rv>Simple process. Clear handoff. No black box.</h2></div>
-      <p class="lede" data-rv>The goal isn't just a system that works. It's a system you understand well enough to explain to your own team without calling me.</p>
-    </div>
-    <ol class="proc">{proc}</ol>
-  </div>
-</section>
-""" + cta("Got a process someone repeats every day? That's the one.", anchor="contact", ways=True) + foot(SCENES_JS + NET_JS)
+    return (home_head(schema) + home_hero() + home_work() + home_band() + home_build() + home_more()
+            + home_process() + home_contact() + home_foot())
 
 
 # ------------------------------------------------------------------ project archive

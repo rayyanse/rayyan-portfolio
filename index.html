@@ -16,8 +16,8 @@
 <meta property="og:site_name" content="Agha Muhammad Rayyan Khan" />
 <meta property="og:image" content="https://rayyankhan.dev/og.png" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="theme-color" content="#05070C" />
-<link rel="preload" as="image" href="/films/jennifer.jpg" fetchpriority="high" />
+<meta name="theme-color" content="#F3F4F6" />
+<link rel="preload" as="image" href="/assets/agha-muhammad-rayyan-khan.webp" type="image/webp" fetchpriority="high" />
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -33,7 +33,7 @@
     "Rayyan Khan"
    ],
    "url": "https://rayyankhan.dev/",
-   "image": "https://rayyankhan.dev/og.png",
+   "image": "https://rayyankhan.dev/assets/agha-muhammad-rayyan-khan.jpg",
    "jobTitle": "AI Systems & Automation Engineer",
    "description": "Builds AI agents, voice assistants, automation pipelines and full-stack dashboards for businesses.",
    "address": {
@@ -70,14 +70,14 @@
     {
      "@type": "ListItem",
      "position": 1,
-     "url": "https://rayyankhan.dev/work/call-stream",
-     "name": "Call Stream"
+     "url": "https://rayyankhan.dev/work/jennifer",
+     "name": "Jennifer"
     },
     {
      "@type": "ListItem",
      "position": 2,
-     "url": "https://rayyankhan.dev/work/jennifer",
-     "name": "Jennifer"
+     "url": "https://rayyankhan.dev/work/call-stream",
+     "name": "Call Stream"
     },
     {
      "@type": "ListItem",
@@ -103,220 +103,293 @@
 }
 </script>
 <script>
-/* Motion start states only when motion is allowed; cleared if GSAP never arrives. */
 (function(){var d=document.documentElement;if(!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('js-motion');setTimeout(function(){if(!window.__motionOK)d.classList.remove('js-motion')},2500)}})();
-/* Boot screen once per session (homepage). site.js runs it and clears the flag; a 4.5 s cap keeps a failed script from hiding the page. */
+/* Boot screen once per session. home.js runs it and clears the flag; a 4.5 s cap keeps a failed script from hiding the page. */
 (function(){var d=document.documentElement;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var b=false;try{b=!sessionStorage.getItem('booted')}catch(e){}if(b){d.classList.add('booting');setTimeout(function(){d.classList.remove('booting')},4500)}})();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="/assets/site.css" />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="/assets/home.css" />
 <link rel="stylesheet" href="/assets/chat.css" />
 </head>
 <body>
 <div class="boot" id="boot" data-systems="22" aria-hidden="true"><div class="boot-in">
-  <div class="boot-brand"><span class="brand-mark">MR</span><span>RAYYAN / SYSTEMS</span></div>
+  <div class="boot-brand"><img src="/assets/agha-muhammad-rayyan-khan.webp" alt="" width="30" height="30" /><span>RAYYAN / SYSTEMS</span></div>
   <ol class="boot-log" id="bootLog"></ol>
   <div class="boot-bar"><i id="bootBar"></i></div>
   <div class="boot-meta"><span id="bootPct">000</span><span>LAHORE · PK</span></div>
 </div></div>
-<div class="field" aria-hidden="true"><div class="orb a"></div><div class="orb b"></div><div class="orb c"></div></div>
 <div class="grain" aria-hidden="true"></div>
-<div class="frame bl" aria-hidden="true">RAYYAN / SYSTEMS &nbsp;·&nbsp; LAHORE, PK</div>
-<div class="frame br" aria-hidden="true"><b id="framePct">00%</b> &nbsp;SCROLLED</div>
-<header class="topbar" id="topbar">
-  <div class="container">
-    <nav>
-      <a href="/" class="brand"><span class="brand-mark">MR</span><span>Muhammad Rayyan<small>AI Systems Engineer</small></span></a>
-      <div class="nav-links">
-        <div class="dd"><a href="/#work" class="dd-t">Work</a><div class="dd-m"><a href="/work/call-stream">Call Stream</a><a href="/work/jennifer">Jennifer</a><a href="/work/al-munir">Al Munir UPVC</a><a href="/work/bresco">Bresco Properties</a><a href="/work/whatsapp-lead-system">WhatsApp Lead Management System</a><a href="/projects" class="dd-all">All 22 projects</a></div></div>
-        <div class="dd"><a href="/#services" class="dd-t">Services</a><div class="dd-m"><a href="/ai-voice-agents">AI voice agents</a><a href="/whatsapp-automation">WhatsApp automation</a><a href="/ai-agents-automation">AI agents &amp; automation</a><a href="/#services" class="dd-all">Everything I build</a></div></div>
-        <a href="/#process">Process</a>
-        <a href="/#contact" class="nav-cta">Work with me</a>
-      </div>
-      <button type="button" class="menu-btn" aria-expanded="false" aria-controls="mmenu" aria-label="Open menu"><i></i></button>
-    </nav>
-  </div>
-  <div class="scrollbar" id="scrollbar"></div>
+<header class="pill" id="pill">
+  <a href="/" class="pill-brand" aria-label="Agha Muhammad Rayyan Khan, home"><img src="/assets/agha-muhammad-rayyan-khan.webp" alt="" width="34" height="34" /><span>Rayyan Khan</span></a>
+  <nav class="pill-links" aria-label="Main"><a href="#work">Work</a><a href="#services">Services</a><a href="#process">Process</a><a href="/projects">All projects</a><span class="pill-ind" aria-hidden="true"></span></nav>
+  <a href="#contact" class="pill-cta"><span class="dot" aria-hidden="true"></span><span class="t">Work with me</span></a>
+  <button type="button" class="pill-menu" aria-expanded="false" aria-controls="sheet" aria-label="Open menu"><i></i></button>
 </header>
-<nav class="mmenu" id="mmenu" aria-label="Site menu"><div class="container">
-  <h3>Services</h3><a href="/ai-voice-agents">AI voice agents</a><a href="/whatsapp-automation">WhatsApp automation</a><a href="/ai-agents-automation">AI agents &amp; automation</a>
-  <h3>Case studies</h3><a href="/work/call-stream">Call Stream</a><a href="/work/jennifer">Jennifer</a><a href="/work/al-munir">Al Munir UPVC</a><a href="/work/bresco">Bresco Properties</a><a href="/work/whatsapp-lead-system">WhatsApp Lead Management System</a><a href="/projects">All 22 projects</a>
-  <h3>More</h3><a href="/#process">How I work</a><a href="/">Home</a>
-  <a href="/#contact" class="mm-cta">Work with me</a>
-</div></nav>
+<nav class="sheet" id="sheet" aria-label="Site menu">
+  <a href="#work">Work</a><a href="#services">Services</a><a href="#process">Process</a><a href="/projects">All projects</a><a href="#contact">Contact</a>
+  <small>Services</small><a href="/ai-voice-agents" style="font-size:1.3rem">AI voice agents</a><a href="/whatsapp-automation" style="font-size:1.3rem">WhatsApp automation</a><a href="/ai-agents-automation" style="font-size:1.3rem">AI agents &amp; automation</a>
+</nav>
 <main>
 
-<section class="xhero home" aria-labelledby="h1">
-  <div class="xhero-bg" aria-hidden="true"><img class="amb" src="/films/jennifer.jpg" alt="" width="1280" height="720" /></div>
-  <div class="xhero-shade" aria-hidden="true"></div>
-  <div class="net" id="net" aria-hidden="true">
-    <canvas id="netCanvas"></canvas>
-    <div class="net-read"><span>sys / network</span><span>rot <b id="nrRot">000.0</b>°</span><span>links <b id="nrLinks">000</b></span><span>events <b id="nrEv">0000</b></span></div>
-    <span class="live-tag"><span class="pulse"></span>live</span>
-    <div class="hud">
-      <div class="hud-tag"><i></i><b>lead.inbound</b><span>new lead · WhatsApp</span></div>
-      <div class="hud-tag"><i></i><b>ai.qualify</b><span>intent 87/100</span></div>
-      <div class="hud-tag"><i></i><b>crm.sync</b><span>contact + notes written</span></div>
-      <div class="hud-tag"><i></i><b>dispatch</b><span>call booked 14:30</span></div>
+<section class="hero" aria-labelledby="h1">
+  <div class="container">
+    <div class="hero-panel">
+      <div class="hero-copy">
+        <div class="status" data-hi><span class="pulse" aria-hidden="true"></span>Available for AI automation projects</div>
+        <h1 id="h1"><span class="ln"><span>AI systems that</span></span> <span class="ln"><span>run the work</span></span> <span class="ln"><span class="dim">while you sleep.</span></span></h1>
+        <p class="lede">I'm Agha Muhammad Rayyan Khan, an AI systems engineer in Lahore. I build <strong>AI agents, voice assistants, WhatsApp bots and automation pipelines</strong> that answer leads, qualify them, update your CRM and hand your team the next action.</p>
+        <div class="actions" data-hi><a href="#work" class="btn btn-ink">See the systems<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a href="#contact" class="btn btn-line">Book a free automation audit</a></div>
+        <dl class="stats" data-hi><div><dt data-count="22">22</dt><dd>Systems shipped</dd></div><div><dt data-count="13">13</dt><dd>Walkthrough films</dd></div><div><dt data-count="5">5</dt><dd>Full case studies</dd></div></dl>
+      </div>
+      <div class="hero-vis">
+        <span class="tagline t1" aria-hidden="true" data-depth="0.4">n8n · Claude · Gemini</span>
+        <span class="tagline t2" aria-hidden="true" data-depth="0.5">Urdu + English</span>
+        <figure class="me">
+          <img src="/assets/agha-muhammad-rayyan-khan.webp" alt="Agha Muhammad Rayyan Khan, AI systems engineer in Lahore" width="400" height="400" fetchpriority="high" />
+          <figcaption><span><b>Rayyan</b> · Lahore, PK</span><span class="live"><span class="pulse red" aria-hidden="true"></span>systems live</span></figcaption>
+        </figure>
+        <div class="feed" aria-hidden="true" data-depth="1"><div class="note n1"><i>WA</i><div><b>lead.inbound</b><span>New WhatsApp lead, replied in 9s</span></div></div><div class="note n2"><i>AI</i><div><b>ai.qualify</b><span>Intent 87/100, routed to an agent</span></div></div><div class="note n3"><i>CRM</i><div><b>crm.sync</b><span>Contact and notes written</span></div></div></div>
+      </div>
     </div>
   </div>
-  <div class="floaters" aria-hidden="true"><div class="glass g1" data-depth="0.50"><span class="mono">At a glance</span><b>9s</b><span>First reply to a new lead</span></div></div>
-  <div class="screen-wrap"><figure class="screen" data-depth="0.55" data-reel="[{&quot;src&quot;: &quot;/films/jennifer.mp4&quot;, &quot;poster&quot;: &quot;/films/jennifer.jpg&quot;, &quot;name&quot;: &quot;Jennifer&quot;, &quot;href&quot;: &quot;/work/jennifer&quot;, &quot;start&quot;: 9}, {&quot;src&quot;: &quot;/films/bresco-teaser.mp4&quot;, &quot;poster&quot;: &quot;/films/bresco.jpg&quot;, &quot;name&quot;: &quot;Bresco Properties&quot;, &quot;href&quot;: &quot;/work/bresco&quot;, &quot;start&quot;: 10}, {&quot;src&quot;: &quot;/films/walead.mp4&quot;, &quot;poster&quot;: &quot;/films/walead.jpg&quot;, &quot;name&quot;: &quot;WhatsApp Lead Management System&quot;, &quot;href&quot;: &quot;/work/whatsapp-lead-system&quot;, &quot;start&quot;: 12}, {&quot;src&quot;: &quot;/films/leadforge.mp4&quot;, &quot;poster&quot;: &quot;/films/leadforge.jpg&quot;, &quot;name&quot;: &quot;LeadForge&quot;, &quot;href&quot;: &quot;/projects#leadforge&quot;, &quot;start&quot;: 10}]">
-    <div class="screen-in">
-      <img src="/films/jennifer.jpg" alt="Still from the Jennifer walkthrough film" fetchpriority="high" width="1280" height="720" />
-      <video muted playsinline preload="none" aria-hidden="true"></video>
-    </div>
-    <figcaption><span class="rec" aria-hidden="true"></span><span>Now playing</span> <a href="/work/jennifer">Jennifer</a><span class="reel-n" aria-hidden="true">01 / 04</span></figcaption>
-  </figure></div>
-  <div class="container xhero-in">
-    <div class="status" data-hi><span class="pulse"></span>Available for AI automation projects</div>
-    <div id="h1"><h1><span class="ln"><span>AI systems that</span></span> <span class="ln"><span><span class="grad">run the work</span></span></span> <span class="ln"><span>while you sleep.</span></span></h1></div>
-    <p class="lede" data-hi>I'm Agha Muhammad Rayyan Khan, an AI systems engineer in Lahore. I build <strong>AI agents, voice assistants, automation pipelines and full-stack dashboards</strong> that answer leads, qualify them, update your CRM and hand your team the next action, without anyone touching a keyboard.</p>
-    <div class="actions" data-hi><a href="#work" class="btn btn-primary">See the systems<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a href="#contact" class="btn btn-ghost">Book a free automation audit</a></div>
-    <div class="chips" data-hi><span class="chip">n8n / Make / Zapier</span><span class="chip">AI agents + RAG</span><span class="chip">Voice + WhatsApp</span></div>
-    <p class="film-note" data-hi style="margin-top:16px">Walkthrough film · names and numbers are sample data</p>
-  </div>
+  <div class="marquee"><p class="sr-only">Built with: n8n, Make.com, Claude, Gemini, Groq, OpenRouter, LiveKit, ElevenLabs, Tavily, WhatsApp API, Google Calendar, Supabase, Next.js, Three.js, Python</p><div class="marquee-track" aria-hidden="true"><span>n8n</span><span>Make.com</span><span>Claude</span><span>Gemini</span><span>Groq</span><span>OpenRouter</span><span>LiveKit</span><span>ElevenLabs</span><span>Tavily</span><span>WhatsApp API</span><span>Google Calendar</span><span>Supabase</span><span>Next.js</span><span>Three.js</span><span>Python</span><span>n8n</span><span>Make.com</span><span>Claude</span><span>Gemini</span><span>Groq</span><span>OpenRouter</span><span>LiveKit</span><span>ElevenLabs</span><span>Tavily</span><span>WhatsApp API</span><span>Google Calendar</span><span>Supabase</span><span>Next.js</span><span>Three.js</span><span>Python</span><span>n8n</span><span>Make.com</span><span>Claude</span><span>Gemini</span><span>Groq</span><span>OpenRouter</span><span>LiveKit</span><span>ElevenLabs</span><span>Tavily</span><span>WhatsApp API</span><span>Google Calendar</span><span>Supabase</span><span>Next.js</span><span>Three.js</span><span>Python</span><span>n8n</span><span>Make.com</span><span>Claude</span><span>Gemini</span><span>Groq</span><span>OpenRouter</span><span>LiveKit</span><span>ElevenLabs</span><span>Tavily</span><span>WhatsApp API</span><span>Google Calendar</span><span>Supabase</span><span>Next.js</span><span>Three.js</span><span>Python</span></div></div>
 </section>
-<div class="marquee"><p class="sr-only">Built with: n8n, Make.com, Claude, Gemini, Groq, OpenRouter, LiveKit, ElevenLabs, Tavily, WhatsApp API, Google Calendar, Supabase, Next.js, Three.js, Python</p><div class="marquee-track" aria-hidden="true"><span>n8n</span><span>Make.com</span><span>Claude</span><span>Gemini</span><span>Groq</span><span>OpenRouter</span><span>LiveKit</span><span>ElevenLabs</span><span>Tavily</span><span>WhatsApp API</span><span>Google Calendar</span><span>Supabase</span><span>Next.js</span><span>Three.js</span><span>Python</span><span>n8n</span><span>Make.com</span><span>Claude</span><span>Gemini</span><span>Groq</span><span>OpenRouter</span><span>LiveKit</span><span>ElevenLabs</span><span>Tavily</span><span>WhatsApp API</span><span>Google Calendar</span><span>Supabase</span><span>Next.js</span><span>Three.js</span><span>Python</span><span>n8n</span><span>Make.com</span><span>Claude</span><span>Gemini</span><span>Groq</span><span>OpenRouter</span><span>LiveKit</span><span>ElevenLabs</span><span>Tavily</span><span>WhatsApp API</span><span>Google Calendar</span><span>Supabase</span><span>Next.js</span><span>Three.js</span><span>Python</span><span>n8n</span><span>Make.com</span><span>Claude</span><span>Gemini</span><span>Groq</span><span>OpenRouter</span><span>LiveKit</span><span>ElevenLabs</span><span>Tavily</span><span>WhatsApp API</span><span>Google Calendar</span><span>Supabase</span><span>Next.js</span><span>Three.js</span><span>Python</span></div></div>
-<section id="work" class="cases" aria-labelledby="cases-h">
+<section id="work" class="sec" aria-labelledby="work-h">
   <div class="container">
     <div class="sec-head">
-      <div><div class="label" data-rv>Case studies</div><h2 id="cases-h" data-rv>Five builds, told start to finish.</h2></div>
-      <p class="lede" data-rv>The problem, how it works, the decisions behind it, and a film of it running. Pick one.</p>
+      <div><div class="label" data-rv>Case studies · 05</div><h2 id="work-h" data-rv>Selected <span class="dim">work.</span></h2></div>
+      <div class="side"><p class="lede" data-rv>Five builds, told start to finish: the problem, how it works, the decisions behind it, and a film of it running.</p></div>
     </div>
-    <ol class="case-index">
-      <li data-rv><a class="ci" href="/work/call-stream">
-        <span class="ci-n">001</span>
-        <span class="ci-t"><b>Call Stream</b><small>Voice AI · built with Shahwaiz</small></span>
-        <span class="ci-d">An Android phone and a normal Pakistani SIM become an AI call agent that answers in Urdu. No SIP trunk, no PTA paperwork, no new number.</span>
-        <span class="ci-thumb"><img src="/films/callstream.jpg" alt="Still from the Call Stream walkthrough film" loading="lazy" width="1280" height="720" /><video data-src="/films/callstream.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></span>
-        <span class="ci-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a></li>
-      <li data-rv><a class="ci" href="/work/jennifer">
-        <span class="ci-n">002</span>
-        <span class="ci-t"><b>Jennifer</b><small>Flagship build · real estate</small></span>
-        <span class="ci-d">Jennifer manages leads, scores intent, tracks follow-ups, searches live market data and briefs the owner daily, all through a normal chat.</span>
-        <span class="ci-thumb"><img src="/films/jennifer.jpg" alt="Still from the Jennifer walkthrough film" loading="lazy" width="1280" height="720" /><video data-src="/films/jennifer.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></span>
-        <span class="ci-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a></li>
-      <li data-rv><a class="ci" href="/work/al-munir">
-        <span class="ci-n">003</span>
-        <span class="ci-t"><b>Al Munir UPVC</b><small>Client build · manufacturing</small></span>
-        <span class="ci-d">A UPVC manufacturer&#x27;s pipeline finds buyers in Facebook groups, calls them with a voice agent and sends a priced PDF quote on WhatsApp.</span>
-        <span class="ci-thumb"><img src="/films/almunir.jpg" alt="Still from the Al Munir UPVC walkthrough film" loading="lazy" width="1280" height="720" /><video data-src="/films/almunir.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></span>
-        <span class="ci-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a></li>
-      <li data-rv><a class="ci" href="/work/bresco">
-        <span class="ci-n">004</span>
-        <span class="ci-t"><b>Bresco Properties</b><small>Client build · real estate</small></span>
-        <span class="ci-d">A Lahore real estate agency&#x27;s pipeline: AI-drafted posts, five agents&#x27; WhatsApp numbers on one dashboard, AI replies in Roman Urdu and Urdu calls.</span>
-        <span class="ci-thumb"><img src="/films/bresco.jpg" alt="Still from the Bresco Properties walkthrough film" loading="lazy" width="1280" height="720" /><video data-src="/films/bresco-teaser.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></span>
-        <span class="ci-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a></li>
-      <li data-rv><a class="ci" href="/work/whatsapp-lead-system">
-        <span class="ci-n">005</span>
-        <span class="ci-t"><b>WhatsApp Lead Management System</b><small>Automation build · BGMC</small></span>
-        <span class="ci-d">Instagram ad leads get a WhatsApp reply in seconds, their needs captured and routed round-robin to the right associate, in the same chat.</span>
-        <span class="ci-thumb"><img src="/films/walead.jpg" alt="Still from the WhatsApp Lead Management System walkthrough film" loading="lazy" width="1280" height="720" /><video data-src="/films/walead.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></span>
-        <span class="ci-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a></li>
-    </ol>
+    <div class="works">
+      <article class="work feat" data-rv>
+        <div class="stage t-a">
+          <div class="meta" aria-hidden="true"><span>Case 002</span><span>Flagship</span></div>
+          <div class="screen">
+            <img src="/films/jennifer.jpg" alt="Still from the Jennifer walkthrough film" loading="lazy" width="1280" height="720" />
+            <video data-src="/films/jennifer.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+          </div>
+        </div>
+        <div class="work-body">
+          <span class="kind">Flagship build · real estate</span>
+          <h3>Jennifer</h3>
+          <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          <p>Jennifer manages leads, scores intent, tracks follow-ups, searches live market data and briefs the owner daily, all through a normal chat.</p>
+          <span class="stack">Next.js 14 / Supabase + RLS / Groq / OpenRouter</span>
+        </div>
+        <a href="/work/jennifer" aria-label="Read the Jennifer case study"></a>
+      </article>
+      <article class="work" data-rv>
+        <div class="stage t-b">
+          <div class="meta" aria-hidden="true"><span>Case 001</span><span>Voice AI</span></div>
+          <div class="screen phone">
+            <img src="/films/callstream.jpg" alt="Still from the Call Stream walkthrough film" loading="lazy" width="720" height="1280" />
+            <video data-src="/films/callstream.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+          </div>
+        </div>
+        <div class="work-body">
+          <span class="kind">Voice AI · built with Shahwaiz</span>
+          <h3>Call Stream</h3>
+          <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          <p>An Android phone and a normal Pakistani SIM become an AI call agent that answers in Urdu. No SIP trunk, no PTA paperwork, no new number.</p>
+          <span class="stack">Android + Pakistani SIM / Asterisk / SIP over TLS / Urdu voice AI</span>
+        </div>
+        <a href="/work/call-stream" aria-label="Read the Call Stream case study"></a>
+      </article>
+      <article class="work" data-rv>
+        <div class="stage t-c">
+          <div class="meta" aria-hidden="true"><span>Case 003</span><span>Client build</span></div>
+          <div class="screen">
+            <img src="/films/almunir.jpg" alt="Still from the Al Munir UPVC walkthrough film" loading="lazy" width="1280" height="720" />
+            <video data-src="/films/almunir.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+          </div>
+        </div>
+        <div class="work-body">
+          <span class="kind">Client build · manufacturing</span>
+          <h3>Al Munir UPVC</h3>
+          <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          <p>A UPVC manufacturer&#x27;s pipeline finds buyers in Facebook groups, calls them with a voice agent and sends a priced PDF quote on WhatsApp.</p>
+          <span class="stack">n8n / Apify / Retell AI / UltraMsg</span>
+        </div>
+        <a href="/work/al-munir" aria-label="Read the Al Munir UPVC case study"></a>
+      </article>
+      <article class="work" data-rv>
+        <div class="stage t-d">
+          <div class="meta" aria-hidden="true"><span>Case 004</span><span>Client build</span></div>
+          <div class="screen">
+            <img src="/films/bresco.jpg" alt="Still from the Bresco Properties walkthrough film" loading="lazy" width="1280" height="720" />
+            <video data-src="/films/bresco-teaser.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+          </div>
+        </div>
+        <div class="work-body">
+          <span class="kind">Client build · real estate</span>
+          <h3>Bresco Properties</h3>
+          <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          <p>A Lahore real estate agency&#x27;s pipeline: AI-drafted posts, five agents&#x27; WhatsApp numbers on one dashboard, AI replies in Roman Urdu and Urdu calls.</p>
+          <span class="stack">Next.js / Supabase / Baileys / Gemini</span>
+        </div>
+        <a href="/work/bresco" aria-label="Read the Bresco Properties case study"></a>
+      </article>
+      <article class="work" data-rv>
+        <div class="stage t-e">
+          <div class="meta" aria-hidden="true"><span>Case 005</span><span>Automation build</span></div>
+          <div class="screen">
+            <img src="/films/walead.jpg" alt="Still from the WhatsApp Lead Management System walkthrough film" loading="lazy" width="1280" height="720" />
+            <video data-src="/films/walead.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+          </div>
+        </div>
+        <div class="work-body">
+          <span class="kind">Automation build · BGMC</span>
+          <h3>WhatsApp Lead Management System</h3>
+          <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          <p>Instagram ad leads get a WhatsApp reply in seconds, their needs captured and routed round-robin to the right associate, in the same chat.</p>
+          <span class="stack">WhatsApp Cloud API / n8n / Claude / Google Sheets</span>
+        </div>
+        <a href="/work/whatsapp-lead-system" aria-label="Read the WhatsApp Lead Management System case study"></a>
+      </article>
+    </div>
+    <div class="works-foot" data-rv><p>Plus 17 more: agents, voice systems, scrapers, platforms and websites.</p><a href="/projects" class="btn btn-line">See all 22 projects<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
   </div>
 </section>
-<section id="services" class="paper" aria-labelledby="svc-h">
+<section class="band" aria-labelledby="band-h">
+  <div class="container band-in">
+    <div>
+      <div class="label" data-rv>Under the hood</div>
+      <h2 id="band-h" data-rv>One network. <span class="dim">Every lead through it.</span></h2>
+      <p class="lede" data-rv>A lead comes in, an agent qualifies it, the CRM gets written and someone on your team gets the next step. The same loop sits under every system here, tuned to the business.</p>
+      <dl class="band-nums" data-rv><div><dt data-count="22" data-suffix="">22</dt><dd>Systems shipped</dd></div><div><dt data-count="13" data-suffix="">13</dt><dd>Walkthrough films</dd></div><div><dt data-count="24" data-suffix="/7">24/7</dt><dd>Hours a day they answer</dd></div></dl>
+    </div>
+    <div class="net" id="net" aria-hidden="true">
+      <canvas id="netCanvas"></canvas>
+      <div class="net-read"><span>sys / network</span><span>rot <b id="nrRot">000.0</b>°</span><span>links <b id="nrLinks">000</b></span><span>events <b id="nrEv">0000</b></span></div>
+      <span class="live-tag"><span class="pulse red"></span>live</span>
+      <div class="hud">
+        <div class="hud-tag"><i></i><b>lead.inbound</b><span>new lead · WhatsApp</span></div>
+        <div class="hud-tag"><i></i><b>ai.qualify</b><span>intent 87/100</span></div>
+        <div class="hud-tag"><i></i><b>crm.sync</b><span>contact + notes written</span></div>
+        <div class="hud-tag"><i></i><b>dispatch</b><span>call booked 14:30</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="services" class="sec" aria-labelledby="svc-h">
   <div class="container">
     <div class="sec-head">
-      <div><div class="label" data-rv>What I build</div><h2 id="svc-h" data-rv>Systems that remove repetitive work, not demos that impress once.</h2></div>
-      <p class="lede" data-rv>Anyone can wire a chatbot that answers a question. I build the boring part underneath: the retries, the edge cases, the CRM writes, the thing that still works on a Sunday at 3am.</p>
+      <div><div class="label" data-rv>What I build</div><h2 id="svc-h" data-rv>Systems, <span class="dim">not demos.</span></h2></div>
+      <div class="side"><p class="lede" data-rv>Anyone can wire a chatbot that answers a question. I build the boring part underneath: the retries, the edge cases, the CRM writes, the thing that still works on a Sunday at 3am.</p></div>
     </div>
-    <ul class="offer caps"><li data-rv><span class="n">01</span><h3>Workflow Automation</h3><p>Automated pipelines that connect your tools and move data without a human copy-pasting between tabs.</p><ul><li>n8n, Make.com and Zapier workflows</li><li>Error handling, retries and failure alerts</li><li>Sheets, Notion, CRMs, email and REST APIs</li></ul><a class="cap-more" href="/ai-agents-automation">AI agents &amp; automation <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li><li data-rv><span class="n">02</span><h3>AI Agents &amp; Chatbots</h3><p>Assistants that understand the request, decide what to do, and actually execute it against your systems.</p><ul><li>RAG over your own business knowledge base</li><li>Lead qualification and intent scoring</li><li>Tool-calling with real action execution</li></ul><a class="cap-more" href="/ai-agents-automation">AI agents &amp; automation <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li><li data-rv><span class="n">03</span><h3>Voice &amp; Booking Systems</h3><p>Voice agents that answer the phone, hold a real conversation, check the calendar and book the slot.</p><ul><li>Live Google Calendar availability checks</li><li>Confirmation emails and reminder sequences</li><li>WhatsApp and email follow-up on no-shows</li></ul><a class="cap-more" href="/ai-voice-agents">AI voice agents <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li><li data-rv><span class="n">04</span><h3>WhatsApp Automation</h3><p>Leads from ads, Facebook groups and Excel sheets get a reply on WhatsApp in seconds, routed to the right person in the same chat.</p><ul><li>Instant replies in English, Urdu and Roman Urdu</li><li>Round-robin routing to online agents</li><li>One inbox for every agent&#x27;s number</li></ul><a class="cap-more" href="/whatsapp-automation">WhatsApp automation <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li><li data-rv><span class="n">05</span><h3>Full-Stack Platforms</h3><p>The product around the intelligence: dashboards, directories, portals and real-time apps, built so someone else can maintain them.</p><ul><li>Next.js, React and Node with Postgres, Mongo or Convex</li><li>Auth, roles and row-level permissions</li><li>Real-time sockets, presence and live updates</li></ul></li><li data-rv><span class="n">06</span><h3>Websites &amp; 3D Web</h3><p>Brand sites and launch pages, from a single-page site to a 3D product viewer that runs in the browser.</p><ul><li>Brand direction, copy and front-end build</li><li>Three.js, WebGL and GSAP scroll-driven motion</li><li>Fast and responsive on real phones, not just a desktop screen</li></ul></li></ul>
+    <div class="build">
+      <ul class="caps"><li class="cap" data-viz="munirquote" data-rv>
+        <button type="button" aria-expanded="false" aria-controls="cap0"><span class="n">01</span><h3>Workflow Automation</h3><p>Automated pipelines that connect your tools and move data without a human copy-pasting between tabs.</p></button>
+        <div class="more" id="cap0"><div><ul><li>n8n, Make.com and Zapier workflows</li><li>Error handling, retries and failure alerts</li><li>Sheets, Notion, CRMs, email and REST APIs</li></ul><a class="svc" href="/ai-agents-automation">AI agents &amp; automation <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div>
+        <span class="bar" aria-hidden="true"><i></i></span>
+      </li><li class="cap" data-viz="research" data-rv>
+        <button type="button" aria-expanded="false" aria-controls="cap1"><span class="n">02</span><h3>AI Agents &amp; Chatbots</h3><p>Assistants that understand the request, decide what to do, and actually execute it against your systems.</p></button>
+        <div class="more" id="cap1"><div><ul><li>RAG over your own business knowledge base</li><li>Lead qualification and intent scoring</li><li>Tool-calling with real action execution</li></ul><a class="svc" href="/ai-agents-automation">AI agents &amp; automation <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div>
+        <span class="bar" aria-hidden="true"><i></i></span>
+      </li><li class="cap" data-viz="receptionist" data-rv>
+        <button type="button" aria-expanded="false" aria-controls="cap2"><span class="n">03</span><h3>Voice &amp; Booking Systems</h3><p>Voice agents that answer the phone, hold a real conversation, check the calendar and book the slot.</p></button>
+        <div class="more" id="cap2"><div><ul><li>Live Google Calendar availability checks</li><li>Confirmation emails and reminder sequences</li><li>WhatsApp and email follow-up on no-shows</li></ul><a class="svc" href="/ai-voice-agents">AI voice agents <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div>
+        <span class="bar" aria-hidden="true"><i></i></span>
+      </li><li class="cap" data-viz="whatsapp" data-rv>
+        <button type="button" aria-expanded="false" aria-controls="cap3"><span class="n">04</span><h3>WhatsApp Automation</h3><p>Leads from ads, Facebook groups and Excel sheets get a reply on WhatsApp in seconds, routed to the right person in the same chat.</p></button>
+        <div class="more" id="cap3"><div><ul><li>Instant replies in English, Urdu and Roman Urdu</li><li>Round-robin routing to online agents</li><li>One inbox for every agent&#x27;s number</li></ul><a class="svc" href="/whatsapp-automation">WhatsApp automation <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div>
+        <span class="bar" aria-hidden="true"><i></i></span>
+      </li><li class="cap" data-viz="bresco" data-rv>
+        <button type="button" aria-expanded="false" aria-controls="cap4"><span class="n">05</span><h3>Full-Stack Platforms</h3><p>The product around the intelligence: dashboards, directories, portals and real-time apps, built so someone else can maintain them.</p></button>
+        <div class="more" id="cap4"><div><ul><li>Next.js, React and Node with Postgres, Mongo or Convex</li><li>Auth, roles and row-level permissions</li><li>Real-time sockets, presence and live updates</li></ul></div></div>
+        <span class="bar" aria-hidden="true"><i></i></span>
+      </li><li class="cap" data-viz="aurelle" data-rv>
+        <button type="button" aria-expanded="false" aria-controls="cap5"><span class="n">06</span><h3>Websites &amp; 3D Web</h3><p>Brand sites and launch pages, from a single-page site to a 3D product viewer that runs in the browser.</p></button>
+        <div class="more" id="cap5"><div><ul><li>Brand direction, copy and front-end build</li><li>Three.js, WebGL and GSAP scroll-driven motion</li><li>Fast and responsive on real phones, not just a desktop screen</li></ul></div></div>
+        <span class="bar" aria-hidden="true"><i></i></span>
+      </li></ul>
+      <div class="viewer" aria-hidden="true">
+        <div class="viewer-top"><b id="vName">Workflow Automation</b><span id="vNum">01 / 06</span></div>
+        <div class="proj-viz" data-viz="munirquote"></div>
+        <div class="vfoot"><span>A scene drawn from a real build</span><span>Pick one on the left</span></div>
+      </div>
+    </div>
   </div>
 </section>
-<section class="red" aria-labelledby="nums-h">
+<section class="sec" style="padding-top:0" aria-labelledby="more-h">
   <div class="container">
-    <div class="label" data-rv>Track record</div>
-    <h2 id="nums-h" class="mono" style="font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;color:#ffd5db;margin-bottom:28px" data-rv>The work, counted</h2>
-    <dl class="nums"><div data-rv><dt data-count="22" data-suffix="">22</dt><dd>Systems shipped</dd></div><div data-rv><dt data-count="13" data-suffix="">13</dt><dd>Walkthrough films</dd></div><div data-rv><dt data-count="5" data-suffix="">5</dt><dd>Full case studies</dd></div></dl>
+    <div class="sec-head">
+      <div><div class="label" data-rv>More builds</div><h2 id="more-h" data-rv>8 more, <span class="dim">each with a film.</span></h2></div>
+      <div class="side"><p class="lede" data-rv>Agents, voice systems, scraping pipelines and live sites. Swipe through, or open the archive.</p><div class="track-nav" data-rv><button type="button" class="prev" aria-label="Previous projects"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><button type="button" aria-label="Next projects"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div></div>
+    </div>
   </div>
-</section>
-<section class="proof" aria-labelledby="more-h">
-  <div class="container proof-head sec-head">
-    <div><div class="label" data-rv>More builds</div><h2 id="more-h" data-rv>8 more, each with a film.</h2></div>
-    <p class="lede" data-rv>Agents, voice systems, scraping pipelines and live sites. Two of them you can open and try right now.</p>
-  </div>
-  <div class="track-wrap"><div class="track"><a class="pcard" href="/projects#agentic-sales-research-chatbot">
+  <div class="track"><a class="tile" href="/projects#agentic-sales-research-chatbot">
         <div class="proj-viz" data-viz="research"></div>
-        <div class="pc-body"><div class="pc-kind">AI agent</div><h3>Agentic Sales Research Chatbot</h3><p>Researches a company live on the web, asks qualifying questions, scores the lead, and writes a personalised outreach email.</p><span class="more">See it in the archive <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </a><a class="pcard" href="/projects#ai-appointment-booking-voice-agent">
+        <div class="tile-body"><span class="kind">AI agent</span><h3>Agentic Sales Research Chatbot</h3><p>Researches a company live on the web, asks qualifying questions, scores the lead, and writes a personalised outreach email.</p><span class="more">See it in the archive <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a><a class="tile" href="/projects#ai-appointment-booking-voice-agent">
         <div class="proj-viz" data-viz="voice"></div>
-        <div class="pc-body"><div class="pc-kind">Voice AI</div><h3>AI Appointment Booking Voice Agent</h3><p>A caller explains what they need, the agent checks Google Calendar, confirms a slot, books it and sends the confirmation.</p><span class="more">See it in the archive <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </a><a class="pcard" href="/projects#zephra">
+        <div class="tile-body"><span class="kind">Voice AI</span><h3>AI Appointment Booking Voice Agent</h3><p>A caller explains what they need, the agent checks Google Calendar, confirms a slot, books it and sends the confirmation.</p><span class="more">See it in the archive <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a><a class="tile" href="/projects#zephra">
         <div class="proj-viz" data-viz="zephra"></div>
-        <div class="pc-body"><div class="pc-kind">Live site</div><h3>ZEPHRA — 3D Garment Configurator</h3><p>A fashion brand site built around a real-time 3D garment viewer. Visitors pick a silhouette and turn the piece around in the browser. There&#x27;s no product photography anywhere on the page.</p><span class="more">See it in the archive <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </a><a class="pcard" href="/projects#ai-human-labs">
+        <div class="tile-body"><span class="kind">Live site</span><h3>ZEPHRA — 3D Garment Configurator</h3><p>A fashion brand site built around a real-time 3D garment viewer. Visitors pick a silhouette and turn the piece around in the browser. There&#x27;s no product photography anywhere on the page.</p><span class="more">See it in the archive <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a><a class="tile" href="/projects#ai-human-labs">
         <div class="proj-viz" data-viz="ahl"></div>
-        <div class="pc-body"><div class="pc-kind">Live demo</div><h3>AI Human Labs</h3><p>A cinematic AI agency website demo with a scroll-driven robot hero, interactive industry carousel and responsive layouts. Built to showcase premium web design, animation and front-end development.</p><span class="more">See it in the archive <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </a><a class="pcard" href="/projects#leadforge">
+        <div class="tile-body"><span class="kind">Live demo</span><h3>AI Human Labs</h3><p>A cinematic AI agency website demo with a scroll-driven robot hero, interactive industry carousel and responsive layouts. Built to showcase premium web design, animation and front-end development.</p><span class="more">See it in the archive <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a><a class="tile" href="/projects#leadforge">
         <div class="proj-viz" data-viz="leadforge"></div>
-        <div class="pc-body"><div class="pc-kind">Client build</div><h3>LeadForge — Overnight Lead Engine</h3><p>A lead engine that works the night shift. At midnight it scrapes job boards, X, LinkedIn, Reddit, Threads, Instagram and Facebook groups, an AI judge keeps only real buying signals, and Claude writes a ready reply for every lead.</p><span class="more">See it in the archive <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </a><a class="pcard" href="/projects#autonomous-ai-sdr-pipeline">
+        <div class="tile-body"><span class="kind">Client build</span><h3>LeadForge — Overnight Lead Engine</h3><p>A lead engine that works the night shift. At midnight it scrapes job boards, X, LinkedIn, Reddit, Threads, Instagram and Facebook groups, an AI judge keeps only real buying signals, and Claude writes a ready reply for every lead.</p><span class="more">See it in the archive <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a><a class="tile" href="/projects#autonomous-ai-sdr-pipeline">
         <div class="proj-viz" data-viz="sdr"></div>
-        <div class="pc-body"><div class="pc-kind">Sales automation</div><h3>Autonomous AI SDR Pipeline</h3><p>Enriches new leads, scores them, researches recent company news, writes the outreach, then fires a different-angle follow-up 48 hours later.</p><span class="more">See it in the archive <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </a><a class="pcard" href="/projects#ai-vape-detection-system">
+        <div class="tile-body"><span class="kind">Sales automation</span><h3>Autonomous AI SDR Pipeline</h3><p>Enriches new leads, scores them, researches recent company news, writes the outreach, then fires a different-angle follow-up 48 hours later.</p><span class="more">See it in the archive <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a><a class="tile" href="/projects#ai-vape-detection-system">
         <div class="proj-viz" data-viz="vape"></div>
-        <div class="pc-body"><div class="pc-kind">Computer vision</div><h3>AI Vape Detection System</h3><p>Computer vision on live camera feeds that sends a WhatsApp alert the moment it spots vaping. Built for schools and managed facilities.</p><span class="more">See it in the archive <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </a><a class="pcard" href="/projects#flowstate">
+        <div class="tile-body"><span class="kind">Computer vision</span><h3>AI Vape Detection System</h3><p>Computer vision on live camera feeds that sends a WhatsApp alert the moment it spots vaping. Built for schools and managed facilities.</p><span class="more">See it in the archive <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a><a class="tile" href="/projects#flowstate">
         <div class="proj-viz" data-viz="flowstate"></div>
-        <div class="pc-body"><div class="pc-kind">Platform</div><h3>Flowstate</h3><p>A block-editor task manager built on one rule: work flows down the hierarchy and nothing gets lost. Fully self-hosted, with no cloud account and no API keys.</p><span class="more">See it in the archive <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </a><a class="pcard all" href="/projects"><div class="pc-body"><span class="big">22</span><h3>Every project, in one place.</h3><p>The 8 above, 9 more without a film, and the 5 case studies. Filter by what you need built.</p><span class="more">Open the archive <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></a></div></div>
+        <div class="tile-body"><span class="kind">Platform</span><h3>Flowstate</h3><p>A block-editor task manager built on one rule: work flows down the hierarchy and nothing gets lost. Fully self-hosted, with no cloud account and no API keys.</p><span class="more">See it in the archive <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a><a class="tile all" href="/projects"><div class="tile-body"><span class="big">22</span><h3>Every project, in one place.</h3><p>Filter by what you need built: automation, agents, voice, platforms, websites.</p><span class="more">Open the archive <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></a></div>
 </section>
-
-<section id="process" aria-labelledby="proc-h">
+<section id="process" class="sec" style="padding-top:0" aria-labelledby="proc-h">
   <div class="container">
     <div class="sec-head">
-      <div><div class="label" data-rv>How I work</div><h2 id="proc-h" data-rv>Simple process. Clear handoff. No black box.</h2></div>
-      <p class="lede" data-rv>The goal isn't just a system that works. It's a system you understand well enough to explain to your own team without calling me.</p>
+      <div><div class="label" data-rv>How I work</div><h2 id="proc-h" data-rv>Simple process. <span class="dim">Clear handoff.</span></h2></div>
+      <div class="side"><p class="lede" data-rv>The goal isn't just a system that works. It's one you understand well enough to explain to your own team without calling me.</p></div>
     </div>
     <ol class="proc"><li data-rv><b>01</b><h3>Audit</h3><p>I map your current process and find where automation saves the most hours, not the most impressive demo.</p></li><li data-rv><b>02</b><h3>Blueprint</h3><p>I design the workflow, tools, data flow, edge cases and failure handling, before writing anything.</p></li><li data-rv><b>03</b><h3>Build</h3><p>I build and test against real scenarios and messy real data, not the happy path that always works in a demo.</p></li><li data-rv><b>04</b><h3>Handoff</h3><p>You get documentation, workflow access and a recorded walkthrough. The system is yours, not rented from me.</p></li></ol>
   </div>
 </section>
-<section class="cta" id="contact" aria-labelledby="cta-h">
-  <div class="container cta-grid">
-    <div data-rv>
-      <div class="label">Work with me</div>
-      <h2 id="cta-h">Got a process someone repeats every day? That's the one.</h2>
-      <p class="lede">Send me the workflow, your tool stack, or just describe the manual thing that eats your week. I'll tell you what can be automated, what shouldn't be, and what the first useful version looks like.</p>
-    </div>
-    <div class="actions" data-rv>
-      <a href="mailto:agharayyan@gmail.com" class="btn btn-primary">Book a free audit<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <a href="https://wa.me/923218234852" target="_blank" rel="noopener" class="btn btn-ghost">Message on WhatsApp</a>
+<section id="contact" class="contact" aria-labelledby="contact-h">
+  <div class="container">
+    <div class="contact-panel">
+      <div class="label" data-rv>Work with me</div>
+      <h2 id="contact-h" data-rv style="margin-top:18px">Got a process someone repeats every day? <span class="dim">That's the one.</span></h2>
+      <div class="contact-grid">
+        <div data-rv>
+          <p class="lede">Send me the workflow, your tool stack, or just describe the manual thing that eats your week. I'll tell you what can be automated, what shouldn't be, and what the first useful version looks like.</p>
+          <a class="mail" href="mailto:agharayyan@gmail.com">agharayyan@gmail.com</a>
+          <div class="ways"><a href="https://wa.me/923218234852" target="_blank" rel="noopener">WhatsApp +92 321 8234852</a><a href="https://www.linkedin.com/in/rayyan45/" target="_blank" rel="me noopener">LinkedIn</a><a href="https://github.com/rayyanse" target="_blank" rel="me noopener">GitHub</a></div>
+        </div>
+        <div class="contact-acts" data-rv>
+          <a href="mailto:agharayyan@gmail.com?subject=Free%20automation%20audit" class="btn btn-red">Book a free audit<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <button type="button" class="btn btn-line copy" data-copy="agharayyan@gmail.com">Copy email<span class="toast" role="status">Copied. Talk soon.</span></button>
+        </div>
+      </div>
     </div>
   </div>
-    <ul class="ways container" data-rv>
-      <li><a href="mailto:agharayyan@gmail.com"><span class="mono">Email</span>agharayyan@gmail.com</a></li>
-      <li><a href="https://www.linkedin.com/in/rayyan45/" target="_blank" rel="noopener"><span class="mono">LinkedIn</span>linkedin.com/in/rayyan45</a></li>
-      <li><a href="https://wa.me/923218234852" target="_blank" rel="noopener"><span class="mono">WhatsApp</span>+92 321 8234852</a></li>
-    </ul>
-</section>
-</main>
+</section></main>
 <footer>
   <div class="container">
-    <div class="foot-grid">
-      <div><h3>Agha Muhammad Rayyan Khan</h3><a href="/">AI systems that do real work. 22 shipped, most with a walkthrough film.</a><a href="mailto:agharayyan@gmail.com">agharayyan@gmail.com</a><a href="https://www.linkedin.com/in/rayyan45/" rel="me noopener" target="_blank">LinkedIn</a><a href="https://github.com/rayyanse" rel="me noopener" target="_blank">GitHub</a></div>
+    <div class="foot">
+      <div><div class="me-line"><img src="/assets/agha-muhammad-rayyan-khan.webp" alt="" width="40" height="40" loading="lazy" />Agha Muhammad Rayyan Khan</div><p class="lede" style="font-size:.9rem;margin-top:14px">AI systems that do real work. 22 shipped, most with a walkthrough film.</p></div>
       <div><h3>Case studies</h3><a href="/work/call-stream">Call Stream</a><a href="/work/jennifer">Jennifer</a><a href="/work/al-munir">Al Munir UPVC</a><a href="/work/bresco">Bresco Properties</a><a href="/work/whatsapp-lead-system">WhatsApp Lead Management System</a></div>
       <div><h3>Services</h3><a href="/ai-voice-agents">AI voice agents</a><a href="/whatsapp-automation">WhatsApp automation</a><a href="/ai-agents-automation">AI agents &amp; automation</a><a href="/projects">All 22 projects</a></div>
+      <div><h3>Elsewhere</h3><a href="mailto:agharayyan@gmail.com">Email</a><a href="https://www.linkedin.com/in/rayyan45/" rel="me noopener" target="_blank">LinkedIn</a><a href="https://github.com/rayyanse" rel="me noopener" target="_blank">GitHub</a><a href="/seo-ray">SEO-Ray</a></div>
     </div>
-    <div class="foot-base"><span>© 2026 Agha Muhammad Rayyan Khan</span><span>AI SYSTEMS ENGINEER · LAHORE, PK · REMOTE</span></div>
+    <div class="foot-base"><span>© 2026 Agha Muhammad Rayyan Khan</span><span>AI systems engineer · Lahore, PK · remote</span></div>
   </div>
 </footer>
-<dialog class="fmodal" id="filmModal" aria-label="Walkthrough film"><button type="button" class="x" aria-label="Close film">×</button><video controls playsinline></video></dialog>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
-<script src="/assets/site.js" defer></script>
 <script src="/assets/scenes.js" defer></script>
+<script src="/assets/home.js" defer></script>
 <script type="module" src="/assets/net.js"></script>
 <button class="chat-bubble" id="chatBubble" aria-label="Chat with Rayyan's AI assistant">
   <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 5.9 2 10.7c0 2.7 1.4 5.1 3.7 6.7-.2 1.5-.8 2.8-1.7 3.8 1.7-.2 3.3-.9 4.7-1.9 1.1.3 2.2.5 3.3.5 5.5 0 10-3.9 10-8.7S17.5 2 12 2z"/></svg>

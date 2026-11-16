@@ -196,11 +196,14 @@ aurelle:()=>
   T(18,132,'scroll · 03 / 07','sm lo')
 };
 
-$$('.proj-viz').forEach(box => {
+function draw(box) {
   const fn = SCENES[box.dataset.viz]; if (!fn) return;
   box.innerHTML = '<svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">' + fn() + '</svg>';
-});
+}
+$$('.proj-viz').forEach(draw);
 function runScene(v) { v.classList.toggle('run', false); void v.offsetWidth; v.classList.add('run'); v.dataset.t = performance.now(); }
+/* home.js swaps the scene in the "What I build" viewer: set data-viz, then Scenes.show(box). */
+window.Scenes = { show: box => { draw(box); box.dataset.ran = '1'; runScene(box); } };
 if (!('IntersectionObserver' in window)) { $$('.proj-viz').forEach(runScene); return; }
 const vio = new IntersectionObserver(es => es.forEach(e => {
   const v = e.target;
@@ -208,7 +211,7 @@ const vio = new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting && !v.dataset.ran) { v.dataset.ran = '1'; setTimeout(() => runScene(v), motion ? 260 : 0); }
 }), { threshold: .3 });
 $$('.proj-viz').forEach(v => vio.observe(v));
-if (fine && motion) $$('.pj,.pcard').forEach(c => c.addEventListener('mouseenter', () => {
+if (fine && motion) $$('.pj,.pcard,.tile').forEach(c => c.addEventListener('mouseenter', () => {
   const v = $('.proj-viz', c); if (v && v.dataset.ran && performance.now() - (+v.dataset.t || 0) > 3500) runScene(v);
 }));
 })();

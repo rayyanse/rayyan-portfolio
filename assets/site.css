@@ -1,5 +1,6 @@
-/* Every page of rayyankhan.dev (homepage, archive, case studies, service pages): the "full experience" layout.
-   Tokens match index.html. All content is plain HTML; every motion start state
+/* The dark pages of rayyankhan.dev (archive, case studies, service pages): the "full experience" layout.
+   The homepage now has its own light stylesheet (home.css); the homepage-only blocks below
+   (boot, showreel, 3D network, case index) are unused until these pages move to the light design. All content is plain HTML; every motion start state
    lives under .js-motion, so without JS (or for crawlers that skip it) the page
    is complete and visible. The LCP element (hero poster) is never hidden. */
 
