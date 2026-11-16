@@ -452,6 +452,7 @@ body::after{
 .proj-in ul{display:flex;flex-direction:column;gap:9px;margin-bottom:20px}
 .proj-in li{display:flex;gap:9px;font-size:.825rem;color:var(--muted);line-height:1.5}
 .proj-in li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--cyan);margin-top:7px;flex-shrink:0;opacity:.75}
+.svc-links{margin-top:14px;font-size:.9rem;color:var(--muted)}.svc-links a{color:var(--text);border-bottom:1px solid var(--line-hot)}.svc-links a:hover{border-color:var(--cyan)}
 .proj-foot{margin-top:auto;padding-top:20px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px}
 
 /* ============ PROCESS ============ */
@@ -779,6 +780,7 @@ setTimeout(function(){if(!window.__motionOK){d.classList.remove('js-motion','boo
       <div class="label">What I build</div>
       <h2>Systems that remove repetitive work — not demos that impress once.</h2>
       <p class="lede">Anyone can wire a chatbot that answers a question. I build the boring part underneath: the retries, the edge cases, the CRM writes, the thing that still works on a Sunday at 3am.</p>
+        <p class="svc-links">In depth: <a href="/ai-voice-agents">AI voice agents</a> · <a href="/whatsapp-automation">WhatsApp automation</a> · <a href="/ai-agents-automation">AI agents &amp; automation</a></p>
     </div>
     <div class="svc-grid">
       <article class="card svc rv">
@@ -852,6 +854,7 @@ setTimeout(function(){if(!window.__motionOK){d.classList.remove('js-motion','boo
           <div class="flag-title">
             <h3>Jennifer — Autonomous AI Business Employee</h3>
             <button type="button" class="btn btn-ghost btn-sm watch" data-film="jennifer" data-title="Jennifer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch how it works</button>
+            <a class="btn btn-ghost btn-sm" href="/work/jennifer">Read the case study<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           </div>
           <p>An AI business assistant for real estate agencies. It manages leads, scores intent, tracks follow-ups, searches live market data, keeps property inventory current, and delivers a daily business briefing — all through natural conversation.</p>
           <div class="mini">
@@ -979,6 +982,25 @@ setTimeout(function(){if(!window.__motionOK){d.classList.remove('js-motion','boo
           <div class="proj-foot">
             <div class="stackline"><span>n8n</span><span>Apify</span><span>Retell AI</span><span>Google Sheets</span><span>PDF.co</span><span>WhatsApp Cloud API</span><span>Claude</span></div>
             <button type="button" class="btn btn-ghost btn-sm watch" data-film="almunir" data-title="Al Munir UPVC"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch how it works</button>
+            <a class="btn btn-ghost btn-sm" href="/work/al-munir">Read the case study<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card proj rv" data-cat="voice">
+        <div class="proj-viz" data-viz="receptionist"></div>
+        <div class="proj-in">
+          <span class="tag g">Voice AI build</span>
+          <h3>Call Stream: Urdu AI Call Agent on a Normal SIM</h3>
+          <p>Turns an Android phone and a normal Pakistani SIM into an AI call agent that answers in Urdu, on the number the business already has. No SIP trunk, no PTA paperwork, no new number.</p>
+          <ul>
+            <li>SIM → Bluetooth → Asterisk bridge → AI agent over SIP with TLS</li>
+            <li>Built together with Shahwaiz, with demo films for 8 industries</li>
+          </ul>
+          <div class="proj-foot">
+            <div class="stackline"><span>Android</span><span>Asterisk</span><span>SIP/TLS</span><span>Urdu voice AI</span></div>
+            <button type="button" class="btn btn-ghost btn-sm watch" data-film="callstream" data-title="Call Stream"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch how it works</button>
+            <a class="btn btn-ghost btn-sm" href="/work/call-stream">Read the case study<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           </div>
         </div>
       </article>
@@ -995,6 +1017,8 @@ setTimeout(function(){if(!window.__motionOK){d.classList.remove('js-motion','boo
           </ul>
           <div class="proj-foot">
             <div class="stackline"><span>Next.js</span><span>Supabase</span><span>Baileys</span><span>Gemini</span><span>CallStream</span></div>
+            <button type="button" class="btn btn-ghost btn-sm watch" data-film="bresco" data-title="Bresco Properties"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch how it works</button>
+            <a class="btn btn-ghost btn-sm" href="/work/bresco">Read the case study<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           </div>
         </div>
       </article>
@@ -1011,6 +1035,8 @@ setTimeout(function(){if(!window.__motionOK){d.classList.remove('js-motion','boo
           </ul>
           <div class="proj-foot">
             <div class="stackline"><span>n8n</span><span>WhatsApp API</span><span>Claude</span><span>Sheets</span></div>
+            <button type="button" class="btn btn-ghost btn-sm watch" data-film="walead" data-title="WhatsApp Lead Management System"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch how it works</button>
+            <a class="btn btn-ghost btn-sm" href="/work/whatsapp-lead-system">Read the case study<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           </div>
         </div>
       </article>
