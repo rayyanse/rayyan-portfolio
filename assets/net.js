@@ -1,10 +1,10 @@
-/* Homepage hero: the 3D systems network (Three.js), ported unchanged from the original homepage.
+/* Homepage dark band: the 3D systems network (Three.js), ported from the original homepage.
    Loaded as a module on the homepage only. It waits for the hero intro ('hero:intro' event from
    site.js, or 5 s at most), renders only while on screen and the tab is visible, and falls back
    to nothing (class no-gl) if WebGL fails. Decorative: everything it shows is aria-hidden.
-   Three.js itself (~600 KB) is only downloaded after `load`, and setup (WebGL context, shaders,
-   the neighbour graph) runs at an idle moment, so neither competes with the first paint.
-   IDLE_TIMEOUT_MS caps the wait. */
+   Three.js itself (~600 KB) is only downloaded after `load` and once the band nears the
+   viewport (NEAR_PX), and setup runs at an idle moment, so it never competes with the first
+   paint. IDLE_TIMEOUT_MS caps the idle wait. */
 const THREE_URL='https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
 const IDLE_TIMEOUT_MS=1200;
 let THREE=null;
@@ -12,7 +12,12 @@ const wrap=document.getElementById('net'), canvas=document.getElementById('netCa
 const fail=e=>{ console.warn('network disabled',e); wrap.classList.add('no-gl'); };
 const safeInit=()=>import(THREE_URL).then(m=>{ THREE=m; try{ init(); }catch(e){ fail(e); } },fail);
 const whenIdle=f=>window.requestIdleCallback?requestIdleCallback(f,{timeout:IDLE_TIMEOUT_MS}):setTimeout(f,200);
-if(wrap&&canvas){ if(document.readyState==='complete') whenIdle(safeInit); else addEventListener('load',()=>whenIdle(safeInit),{once:true}); }
+/* three.js is only fetched once the band is within NEAR_PX of the viewport, after `load`. */
+const NEAR_PX=600;
+const whenNear=f=>{ if(!('IntersectionObserver' in window)) return f();
+  const io=new IntersectionObserver(es=>{ if(es.some(x=>x.isIntersecting)){ io.disconnect(); f(); } },{rootMargin:NEAR_PX+'px 0px'}); io.observe(wrap); };
+const boot=()=>whenNear(()=>whenIdle(safeInit));
+if(wrap&&canvas){ if(document.readyState==='complete') boot(); else addEventListener('load',boot,{once:true}); }
 
 function init(){
   const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -42,7 +47,7 @@ function init(){
   for(let i=0;i<(small?8:16);i++) pts.push(new THREE.Vector3().randomDirection().multiplyScalar(.5+Math.random()*.65));
   const count=pts.length, pos=new Float32Array(count*3); pts.forEach((v,i)=>v.toArray(pos,i*3));
   const nodeGeo=new THREE.BufferGeometry(); nodeGeo.setAttribute('position',new THREE.BufferAttribute(pos,3));
-  const nodeMat=mat(.075,0x6ba6f5); group.add(new THREE.Points(nodeGeo,nodeMat));
+  const nodeMat=mat(.075,0xaeb4c0); group.add(new THREE.Points(nodeGeo,nodeMat));
 
   /* edges: 3 nearest neighbours */
   const adj=Array.from({length:count},()=>[]), seen=new Set(), edges=[];
@@ -60,7 +65,7 @@ function init(){
   edges.sort((a,b)=>near(a)-near(b));
   const ep=new Float32Array(edges.length*6); edges.forEach(([a,b],i)=>{ pts[a].toArray(ep,i*6); pts[b].toArray(ep,i*6+3); });
   const edgeGeo=new THREE.BufferGeometry(); edgeGeo.setAttribute('position',new THREE.BufferAttribute(ep,3));
-  const edgeMat=new THREE.LineBasicMaterial({color:0x3b7de0,transparent:true,opacity:0,depthWrite:false,blending:THREE.AdditiveBlending});
+  const edgeMat=new THREE.LineBasicMaterial({color:0x6b7384,transparent:true,opacity:0,depthWrite:false,blending:THREE.AdditiveBlending});
   const lines=new THREE.LineSegments(edgeGeo,edgeMat); group.add(lines);
 
   const hp=new Float32Array(hubs.length*3); hubs.forEach((h,i)=>pts[h].toArray(hp,i*3));
@@ -68,7 +73,7 @@ function init(){
   const hubMat=mat(.2,0xeef3fb); group.add(new THREE.Points(hubGeo,hubMat));
 
   const ringGeo=new THREE.BufferGeometry(); ringGeo.setAttribute('position',new THREE.BufferAttribute(new Float32Array(3),3));
-  const ringMat=mat(.2,0xe01e33,ringTex); group.add(new THREE.Points(ringGeo,ringMat));
+  const ringMat=mat(.2,0xffffff,ringTex); group.add(new THREE.Points(ringGeo,ringMat));
 
   /* data pulses travelling the edges; one red pulse leaves the live hub */
   const pulses=(n,color,size)=>{
@@ -77,7 +82,7 @@ function init(){
     const list=[]; for(let i=0;i<n;i++){ const a=(Math.random()*count)|0; list.push({a,b:adj[a][(Math.random()*adj[a].length)|0],t:Math.random(),s:.55+Math.random()*.7}); }
     return {arr,g,m,list};
   };
-  const blue=pulses(small?14:30,0xb9d3f8,.085), red=pulses(1,0xe01e33,.14);
+  const blue=pulses(small?14:30,0xdfe3ea,.085), red=pulses(1,0xffffff,.14);
   const advance=(pl,dt)=>{
     pl.list.forEach((q,i)=>{
       q.t+=dt*q.s;
