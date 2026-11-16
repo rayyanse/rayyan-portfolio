@@ -170,6 +170,36 @@ CASES = [
         "limits": None,
         "related": ["bresco", "al-munir"], "service": "whatsapp-automation",
     },
+    {
+        # Facts from the Sebastian repo README (C:\Users\Muhammad Rayyan\sebastian) and his showcase film.
+        "slug": "sebastian",
+        "kind": "Voice AI · AssemblyAI hackathon build",
+        "name": "Sebastian",
+        "title": "Sebastian: An AI Teammate Inside Real WhatsApp Calls",
+        "description": "Sebastian joins real WhatsApp and phone calls on an Android phone, takes notes, answers out loud when you say his name and sends the summary after.",
+        "h1": ["An AI teammate", "inside real", '<span class="grad">WhatsApp calls.</span>'],
+        "lede": "Sebastian lives inside ordinary WhatsApp and phone calls on your own Android phone. He introduces himself, stays quiet and takes notes. Say his name and he answers out loud, so both people hear him. He can search the web, book a follow-up or read a Notion doc mid-call, and the summary lands on WhatsApp when you hang up. Built for AssemblyAI's voice hackathon week.",
+        "chips": ["Android + Kotlin", "AssemblyAI Universal Streaming", "LLM Gateway", "AssemblyAI TTS", "Cloudflare Workers", "Picovoice", "Notion"],
+        "film": "sebastian", "tall": False, "note": "Showcase film · the call section is a real WhatsApp call recording",
+        "problem": 'Meeting bots like Otter and Fireflies <em>only listen</em>, and only inside meeting apps. A WhatsApp call has no seat for them.',
+        "problem_p": "And they never talk back. When someone asks a question mid-call, a note-taker writes it down. It can't look the answer up, book the follow-up or say a word.",
+        "steps": [
+            ("“Hey Sebastian, call Shahwaiz”", "An on-device wake word hears it, and Sebastian places the WhatsApp call. You can also just call someone yourself."),
+            ("He introduces himself, then listens", "He waits for the other side's first words before his join line, so a ringing tone never fools him and everyone knows they're being noted."),
+            ("Two transcripts, one per side", "Each side of the call gets its own live transcript, so every line knows who said it."),
+            ("Say his name and he answers out loud", "His voice is mixed into both sides of the call, so both people hear him. If someone talks over him, he stops."),
+            ("He does things mid-call", "Web search, booking a follow-up, reading a Notion doc. For a slow tool he says “On it.” first, then gives the result."),
+            ("The notes arrive when you hang up", "A summary with decisions and action items lands on WhatsApp, and the full notes go to a Notion page."),
+        ],
+        "decisions": [
+            ("Getting into WhatsApp's audio", "Android gives apps no way into another app's call audio. A helper running as Android's shell user registers two audio loopback mixes on WhatsApp: one takes the other person's voice off the earpiece, the other replaces what WhatsApp hears as the microphone."),
+            ("Knowing when to speak", "A finished line with his name triggers him. For 10 seconds after he answers, follow-ups go to him too, he stays silent when people are talking to each other, and a passing mention of his name doesn't wake him."),
+            ("He never hears himself", "While he speaks, both transcripts get silence, so his own voice can't trigger him or end up in the notes. The call-audio layer comes from Call Stream."),
+        ],
+        "facts": [("2", "live transcripts, one for each side of the call"), ("0", "apps, links or invites the other person needs"), ("1", "API key for listening, thinking and speaking")],
+        "limits": "Built in a hackathon week. It needs an Android 13+ phone paired once over Wireless debugging, and it speaks English for now: Urdu waits on AssemblyAI's text-to-speech supporting it.",
+        "related": ["call-stream", "jennifer"], "service": "ai-voice-agents",
+    },
 ]
 
 # ---------------------------------------------------------------- service pages
@@ -200,7 +230,7 @@ SERVICES = [
             ("Follow up on no-shows", "WhatsApp and email follow-up when someone misses their appointment."),
             ("Voice on your website", "A voice agent that runs in the browser over WebRTC, with no phone line needed."),
         ],
-        "proof": ["call-stream", "al-munir", "bresco"],
+        "proof": ["call-stream", "sebastian", "al-munir", "bresco"],
         "faq": [
             ("Can the agent speak Urdu?", "Yes. Call Stream's agents talk to callers in Urdu, and the same setups work in English. On WhatsApp, the bots handle Roman Urdu too."),
             ("Do I need a new phone number or a SIP trunk?", "No. Call Stream runs on a normal Pakistani SIM in an Android phone, so there's no PTA paperwork or carrier deal. The limit is one call at a time per SIM, which suits a business doing around 20 calls a day. For more volume, we plan a proper phone line together."),
@@ -659,8 +689,11 @@ PHOTO = "/assets/agha-muhammad-rayyan-khan.webp"
 PHOTO_JPG = "/assets/agha-muhammad-rayyan-khan.jpg"
 PHOTO_ALT = f"{NAME}, AI systems engineer in Lahore"
 # Homepage order of the case studies: the flagship first, as the full-width card.
-HOME_CASES = ["jennifer", "call-stream", "al-munir", "bresco", "whatsapp-lead-system"]
-TINTS = ["t-a", "t-b", "t-c", "t-d", "t-e"]
+NUM_WORDS = {4: "Four", 5: "Five", 6: "Six", 7: "Seven", 8: "Eight"}
+# FEATURED cards span the full width; the rest pair up two by two.
+HOME_CASES = ["jennifer", "call-stream", "al-munir", "sebastian", "bresco", "whatsapp-lead-system"]
+FEATURED = {"jennifer": "Flagship", "sebastian": "Hackathon build"}
+TINTS = ["t-a", "t-b", "t-c", "t-e", "t-d", "t-a"]
 # The feed beside the photo starts with these three (home.js rotates more in). Sample events, decorative.
 FEED = [("WA", "lead.inbound", "New WhatsApp lead, replied in 9s"),
         ("AI", "ai.qualify", "Intent 87/100, routed to an agent"),
@@ -763,9 +796,9 @@ def home_work() -> str:
         c = CASE_BY[slug]
         hero_film = c.get("hero_film", c["film"])
         stack = " / ".join(c["chips"][:4])
-        cards.append(f"""      <article class="work{' feat' if i == 0 else ''}" data-rv>
+        cards.append(f"""      <article class="work{' feat' if slug in FEATURED else ''}" data-rv>
         <div class="stage {TINTS[i]}">
-          <div class="meta" aria-hidden="true"><span>Case {case_no(slug)}</span><span>{'Flagship' if i == 0 else e(c['kind'].split(' · ')[0])}</span></div>
+          <div class="meta" aria-hidden="true"><span>Case {case_no(slug)}</span><span>{e(FEATURED.get(slug) or c['kind'].split(' · ')[0])}</span></div>
           <div class="screen{' phone' if c['tall'] else ''}">
             <img src="/films/{c['film']}.jpg" alt="Still from the {e(c['name'])} walkthrough film" loading="lazy" width="{720 if c['tall'] else 1280}" height="{1280 if c['tall'] else 720}" />
             <video data-src="/films/{hero_film}.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
@@ -785,7 +818,7 @@ def home_work() -> str:
   <div class="container">
     <div class="sec-head">
       <div><div class="label" data-rv>Case studies · {len(CASES):02d}</div><h2 id="work-h" data-rv>Selected <span class="dim">work.</span></h2></div>
-      <div class="side"><p class="lede" data-rv>Five builds, told start to finish: the problem, how it works, the decisions behind it, and a film of it running.</p></div>
+      <div class="side"><p class="lede" data-rv>{NUM_WORDS[len(CASES)]} builds, told start to finish: the problem, how it works, the decisions behind it, and a film of it running.</p></div>
     </div>
     <div class="works">
 {chr(10).join(cards)}
