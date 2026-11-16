@@ -105,6 +105,8 @@
 <script>
 /* Motion start states only when motion is allowed; cleared if GSAP never arrives. */
 (function(){var d=document.documentElement;if(!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('js-motion');setTimeout(function(){if(!window.__motionOK)d.classList.remove('js-motion')},2500)}})();
+/* Boot screen once per session (homepage). site.js runs it and clears the flag; a 4.5 s cap keeps a failed script from hiding the page. */
+(function(){var d=document.documentElement;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var b=false;try{b=!sessionStorage.getItem('booted')}catch(e){}if(b){d.classList.add('booting');setTimeout(function(){d.classList.remove('booting')},4500)}})();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -113,6 +115,13 @@
 <link rel="stylesheet" href="/assets/chat.css" />
 </head>
 <body>
+<div class="boot" id="boot" data-systems="22" aria-hidden="true"><div class="boot-in">
+  <div class="boot-brand"><span class="brand-mark">MR</span><span>RAYYAN / SYSTEMS</span></div>
+  <ol class="boot-log" id="bootLog"></ol>
+  <div class="boot-bar"><i id="bootBar"></i></div>
+  <div class="boot-meta"><span id="bootPct">000</span><span>LAHORE · PK</span></div>
+</div></div>
+<div class="field" aria-hidden="true"><div class="orb a"></div><div class="orb b"></div><div class="orb c"></div></div>
 <div class="grain" aria-hidden="true"></div>
 <div class="frame bl" aria-hidden="true">RAYYAN / SYSTEMS &nbsp;·&nbsp; LAHORE, PK</div>
 <div class="frame br" aria-hidden="true"><b id="framePct">00%</b> &nbsp;SCROLLED</div>
@@ -142,7 +151,18 @@
 <section class="xhero home" aria-labelledby="h1">
   <div class="xhero-bg" aria-hidden="true"><img class="amb" src="/films/jennifer.jpg" alt="" width="1280" height="720" /></div>
   <div class="xhero-shade" aria-hidden="true"></div>
-  <div class="floaters" aria-hidden="true"><div class="glass g1" data-depth="0.50"><span class="mono">At a glance</span><b>9s</b><span>First reply to a new lead</span></div><div class="glass g2" data-depth="0.90"><span class="mono">And</span><b>22</b><span>Systems shipped, most with a film</span></div></div>
+  <div class="net" id="net" aria-hidden="true">
+    <canvas id="netCanvas"></canvas>
+    <div class="net-read"><span>sys / network</span><span>rot <b id="nrRot">000.0</b>°</span><span>links <b id="nrLinks">000</b></span><span>events <b id="nrEv">0000</b></span></div>
+    <span class="live-tag"><span class="pulse"></span>live</span>
+    <div class="hud">
+      <div class="hud-tag"><i></i><b>lead.inbound</b><span>new lead · WhatsApp</span></div>
+      <div class="hud-tag"><i></i><b>ai.qualify</b><span>intent 87/100</span></div>
+      <div class="hud-tag"><i></i><b>crm.sync</b><span>contact + notes written</span></div>
+      <div class="hud-tag"><i></i><b>dispatch</b><span>call booked 14:30</span></div>
+    </div>
+  </div>
+  <div class="floaters" aria-hidden="true"><div class="glass g1" data-depth="0.50"><span class="mono">At a glance</span><b>9s</b><span>First reply to a new lead</span></div></div>
   <div class="screen-wrap"><figure class="screen" data-depth="0.55" data-reel="[{&quot;src&quot;: &quot;/films/jennifer.mp4&quot;, &quot;poster&quot;: &quot;/films/jennifer.jpg&quot;, &quot;name&quot;: &quot;Jennifer&quot;, &quot;href&quot;: &quot;/work/jennifer&quot;, &quot;start&quot;: 9}, {&quot;src&quot;: &quot;/films/bresco-teaser.mp4&quot;, &quot;poster&quot;: &quot;/films/bresco.jpg&quot;, &quot;name&quot;: &quot;Bresco Properties&quot;, &quot;href&quot;: &quot;/work/bresco&quot;, &quot;start&quot;: 10}, {&quot;src&quot;: &quot;/films/walead.mp4&quot;, &quot;poster&quot;: &quot;/films/walead.jpg&quot;, &quot;name&quot;: &quot;WhatsApp Lead Management System&quot;, &quot;href&quot;: &quot;/work/whatsapp-lead-system&quot;, &quot;start&quot;: 12}, {&quot;src&quot;: &quot;/films/leadforge.mp4&quot;, &quot;poster&quot;: &quot;/films/leadforge.jpg&quot;, &quot;name&quot;: &quot;LeadForge&quot;, &quot;href&quot;: &quot;/projects#leadforge&quot;, &quot;start&quot;: 10}]">
     <div class="screen-in">
       <img src="/films/jennifer.jpg" alt="Still from the Jennifer walkthrough film" fetchpriority="high" width="1280" height="720" />
@@ -227,28 +247,28 @@
     <p class="lede" data-rv>Agents, voice systems, scraping pipelines and live sites. Two of them you can open and try right now.</p>
   </div>
   <div class="track-wrap"><div class="track"><a class="pcard" href="/projects#agentic-sales-research-chatbot">
-        <img src="/films/research.jpg" alt="Still from the Agentic Sales Research Chatbot walkthrough film" loading="lazy" width="1280" height="720" />
+        <div class="proj-viz" data-viz="research"></div>
         <div class="pc-body"><div class="pc-kind">AI agent</div><h3>Agentic Sales Research Chatbot</h3><p>Researches a company live on the web, asks qualifying questions, scores the lead, and writes a personalised outreach email.</p><span class="more">See it in the archive <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
       </a><a class="pcard" href="/projects#ai-appointment-booking-voice-agent">
-        <img src="/films/booking.jpg" alt="Still from the AI Appointment Booking Voice Agent walkthrough film" loading="lazy" width="1280" height="720" />
+        <div class="proj-viz" data-viz="voice"></div>
         <div class="pc-body"><div class="pc-kind">Voice AI</div><h3>AI Appointment Booking Voice Agent</h3><p>A caller explains what they need, the agent checks Google Calendar, confirms a slot, books it and sends the confirmation.</p><span class="more">See it in the archive <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
       </a><a class="pcard" href="/projects#zephra">
-        <img src="/films/zephra.jpg" alt="Still from the ZEPHRA — 3D Garment Configurator walkthrough film" loading="lazy" width="1280" height="720" />
+        <div class="proj-viz" data-viz="zephra"></div>
         <div class="pc-body"><div class="pc-kind">Live site</div><h3>ZEPHRA — 3D Garment Configurator</h3><p>A fashion brand site built around a real-time 3D garment viewer. Visitors pick a silhouette and turn the piece around in the browser. There&#x27;s no product photography anywhere on the page.</p><span class="more">See it in the archive <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
       </a><a class="pcard" href="/projects#ai-human-labs">
-        <img src="/films/humanlabs.jpg" alt="Still from the AI Human Labs walkthrough film" loading="lazy" width="1280" height="720" />
+        <div class="proj-viz" data-viz="ahl"></div>
         <div class="pc-body"><div class="pc-kind">Live demo</div><h3>AI Human Labs</h3><p>A cinematic AI agency website demo with a scroll-driven robot hero, interactive industry carousel and responsive layouts. Built to showcase premium web design, animation and front-end development.</p><span class="more">See it in the archive <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
       </a><a class="pcard" href="/projects#leadforge">
-        <img src="/films/leadforge.jpg" alt="Still from the LeadForge — Overnight Lead Engine walkthrough film" loading="lazy" width="1280" height="720" />
+        <div class="proj-viz" data-viz="leadforge"></div>
         <div class="pc-body"><div class="pc-kind">Client build</div><h3>LeadForge — Overnight Lead Engine</h3><p>A lead engine that works the night shift. At midnight it scrapes job boards, X, LinkedIn, Reddit, Threads, Instagram and Facebook groups, an AI judge keeps only real buying signals, and Claude writes a ready reply for every lead.</p><span class="more">See it in the archive <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
       </a><a class="pcard" href="/projects#autonomous-ai-sdr-pipeline">
-        <img src="/films/sdr.jpg" alt="Still from the Autonomous AI SDR Pipeline walkthrough film" loading="lazy" width="1280" height="720" />
+        <div class="proj-viz" data-viz="sdr"></div>
         <div class="pc-body"><div class="pc-kind">Sales automation</div><h3>Autonomous AI SDR Pipeline</h3><p>Enriches new leads, scores them, researches recent company news, writes the outreach, then fires a different-angle follow-up 48 hours later.</p><span class="more">See it in the archive <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
       </a><a class="pcard" href="/projects#ai-vape-detection-system">
-        <img src="/films/vape.jpg" alt="Still from the AI Vape Detection System walkthrough film" loading="lazy" width="1280" height="720" />
+        <div class="proj-viz" data-viz="vape"></div>
         <div class="pc-body"><div class="pc-kind">Computer vision</div><h3>AI Vape Detection System</h3><p>Computer vision on live camera feeds that sends a WhatsApp alert the moment it spots vaping. Built for schools and managed facilities.</p><span class="more">See it in the archive <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
       </a><a class="pcard" href="/projects#flowstate">
-        <img src="/films/flowstate.jpg" alt="Still from the Flowstate walkthrough film" loading="lazy" width="1280" height="720" />
+        <div class="proj-viz" data-viz="flowstate"></div>
         <div class="pc-body"><div class="pc-kind">Platform</div><h3>Flowstate</h3><p>A block-editor task manager built on one rule: work flows down the hierarchy and nothing gets lost. Fully self-hosted, with no cloud account and no API keys.</p><span class="more">See it in the archive <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
       </a><a class="pcard all" href="/projects"><div class="pc-body"><span class="big">22</span><h3>Every project, in one place.</h3><p>The 8 above, 9 more without a film, and the 5 case studies. Filter by what you need built.</p><span class="more">Open the archive <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></a></div></div>
 </section>
@@ -296,6 +316,8 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
 <script src="/assets/site.js" defer></script>
+<script src="/assets/scenes.js" defer></script>
+<script type="module" src="/assets/net.js"></script>
 <button class="chat-bubble" id="chatBubble" aria-label="Chat with Rayyan's AI assistant">
   <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 5.9 2 10.7c0 2.7 1.4 5.1 3.7 6.7-.2 1.5-.8 2.8-1.7 3.8 1.7-.2 3.3-.9 4.7-1.9 1.1.3 2.2.5 3.3.5 5.5 0 10-3.9 10-8.7S17.5 2 12 2z"/></svg>
   <span class="chat-notif" id="chatNotif"></span>

@@ -24,7 +24,8 @@
   "site_label": null,
   "case": "/work/jennifer",
   "slug": "jennifer",
-  "metric": null
+  "metric": null,
+  "viz": null
  },
  {
   "cat": "ai",
@@ -46,7 +47,8 @@
   "site_label": null,
   "case": null,
   "slug": "agentic-sales-research-chatbot",
-  "metric": null
+  "metric": null,
+  "viz": "research"
  },
  {
   "cat": "voice",
@@ -68,7 +70,8 @@
   "site_label": null,
   "case": null,
   "slug": "ai-appointment-booking-voice-agent",
-  "metric": null
+  "metric": null,
+  "viz": "voice"
  },
  {
   "cat": "web",
@@ -87,7 +90,8 @@
   "site_label": "Open site",
   "case": null,
   "slug": "zephra",
-  "metric": null
+  "metric": null,
+  "viz": "zephra"
  },
  {
   "cat": "web",
@@ -106,7 +110,8 @@
   "site_label": "View demo",
   "case": null,
   "slug": "ai-human-labs",
-  "metric": null
+  "metric": null,
+  "viz": "ahl"
  },
  {
   "cat": "automation",
@@ -130,7 +135,8 @@
   "site_label": null,
   "case": null,
   "slug": "leadforge",
-  "metric": null
+  "metric": null,
+  "viz": "leadforge"
  },
  {
   "cat": "automation",
@@ -156,7 +162,8 @@
   "site_label": null,
   "case": "/work/al-munir",
   "slug": "al-munir-upvc",
-  "metric": null
+  "metric": null,
+  "viz": "munirquote"
  },
  {
   "cat": "voice",
@@ -178,7 +185,8 @@
   "site_label": null,
   "case": "/work/call-stream",
   "slug": "call-stream",
-  "metric": null
+  "metric": null,
+  "viz": "receptionist"
  },
  {
   "cat": "automation",
@@ -201,7 +209,8 @@
   "site_label": null,
   "case": "/work/bresco",
   "slug": "bresco-properties",
-  "metric": null
+  "metric": null,
+  "viz": "bresco"
  },
  {
   "cat": "automation",
@@ -223,7 +232,8 @@
   "site_label": null,
   "case": "/work/whatsapp-lead-system",
   "slug": "whatsapp-lead-management-system",
-  "metric": null
+  "metric": null,
+  "viz": "whatsapp"
  },
  {
   "cat": "automation",
@@ -245,7 +255,8 @@
   "site_label": null,
   "case": null,
   "slug": "autonomous-ai-sdr-pipeline",
-  "metric": null
+  "metric": null,
+  "viz": "sdr"
  },
  {
   "cat": "automation",
@@ -267,7 +278,8 @@
   "site_label": null,
   "case": null,
   "slug": "multi-platform-content-engine",
-  "metric": null
+  "metric": null,
+  "viz": "content"
  },
  {
   "cat": "voice",
@@ -286,7 +298,8 @@
   "site_label": null,
   "case": null,
   "slug": "ai-voice-receptionist",
-  "metric": null
+  "metric": null,
+  "viz": "receptionist"
  },
  {
   "cat": "ai",
@@ -305,7 +318,8 @@
   "site_label": null,
   "case": null,
   "slug": "sentry",
-  "metric": null
+  "metric": null,
+  "viz": "sentry"
  },
  {
   "cat": "data",
@@ -325,7 +339,8 @@
   "site_label": null,
   "case": null,
   "slug": "ai-vape-detection-system",
-  "metric": null
+  "metric": null,
+  "viz": "vape"
  },
  {
   "cat": "platforms",
@@ -344,7 +359,8 @@
   "site_label": null,
   "case": null,
   "slug": "b-r-i-d-g-e-directory",
-  "metric": null
+  "metric": null,
+  "viz": "bridge"
  },
  {
   "cat": "platforms",
@@ -362,7 +378,8 @@
   "site_label": null,
   "case": null,
   "slug": "echo",
-  "metric": null
+  "metric": null,
+  "viz": "echo"
  },
  {
   "cat": "ai",
@@ -381,7 +398,8 @@
   "site_label": null,
   "case": null,
   "slug": "aura",
-  "metric": null
+  "metric": null,
+  "viz": "aura"
  },
  {
   "cat": "platforms",
@@ -400,7 +418,8 @@
   "site_label": null,
   "case": null,
   "slug": "groupxam",
-  "metric": null
+  "metric": null,
+  "viz": "groupxam"
  },
  {
   "cat": "platforms",
@@ -418,7 +437,8 @@
   "site_label": null,
   "case": null,
   "slug": "flowstate",
-  "metric": null
+  "metric": null,
+  "viz": "flowstate"
  },
  {
   "cat": "data",
@@ -440,7 +460,8 @@
   "metric": [
    "15%",
    "lower forecast error than the previous baseline"
-  ]
+  ],
+  "viz": "corecast"
  },
  {
   "cat": "web",
@@ -459,6 +480,7 @@
   "site_label": null,
   "case": null,
   "slug": "maison-aurelle",
-  "metric": null
+  "metric": null,
+  "viz": "aurelle"
  }
 ]

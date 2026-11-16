@@ -308,7 +308,19 @@ CAPABILITIES = [
 
 
 def head(title: str, description: str, path: str, image: str, schema: list[dict], frame_left: str,
-         og_type: str = "article", preload: str | None = None) -> str:
+         og_type: str = "article", preload: str | None = None, boot: bool = False) -> str:
+    """boot=True (homepage only) adds the first-visit boot screen and the drifting ambient field."""
+    boot_flag = """
+/* Boot screen once per session (homepage). site.js runs it and clears the flag; a 4.5 s cap keeps a failed script from hiding the page. */
+(function(){var d=document.documentElement;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var b=false;try{b=!sessionStorage.getItem('booted')}catch(e){}if(b){d.classList.add('booting');setTimeout(function(){d.classList.remove('booting')},4500)}})();""" if boot else ""
+    boot_html = f"""<div class="boot" id="boot" data-systems="{len(PROJECTS)}" aria-hidden="true"><div class="boot-in">
+  <div class="boot-brand"><span class="brand-mark">MR</span><span>RAYYAN / SYSTEMS</span></div>
+  <ol class="boot-log" id="bootLog"></ol>
+  <div class="boot-bar"><i id="bootBar"></i></div>
+  <div class="boot-meta"><span id="bootPct">000</span><span>LAHORE · PK</span></div>
+</div></div>
+<div class="field" aria-hidden="true"><div class="orb a"></div><div class="orb b"></div><div class="orb c"></div></div>
+""" if boot else ""
     url = f"{SITE}{path}"
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -335,7 +347,7 @@ def head(title: str, description: str, path: str, image: str, schema: list[dict]
 </script>
 <script>
 /* Motion start states only when motion is allowed; cleared if GSAP never arrives. */
-(function(){{var d=document.documentElement;if(!matchMedia('(prefers-reduced-motion: reduce)').matches){{d.classList.add('js-motion');setTimeout(function(){{if(!window.__motionOK)d.classList.remove('js-motion')}},2500)}}}})();
+(function(){{var d=document.documentElement;if(!matchMedia('(prefers-reduced-motion: reduce)').matches){{d.classList.add('js-motion');setTimeout(function(){{if(!window.__motionOK)d.classList.remove('js-motion')}},2500)}}}})();{boot_flag}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -344,7 +356,7 @@ def head(title: str, description: str, path: str, image: str, schema: list[dict]
 <link rel="stylesheet" href="/assets/chat.css" />
 </head>
 <body>
-<div class="grain" aria-hidden="true"></div>
+{boot_html}<div class="grain" aria-hidden="true"></div>
 <div class="frame bl" aria-hidden="true">{frame_left}</div>
 <div class="frame br" aria-hidden="true"><b id="framePct">00%</b> &nbsp;SCROLLED</div>
 <header class="topbar" id="topbar">
@@ -482,7 +494,8 @@ def cta(heading: str, anchor: str | None = None, ways: bool = False) -> str:
 """
 
 
-def foot() -> str:
+def foot(scripts: str = "") -> str:
+    """Footer, film dialog, chat widget and scripts. `scripts` adds page-specific ones (scenes, the 3D network)."""
     work = "".join(f'<a href="/work/{c["slug"]}">{e(c["name"])}</a>' for c in CASES)
     serv = "".join(f'<a href="/{s["slug"]}">{e(SERVICE_NAMES[s["slug"]])}</a>' for s in SERVICES)
     return f"""</main>
@@ -501,7 +514,7 @@ def foot() -> str:
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
 <script src="{LENIS}" defer></script>
 <script src="/assets/site.js" defer></script>
-{CHAT_WIDGET}<script src="/assets/chat.js" defer></script>
+{scripts}{CHAT_WIDGET}<script src="/assets/chat.js" defer></script>
 </body>
 </html>
 """
@@ -660,6 +673,8 @@ HOME_DESC = f"{NAME} builds AI agents, voice assistants and automation pipelines
 STACK = ["n8n", "Make.com", "Claude", "Gemini", "Groq", "OpenRouter", "LiveKit", "ElevenLabs", "Tavily", "WhatsApp API",
          "Google Calendar", "Supabase", "Next.js", "Three.js", "Python"]
 CHIPS = ["n8n / Make / Zapier", "AI agents + RAG", "Voice + WhatsApp"]
+SCENES_JS = '<script src="/assets/scenes.js" defer></script>\n'
+NET_JS = '<script type="module" src="/assets/net.js"></script>\n'
 
 
 def home_hero() -> str:
@@ -669,7 +684,7 @@ def home_hero() -> str:
     first = REEL[0]
     reel = e(json.dumps([{"src": f"/films/{r['film']}.mp4", "poster": f"/films/{r.get('poster', r['film'])}.jpg",
                           "name": r["name"], "href": r["href"], "start": r["start"]} for r in REEL]))
-    glass = [("9s", "First reply to a new lead"), (str(len(PROJECTS)), "Systems shipped, most with a film")]
+    glass = [("9s", "First reply to a new lead")]
     g = "".join(
         f'<div class="glass g{i+1}" data-depth="{0.5 + i * 0.4:.2f}"><span class="mono">{"At a glance" if i == 0 else "And"}</span><b>{e(v)}</b><span>{e(l)}</span></div>'
         for i, (v, l) in enumerate(glass))
@@ -678,6 +693,17 @@ def home_hero() -> str:
 <section class="xhero home" aria-labelledby="h1">
   <div class="xhero-bg" aria-hidden="true"><img class="amb" src="/films/{first['film']}.jpg" alt="" width="1280" height="720" /></div>
   <div class="xhero-shade" aria-hidden="true"></div>
+  <div class="net" id="net" aria-hidden="true">
+    <canvas id="netCanvas"></canvas>
+    <div class="net-read"><span>sys / network</span><span>rot <b id="nrRot">000.0</b>°</span><span>links <b id="nrLinks">000</b></span><span>events <b id="nrEv">0000</b></span></div>
+    <span class="live-tag"><span class="pulse"></span>live</span>
+    <div class="hud">
+      <div class="hud-tag"><i></i><b>lead.inbound</b><span>new lead · WhatsApp</span></div>
+      <div class="hud-tag"><i></i><b>ai.qualify</b><span>intent 87/100</span></div>
+      <div class="hud-tag"><i></i><b>crm.sync</b><span>contact + notes written</span></div>
+      <div class="hud-tag"><i></i><b>dispatch</b><span>call booked 14:30</span></div>
+    </div>
+  </div>
   <div class="floaters" aria-hidden="true">{g}</div>
   <div class="screen-wrap"><figure class="screen" data-depth="0.55" data-reel="{reel}">
     <div class="screen-in">
@@ -740,9 +766,9 @@ def home_capabilities() -> str:
 
 
 def project_tile(p: dict) -> str:
-    """A small card for the homepage 'more builds' track. Links into the archive."""
+    """A small card for the homepage 'more builds' track: the project's animated scene, links into the archive."""
     return f"""<a class="pcard" href="/projects#{p['slug']}">
-        <img src="/films/{p['film']}.jpg" alt="Still from the {e(p['title'])} walkthrough film" loading="lazy" width="1280" height="720" />
+        <div class="proj-viz" data-viz="{p['viz']}"></div>
         <div class="pc-body"><div class="pc-kind">{e(p['tag'])}</div><h3>{e(p['title'])}</h3><p>{e(p['text'])}</p><span class="more">See it in the archive {ARROW_SM}</span></div>
       </a>"""
 
@@ -778,7 +804,7 @@ def home_page() -> str:
     ]
     proc = "".join(f'<li data-rv><b>{n}</b><h3>{e(t)}</h3><p>{e(p)}</p></li>' for n, t, p in PROCESS)
     page = head(HOME_TITLE, HOME_DESC, "/", f"{SITE}/og.png", schema, "RAYYAN / SYSTEMS &nbsp;·&nbsp; LAHORE, PK",
-                og_type="website", preload=f"/films/{REEL[0]['film']}.jpg")
+                og_type="website", preload=f"/films/{REEL[0]['film']}.jpg", boot=True)
     page = page.replace(f'<meta property="og:title" content="{e(HOME_TITLE)}" />',
                         f'<meta property="og:title" content="{NAME}, AI Systems &amp; Automation Engineer" />', 1)
     films = len({p["film"] for p in PROJECTS if p["film"]})
@@ -796,7 +822,7 @@ def home_page() -> str:
     <ol class="proc">{proc}</ol>
   </div>
 </section>
-""" + cta("Got a process someone repeats every day? That's the one.", anchor="contact", ways=True) + foot()
+""" + cta("Got a process someone repeats every day? That's the one.", anchor="contact", ways=True) + foot(SCENES_JS + NET_JS)
 
 
 # ------------------------------------------------------------------ project archive
@@ -804,8 +830,12 @@ def home_page() -> str:
 def project_card(p: dict, first: bool = False) -> str:
     short = p["title"].split(" — ")[0]
     load = 'fetchpriority="high"' if first else 'loading="lazy"'
-    media = (f'<div class="pj-media"><img src="/films/{p["film"]}.jpg" alt="Still from the {e(p["title"])} walkthrough film" {load} width="1280" height="720" /></div>'
-             if p["film"] else f'<div class="pj-media none" aria-hidden="true"><span>{e(short)}</span></div>')
+    if p.get("viz"):  # the project's animated scene (assets/scenes.js), as on the original homepage
+        media = f'<div class="pj-media proj-viz" data-viz="{p["viz"]}" aria-hidden="true"></div>'
+    elif p["film"]:
+        media = f'<div class="pj-media"><img src="/films/{p["film"]}.jpg" alt="Still from the {e(p["title"])} walkthrough film" {load} width="1280" height="720" /></div>'
+    else:
+        media = f'<div class="pj-media none" aria-hidden="true"><span>{e(short)}</span></div>'
     pts = ("<ul>" + "".join(f"<li>{e(x)}</li>" for x in p["points"]) + "</ul>") if p["points"] else ""
     metric = f'<div class="pj-metric"><b>{e(p["metric"][0])}</b><span>{e(p["metric"][1])}</span></div>' if p.get("metric") else ""
     stack = "".join(f"<span>{e(x)}</span>" for x in p["stack"])
@@ -859,7 +889,7 @@ def projects_page() -> str:
     {cards}
   </div>
 </section>
-""" + cta("Want one of these, built around your business?") + foot()
+""" + cta("Want one of these, built around your business?") + foot(SCENES_JS)
 
 
 def main() -> None:

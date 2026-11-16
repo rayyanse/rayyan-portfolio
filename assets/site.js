@@ -170,9 +170,66 @@
     gsap.to(o, { v: to, duration: 1.6, ease: 'power3.out', onUpdate: function () { el.textContent = Math.round(o.v) + suf; } });
   }
 
+  /* ---------- hero intro: runs after the boot screen (homepage) or straight away ---------- */
+  var introQueue = [], introDone = false;
+  function onIntro(f) { if (introDone) f(); else introQueue.push(f); }
+  function heroIntro() {
+    if (introDone) return; introDone = true;
+    window.__heroGo = true; dispatchEvent(new Event('hero:intro'));   /* assets/net.js waits for this */
+    introQueue.forEach(function (f) { f(); }); introQueue = [];
+  }
+  /* boot screen, first visit per session: a real load bar (caps at 90% until `load`),
+     four log lines, then it slides away. Never longer than 2.6 s. */
+  function boot() {
+    var el = $('#boot');
+    if (!el || !d.classList.contains('booting')) { heroIntro(); return; }
+    var log = $('#bootLog'), bar = $('#bootBar'), pct = $('#bootPct');
+    var steps = [[.1, 'mounting agents'], [.36, 'wiring ' + (el.getAttribute('data-systems') || 'the') + ' systems'], [.64, 'opening network'], [.9, 'handshake ok']];
+    var shown = 0, p = 0, loaded = document.readyState === 'complete', done = false, t0 = performance.now();
+    addEventListener('load', function () { loaded = true; }, { once: true });
+    function finish() {
+      if (done) return; done = true;
+      bar.style.transform = 'scaleX(1)'; pct.textContent = '100';
+      try { sessionStorage.setItem('booted', '1'); } catch (err) {}
+      var a = el.animate ? el.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-100%)' }], { duration: 760, delay: 160, easing: 'cubic-bezier(.77,0,.175,1)', fill: 'forwards' }) : null;
+      if (a) a.onfinish = function () { d.classList.toggle('booting', false); }; else d.classList.toggle('booting', false);
+      setTimeout(heroIntro, 420);
+    }
+    (function tick(t) {
+      var e = t - t0, target = Math.min(loaded ? 1 : .9, e / 1150);
+      p += (target - p) * .14; if (target >= 1 && p > .99) p = 1;
+      bar.style.transform = 'scaleX(' + p.toFixed(3) + ')'; pct.textContent = String(Math.round(p * 100)).padStart(3, '0');
+      while (shown < steps.length && p >= steps[shown][0]) { var li = document.createElement('li'); li.innerHTML = '<b>[ ok ]</b><span>' + steps[shown][1] + '</span>'; log.appendChild(li); shown++; }
+      if (p >= 1 || e > 2600) finish(); else requestAnimationFrame(tick);
+    })(t0);
+  }
+
+  /* ---------- text decode: characters scramble, then lock in left to right ---------- */
+  var GLY = '!<>-_\\/[]{}=+*^?#0123456789';
+  function scramble(el, dur) {
+    if (!el || el.children.length || !el.textContent.trim()) return;
+    var txt = el.getAttribute('data-txt') || el.textContent; el.setAttribute('data-txt', txt);
+    var n = txt.length, t0 = performance.now(); dur = dur || Math.min(900, 260 + n * 18);
+    (function f(t) {
+      var p = Math.min((t - t0) / dur, 1), lock = Math.floor(n * (p * p * (3 - 2 * p))), o = '';
+      for (var i = 0; i < n; i++) { var c = txt[i]; o += (i < lock || c === ' ') ? c : GLY[(Math.random() * GLY.length) | 0]; }
+      el.textContent = p < 1 ? o : txt; if (p < 1) requestAnimationFrame(f);
+    })(t0);
+  }
+
+  /* ---------- cursor light on cards (border on dark cards, spotlight on paper) ---------- */
+  if (fine) $$('.pj,.pcard,.offer.caps>li').forEach(function (c) {
+    c.addEventListener('pointermove', function (e) {
+      var r = c.getBoundingClientRect();
+      c.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+      c.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+    });
+  });
+
   if (!d.classList.contains('js-motion') || !window.gsap) {
     d.classList.remove('js-motion');
     $$('[data-count]').forEach(countUp);
+    boot();
     return;
   }
   window.__motionOK = true;
@@ -191,13 +248,16 @@
   }
 
   /* ---------- hero entrance: lines rise from a mask, copy follows, glass settles in ---------- */
-  var tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
-  tl.to('.xhero h1 .ln>span', { y: 0, duration: 1.15, stagger: 0.09 }, 0.05)
-    .to('.xhero [data-hi]', { opacity: 1, y: 0, duration: 0.9, stagger: 0.06 }, 0.3)
-    .fromTo('.glass', { opacity: 0, y: 30, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 1.2, stagger: 0.12 }, 0.5)
-    .fromTo('.phone', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1.3 }, 0.35)
-    .fromTo('.screen-wrap', { opacity: 0, y: 50, rotationX: 8 }, { opacity: 1, y: 0, rotationX: 0, duration: 1.5 }, 0.25)
-    .fromTo('.xhero-bg', { scale: 1.08 }, { scale: 1, duration: 2.4, ease: 'power2.out' }, 0);
+  var tl = gsap.timeline({ paused: true, defaults: { ease: 'expo.out' } });
+  onIntro(function () { tl.play(); setTimeout(function () { scramble($('.xhero h1 .grad'), 950); }, 500); });
+  /* only the pieces this page has (the homepage has a screen, service pages a phone) */
+  var has = function (s) { return !!$(s); };
+  tl.to('.xhero h1 .ln>span,.pj-hero h1 .ln>span', { y: 0, duration: 1.15, stagger: 0.09 }, 0.05)
+    .to('.xhero [data-hi],.pj-hero [data-hi]', { opacity: 1, y: 0, duration: 0.9, stagger: 0.06 }, 0.3);
+  if (has('.glass')) tl.fromTo('.glass', { opacity: 0, y: 30, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 1.2, stagger: 0.12 }, 0.5);
+  if (has('.phone')) tl.fromTo('.phone', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1.3 }, 0.35);
+  if (has('.screen-wrap')) tl.fromTo('.screen-wrap', { y: 50, rotationX: 8 }, { y: 0, rotationX: 0, duration: 1.5 }, 0.25);  /* no fade: its poster is the LCP and stays visible */
+  if (has('.xhero-bg')) tl.fromTo('.xhero-bg', { scale: 1.08 }, { scale: 1, duration: 2.4, ease: 'power2.out' }, 0);
 
   /* ---------- mouse parallax on three depth layers: background, glass, phone ---------- */
   if (fine && desktop) {
@@ -212,12 +272,47 @@
   }
 
   /* ---------- hero copy drifts up and fades as you leave it ---------- */
-  gsap.to('.xhero-in', { yPercent: -12, opacity: 0.2, ease: 'none', scrollTrigger: { trigger: '.xhero', start: 'top top', end: 'bottom top', scrub: true } });
+  if (has('.xhero-in')) gsap.to('.xhero-in', { yPercent: -12, opacity: 0.2, ease: 'none', scrollTrigger: { trigger: '.xhero', start: 'top top', end: 'bottom top', scrub: true } });
 
   /* ---------- scroll reveals ---------- */
+  /* cards wipe open top-down behind a scan line and their title decodes; headings and labels
+     decode; everything else rises in. Ported from the original homepage. */
+  var EASE = 'cubic-bezier(.16,1,.3,1)', CARD = '.pj,.pcard,.offer>li,.case-index>li,.proc>li,.ways';
+  function play(u, delay) {
+    gsap.set(u, { opacity: 1, y: 0, filter: 'none' });
+    if (u.matches(CARD) && u.animate) {
+      u.animate([{ clipPath: 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 0% 0)' }], { duration: 760, delay: delay, easing: EASE, fill: 'backwards' });
+      var ln = document.createElement('i'); ln.className = 'scanln'; ln.setAttribute('aria-hidden', 'true'); u.appendChild(ln);
+      var h = u.offsetHeight;
+      ln.animate([{ transform: 'translateY(0)', opacity: 1 }, { transform: 'translateY(' + h + 'px)', opacity: 1, offset: .9 }, { transform: 'translateY(' + h + 'px)', opacity: 0 }],
+        { duration: 760, delay: delay, easing: EASE, fill: 'both' }).onfinish = function () { ln.parentNode && ln.parentNode.removeChild(ln); };
+      var t = u.querySelector('h2,h3,.ci-t b'); if (t) setTimeout(function () { scramble(t); }, delay + 120);
+    } else if (u.matches('h2,h3,.label')) {
+      if (u.animate) u.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 120, delay: delay, fill: 'backwards' });
+      setTimeout(function () { scramble(u); }, delay);
+    } else {
+      gsap.fromTo(u, { opacity: 0, y: 14, filter: 'blur(8px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.9, delay: delay / 1000, ease: 'power3.out' });
+    }
+  }
   ScrollTrigger.batch('[data-rv]', {
     start: 'top 88%', once: true,
-    onEnter: function (els) { gsap.to(els, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.95, ease: 'power3.out', stagger: 0.08 }); }
+    onEnter: function (els) { els.forEach(function (u, i) { play(u, Math.min(i, 6) * 80); }); }
+  });
+
+  /* ---------- process: line scrubbed by scroll, numbers light as it passes ---------- */
+  var proc = $('.proc'), procItems = $$('.proc>li');
+  if (proc) ScrollTrigger.create({ trigger: proc, start: 'top 80%', end: 'bottom 55%', scrub: 0.6,
+    onUpdate: function (s) {
+      proc.style.setProperty('--p', s.progress.toFixed(3));
+      procItems.forEach(function (li, i) { li.classList.toggle('lit', s.progress >= i / Math.max(1, procItems.length - 1) * .97); });
+    } });
+
+  /* archive filter: shown cards pop in */
+  $$('.pj-f').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var k = 0;
+      $$('.pj').forEach(function (c) { c.classList.toggle('pop', false); if (!c.hidden) { void c.offsetWidth; c.style.animationDelay = Math.min(k++, 8) * 45 + 'ms'; c.classList.add('pop'); } });
+    });
   });
 
   /* ---------- big statement on paper: words light up as you scroll ---------- */
@@ -248,4 +343,5 @@
   });
 
   addEventListener('load', function () { ScrollTrigger.refresh(); });
+  boot();
 })();
