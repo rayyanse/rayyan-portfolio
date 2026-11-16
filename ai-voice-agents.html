@@ -112,6 +112,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="/assets/site.css" />
+<link rel="stylesheet" href="/assets/chat.css" />
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
@@ -122,7 +123,7 @@
     <nav>
       <a href="/" class="brand"><span class="brand-mark">MR</span><span>Muhammad Rayyan<small>AI Systems Engineer</small></span></a>
       <div class="nav-links">
-        <div class="dd"><a href="/#work" class="dd-t">Work</a><div class="dd-m"><a href="/work/call-stream">Call Stream</a><a href="/work/jennifer">Jennifer</a><a href="/work/al-munir">Al Munir UPVC</a><a href="/work/bresco">Bresco Properties</a><a href="/work/whatsapp-lead-system">WhatsApp Lead Management System</a><a href="/#work" class="dd-all">All projects</a></div></div>
+        <div class="dd"><a href="/#work" class="dd-t">Work</a><div class="dd-m"><a href="/work/call-stream">Call Stream</a><a href="/work/jennifer">Jennifer</a><a href="/work/al-munir">Al Munir UPVC</a><a href="/work/bresco">Bresco Properties</a><a href="/work/whatsapp-lead-system">WhatsApp Lead Management System</a><a href="/projects" class="dd-all">All 22 projects</a></div></div>
         <div class="dd"><a href="/#services" class="dd-t">Services</a><div class="dd-m"><a href="/ai-voice-agents">AI voice agents</a><a href="/whatsapp-automation">WhatsApp automation</a><a href="/ai-agents-automation">AI agents &amp; automation</a><a href="/#services" class="dd-all">Everything I build</a></div></div>
         <a href="/#process">Process</a>
         <a href="/#contact" class="nav-cta">Work with me</a>
@@ -134,7 +135,7 @@
 </header>
 <nav class="mmenu" id="mmenu" aria-label="Site menu"><div class="container">
   <h3>Services</h3><a href="/ai-voice-agents">AI voice agents</a><a href="/whatsapp-automation">WhatsApp automation</a><a href="/ai-agents-automation">AI agents &amp; automation</a>
-  <h3>Case studies</h3><a href="/work/call-stream">Call Stream</a><a href="/work/jennifer">Jennifer</a><a href="/work/al-munir">Al Munir UPVC</a><a href="/work/bresco">Bresco Properties</a><a href="/work/whatsapp-lead-system">WhatsApp Lead Management System</a><a href="/#work">All projects</a>
+  <h3>Case studies</h3><a href="/work/call-stream">Call Stream</a><a href="/work/jennifer">Jennifer</a><a href="/work/al-munir">Al Munir UPVC</a><a href="/work/bresco">Bresco Properties</a><a href="/work/whatsapp-lead-system">WhatsApp Lead Management System</a><a href="/projects">All 22 projects</a>
   <h3>More</h3><a href="/#process">How I work</a><a href="/">Home</a>
   <a href="/#contact" class="mm-cta">Work with me</a>
 </div></nav>
@@ -236,9 +237,9 @@
 <footer>
   <div class="container">
     <div class="foot-grid">
-      <div><h3>Agha Muhammad Rayyan Khan</h3><a href="/">AI systems that do real work. 20+ shipped, each with a walkthrough film.</a><a href="mailto:agharayyan@gmail.com">agharayyan@gmail.com</a><a href="https://www.linkedin.com/in/rayyan45/" rel="me noopener" target="_blank">LinkedIn</a><a href="https://github.com/rayyanse" rel="me noopener" target="_blank">GitHub</a></div>
+      <div><h3>Agha Muhammad Rayyan Khan</h3><a href="/">AI systems that do real work. 22 shipped, most with a walkthrough film.</a><a href="mailto:agharayyan@gmail.com">agharayyan@gmail.com</a><a href="https://www.linkedin.com/in/rayyan45/" rel="me noopener" target="_blank">LinkedIn</a><a href="https://github.com/rayyanse" rel="me noopener" target="_blank">GitHub</a></div>
       <div><h3>Case studies</h3><a href="/work/call-stream">Call Stream</a><a href="/work/jennifer">Jennifer</a><a href="/work/al-munir">Al Munir UPVC</a><a href="/work/bresco">Bresco Properties</a><a href="/work/whatsapp-lead-system">WhatsApp Lead Management System</a></div>
-      <div><h3>Services</h3><a href="/ai-voice-agents">AI voice agents</a><a href="/whatsapp-automation">WhatsApp automation</a><a href="/ai-agents-automation">AI agents &amp; automation</a><a href="/#work">All projects</a></div>
+      <div><h3>Services</h3><a href="/ai-voice-agents">AI voice agents</a><a href="/whatsapp-automation">WhatsApp automation</a><a href="/ai-agents-automation">AI agents &amp; automation</a><a href="/projects">All 22 projects</a></div>
     </div>
     <div class="foot-base"><span>© 2026 Agha Muhammad Rayyan Khan</span><span>AI SYSTEMS ENGINEER · LAHORE, PK · REMOTE</span></div>
   </div>
@@ -248,5 +249,31 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
 <script src="/assets/site.js" defer></script>
+<button class="chat-bubble" id="chatBubble" aria-label="Chat with Rayyan's AI assistant">
+  <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 5.9 2 10.7c0 2.7 1.4 5.1 3.7 6.7-.2 1.5-.8 2.8-1.7 3.8 1.7-.2 3.3-.9 4.7-1.9 1.1.3 2.2.5 3.3.5 5.5 0 10-3.9 10-8.7S17.5 2 12 2z"/></svg>
+  <span class="chat-notif" id="chatNotif"></span>
+</button>
+
+<div class="chat-panel" id="chatPanel" role="dialog" aria-label="AI assistant">
+  <div class="chat-header">
+    <div class="chat-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4M8 14h.01M16 14h.01"/></svg></div>
+    <div class="chat-header-info">
+      <div class="chat-header-name">Rayyan's Assistant</div>
+      <div class="chat-header-status">Online</div>
+    </div>
+    <button class="chat-close" id="chatClose" aria-label="Close chat">&times;</button>
+  </div>
+  <div class="chat-messages" id="chatMessages"></div>
+  <div class="chat-suggestions" id="chatSuggestions">
+    <button class="suggestion">What can you build for me?</button>
+    <button class="suggestion">Tell me about Jennifer AI</button>
+    <button class="suggestion">How much does a project cost?</button>
+  </div>
+  <div class="chat-input-row">
+    <textarea id="chatInput" rows="1" maxlength="1000" placeholder="Ask about Rayyan's work..."></textarea>
+    <button class="chat-send" id="chatSend" aria-label="Send"><svg viewBox="0 0 24 24"><path d="M3 20.5 21 12 3 3.5 3 10l12 2-12 2z"/></svg></button>
+  </div>
+</div>
+<script src="/assets/chat.js" defer></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-/* Inner pages: menu, films and motion. Everything here is progressive
+/* Every page: menu, films, showreel, archive filters and motion. Everything here is progressive
    enhancement: the HTML is complete on its own, `js-motion` start states are
    only set when motion is allowed (in <head>) and are cleared if GSAP never
    loads. Timings follow the human-web-design motion kit (expo/out curves,
@@ -47,10 +47,64 @@
       v.play().catch(function () {});
     });
   }
-  if (desktop && !reduce) {
-    if (document.readyState === 'complete') setTimeout(startHeroFilm, 300);
-    else addEventListener('load', function () { setTimeout(startHeroFilm, 300); });
+  /* ---------- homepage showreel: the framed screen cycles through REEL films ----------
+     Each film plays SHOT_MS from its start second, then the next one fades in. The
+     ambient blur, the caption link and the counter follow. Pauses while off screen. */
+  var SHOT_MS = 9000, SKIP_MS = 4000;
+  function startReel() {
+    var fig = $('.screen[data-reel]');
+    if (!fig) return;
+    var list; try { list = JSON.parse(fig.getAttribute('data-reel')); } catch (err) { return; }
+    var v = $('video', fig), img = $('.screen-in img', fig), amb = $('.xhero-bg .amb'), cap = $('figcaption a', fig), cnt = $('.reel-n', fig);
+    var i = -1, timer = null, visible = true;
+    var pad = function (n) { return String(n).padStart(2, '0'); };
+    v.muted = true;
+    function show(k) {
+      i = k % list.length; var r = list[i];
+      clearTimeout(timer);
+      v.classList.remove('on');
+      cap.textContent = r.name; cap.href = r.href;
+      if (cnt) cnt.textContent = pad(i + 1) + ' / ' + pad(list.length);
+      setTimeout(function () {
+        img.src = r.poster; if (amb) amb.src = r.poster;
+        v.src = r.src + '#t=' + r.start;
+        if (visible) v.play().catch(function () {});
+      }, k === 0 ? 0 : 450);
+    }
+    v.addEventListener('playing', function () {
+      v.classList.add('on');
+      clearTimeout(timer); timer = setTimeout(function () { show(i + 1); }, SHOT_MS);
+    });
+    v.addEventListener('error', function () { clearTimeout(timer); timer = setTimeout(function () { show(i + 1); }, SKIP_MS); });
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) {
+      visible = es[0].isIntersecting;
+      if (visible) { if (v.src) v.play().catch(function () {}); } else { v.pause(); clearTimeout(timer); }
+    }, { threshold: 0.1 }).observe(fig);
+    show(0);
   }
+  function startFilms() { startHeroFilm(); startReel(); }
+  if (desktop && !reduce) {
+    if (document.readyState === 'complete') setTimeout(startFilms, 300);
+    else addEventListener('load', function () { setTimeout(startFilms, 300); });
+  }
+
+  /* ---------- case index: a row's film plays on hover (fine pointers, loaded on first hover) ---------- */
+  if (fine && !reduce) $$('.ci').forEach(function (a) {
+    var v = $('video', a); if (!v) return;
+    a.addEventListener('mouseenter', function () { if (!v.src) v.src = v.getAttribute('data-src'); v.play().then(function () { v.classList.add('on'); }).catch(function () {}); });
+    a.addEventListener('mouseleave', function () { v.pause(); v.classList.remove('on'); });
+  });
+
+  /* ---------- archive filters: every project is in the HTML; filtering only hides cards ---------- */
+  var filters = $$('.pj-f'), cards = $$('.pj');
+  filters.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var f = b.getAttribute('data-f');
+      filters.forEach(function (x) { var on = x === b; x.classList.toggle('on', on); x.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+      cards.forEach(function (c) { c.hidden = f !== 'all' && c.getAttribute('data-cat') !== f; });
+      if (window.ScrollTrigger) ScrollTrigger.refresh();
+    });
+  });
 
   /* ---------- section film: plays while visible ---------- */
   $$('.how-film video').forEach(function (v) {
@@ -142,6 +196,7 @@
     .to('.xhero [data-hi]', { opacity: 1, y: 0, duration: 0.9, stagger: 0.06 }, 0.3)
     .fromTo('.glass', { opacity: 0, y: 30, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 1.2, stagger: 0.12 }, 0.5)
     .fromTo('.phone', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1.3 }, 0.35)
+    .fromTo('.screen-wrap', { opacity: 0, y: 50, rotationX: 8 }, { opacity: 1, y: 0, rotationX: 0, duration: 1.5 }, 0.25)
     .fromTo('.xhero-bg', { scale: 1.08 }, { scale: 1, duration: 2.4, ease: 'power2.out' }, 0);
 
   /* ---------- mouse parallax on three depth layers: background, glass, phone ---------- */

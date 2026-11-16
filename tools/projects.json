@@ -1,0 +1,464 @@
+[
+ {
+  "cat": "ai",
+  "tag": "Flagship build",
+  "title": "Jennifer — Autonomous AI Business Employee",
+  "text": "An AI business assistant for real estate agencies. It manages leads, scores intent, tracks follow-ups, searches live market data, keeps property inventory current, and delivers a daily business briefing — all through natural conversation.",
+  "points": [
+   "Agent decides the action from the conversation itself",
+   "RAG plus live database context for grounded answers",
+   "CRM, inventory and task tracking wired into one loop"
+  ],
+  "stack": [
+   "Next.js 14",
+   "Supabase + RLS",
+   "Groq",
+   "OpenRouter",
+   "Gemini",
+   "Tavily",
+   "RAG",
+   "Vercel"
+  ],
+  "film": "jennifer",
+  "site": null,
+  "site_label": null,
+  "case": "/work/jennifer",
+  "slug": "jennifer",
+  "metric": null
+ },
+ {
+  "cat": "ai",
+  "tag": "AI agent",
+  "title": "Agentic Sales Research Chatbot",
+  "text": "Researches a company live on the web, asks qualifying questions, scores the lead, and writes a personalised outreach email.",
+  "points": [
+   "Company input → web research → lead score → email",
+   "Chooses between search, knowledge base and direct answer by context"
+  ],
+  "stack": [
+   "Streamlit",
+   "Agentic AI",
+   "Web Search",
+   "RAG"
+  ],
+  "film": "research",
+  "site": null,
+  "site_label": null,
+  "case": null,
+  "slug": "agentic-sales-research-chatbot",
+  "metric": null
+ },
+ {
+  "cat": "voice",
+  "tag": "Voice AI",
+  "title": "AI Appointment Booking Voice Agent",
+  "text": "A caller explains what they need, the agent checks Google Calendar, confirms a slot, books it and sends the confirmation.",
+  "points": [
+   "Inbound call → qualification → calendar check → booking",
+   "Built for clinics, agencies, consultants and service businesses"
+  ],
+  "stack": [
+   "LiveKit",
+   "Voice AI",
+   "Calendar API",
+   "Email"
+  ],
+  "film": "booking",
+  "site": null,
+  "site_label": null,
+  "case": null,
+  "slug": "ai-appointment-booking-voice-agent",
+  "metric": null
+ },
+ {
+  "cat": "web",
+  "tag": "Live site",
+  "title": "ZEPHRA — 3D Garment Configurator",
+  "text": "A fashion brand site built around a real-time 3D garment viewer. Visitors pick a silhouette and turn the piece around in the browser. There's no product photography anywhere on the page.",
+  "points": [],
+  "stack": [
+   "Next.js",
+   "Three.js",
+   "WebGL",
+   "React"
+  ],
+  "film": "zephra",
+  "site": "https://3-d-clothing-brand.vercel.app",
+  "site_label": "Open site",
+  "case": null,
+  "slug": "zephra",
+  "metric": null
+ },
+ {
+  "cat": "web",
+  "tag": "Live demo",
+  "title": "AI Human Labs",
+  "text": "A cinematic AI agency website demo with a scroll-driven robot hero, interactive industry carousel and responsive layouts. Built to showcase premium web design, animation and front-end development.",
+  "points": [],
+  "stack": [
+   "React",
+   "Vite",
+   "3D",
+   "SPA"
+  ],
+  "film": "humanlabs",
+  "site": "https://aihumanlabs.vercel.app",
+  "site_label": "View demo",
+  "case": null,
+  "slug": "ai-human-labs",
+  "metric": null
+ },
+ {
+  "cat": "automation",
+  "tag": "Client build",
+  "title": "LeadForge — Overnight Lead Engine",
+  "text": "A lead engine that works the night shift. At midnight it scrapes job boards, X, LinkedIn, Reddit, Threads, Instagram and Facebook groups, an AI judge keeps only real buying signals, and Claude writes a ready reply for every lead.",
+  "points": [
+   "Scrape → AI judge → AI-written reply → pre-filled, never auto-sent",
+   "08:30 WhatsApp summary, every lead waiting in a dashboard"
+  ],
+  "stack": [
+   "Python",
+   "Playwright",
+   "Groq",
+   "Claude",
+   "Supabase",
+   "Next.js"
+  ],
+  "film": "leadforge",
+  "site": null,
+  "site_label": null,
+  "case": null,
+  "slug": "leadforge",
+  "metric": null
+ },
+ {
+  "cat": "automation",
+  "tag": "Client build",
+  "title": "Al Munir UPVC — Self-Running Sales Pipeline",
+  "text": "A sales pipeline for a UPVC windows company that finds its own customers. Every morning it pulls fresh posts from Facebook groups where people ask about windows. An AI voice agent calls each new lead, and a branded PDF quote reaches them on WhatsApp, where an AI assistant handles the replies.",
+  "points": [
+   "Facebook groups → lead sheet → AI call → priced quote → WhatsApp → AI follow-up",
+   "Quotes rendered from the company's own branded template, as a 2-page PDF",
+   "Hands over to a human the moment a customer asks for one"
+  ],
+  "stack": [
+   "n8n",
+   "Apify",
+   "Retell AI",
+   "Google Sheets",
+   "PDF.co",
+   "WhatsApp Cloud API",
+   "Claude"
+  ],
+  "film": "almunir",
+  "site": null,
+  "site_label": null,
+  "case": "/work/al-munir",
+  "slug": "al-munir-upvc",
+  "metric": null
+ },
+ {
+  "cat": "voice",
+  "tag": "Voice AI build",
+  "title": "Call Stream: Urdu AI Call Agent on a Normal SIM",
+  "text": "Turns an Android phone and a normal Pakistani SIM into an AI call agent that answers in Urdu, on the number the business already has. No SIP trunk, no PTA paperwork, no new number.",
+  "points": [
+   "SIM → Bluetooth → Asterisk bridge → AI agent over SIP with TLS",
+   "Built together with Shahwaiz, with demo films for 8 industries"
+  ],
+  "stack": [
+   "Android",
+   "Asterisk",
+   "SIP/TLS",
+   "Urdu voice AI"
+  ],
+  "film": "callstream",
+  "site": null,
+  "site_label": null,
+  "case": "/work/call-stream",
+  "slug": "call-stream",
+  "metric": null
+ },
+ {
+  "cat": "automation",
+  "tag": "Client build",
+  "title": "Bresco Properties — AI Sales Stack",
+  "text": "A Lahore real estate agency's sales pipeline, end to end. AI writes Facebook posts that a person approves, five agents' WhatsApp numbers run campaigns from one dashboard, an AI answers leads in Roman Urdu and English, and a calling agent phones every lead in Urdu.",
+  "points": [
+   "Posts → WhatsApp campaigns → AI replies with human handoff → Urdu calls",
+   "Calls run on CallStream, built together with Shahwaiz"
+  ],
+  "stack": [
+   "Next.js",
+   "Supabase",
+   "Baileys",
+   "Gemini",
+   "CallStream"
+  ],
+  "film": "bresco",
+  "site": null,
+  "site_label": null,
+  "case": "/work/bresco",
+  "slug": "bresco-properties",
+  "metric": null
+ },
+ {
+  "cat": "automation",
+  "tag": "Automation build",
+  "title": "WhatsApp Lead Management System",
+  "text": "Captures leads from Instagram ads, replies instantly on WhatsApp, collects requirements, and routes each lead to the right team member.",
+  "points": [
+   "Round-robin assignment with availability tracking",
+   "Associate email alerts and full follow-up logging"
+  ],
+  "stack": [
+   "n8n",
+   "WhatsApp API",
+   "Claude",
+   "Sheets"
+  ],
+  "film": "walead",
+  "site": null,
+  "site_label": null,
+  "case": "/work/whatsapp-lead-system",
+  "slug": "whatsapp-lead-management-system",
+  "metric": null
+ },
+ {
+  "cat": "automation",
+  "tag": "Sales automation",
+  "title": "Autonomous AI SDR Pipeline",
+  "text": "Enriches new leads, scores them, researches recent company news, writes the outreach, then fires a different-angle follow-up 48 hours later.",
+  "points": [
+   "Hunter.io enrichment and Tavily live research",
+   "Google Sheets dashboard for pipeline tracking"
+  ],
+  "stack": [
+   "n8n",
+   "Hunter.io",
+   "Tavily",
+   "Claude"
+  ],
+  "film": "sdr",
+  "site": null,
+  "site_label": null,
+  "case": null,
+  "slug": "autonomous-ai-sdr-pipeline",
+  "metric": null
+ },
+ {
+  "cat": "automation",
+  "tag": "Content automation",
+  "title": "Multi-Platform Content Engine",
+  "text": "One idea, video or podcast becomes scripts, voiceovers, short-form video, LinkedIn posts, threads, a newsletter and scheduled uploads, with a human review gate before anything ships.",
+  "points": [
+   "AI script, then human review, then voice, video and scheduling"
+  ],
+  "stack": [
+   "n8n",
+   "Claude API",
+   "ElevenLabs",
+   "Whisper",
+   "YouTube API"
+  ],
+  "film": null,
+  "site": null,
+  "site_label": null,
+  "case": null,
+  "slug": "multi-platform-content-engine",
+  "metric": null
+ },
+ {
+  "cat": "voice",
+  "tag": "Voice AI",
+  "title": "AI Voice Receptionist",
+  "text": "A voice receptionist that runs in the browser. It answers, holds a natural conversation and routes the caller over WebRTC, with no phone line needed.",
+  "points": [],
+  "stack": [
+   "Vapi",
+   "Next.js 15",
+   "TypeScript",
+   "WebRTC"
+  ],
+  "film": null,
+  "site": null,
+  "site_label": null,
+  "case": null,
+  "slug": "ai-voice-receptionist",
+  "metric": null
+ },
+ {
+  "cat": "ai",
+  "tag": "AI agent",
+  "title": "Sentry — Instructable Support Agent",
+  "text": "A support agent that follows business-specific instructions to resolve routine queries end to end, and hands off to a human as soon as a question falls outside its scope.",
+  "points": [],
+  "stack": [
+   "LLM",
+   "RAG",
+   "Tool-calling",
+   "Escalation"
+  ],
+  "film": null,
+  "site": null,
+  "site_label": null,
+  "case": null,
+  "slug": "sentry",
+  "metric": null
+ },
+ {
+  "cat": "data",
+  "tag": "Computer vision",
+  "title": "AI Vape Detection System",
+  "text": "Computer vision on live camera feeds that sends a WhatsApp alert the moment it spots vaping. Built for schools and managed facilities.",
+  "points": [],
+  "stack": [
+   "Python",
+   "PyTorch",
+   "OpenCV",
+   "YOLO",
+   "WhatsApp API"
+  ],
+  "film": "vape",
+  "site": null,
+  "site_label": null,
+  "case": null,
+  "slug": "ai-vape-detection-system",
+  "metric": null
+ },
+ {
+  "cat": "platforms",
+  "tag": "Platform",
+  "title": "B.R.I.D.G.E. Directory",
+  "text": "A platform for discovering and supporting Black-owned businesses across the US. Searchable directory across 20+ categories, business profiles, direct messaging and a paid listing tier.",
+  "points": [],
+  "stack": [
+   "React 19",
+   "TypeScript",
+   "Convex",
+   "OIDC"
+  ],
+  "film": null,
+  "site": null,
+  "site_label": null,
+  "case": null,
+  "slug": "b-r-i-d-g-e-directory",
+  "metric": null
+ },
+ {
+  "cat": "platforms",
+  "tag": "Real-time",
+  "title": "Echo",
+  "text": "A real-time messaging app with DMs and groups, replies, reactions, attachments, read receipts, typing indicators and live presence. Everything updates over the socket without a refresh.",
+  "points": [],
+  "stack": [
+   "React 19",
+   "Express",
+   "Socket.IO"
+  ],
+  "film": null,
+  "site": null,
+  "site_label": null,
+  "case": null,
+  "slug": "echo",
+  "metric": null
+ },
+ {
+  "cat": "ai",
+  "tag": "AI product",
+  "title": "Aura",
+  "text": "A mental-wellness platform with mood tracking, journaling, an AI support chat, real-time emotion detection from webcam and voice, and a local support directory.",
+  "points": [],
+  "stack": [
+   "Python",
+   "OpenCV",
+   "LLM",
+   "Real-time"
+  ],
+  "film": null,
+  "site": null,
+  "site_label": null,
+  "case": null,
+  "slug": "aura",
+  "metric": null
+ },
+ {
+  "cat": "platforms",
+  "tag": "Platform",
+  "title": "GroupXam",
+  "text": "An online learning and exam-prep platform with AI tutoring and a multiplayer whiteboard for group study sessions.",
+  "points": [],
+  "stack": [
+   "React",
+   "Node.js",
+   "Express",
+   "MongoDB"
+  ],
+  "film": null,
+  "site": null,
+  "site_label": null,
+  "case": null,
+  "slug": "groupxam",
+  "metric": null
+ },
+ {
+  "cat": "platforms",
+  "tag": "Platform",
+  "title": "Flowstate",
+  "text": "A block-editor task manager built on one rule: work flows down the hierarchy and nothing gets lost. Fully self-hosted, with no cloud account and no API keys.",
+  "points": [],
+  "stack": [
+   "Next.js",
+   "TypeScript",
+   "PostgreSQL"
+  ],
+  "film": "flowstate",
+  "site": null,
+  "site_label": null,
+  "case": null,
+  "slug": "flowstate",
+  "metric": null
+ },
+ {
+  "cat": "data",
+  "tag": "Forecasting",
+  "title": "CoreCast — Inventory Forecasting",
+  "text": "Time-series models for supply-chain inventory planning, built through repeated rounds of data cleaning, feature engineering and model selection.",
+  "points": [],
+  "stack": [
+   "Python",
+   "Time-series",
+   "Pandas",
+   "Scikit-learn"
+  ],
+  "film": null,
+  "site": null,
+  "site_label": null,
+  "case": null,
+  "slug": "corecast",
+  "metric": [
+   "15%",
+   "lower forecast error than the previous baseline"
+  ]
+ },
+ {
+  "cat": "web",
+  "tag": "Brand site",
+  "title": "Maison Aurelle",
+  "text": "A brand site built around 3D scenes and scroll-driven animation. The browsing itself carries the brand, more than the copy does.",
+  "points": [],
+  "stack": [
+   "Next.js",
+   "Three.js",
+   "GSAP",
+   "Tailwind"
+  ],
+  "film": null,
+  "site": null,
+  "site_label": null,
+  "case": null,
+  "slug": "maison-aurelle",
+  "metric": null
+ }
+]

@@ -1,10 +1,11 @@
-"""Builds the case-study and service pages of rayyankhan.dev from the data below.
+"""Builds every page of rayyankhan.dev from the data below and tools/projects.json.
 
 Run from the repo root:  python tools/build_pages.py
-Writes work/<slug>.html and <service-slug>.html. Vercel's cleanUrls serves them
-without the .html extension. Edit facts here, never in the generated HTML.
+Writes index.html, projects.html, work/<slug>.html, <service-slug>.html and
+sitemap.xml. Vercel's cleanUrls serves them without the .html extension.
+Edit facts here (or in tools/projects.json), never in the generated HTML.
 
-Every claim must be true: facts come from the project cards on index.html,
+Every claim must be true: facts come from the original project cards,
 Rayyan's LinkedIn posts and his project notes. Films with sample data say so.
 """
 from __future__ import annotations
@@ -272,8 +273,40 @@ SOUND = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width
 PLAY = '<svg class="play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>'
 LENIS = "https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"
 
+# Every shipped project (the full archive on /projects). Order is the display order.
+PROJECTS = json.loads((ROOT / "tools" / "projects.json").read_text(encoding="utf-8"))
+FILTERS = [("all", "Everything"), ("automation", "Automation"), ("ai", "AI & agents"), ("voice", "Voice"),
+           ("platforms", "Platforms"), ("web", "Websites"), ("data", "Data & ML")]
+CHAT_WIDGET = (ROOT / "tools" / "chat_widget.html").read_text(encoding="utf-8")
 
-def head(title: str, description: str, path: str, image: str, schema: list[dict], frame_left: str) -> str:
+# Homepage showreel: the framed screen in the hero cycles through these films.
+# start = second to start from (skips each film's title card), all checked by eye.
+REEL = [
+    {"film": "jennifer", "name": "Jennifer", "href": "/work/jennifer", "start": 9},
+    {"film": "bresco-teaser", "poster": "bresco", "name": "Bresco Properties", "href": "/work/bresco", "start": 10},
+    {"film": "walead", "name": "WhatsApp Lead Management System", "href": "/work/whatsapp-lead-system", "start": 12},
+    {"film": "leadforge", "name": "LeadForge", "href": "/projects#leadforge", "start": 10},
+]
+
+# Homepage "What I build" (on paper). The original homepage's five, plus WhatsApp automation (now its own service page).
+CAPABILITIES = [
+    ("Workflow Automation", "Automated pipelines that connect your tools and move data without a human copy-pasting between tabs.",
+     ["n8n, Make.com and Zapier workflows", "Error handling, retries and failure alerts", "Sheets, Notion, CRMs, email and REST APIs"], "/ai-agents-automation"),
+    ("AI Agents & Chatbots", "Assistants that understand the request, decide what to do, and actually execute it against your systems.",
+     ["RAG over your own business knowledge base", "Lead qualification and intent scoring", "Tool-calling with real action execution"], "/ai-agents-automation"),
+    ("Voice & Booking Systems", "Voice agents that answer the phone, hold a real conversation, check the calendar and book the slot.",
+     ["Live Google Calendar availability checks", "Confirmation emails and reminder sequences", "WhatsApp and email follow-up on no-shows"], "/ai-voice-agents"),
+    ("WhatsApp Automation", "Leads from ads, Facebook groups and Excel sheets get a reply on WhatsApp in seconds, routed to the right person in the same chat.",
+     ["Instant replies in English, Urdu and Roman Urdu", "Round-robin routing to online agents", "One inbox for every agent's number"], "/whatsapp-automation"),
+    ("Full-Stack Platforms", "The product around the intelligence: dashboards, directories, portals and real-time apps, built so someone else can maintain them.",
+     ["Next.js, React and Node with Postgres, Mongo or Convex", "Auth, roles and row-level permissions", "Real-time sockets, presence and live updates"], None),
+    ("Websites & 3D Web", "Brand sites and launch pages, from a single-page site to a 3D product viewer that runs in the browser.",
+     ["Brand direction, copy and front-end build", "Three.js, WebGL and GSAP scroll-driven motion", "Fast and responsive on real phones, not just a desktop screen"], None),
+]
+
+
+def head(title: str, description: str, path: str, image: str, schema: list[dict], frame_left: str,
+         og_type: str = "article", preload: str | None = None) -> str:
     url = f"{SITE}{path}"
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -288,13 +321,13 @@ def head(title: str, description: str, path: str, image: str, schema: list[dict]
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <meta property="og:title" content="{e(title)}" />
 <meta property="og:description" content="{e(description)}" />
-<meta property="og:type" content="article" />
+<meta property="og:type" content="{og_type}" />
 <meta property="og:url" content="{url}" />
 <meta property="og:site_name" content="{NAME}" />
 <meta property="og:image" content="{image}" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="theme-color" content="#05070C" />
-<link rel="preload" as="image" href="{image.replace(SITE, '')}" fetchpriority="high" />
+<link rel="preload" as="image" href="{preload or image.replace(SITE, '')}" fetchpriority="high" />
 <script type="application/ld+json">
 {json.dumps({"@context": "https://schema.org", "@graph": schema}, indent=1, ensure_ascii=False)}
 </script>
@@ -306,6 +339,7 @@ def head(title: str, description: str, path: str, image: str, schema: list[dict]
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="/assets/site.css" />
+<link rel="stylesheet" href="/assets/chat.css" />
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
@@ -330,7 +364,7 @@ def nav_links() -> str:
     work = "".join(f'<a href="/work/{c["slug"]}">{e(c["name"])}</a>' for c in CASES)
     serv = "".join(f'<a href="/{s["slug"]}">{e(SERVICE_NAMES[s["slug"]])}</a>' for s in SERVICES)
     return f"""      <div class="nav-links">
-        <div class="dd"><a href="/#work" class="dd-t">Work</a><div class="dd-m">{work}<a href="/#work" class="dd-all">All projects</a></div></div>
+        <div class="dd"><a href="/#work" class="dd-t">Work</a><div class="dd-m">{work}<a href="/projects" class="dd-all">All {len(PROJECTS)} projects</a></div></div>
         <div class="dd"><a href="/#services" class="dd-t">Services</a><div class="dd-m">{serv}<a href="/#services" class="dd-all">Everything I build</a></div></div>
         <a href="/#process">Process</a>
         <a href="/#contact" class="nav-cta">Work with me</a>
@@ -344,7 +378,7 @@ def mobile_menu() -> str:
     serv = "".join(f'<a href="/{s["slug"]}">{e(SERVICE_NAMES[s["slug"]])}</a>' for s in SERVICES)
     return f"""<nav class="mmenu" id="mmenu" aria-label="Site menu"><div class="container">
   <h3>Services</h3>{serv}
-  <h3>Case studies</h3>{work}<a href="/#work">All projects</a>
+  <h3>Case studies</h3>{work}<a href="/projects">All {len(PROJECTS)} projects</a>
   <h3>More</h3><a href="/#process">How I work</a><a href="/">Home</a>
   <a href="/#contact" class="mm-cta">Work with me</a>
 </div></nav>"""
@@ -405,7 +439,7 @@ def nums_band(label: str, heading: str, facts: list[tuple[str, str]]) -> str:
 
 def marquee(items: list[str]) -> str:
     row = "".join(f"<span>{e(x)}</span>" for x in items)
-    return f'<div class="marquee" aria-label="Built with: {e(", ".join(items))}"><div class="marquee-track" aria-hidden="true">{row}{row}{row}{row}</div></div>'
+    return f'<div class="marquee"><p class="sr-only">Built with: {e(", ".join(items))}</p><div class="marquee-track" aria-hidden="true">{row}{row}{row}{row}</div></div>'
 
 
 def next_teaser(kind: str, href: str, title: str, sub: str, poster: str) -> str:
@@ -421,8 +455,16 @@ def next_teaser(kind: str, href: str, title: str, sub: str, poster: str) -> str:
 </a>"""
 
 
-def cta(heading: str) -> str:
-    return f"""<section class="cta" aria-labelledby="cta-h">
+def cta(heading: str, anchor: str | None = None, ways: bool = False) -> str:
+    """Closing call to action. On the homepage it carries id="contact" and the three ways to reach Rayyan."""
+    idattr = f' id="{anchor}"' if anchor else ""
+    way_list = f"""
+    <ul class="ways container" data-rv>
+      <li><a href="mailto:{EMAIL}"><span class="mono">Email</span>{EMAIL}</a></li>
+      <li><a href="https://www.linkedin.com/in/rayyan45/" target="_blank" rel="noopener"><span class="mono">LinkedIn</span>linkedin.com/in/rayyan45</a></li>
+      <li><a href="{WHATSAPP}" target="_blank" rel="noopener"><span class="mono">WhatsApp</span>+92 321 8234852</a></li>
+    </ul>""" if ways else ""
+    return f"""<section class="cta"{idattr} aria-labelledby="cta-h">
   <div class="container cta-grid">
     <div data-rv>
       <div class="label">Work with me</div>
@@ -433,7 +475,7 @@ def cta(heading: str) -> str:
       <a href="mailto:{EMAIL}" class="btn btn-primary">Book a free audit{ARROW}</a>
       <a href="{WHATSAPP}" target="_blank" rel="noopener" class="btn btn-ghost">Message on WhatsApp</a>
     </div>
-  </div>
+  </div>{way_list}
 </section>
 """
 
@@ -445,9 +487,9 @@ def foot() -> str:
 <footer>
   <div class="container">
     <div class="foot-grid">
-      <div><h3>{NAME}</h3><a href="/">AI systems that do real work. 20+ shipped, each with a walkthrough film.</a><a href="mailto:{EMAIL}">{EMAIL}</a><a href="https://www.linkedin.com/in/rayyan45/" rel="me noopener" target="_blank">LinkedIn</a><a href="https://github.com/rayyanse" rel="me noopener" target="_blank">GitHub</a></div>
+      <div><h3>{NAME}</h3><a href="/">AI systems that do real work. {len(PROJECTS)} shipped, most with a walkthrough film.</a><a href="mailto:{EMAIL}">{EMAIL}</a><a href="https://www.linkedin.com/in/rayyan45/" rel="me noopener" target="_blank">LinkedIn</a><a href="https://github.com/rayyanse" rel="me noopener" target="_blank">GitHub</a></div>
       <div><h3>Case studies</h3>{work}</div>
-      <div><h3>Services</h3>{serv}<a href="/#work">All projects</a></div>
+      <div><h3>Services</h3>{serv}<a href="/projects">All {len(PROJECTS)} projects</a></div>
     </div>
     <div class="foot-base"><span>© 2026 {NAME}</span><span>AI SYSTEMS ENGINEER · LAHORE, PK · REMOTE</span></div>
   </div>
@@ -457,6 +499,7 @@ def foot() -> str:
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
 <script src="{LENIS}" defer></script>
 <script src="/assets/site.js" defer></script>
+{CHAT_WIDGET}<script src="/assets/chat.js" defer></script>
 </body>
 </html>
 """
@@ -606,50 +649,215 @@ def service_page(s: dict) -> str:
 """ + next_teaser("Next service", f"/{nxt['slug']}", SERVICE_NAMES[nxt["slug"]], nxt["description"], nxt["film"]) + cta("Got a process someone repeats every day?") + foot()
 
 
+
+
+# ------------------------------------------------------------------ homepage
+
+HOME_TITLE = f"{NAME}, AI Automation Engineer in Lahore"
+HOME_DESC = f"{NAME} builds AI agents, voice assistants and automation pipelines that run business operations without manual work."
+STACK = ["n8n", "Make.com", "Claude", "Gemini", "Groq", "OpenRouter", "LiveKit", "ElevenLabs", "Tavily", "WhatsApp API",
+         "Google Calendar", "Supabase", "Next.js", "Three.js", "Python"]
+CHIPS = ["n8n / Make / Zapier", "AI agents + RAG", "Voice + WhatsApp"]
+
+
+def home_hero() -> str:
+    """Copy on the left, a framed screen on the right playing a showreel of real films.
+    The first film's poster is the LCP and is visible from the first paint; the films load
+    on desktop after `load` (assets/site.js). The blurred ambient copy behind is decorative."""
+    first = REEL[0]
+    reel = e(json.dumps([{"src": f"/films/{r['film']}.mp4", "poster": f"/films/{r.get('poster', r['film'])}.jpg",
+                          "name": r["name"], "href": r["href"], "start": r["start"]} for r in REEL]))
+    glass = [("9s", "First reply to a new lead"), (str(len(PROJECTS)), "Systems shipped, most with a film")]
+    g = "".join(
+        f'<div class="glass g{i+1}" data-depth="{0.5 + i * 0.4:.2f}"><span class="mono">{"At a glance" if i == 0 else "And"}</span><b>{e(v)}</b><span>{e(l)}</span></div>'
+        for i, (v, l) in enumerate(glass))
+    chips = "".join(f'<span class="chip">{e(c)}</span>' for c in CHIPS)
+    return f"""
+<section class="xhero home" aria-labelledby="h1">
+  <div class="xhero-bg" aria-hidden="true"><img class="amb" src="/films/{first['film']}.jpg" alt="" width="1280" height="720" /></div>
+  <div class="xhero-shade" aria-hidden="true"></div>
+  <div class="floaters" aria-hidden="true">{g}</div>
+  <div class="screen-wrap"><figure class="screen" data-depth="0.55" data-reel="{reel}">
+    <div class="screen-in">
+      <img src="/films/{first['film']}.jpg" alt="Still from the {e(first['name'])} walkthrough film" fetchpriority="high" width="1280" height="720" />
+      <video muted playsinline preload="none" aria-hidden="true"></video>
+    </div>
+    <figcaption><span class="rec" aria-hidden="true"></span><span>Now playing</span> <a href="{first['href']}">{e(first['name'])}</a><span class="reel-n" aria-hidden="true">01 / {len(REEL):02d}</span></figcaption>
+  </figure></div>
+  <div class="container xhero-in">
+    <div class="status" data-hi><span class="pulse"></span>Available for AI automation projects</div>
+    <div id="h1">{h1(['AI systems that', '<span class="grad">run the work</span>', 'while you sleep.'])}</div>
+    <p class="lede" data-hi>I'm {NAME}, an AI systems engineer in Lahore. I build <strong>AI agents, voice assistants, automation pipelines and full-stack dashboards</strong> that answer leads, qualify them, update your CRM and hand your team the next action, without anyone touching a keyboard.</p>
+    <div class="actions" data-hi><a href="#work" class="btn btn-primary">See the systems{ARROW}</a><a href="#contact" class="btn btn-ghost">Book a free automation audit</a></div>
+    <div class="chips" data-hi>{chips}</div>
+    <p class="film-note" data-hi style="margin-top:16px">{SAMPLE}</p>
+  </div>
+</section>"""
+
+
 def home_cases() -> str:
-    """The homepage 'Case studies 001-005' index. Written into index.html between the CASES markers."""
     rows = []
     for c in CASES:
-        n = case_no(c["slug"])
-        rows.append(f"""      <li><a class="ci" href="/work/{c['slug']}">
-        <span class="ci-n">{n}</span>
+        rows.append(f"""      <li data-rv><a class="ci" href="/work/{c['slug']}">
+        <span class="ci-n">{case_no(c['slug'])}</span>
         <span class="ci-t"><b>{e(c['name'])}</b><small>{e(c['kind'])}</small></span>
         <span class="ci-d">{e(c['description'])}</span>
-        <span class="ci-thumb{' tall' if c['tall'] else ''}"><img src="/films/{c['film']}.jpg" alt="Still from the {e(c['name'])} walkthrough film" loading="lazy" width="1280" height="720" /><video data-src="/films/{c.get('hero_film', c['film'])}.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></span>
+        <span class="ci-thumb"><img src="/films/{c['film']}.jpg" alt="Still from the {e(c['name'])} walkthrough film" loading="lazy" width="1280" height="720" /><video data-src="/films/{c.get('hero_film', c['film'])}.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></span>
         <span class="ci-go" aria-hidden="true">{ARROW}</span>
       </a></li>""")
-    serv = "".join(f'<a class="svc-btn" href="/{s["slug"]}">{e(SERVICE_NAMES[s["slug"]])}{ARROW_SM}</a>' for s in SERVICES)
-    return f"""<!-- CASES:START (generated by tools/build_pages.py, edit the data there) -->
-<section id="cases" class="cases">
+    return f"""
+<section id="work" class="cases" aria-labelledby="cases-h">
   <div class="container">
-    <div class="head rv">
-      <div class="label">Case studies</div>
-      <h2>Five builds, told start to finish.</h2>
-      <p class="lede">The problem, how it works, the decisions behind it, and a film of it running. Pick one.</p>
+    <div class="sec-head">
+      <div><div class="label" data-rv>Case studies</div><h2 id="cases-h" data-rv>Five builds, told start to finish.</h2></div>
+      <p class="lede" data-rv>The problem, how it works, the decisions behind it, and a film of it running. Pick one.</p>
     </div>
     <ol class="case-index">
 {chr(10).join(rows)}
     </ol>
-    <div class="svc-row rv"><span>Or start from what you need:</span>{serv}</div>
+  </div>
+</section>"""
+
+
+def home_capabilities() -> str:
+    items = []
+    for i, (t, p, pts, href) in enumerate(CAPABILITIES):
+        more = f'<a class="cap-more" href="{href}">{e(SERVICE_NAMES[href.strip("/")])} {ARROW_SM}</a>' if href else ""
+        lis = "".join(f"<li>{e(x)}</li>" for x in pts)
+        items.append(f'<li data-rv><span class="n">{i+1:02d}</span><h3>{e(t)}</h3><p>{e(p)}</p><ul>{lis}</ul>{more}</li>')
+    return f"""
+<section id="services" class="paper" aria-labelledby="svc-h">
+  <div class="container">
+    <div class="sec-head">
+      <div><div class="label" data-rv>What I build</div><h2 id="svc-h" data-rv>Systems that remove repetitive work, not demos that impress once.</h2></div>
+      <p class="lede" data-rv>Anyone can wire a chatbot that answers a question. I build the boring part underneath: the retries, the edge cases, the CRM writes, the thing that still works on a Sunday at 3am.</p>
+    </div>
+    <ul class="offer caps">{''.join(items)}</ul>
+  </div>
+</section>"""
+
+
+def project_tile(p: dict) -> str:
+    """A small card for the homepage 'more builds' track. Links into the archive."""
+    return f"""<a class="pcard" href="/projects#{p['slug']}">
+        <img src="/films/{p['film']}.jpg" alt="Still from the {e(p['title'])} walkthrough film" loading="lazy" width="1280" height="720" />
+        <div class="pc-body"><div class="pc-kind">{e(p['tag'])}</div><h3>{e(p['title'])}</h3><p>{e(p['text'])}</p><span class="more">See it in the archive {ARROW_SM}</span></div>
+      </a>"""
+
+
+def home_more() -> str:
+    case_paths = {f"/work/{c['slug']}" for c in CASES}
+    more = [p for p in PROJECTS if p["film"] and p.get("case") not in case_paths]
+    rest = len(PROJECTS) - len(CASES) - len(more)
+    tiles = "".join(project_tile(p) for p in more)
+    end = f"""<a class="pcard all" href="/projects"><div class="pc-body"><span class="big">{len(PROJECTS)}</span><h3>Every project, in one place.</h3><p>The {len(more)} above, {rest} more without a film, and the {len(CASES)} case studies. Filter by what you need built.</p><span class="more">Open the archive {ARROW_SM}</span></div></a>"""
+    return f"""
+<section class="proof" aria-labelledby="more-h">
+  <div class="container proof-head sec-head">
+    <div><div class="label" data-rv>More builds</div><h2 id="more-h" data-rv>{len(more)} more, each with a film.</h2></div>
+    <p class="lede" data-rv>Agents, voice systems, scraping pipelines and live sites. Two of them you can open and try right now.</p>
+  </div>
+  <div class="track-wrap"><div class="track">{tiles}{end}</div></div>
+</section>"""
+
+
+def home_page() -> str:
+    schema = [
+        {"@type": "Person", "@id": f"{SITE}/#person", "name": NAME,
+         "alternateName": ["Muhammad Rayyan Khan", "Agha Rayyan", "Muhammad Rayyan", "Rayyan Khan"],
+         "url": f"{SITE}/", "image": f"{SITE}/og.png", "jobTitle": "AI Systems & Automation Engineer",
+         "description": "Builds AI agents, voice assistants, automation pipelines and full-stack dashboards for businesses.",
+         "address": {"@type": "PostalAddress", "addressLocality": "Lahore", "addressCountry": "PK"},
+         "knowsAbout": ["AI agents", "Voice AI", "Workflow automation", "n8n", "WhatsApp automation", "Retrieval-augmented generation"],
+         "sameAs": ["https://www.linkedin.com/in/rayyan45/", "https://github.com/rayyanse"]},
+        {"@type": "WebSite", "@id": f"{SITE}/#website", "url": f"{SITE}/", "name": NAME, "publisher": {"@id": f"{SITE}/#person"}},
+        {"@type": "ItemList", "name": "Case studies", "itemListElement": [
+            {"@type": "ListItem", "position": i + 1, "url": f"{SITE}/work/{c['slug']}", "name": c["name"]} for i, c in enumerate(CASES)]},
+    ]
+    proc = "".join(f'<li data-rv><b>{n}</b><h3>{e(t)}</h3><p>{e(p)}</p></li>' for n, t, p in PROCESS)
+    page = head(HOME_TITLE, HOME_DESC, "/", f"{SITE}/og.png", schema, "RAYYAN / SYSTEMS &nbsp;·&nbsp; LAHORE, PK",
+                og_type="website", preload=f"/films/{REEL[0]['film']}.jpg")
+    page = page.replace(f'<meta property="og:title" content="{e(HOME_TITLE)}" />',
+                        f'<meta property="og:title" content="{NAME}, AI Systems &amp; Automation Engineer" />', 1)
+    films = len({p["film"] for p in PROJECTS if p["film"]})
+    return page + home_hero() + "\n" + marquee(STACK) + home_cases() + home_capabilities() + nums_band(
+        "Track record", "The work, counted",
+        [(str(len(PROJECTS)), "Systems shipped"), (str(films), "Walkthrough films"), (str(len(CASES)), "Full case studies")]
+    ) + home_more() + f"""
+
+<section id="process" aria-labelledby="proc-h">
+  <div class="container">
+    <div class="sec-head">
+      <div><div class="label" data-rv>How I work</div><h2 id="proc-h" data-rv>Simple process. Clear handoff. No black box.</h2></div>
+      <p class="lede" data-rv>The goal isn't just a system that works. It's a system you understand well enough to explain to your own team without calling me.</p>
+    </div>
+    <ol class="proc">{proc}</ol>
   </div>
 </section>
-<!-- CASES:END -->"""
+""" + cta("Got a process someone repeats every day? That's the one.", anchor="contact", ways=True) + foot()
 
 
-def update_index() -> None:
-    """Refresh the generated block in index.html (inserted after the hero the first time)."""
-    p = ROOT / "index.html"
-    s = p.read_text(encoding="utf-8")
-    block = home_cases()
-    start, end = "<!-- CASES:START", "<!-- CASES:END -->"
-    if start in s:
-        a = s.index(start); b = s.index(end) + len(end)
-        s = s[:a] + block + s[b:]
-    else:
-        anchor = "<!-- ============ SERVICES"
-        i = s.index(anchor) if anchor in s else s.index('<section id="services">')
-        s = s[:i] + block + "\n\n" + s[i:]
-    p.write_text(s, encoding="utf-8")
+# ------------------------------------------------------------------ project archive
+
+def project_card(p: dict, first: bool = False) -> str:
+    short = p["title"].split(" — ")[0]
+    load = 'fetchpriority="high"' if first else 'loading="lazy"'
+    media = (f'<div class="pj-media"><img src="/films/{p["film"]}.jpg" alt="Still from the {e(p["title"])} walkthrough film" {load} width="1280" height="720" /></div>'
+             if p["film"] else f'<div class="pj-media none" aria-hidden="true"><span>{e(short)}</span></div>')
+    pts = ("<ul>" + "".join(f"<li>{e(x)}</li>" for x in p["points"]) + "</ul>") if p["points"] else ""
+    metric = f'<div class="pj-metric"><b>{e(p["metric"][0])}</b><span>{e(p["metric"][1])}</span></div>' if p.get("metric") else ""
+    stack = "".join(f"<span>{e(x)}</span>" for x in p["stack"])
+    acts = []
+    if p["case"]:
+        acts.append(f'<a class="btn btn-ghost btn-sm" href="{p["case"]}">Read the case study{ARROW}</a>')
+    if p["film"]:
+        acts.append(f'<button type="button" class="btn btn-ghost btn-sm" data-watch="/films/{p["film"]}.mp4" data-poster="/films/{p["film"]}.jpg">{PLAY}Watch the film</button>')
+    if p["site"]:
+        acts.append(f'<a class="btn btn-ghost btn-sm" href="{p["site"]}" target="_blank" rel="noopener">{e(p["site_label"])} ↗</a>')
+    return f"""<article class="pj" id="{p['slug']}" data-cat="{p['cat']}" data-rv>
+      {media}
+      <div class="pj-in">
+        <span class="pj-tag">{e(p['tag'])}</span>
+        <h2>{e(p['title'])}</h2>
+        <p>{e(p['text'])}</p>{pts}{metric}
+        <div class="pj-stack">{stack}</div>
+        <div class="pj-acts">{''.join(acts)}</div>
+      </div>
+    </article>"""
+
+
+def projects_page() -> str:
+    path = "/projects"
+    title = f"All {len(PROJECTS)} projects by {NAME}"
+    desc = f"Every AI agent, voice system, automation pipeline, platform and website {NAME} has shipped: {len(PROJECTS)} projects, most with a walkthrough film."
+    schema = [
+        {"@type": "CollectionPage", "@id": f"{SITE}{path}#page", "name": f"All {len(PROJECTS)} projects", "description": desc, "url": f"{SITE}{path}",
+         "author": person(), "mainEntity": {"@type": "ItemList", "itemListElement": [
+             {"@type": "ListItem", "position": i + 1, "name": p["title"], "url": SITE + (p["case"] or f"{path}#{p['slug']}")} for i, p in enumerate(PROJECTS)]}},
+        crumbs_schema([("Home", "/"), ("All projects", path)]),
+    ]
+    counts = {k: (len(PROJECTS) if k == "all" else sum(p["cat"] == k for p in PROJECTS)) for k, _ in FILTERS}
+    filt = "".join(
+        f'<button type="button" class="pj-f{" on" if k == "all" else ""}" data-f="{k}" aria-pressed="{"true" if k == "all" else "false"}">{e(l)} <i>{counts[k]}</i></button>'
+        for k, l in FILTERS)
+    cards = "\n    ".join(project_card(p, i == 0) for i, p in enumerate(PROJECTS))
+    films = len({p["film"] for p in PROJECTS if p["film"]})
+    return head(title, desc, path, f"{SITE}/films/jennifer.jpg", schema, f"ARCHIVE &nbsp;·&nbsp; <b>{len(PROJECTS)}</b> PROJECTS",
+                og_type="website", preload="/films/jennifer.jpg") + f"""
+<section class="pj-hero" aria-labelledby="h1">
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb" data-hi><a href="/">Home</a><span aria-hidden="true">/</span><span>All projects</span></nav>
+    <div id="h1">{h1([f'{len(PROJECTS)} systems,', '<span class="grad">shipped.</span>'])}</div>
+    <p class="lede" data-hi>Agents, voice systems, scraping pipelines, platforms and websites. Each one shows the problem, the stack, and whether you can go use it today. {films} have a walkthrough film; {len(CASES)} have a full case study.</p>
+    <div class="pj-filters" role="toolbar" aria-label="Filter projects" data-hi>{filt}</div>
+  </div>
+</section>
+<section class="pj-list" aria-label="Projects">
+  <div class="container pj-grid">
+    {cards}
+  </div>
+</section>
+""" + cta("Want one of these, built around your business?") + foot()
 
 
 def main() -> None:
@@ -658,14 +866,15 @@ def main() -> None:
         (ROOT / "work" / f"{c['slug']}.html").write_text(case_page(c), encoding="utf-8")
     for s in SERVICES:
         (ROOT / f"{s['slug']}.html").write_text(service_page(s), encoding="utf-8")
+    (ROOT / "projects.html").write_text(projects_page(), encoding="utf-8")
+    (ROOT / "index.html").write_text(home_page(), encoding="utf-8")
     write_sitemap()
-    update_index()
-    print(f"built {len(CASES)} case studies, {len(SERVICES)} service pages and sitemap.xml")
+    print(f"built the homepage, the {len(PROJECTS)}-project archive, {len(CASES)} case studies, {len(SERVICES)} service pages and sitemap.xml")
 
 
 def write_sitemap() -> None:
-    """Homepage plus every generated page. lastmod is the build date (FILM_DATE), bump it when content changes."""
-    paths = ["/"] + [f"/{s['slug']}" for s in SERVICES] + [f"/work/{c['slug']}" for c in CASES]
+    """Every generated page. lastmod is the build date (FILM_DATE), bump it when content changes."""
+    paths = ["/", "/projects"] + [f"/{s['slug']}" for s in SERVICES] + [f"/work/{c['slug']}" for c in CASES]
     urls = "".join(f"  <url>\n    <loc>{SITE}{p}</loc>\n    <lastmod>{FILM_DATE}</lastmod>\n  </url>\n" for p in paths)
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + "</urlset>\n"
     (ROOT / "sitemap.xml").write_text(xml, encoding="utf-8")
