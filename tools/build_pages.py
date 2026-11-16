@@ -303,19 +303,39 @@ def head(title: str, description: str, path: str, image: str, schema: list[dict]
   <div class="container">
     <nav>
       <a href="/" class="brand"><span class="brand-mark">MR</span><span>Muhammad Rayyan<small>AI Systems Engineer</small></span></a>
-      <div class="nav-links">
-        <a href="/#work">Work</a>
-        <a href="/ai-voice-agents">Voice agents</a>
-        <a href="/whatsapp-automation">WhatsApp</a>
-        <a href="/ai-agents-automation">AI agents</a>
-        <a href="/#contact" class="nav-cta">Work with me</a>
-      </div>
+{nav_links()}
     </nav>
   </div>
   <div class="scrollbar" id="scrollbar"></div>
 </header>
+{mobile_menu()}
 <main>
 """
+
+
+def nav_links() -> str:
+    """Desktop nav with Work and Services dropdowns, plus the mobile menu button. Shared with index.html."""
+    work = "".join(f'<a href="/work/{c["slug"]}">{e(c["name"])}</a>' for c in CASES)
+    serv = "".join(f'<a href="/{s["slug"]}">{e(SERVICE_NAMES[s["slug"]])}</a>' for s in SERVICES)
+    return f"""      <div class="nav-links">
+        <div class="dd"><a href="/#work" class="dd-t">Work</a><div class="dd-m">{work}<a href="/#work" class="dd-all">All projects</a></div></div>
+        <div class="dd"><a href="/#services" class="dd-t">Services</a><div class="dd-m">{serv}<a href="/#services" class="dd-all">Everything I build</a></div></div>
+        <a href="/#process">Process</a>
+        <a href="/#contact" class="nav-cta">Work with me</a>
+      </div>
+      <button type="button" class="menu-btn" aria-expanded="false" aria-controls="mmenu" aria-label="Open menu"><i></i></button>"""
+
+
+def mobile_menu() -> str:
+    """Full-screen menu for phones, opened by .menu-btn (assets/site.js). Shared with index.html."""
+    work = "".join(f'<a href="/work/{c["slug"]}">{e(c["name"])}</a>' for c in CASES)
+    serv = "".join(f'<a href="/{s["slug"]}">{e(SERVICE_NAMES[s["slug"]])}</a>' for s in SERVICES)
+    return f"""<nav class="mmenu" id="mmenu" aria-label="Site menu"><div class="container">
+  <h3>Services</h3>{serv}
+  <h3>Case studies</h3>{work}<a href="/#work">All projects</a>
+  <h3>More</h3><a href="/#process">How I work</a><a href="/">Home</a>
+  <a href="/#contact" class="mm-cta">Work with me</a>
+</div></nav>"""
 
 
 def film(name: str, tall: bool, note: str, poster: str | None = None) -> str:

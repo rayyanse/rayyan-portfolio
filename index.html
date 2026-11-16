@@ -684,6 +684,41 @@ footer{border-top:1px solid var(--line);padding-block:34px}
 .film-close:hover{border-color:var(--blue-400)}
 @keyframes film-in{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){.film-box{animation:none}}
+
+/* ============ NAV DROPDOWNS (desktop) + MOBILE MENU ============ */
+.dd{position:relative}
+.dd-t{display:inline-flex;align-items:center;gap:6px}
+.dd-t::after{content:'';width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:translateY(-2px) rotate(45deg);opacity:.6}
+.dd-m{position:absolute;top:100%;left:-8px;min-width:270px;padding:8px;margin-top:10px;border-radius:14px;background:rgba(8,11,20,.97);border:1px solid var(--line-2);box-shadow:0 24px 60px -20px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.05);opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .2s,transform .25s cubic-bezier(.16,1,.3,1),visibility .2s}
+.dd-m::before{content:'';position:absolute;left:0;right:0;top:-12px;height:12px}
+.dd:hover .dd-m,.dd:focus-within .dd-m{opacity:1;visibility:visible;transform:none}
+.nav-links .dd-m a{display:block;padding:9px 12px;border-radius:9px;font-size:.86rem;font-weight:500;color:var(--muted);white-space:nowrap}
+.nav-links .dd-m a:hover{color:var(--text);background:rgba(59,125,224,.10)}
+.nav-links .dd-m a.dd-all{color:var(--cyan);margin-top:4px;border-top:1px solid var(--line);border-radius:0 0 9px 9px;padding-top:11px}
+.menu-btn{display:none;width:42px;height:42px;margin-left:8px;border-radius:12px;border:1px solid var(--line-2);background:rgba(148,163,184,.06);place-items:center;flex-shrink:0}
+.menu-btn i{position:relative;display:block;width:18px;height:1.5px;background:var(--text);transition:background .2s}
+.menu-btn i::before,.menu-btn i::after{content:'';position:absolute;left:0;width:18px;height:1.5px;background:var(--text);transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.menu-btn i::before{transform:translateY(-6px)}.menu-btn i::after{transform:translateY(6px)}
+.menu-btn[aria-expanded="true"] i{background:transparent}
+.menu-btn[aria-expanded="true"] i::before{transform:rotate(45deg)}.menu-btn[aria-expanded="true"] i::after{transform:rotate(-45deg)}
+.mmenu{position:fixed;inset:0;z-index:899;display:none;overflow-y:auto;padding:96px var(--pad) 48px;background:rgba(5,7,12,.97);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+.mmenu.open{display:block;animation:mmIn .35s cubic-bezier(.16,1,.3,1)}
+@keyframes mmIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.mmenu h3{font-family:var(--mono);font-size:.68rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin:26px 0 8px}
+.mmenu h3:first-child{margin-top:0}
+.mmenu a{display:block;padding:9px 0;font-family:var(--display);font-size:1.3rem;font-weight:600;letter-spacing:-.02em;color:var(--text);border-bottom:1px solid var(--line)}
+.mmenu a.mm-cta{margin-top:28px;border:0;text-align:center;padding:14px;border-radius:999px;font-family:var(--body);font-size:1rem;color:#fff;background:linear-gradient(180deg,var(--blood-400),var(--blood-500))}
+body.menu-open{overflow:hidden}
+@media(max-width:860px){.nav-links .dd{display:none}.menu-btn{display:grid}}
+
+/* footer link grid (same as the inner pages) */
+.foot-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:28px}
+.foot-grid h3{font-family:var(--mono);font-size:.68rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:12px}
+.foot-grid a{display:block;font-size:.88rem;color:var(--muted);padding:4px 0;transition:color .18s}
+.foot-grid a:hover{color:var(--text)}
+.foot-base{margin-top:36px;padding-top:20px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:.8rem;color:var(--dim)}
+@media(max-width:760px){.foot-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:420px){.brand>span:not(.brand-mark){display:none}.menu-btn{margin-left:6px}}
 </style>
 <script>/* motion flags, set before first paint */
 (function(){var d=document.documentElement;
@@ -715,15 +750,22 @@ setTimeout(function(){if(!window.__motionOK){d.classList.remove('js-motion','boo
         <span>Muhammad Rayyan<small>AI Systems Engineer</small></span>
       </a>
       <div class="nav-links">
-        <a href="#services">Services</a>
-        <a href="#work">Work</a>
-        <a href="#process">Process</a>
-        <a href="#contact" class="nav-cta">Work with me</a>
+        <div class="dd"><a href="/#work" class="dd-t">Work</a><div class="dd-m"><a href="/work/call-stream">Call Stream</a><a href="/work/jennifer">Jennifer</a><a href="/work/al-munir">Al Munir UPVC</a><a href="/work/bresco">Bresco Properties</a><a href="/work/whatsapp-lead-system">WhatsApp Lead Management System</a><a href="/#work" class="dd-all">All projects</a></div></div>
+        <div class="dd"><a href="/#services" class="dd-t">Services</a><div class="dd-m"><a href="/ai-voice-agents">AI voice agents</a><a href="/whatsapp-automation">WhatsApp automation</a><a href="/ai-agents-automation">AI agents &amp; automation</a><a href="/#services" class="dd-all">Everything I build</a></div></div>
+        <a href="/#process">Process</a>
+        <a href="/#contact" class="nav-cta">Work with me</a>
       </div>
+      <button type="button" class="menu-btn" aria-expanded="false" aria-controls="mmenu" aria-label="Open menu"><i></i></button>
     </nav>
   </div>
   <div class="scrollbar" id="scrollbar"></div>
 </header>
+<nav class="mmenu" id="mmenu" aria-label="Site menu"><div class="container">
+  <h3>Services</h3><a href="/ai-voice-agents">AI voice agents</a><a href="/whatsapp-automation">WhatsApp automation</a><a href="/ai-agents-automation">AI agents &amp; automation</a>
+  <h3>Case studies</h3><a href="/work/call-stream">Call Stream</a><a href="/work/jennifer">Jennifer</a><a href="/work/al-munir">Al Munir UPVC</a><a href="/work/bresco">Bresco Properties</a><a href="/work/whatsapp-lead-system">WhatsApp Lead Management System</a><a href="/#work">All projects</a>
+  <h3>More</h3><a href="/#process">How I work</a><a href="/">Home</a>
+  <a href="/#contact" class="mm-cta">Work with me</a>
+</div></nav>
 
 <main id="top">
 
@@ -1250,9 +1292,13 @@ setTimeout(function(){if(!window.__motionOK){d.classList.remove('js-motion','boo
 </main>
 
 <footer>
-  <div class="container foot">
-    <span>© 2026 Agha Muhammad Rayyan Khan</span>
-    <span class="r">AI SYSTEMS ENGINEER · LAHORE, PK · REMOTE</span>
+  <div class="container">
+    <div class="foot-grid">
+      <div><h3>Agha Muhammad Rayyan Khan</h3><a href="/">AI systems that do real work. 20+ shipped, each with a walkthrough film.</a><a href="mailto:agharayyan@gmail.com">agharayyan@gmail.com</a><a href="https://www.linkedin.com/in/rayyan45/" rel="me noopener" target="_blank">LinkedIn</a><a href="https://github.com/rayyanse" rel="me noopener" target="_blank">GitHub</a></div>
+      <div><h3>Case studies</h3><a href="/work/call-stream">Call Stream</a><a href="/work/jennifer">Jennifer</a><a href="/work/al-munir">Al Munir UPVC</a><a href="/work/bresco">Bresco Properties</a><a href="/work/whatsapp-lead-system">WhatsApp Lead Management System</a></div>
+      <div><h3>Services</h3><a href="/ai-voice-agents">AI voice agents</a><a href="/whatsapp-automation">WhatsApp automation</a><a href="/ai-agents-automation">AI agents &amp; automation</a><a href="/#work">All projects</a></div>
+    </div>
+    <div class="foot-base"><span>© 2026 Agha Muhammad Rayyan Khan</span><span>AI SYSTEMS ENGINEER · LAHORE, PK · REMOTE</span></div>
   </div>
 </footer>
 
@@ -1909,6 +1955,14 @@ function init(){
     var p=v.play();if(p&&p.catch)p.catch(function(){});
   })});
 })();
+</script>
+<script>
+/* mobile menu (same behaviour as assets/site.js on the inner pages) */
+(function(){var b=document.querySelector('.menu-btn'),m=document.getElementById('mmenu');if(!b||!m)return;
+function set(o){m.classList.toggle('open',o);document.body.classList.toggle('menu-open',o);b.setAttribute('aria-expanded',o?'true':'false');b.setAttribute('aria-label',o?'Close menu':'Open menu');}
+b.addEventListener('click',function(){set(!m.classList.contains('open'))});
+m.addEventListener('click',function(e){if(e.target.closest('a'))set(false)});
+addEventListener('keydown',function(e){if(e.key==='Escape'&&m.classList.contains('open')){set(false);b.focus();}});})();
 </script>
 </body>
 </html>

@@ -7,6 +7,20 @@
   var fine = window.matchMedia('(pointer: fine)').matches;
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
+  /* mobile menu: the button toggles, a link or Escape closes, page scroll locks while open */
+  var mb = document.querySelector('.menu-btn'), mm = document.getElementById('mmenu');
+  if (mb && mm) {
+    var setMenu = function (open) {
+      mm.classList.toggle('open', open);
+      document.body.classList.toggle('menu-open', open);
+      mb.setAttribute('aria-expanded', open ? 'true' : 'false');
+      mb.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
+    mb.addEventListener('click', function () { setMenu(!mm.classList.contains('open')); });
+    mm.addEventListener('click', function (ev) { if (ev.target.closest('a')) setMenu(false); });
+    addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && mm.classList.contains('open')) { setMenu(false); mb.focus(); } });
+  }
+
   /* topbar + scroll progress */
   var bar = document.getElementById('topbar'), prog = document.getElementById('scrollbar');
   function onScroll() {
