@@ -855,7 +855,7 @@ def home_build() -> str:
 
 def home_more() -> str:
     case_paths = {f"/work/{c['slug']}" for c in CASES}
-    more = [p for p in PROJECTS if p["film"] and p.get("case") not in case_paths and p.get("viz")]
+    more = [p for p in PROJECTS if p.get("case") not in case_paths and p.get("viz")]
     tiles = "".join(f"""<a class="tile" href="/projects#{p['slug']}">
         <div class="proj-viz" data-viz="{p['viz']}"></div>
         <div class="tile-body"><span class="kind">{e(p['tag'])}</span><h3>{e(p['title'])}</h3><p>{e(p['text'])}</p><span class="more">See it in the archive {ARROW_SM}</span></div>
@@ -865,8 +865,8 @@ def home_more() -> str:
 <section class="sec" style="padding-top:0" aria-labelledby="more-h">
   <div class="container">
     <div class="sec-head">
-      <div><div class="label" data-rv>More builds</div><h2 id="more-h" data-rv>{len(more)} more, <span class="dim">each with a film.</span></h2></div>
-      <div class="side"><p class="lede" data-rv>Agents, voice systems, scraping pipelines and live sites. Swipe through, or open the archive.</p><div class="track-nav" data-rv><button type="button" class="prev" aria-label="Previous projects">{ARROW}</button><button type="button" aria-label="Next projects">{ARROW}</button></div></div>
+      <div><div class="label" data-rv>More builds</div><h2 id="more-h" data-rv>{len(more)} more, <span class="dim">all shipped.</span></h2></div>
+      <div class="side"><p class="lede" data-rv>Call agents, SEO tools, lead hunters, film pipelines and live sites. Swipe through, or open the archive.</p><div class="track-nav" data-rv><button type="button" class="prev" aria-label="Previous projects">{ARROW}</button><button type="button" aria-label="Next projects">{ARROW}</button></div></div>
     </div>
   </div>
   <div class="track">{tiles}{end}</div>

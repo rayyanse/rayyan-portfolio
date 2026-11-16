@@ -120,14 +120,42 @@ receptionist:()=>
   G('s-pop',1.6,Rc(222,22,82,18,'vp',null,5,'style="stroke:#3B7DE0"')+T(230,34,'→ bookings','sm ac'))+
   T(160,118,'webrtc · no phone line','sm lo s-in',.2,MID),
 
-sentry:()=>
-  Rc(18,12,96,116,'vp',null,8)+T(28,28,'rules.md','sm ac')+
-  T(28,46,'refunds < 14 days','sm lo s-in',.1)+T(28,60,'no legal advice','sm lo s-in',.2)+T(28,74,'billing → human','sm lo s-in',.3)+Rc(28,86,60,3,'vg s-gx',.4,1.5)+Rc(28,94,48,3,'vg s-gx',.5,1.5)+
-  G('s-pop',.5,Rc(126,14,124,18,'vg',null,7)+T(133,26,'Where is order #884?','sm hi'))+
-  G('s-pop',.9,Rc(162,38,140,18,'vf',null,7)+T(169,50,'Shipped today · arrives Thu','sm hi'))+
-  T(302,70,'✓ resolved','sm gn s-in',1.2,END)+
-  G('s-pop',1.5,Rc(126,80,124,18,'vg',null,7)+T(133,92,'Can I dispute this charge?','sm hi'))+
-  G('s-pop',2.1,Rc(186,104,116,18,'vp',null,7,'style="stroke:#E01E33"')+T(194,116,'escalated → human','sm rd')),
+sebastian:()=>
+  Rc(14,14,146,112,'vp s-in',0,10)+T(26,30,'WhatsApp call · 04:12','sm lo s-in',.1)+C(146,27,3,'vrf s-blink',0)+
+  T(26,52,'THEM','sm lo s-in',.2)+wave(54,22,4,49,12,1)+
+  T(26,74,'YOU','sm lo s-in',.3)+wave(54,22,4,71,10,3)+
+  T(26,100,'"Sebastian, book Fri 3 PM"','ac s-type',.8)+
+  G('s-pop',1.6,Rc(170,22,136,24,'vf',null,8)+T(178,37,'On it. Booked Fri 15:00','sm hi'))+
+  G('s-pop',2.3,Rc(170,54,136,24,'vg',null,8)+T(178,69,'Search: what just launched','sm hi'))+
+  T(170,98,'call ends →','sm lo s-in',2.8)+
+  T(170,114,'✓ notes on WhatsApp + Notion','sm gn s-in',3.1),
+
+seoray:()=>
+  Rc(18,14,176,20,'vp s-in',0,6)+T(28,27.5,'audit · rayyankhan.dev','hi s-type',.15)+
+  T(18,52,'✓ technical','sm gn s-in',.6)+T(18,66,'✓ structured data','sm gn s-in',.75)+T(18,80,'! speed on a phone','sm rd s-in',.9)+T(18,94,'✓ AI readiness','sm gn s-in',1.05)+
+  Rc(18,106,176,4,'vg',null,2)+Rc(18,106,164,4,'vb s-gx',1.2,2)+
+  C(262,54,28,'vl',null,'stroke-width="5" opacity=".45"')+
+  '<g transform="rotate(-90 262 54)">'+C(262,54,28,'va s-arc',null,'stroke-width="5" pathLength="100" stroke-dasharray="98 100" style="--d:1.2s;--len:98"')+'</g>'+
+  T(262,59,'98','big hi s-pop',1.8,MID)+T(262,96,'HEALTH SCORE','sm lo s-in',1.8,MID)+
+  G('s-pop',2.2,Rc(218,108,40,20,'vp',null,3)+T(238,121,'OWNER','sm ac',null,MID))+
+  G('s-pop',2.4,Rc(266,108,40,20,'vp',null,3)+T(286,121,'DEV','sm ac',null,MID)),
+
+filmpipe:()=>
+  T(18,24,'film.html → render.py → film.mp4','sm ac s-type',.1)+
+  ['SCENE 1','SCENE 2','SCENE 3','END CARD'].map((n,i)=>G('s-pop',.4+i*.15,Rc(18+i*72,34,64,40,'vp',null,4)+T(50+i*72,57,n,'sm lo',null,MID))).join('')+
+  T(18,96,'VO','sm lo s-in',1)+wave(40,44,6,93,10,2)+
+  Rc(18,112,284,4,'vg',null,2)+Rc(18,112,284,4,'vb s-gx',1.3,2)+
+  G('s-flow',0,Rc(18,107,2,14,'vrf',null,1),'--dx:282px')+
+  T(302,132,'voice · music · render','sm lo s-in',1.6,END),
+
+jobhunt:()=>{
+  const rows=[['n8n automation dev','92','gn'],['AI voice agent build','88','gn'],['WhatsApp bot, remote','81','ac'],['Senior ML, US only','34','rd']];
+  let s=T(18,24,'RemoteOK · HN · Reddit · Upwork','sm lo s-in',0);
+  rows.forEach(([t,n,c],i)=>{const y=34+i*22;s+=G('s-in',.3+i*.15,Rc(18,y,200,18,'vp',null,4)+T(28,y+12,t,'sm hi')+T(208,y+12,n,'sm '+c,null,END));});
+  s+=Rc(18,34,200,18,'va s-draw',1.1,4,'pathLength="1"');
+  s+=G('s-pop',1.5,Rc(232,34,72,84,'vp',null,6)+T(268,52,'PITCH','sm lo',null,MID)+Rc(242,62,52,3,'vg',null,1.5)+Rc(242,70,44,3,'vg',null,1.5)+Rc(242,78,50,3,'vg',null,1.5)+Rc(242,86,38,3,'vg',null,1.5));
+  s+=T(268,108,'✓ drafted','sm gn s-in',2.1,MID);
+  return s;},
 
 vape:()=>
   '<path d="M18 26V14H30M290 14H302V26M302 114V126H290M30 126H18V114" class="vl"/>'+
@@ -138,38 +166,6 @@ vape:()=>
   G('s-pop',1.6,Rc(132,22,52,11,'vrf',null,2)+T(136,30.5,'VAPE 0.94','sm hi'))+
   T(296,134,'→ WhatsApp alert sent','sm hi s-type',1.9,END),
 
-bridge:()=>{
-  let s=Rc(18,12,190,20,'vp',null,6)+T(28,25.5,'coffee · atlanta, GA','hi s-type',.2)+T(218,25,'FOOD','sm ac s-in',.4)+T(248,25,'BEAUTY','sm lo s-in',.45)+T(286,25,'LAW','sm lo s-in',.5);
-  for(let i=0;i<10;i++){const x=18+(i%5)*58,y=i<5?42:84;s+=G('s-pop',.6+i*.05,Rc(x,y,52,36,'vp',null,6)+C(x+11,y+11,5,'vg')+Rc(x+7,y+22,34,3,'vg',null,1.5)+Rc(x+7,y+28,22,3,'vg',null,1.5));
-    if([1,4,7].includes(i)) s+=Rc(x,y,52,36,'va s-draw',1.3+i*.05,6,'pathLength="1"');}
-  s+=T(18,134,'3 of 214 Black-owned businesses match','sm ac s-in',1.7);
-  return s;},
-
-echo:()=>
-  C(24,26,7,'vg')+C(29,31,2.6,'vgn s-blink',0)+
-  G('s-pop',.2,Rc(38,16,128,18,'vg',null,7)+T(45,28,'did the deploy go out?','sm hi'))+
-  G('s-pop',.7,Rc(160,42,142,18,'vf',null,7)+T(167,54,'yep, live 2 min ago','sm hi'))+
-  T(302,72,'✓✓ read','sm ac s-in',1.1,END)+
-  G('s-pop',1.5,Rc(248,62,26,13,'vp',null,6.5)+T(261,71.5,'+1','sm hi',null,MID))+
-  G('s-in',1.3,Rc(38,84,44,16,'vg',null,8)+C(50,92,2,'vb s-blink',0)+C(60,92,2,'vb s-blink',.2)+C(70,92,2,'vb s-blink',.4))+
-  T(18,124,'4 online · #launch','sm lo'),
-
-aura:()=>
-  Rc(18,14,100,84,'vp',null,8)+C(68,52,20,'vl')+
-  P('M44 34V28H50M86 28H92V34M92 70V76H86M50 76H44V70','va s-draw',.3)+
-  T(68,114,'calm · 0.82','sm ac s-in',1.1,MID)+
-  '<path d="M132 104H302M132 20V104" class="vl"/>'+
-  P('M132 80 C150 60 160 90 178 70 S206 40 222 58 S250 84 266 52 S290 34 302 44','vs s-draw',.4)+
-  C(302,44,3,'vb s-pop',1.3)+T(302,124,'mood · 14 days','sm lo',null,END),
-
-groupxam:()=>
-  Rc(18,12,284,116,'vp',null,8)+T(28,27,'Q4/20 · integrals','sm lo')+T(292,27,'02:14','sm ac',null,END)+
-  P('M40 58 C60 40 80 76 100 58 S140 44 150 62','vs s-draw',.3)+
-  T(40,84,'∫ x² dx = x³/3 + C','hi s-type',.9)+
-  P('M190 96 C210 70 240 110 260 80 S284 70 290 88','va s-draw',1.3)+
-  G('s-drift',0,'<path d="M170 60l0 12 3.4-3.2 2.6 5.4 2-1-2.6-5.2 4.6-.4z" class="vb"/>'+Rc(180,72,26,11,'vf',null,3)+T(193,80,'Sara','sm hi',null,MID),'--px:14px')+
-  G('s-drift',-3,'<path d="M236 100l0 12 3.4-3.2 2.6 5.4 2-1-2.6-5.2 4.6-.4z" class="vb"/>'+Rc(246,112,28,11,'vp',null,3)+T(260,120,'Omar','sm hi',null,MID),'--px:10px'),
-
 flowstate:()=>{
   const rows=[[0,'Launch v2',1],[1,'Landing page',1],[2,'Hero copy',1],[2,'Pricing table',0],[1,'Email sequence',0],[0,'Hire designer',0]];
   let s='<path d="M28 30V88M46 48V80" class="vl"/>';
@@ -178,14 +174,6 @@ flowstate:()=>{
     if(done) s+=P('M'+(x+2)+' '+(y+4.6)+'l2.2 2.4 4.4-5','va s-draw',.6+i*.28);});
   s+=T(302,24,'3 / 6','ac s-in',1.5,END)+Rc(242,32,60,3,'vg',null,1.5)+Rc(242,32,30,3,'vf s-gx',1.5,1.5);
   return s;},
-
-corecast:()=>
-  '<path d="M18 112H302M18 14V112" class="vl"/>'+
-  '<path d="M200 62 L250 44 L302 36 L302 70 L250 72 L200 70Z" class="vg s-in"'+st(.9)+'/>'+
-  P('M18 88 L36 80 L54 84 L72 70 L90 76 L108 64 L126 70 L144 58 L162 66 L180 56 L200 66','vs s-draw',.2)+
-  P('M200 66 L250 58 L302 52','va s-draw',1,'stroke-dasharray="3 3"')+
-  T(200,126,'today','sm lo',null,MID)+'<path d="M200 14V112" class="vl" stroke-dasharray="2 3"/>'+
-  G('s-pop',1.5,Rc(226,16,76,18,'vp',null,5)+T(264,28,'−15% error','sm gn',null,MID)),
 
 aurelle:()=>
   G('s-drift',0,Rc(56,30,118,78,'vp',null,3),'--px:4px')+

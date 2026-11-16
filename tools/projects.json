@@ -28,6 +28,32 @@
   "viz": null
  },
  {
+  "film": null,
+  "site": null,
+  "site_label": null,
+  "case": null,
+  "metric": null,
+  "cat": "voice",
+  "tag": "Voice AI · hackathon build",
+  "slug": "sebastian",
+  "viz": "sebastian",
+  "title": "Sebastian — An AI Teammate Inside Real Calls",
+  "text": "Sebastian joins ordinary WhatsApp and phone calls on an Android phone. He introduces himself, takes notes quietly, and answers out loud when someone says his name, so both people hear him. When the call ends, the summary lands on WhatsApp and in Notion.",
+  "points": [
+   "Mid-call actions: web search, booking a follow-up, reading a Notion doc",
+   "The other person needs no app, no link and no meeting invite",
+   "Built for AssemblyAI's voice hackathon week"
+  ],
+  "stack": [
+   "Android",
+   "Kotlin",
+   "AssemblyAI streaming STT + TTS",
+   "LLM Gateway",
+   "Cloudflare Workers",
+   "Notion"
+  ]
+ },
+ {
   "cat": "ai",
   "tag": "AI agent",
   "title": "Agentic Sales Research Chatbot",
@@ -137,6 +163,76 @@
   "slug": "leadforge",
   "metric": null,
   "viz": "leadforge"
+ },
+ {
+  "film": null,
+  "site": "/seo-ray",
+  "site_label": "See SEO-Ray",
+  "case": null,
+  "metric": null,
+  "cat": "automation",
+  "tag": "SEO tool · Rawaiz Tech",
+  "slug": "seo-ray",
+  "viz": "seoray",
+  "title": "SEO-Ray — SEO Audits as Two PDF Reports",
+  "text": "Audits a website on free data sources (technical, on-page, structured data, speed, AI readiness and what Gemini knows about the business), then writes two PDFs: a plain-English one for the owner and a fix checklist for the developer.",
+  "points": [
+   "Owner report: a health score, where you stand, and a plan grouped by effort",
+   "Developer report: every finding with the exact fix, evidence and affected URLs"
+  ],
+  "stack": [
+   "TypeScript",
+   "Node.js",
+   "Playwright",
+   "PageSpeed Insights",
+   "Gemini"
+  ]
+ },
+ {
+  "film": null,
+  "site": null,
+  "site_label": null,
+  "case": null,
+  "metric": null,
+  "cat": "automation",
+  "tag": "AI automation",
+  "slug": "job-lead-hunter",
+  "viz": "jobhunt",
+  "title": "Job & Lead Hunter — Finds the Work, Drafts the Pitch",
+  "text": "Pulls fresh jobs and freelance projects from RemoteOK, Remotive, WeWorkRemotely, Hacker News, Reddit and Upwork's public feed, scores each one 0 to 100 against a real profile, drafts a tailored pitch for the best ones and tracks every application on a board.",
+  "points": [
+   "Scores skill overlap, title fit, location, seniority and freshness",
+   "Read-only: it never logs in to Upwork or sends anything for you"
+  ],
+  "stack": [
+   "Python",
+   "RSS + public APIs",
+   "Claude"
+  ]
+ },
+ {
+  "film": null,
+  "site": null,
+  "site_label": null,
+  "case": null,
+  "metric": null,
+  "cat": "automation",
+  "tag": "Video automation",
+  "slug": "product-film-pipeline",
+  "viz": "filmpipe",
+  "title": "Product Film Pipeline — Cinematic Product Films, All in Code",
+  "text": "Turns any product into a motion-graphics film written entirely in code: animated scenes in HTML, an AI voiceover, music and sound effects mixed in, rendered frame by frame. Swap the name, data and script, and a new film renders in about 20 minutes.",
+  "points": [
+   "Made the Bresco pitch films and eight Call Stream industry films",
+   "One flag cuts a 30-second teaser from the same film"
+  ],
+  "stack": [
+   "HTML + JavaScript",
+   "Python",
+   "edge-tts",
+   "Gemini TTS",
+   "FFmpeg"
+  ]
  },
  {
   "cat": "automation",
@@ -282,46 +378,6 @@
   "viz": "content"
  },
  {
-  "cat": "voice",
-  "tag": "Voice AI",
-  "title": "AI Voice Receptionist",
-  "text": "A voice receptionist that runs in the browser. It answers, holds a natural conversation and routes the caller over WebRTC, with no phone line needed.",
-  "points": [],
-  "stack": [
-   "Vapi",
-   "Next.js 15",
-   "TypeScript",
-   "WebRTC"
-  ],
-  "film": null,
-  "site": null,
-  "site_label": null,
-  "case": null,
-  "slug": "ai-voice-receptionist",
-  "metric": null,
-  "viz": "receptionist"
- },
- {
-  "cat": "ai",
-  "tag": "AI agent",
-  "title": "Sentry — Instructable Support Agent",
-  "text": "A support agent that follows business-specific instructions to resolve routine queries end to end, and hands off to a human as soon as a question falls outside its scope.",
-  "points": [],
-  "stack": [
-   "LLM",
-   "RAG",
-   "Tool-calling",
-   "Escalation"
-  ],
-  "film": null,
-  "site": null,
-  "site_label": null,
-  "case": null,
-  "slug": "sentry",
-  "metric": null,
-  "viz": "sentry"
- },
- {
   "cat": "data",
   "tag": "Computer vision",
   "title": "AI Vape Detection System",
@@ -345,85 +401,6 @@
  {
   "cat": "platforms",
   "tag": "Platform",
-  "title": "B.R.I.D.G.E. Directory",
-  "text": "A platform for discovering and supporting Black-owned businesses across the US. Searchable directory across 20+ categories, business profiles, direct messaging and a paid listing tier.",
-  "points": [],
-  "stack": [
-   "React 19",
-   "TypeScript",
-   "Convex",
-   "OIDC"
-  ],
-  "film": null,
-  "site": null,
-  "site_label": null,
-  "case": null,
-  "slug": "b-r-i-d-g-e-directory",
-  "metric": null,
-  "viz": "bridge"
- },
- {
-  "cat": "platforms",
-  "tag": "Real-time",
-  "title": "Echo",
-  "text": "A real-time messaging app with DMs and groups, replies, reactions, attachments, read receipts, typing indicators and live presence. Everything updates over the socket without a refresh.",
-  "points": [],
-  "stack": [
-   "React 19",
-   "Express",
-   "Socket.IO"
-  ],
-  "film": null,
-  "site": null,
-  "site_label": null,
-  "case": null,
-  "slug": "echo",
-  "metric": null,
-  "viz": "echo"
- },
- {
-  "cat": "ai",
-  "tag": "AI product",
-  "title": "Aura",
-  "text": "A mental-wellness platform with mood tracking, journaling, an AI support chat, real-time emotion detection from webcam and voice, and a local support directory.",
-  "points": [],
-  "stack": [
-   "Python",
-   "OpenCV",
-   "LLM",
-   "Real-time"
-  ],
-  "film": null,
-  "site": null,
-  "site_label": null,
-  "case": null,
-  "slug": "aura",
-  "metric": null,
-  "viz": "aura"
- },
- {
-  "cat": "platforms",
-  "tag": "Platform",
-  "title": "GroupXam",
-  "text": "An online learning and exam-prep platform with AI tutoring and a multiplayer whiteboard for group study sessions.",
-  "points": [],
-  "stack": [
-   "React",
-   "Node.js",
-   "Express",
-   "MongoDB"
-  ],
-  "film": null,
-  "site": null,
-  "site_label": null,
-  "case": null,
-  "slug": "groupxam",
-  "metric": null,
-  "viz": "groupxam"
- },
- {
-  "cat": "platforms",
-  "tag": "Platform",
   "title": "Flowstate",
   "text": "A block-editor task manager built on one rule: work flows down the hierarchy and nothing gets lost. Fully self-hosted, with no cloud account and no API keys.",
   "points": [],
@@ -439,29 +416,6 @@
   "slug": "flowstate",
   "metric": null,
   "viz": "flowstate"
- },
- {
-  "cat": "data",
-  "tag": "Forecasting",
-  "title": "CoreCast — Inventory Forecasting",
-  "text": "Time-series models for supply-chain inventory planning, built through repeated rounds of data cleaning, feature engineering and model selection.",
-  "points": [],
-  "stack": [
-   "Python",
-   "Time-series",
-   "Pandas",
-   "Scikit-learn"
-  ],
-  "film": null,
-  "site": null,
-  "site_label": null,
-  "case": null,
-  "slug": "corecast",
-  "metric": [
-   "15%",
-   "lower forecast error than the previous baseline"
-  ],
-  "viz": "corecast"
  },
  {
   "cat": "web",
