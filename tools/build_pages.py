@@ -21,6 +21,8 @@ ROOT = Path(__file__).resolve().parent.parent
 # Publish date of these pages and their films (VideoObject uploadDate, sitemap lastmod).
 FILM_DATE = "2026-11-16"
 SAMPLE = "Walkthrough film · names and numbers are sample data"
+# Films with light (white UI) posters get a dimmed, blue-tinted hero treatment so they sit in the dark layout.
+LIGHT_FILMS = {"almunir", "booking", "flowstate"}
 
 e = html.escape
 
@@ -179,12 +181,14 @@ OWN = ("Who owns the system when it's done?", "You do. You get documentation, wo
 SERVICES = [
     {
         "slug": "ai-voice-agents",
+        "glass": [("2", "languages the agents talk in: Urdu and English"), ("0", "new numbers needed with Call Stream")],
+        "nums": [("20+", "systems shipped, each with a walkthrough film"), ("8", "industry demo films for Call Stream"), ("24/7", "answering, with no office hours")],
         "label": "Service · AI voice agents",
         "title": "AI Voice Agent Developer: Urdu and English Call Agents",
         "description": "AI voice agents that answer your phone in Urdu or English, book appointments into your calendar and call leads back, even on your existing number.",
         "h1": ["AI voice agents", "that answer in Urdu", '<span class="grad">and book the slot.</span>'],
         "lede": "I build voice agents that answer your phone, hold a real conversation in Urdu or English, check your calendar and book the appointment. They can run on your existing mobile number, with no SIP trunk and no new number.",
-        "film": "booking", "tall": False, "note": SAMPLE,
+        "film": "callstream", "tall": True, "note": "Example call for illustration · AI voices",
         "offer": [
             ("Answer every inbound call", "The agent picks up, understands what the caller needs and qualifies them, day or night."),
             ("Book into your calendar", "Live Google Calendar availability checks, a confirmed slot, then confirmation emails and reminders."),
@@ -204,12 +208,14 @@ SERVICES = [
     },
     {
         "slug": "whatsapp-automation",
+        "glass": [("Seconds", "to the first reply after an ad click"), ("2", "reply languages: Roman Urdu and English")],
+        "nums": [("20+", "systems shipped, each with a walkthrough film"), ("5", "agents' WhatsApp numbers on one Bresco dashboard"), ("0", "leads left waiting when the team is busy")],
         "label": "Service · WhatsApp automation",
         "title": "WhatsApp Automation in Pakistan: Bots, Routing, Campaigns",
         "description": "WhatsApp bots that reply to leads in seconds in Roman Urdu or English, route them to the right person and send quotes, built in Lahore.",
         "h1": ["WhatsApp automation", "that replies", '<span class="grad">before the lead goes cold.</span>'],
         "lede": "For most local businesses, leads arrive on WhatsApp. I build the bots, routing and campaigns that reply in seconds, in Roman Urdu or English, and hand the conversation to the right person on your team.",
-        "film": "almunir", "tall": False, "note": SAMPLE,
+        "film": "walead", "tall": False, "note": SAMPLE,
         "offer": [
             ("Instant replies to ad leads", "A lead clicks your Instagram or Facebook ad and gets an answer in seconds, not the next morning."),
             ("Requirements, captured", "A natural conversation collects what the customer needs before a person ever reads it."),
@@ -229,6 +235,8 @@ SERVICES = [
     },
     {
         "slug": "ai-agents-automation",
+        "glass": [("4", "step provider fallback chain in Jennifer"), ("0", "manual CRM updates")],
+        "nums": [("20+", "systems shipped, each with a walkthrough film"), ("4", "step provider fallback chain in Jennifer"), ("100+", "emails sent by one n8n follow-up system")],
         "label": "Service · AI agents & automation",
         "title": "Hire an AI Agent Developer: Custom AI Agents & Automation",
         "description": "Custom AI agents that decide and act on your systems, plus n8n and Make automation with retries and alerts. Built by Agha Muhammad Rayyan Khan.",
@@ -261,9 +269,11 @@ SERVICE_NAMES = {"ai-voice-agents": "AI voice agents", "whatsapp-automation": "W
 ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
 ARROW_SM = ARROW.replace('<svg ', '<svg width="14" height="14" ', 1)
 SOUND = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>'
+PLAY = '<svg class="play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>'
+LENIS = "https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"
 
 
-def head(title: str, description: str, path: str, image: str, schema: list[dict]) -> str:
+def head(title: str, description: str, path: str, image: str, schema: list[dict], frame_left: str) -> str:
     url = f"{SITE}{path}"
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -284,6 +294,7 @@ def head(title: str, description: str, path: str, image: str, schema: list[dict]
 <meta property="og:image" content="{image}" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="theme-color" content="#05070C" />
+<link rel="preload" as="image" href="{image.replace(SITE, '')}" fetchpriority="high" />
 <script type="application/ld+json">
 {json.dumps({"@context": "https://schema.org", "@graph": schema}, indent=1, ensure_ascii=False)}
 </script>
@@ -297,8 +308,9 @@ def head(title: str, description: str, path: str, image: str, schema: list[dict]
 <link rel="stylesheet" href="/assets/site.css" />
 </head>
 <body>
-<div class="field"><div class="orb a"></div><div class="orb b"></div></div>
 <div class="grain" aria-hidden="true"></div>
+<div class="frame bl" aria-hidden="true">{frame_left}</div>
+<div class="frame br" aria-hidden="true"><b id="framePct">00%</b> &nbsp;SCROLLED</div>
 <header class="topbar" id="topbar">
   <div class="container">
     <nav>
@@ -338,13 +350,75 @@ def mobile_menu() -> str:
 </div></nav>"""
 
 
-def film(name: str, tall: bool, note: str, poster: str | None = None) -> str:
-    """Hero film. `name` is the video file, `poster` the still (defaults to the same name)."""
-    return f"""<div class="film{' tall' if tall else ''}">
-        <video src="/films/{name}.mp4" poster="/films/{poster or name}.jpg" muted loop playsinline preload="metadata" aria-label="Walkthrough film"></video>
-        <div class="film-bar"><button type="button" class="film-sound" aria-pressed="false">{SOUND}<span>Play with sound</span></button></div>
-      </div>
-      <p class="film-note" data-hi>{e(note)}</p>"""
+def h1(lines: list[str]) -> str:
+    return "<h1>" + " ".join(f'<span class="ln"><span>{l}</span></span>' for l in lines) + "</h1>"
+
+
+def hero(*, crumbs: str, idx_num: str, label: str, lines: list[str], lede: str, actions: str, chips: str,
+         film_name: str, poster: str, tall: bool, note: str, glass: list[tuple[str, str]], watch_src: str) -> str:
+    """Film full-bleed behind the copy. The poster <img> is the LCP and is visible from the first paint;
+    the background video only loads on desktop after `load` (assets/site.js)."""
+    g = "".join(
+        f'<div class="glass g{i+1}" data-depth="{0.5 + i * 0.35:.2f}"><span class="mono">{"At a glance" if i == 0 else "And"}</span><b>{e(v)}</b><span>{e(l)}</span></div>'
+        for i, (v, l) in enumerate(glass[:2])
+    )
+    phone = (f'<div class="phone" data-depth="0.9"><img src="/films/{poster}.jpg" alt="" width="720" height="1280" />'
+             f'<video data-src="/films/{film_name}.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div>') if tall else ""
+    tall_attr = " data-tall" if tall else ""
+    return f"""
+<section class="xhero{' tall' if tall else ''}{' light' if poster in LIGHT_FILMS else ''}" aria-labelledby="h1">
+  <div class="xhero-bg" data-depth="0.25">
+    <img src="/films/{poster}.jpg" alt="Still from the walkthrough film" fetchpriority="high" width="1280" height="720" />
+    <video data-src="/films/{film_name}.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+  </div>
+  <div class="xhero-shade" aria-hidden="true"></div>
+  <div class="floaters" aria-hidden="true">{g}</div>
+  {phone}
+  <div class="container xhero-in">
+    {crumbs}
+    <div class="idx" data-hi><span class="num">{idx_num}</span><span class="label" style="margin:0">{e(label)}</span></div>
+    <div id="h1">{h1(lines)}</div>
+    <p class="lede" data-hi>{e(lede)}</p>
+    <div class="actions" data-hi>{actions}<button type="button" class="btn btn-ghost" data-watch="{watch_src}" data-poster="/films/{poster}.jpg"{tall_attr}>{PLAY}Watch the film</button></div>
+    <div class="chips" data-hi>{chips}</div>
+    <p class="film-note" data-hi style="margin-top:16px">{e(note)}</p>
+  </div>
+</section>"""
+
+
+def nums_band(label: str, heading: str, facts: list[tuple[str, str]]) -> str:
+    import re
+    cells = []
+    for v, l in facts:
+        m = re.fullmatch(r"(\d+)(\D*)", v)
+        dt = f'<dt data-count="{m.group(1)}" data-suffix="{e(m.group(2))}">{e(v)}</dt>' if m else f'<dt class="word">{e(v)}</dt>'
+        cells.append(f'<div data-rv>{dt}<dd>{e(l)}</dd></div>')
+    return f"""
+<section class="red" aria-labelledby="nums-h">
+  <div class="container">
+    <div class="label" data-rv>{e(label)}</div>
+    <h2 id="nums-h" class="mono" style="font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;color:#ffd5db;margin-bottom:28px" data-rv>{e(heading)}</h2>
+    <dl class="nums">{''.join(cells)}</dl>
+  </div>
+</section>"""
+
+
+def marquee(items: list[str]) -> str:
+    row = "".join(f"<span>{e(x)}</span>" for x in items)
+    return f'<div class="marquee" aria-label="Built with: {e(", ".join(items))}"><div class="marquee-track" aria-hidden="true">{row}{row}{row}{row}</div></div>'
+
+
+def next_teaser(kind: str, href: str, title: str, sub: str, poster: str) -> str:
+    return f"""
+<a class="next" href="{href}" aria-label="{e(kind)}: {e(title)}">
+  <img src="/films/{poster}.jpg" alt="" loading="lazy" width="1280" height="720" />
+  <div class="container">
+    <span class="mono">{e(kind)}</span>
+    <span class="title">{e(title)}</span>
+    <p class="sub">{e(sub)}</p>
+    <span class="go"><i>{ARROW}</i>Open it</span>
+  </div>
+</a>"""
 
 
 def cta(heading: str) -> str:
@@ -378,19 +452,22 @@ def foot() -> str:
     <div class="foot-base"><span>© 2026 {NAME}</span><span>AI SYSTEMS ENGINEER · LAHORE, PK · REMOTE</span></div>
   </div>
 </footer>
+<dialog class="fmodal" id="filmModal" aria-label="Walkthrough film"><button type="button" class="x" aria-label="Close film">×</button><video controls playsinline></video></dialog>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="{LENIS}" defer></script>
 <script src="/assets/site.js" defer></script>
 </body>
 </html>
 """
 
 
-def card(slug: str) -> str:
+def pcard(slug: str, i: int) -> str:
     c = CASE_BY[slug]
-    return f"""<a class="rcard" href="/work/{slug}" data-rv>
+    return f"""<a class="pcard" href="/work/{slug}">
+        <span class="num">CASE {case_no(slug)}</span>
         <img src="/films/{c['film']}.jpg" alt="Still from the {e(c['name'])} walkthrough film" loading="lazy" width="1280" height="720" />
-        <div class="rc-body"><div class="rc-kind">{e(c['kind'])}</div><h3>{e(c['name'])}</h3><p>{e(c['description'])}</p><span class="more">Read the case study {ARROW_SM}</span></div>
+        <div class="pc-body"><div class="pc-kind">{e(c['kind'])}</div><h3>{e(c['name'])}</h3><p>{e(c['description'])}</p><span class="more wipe">Read the case study {ARROW_SM}</span></div>
       </a>"""
 
 
@@ -406,132 +483,127 @@ def video_schema(name: str, description: str, film_name: str) -> dict:
     return {"@type": "VideoObject", "name": f"{name} walkthrough film", "description": description, "thumbnailUrl": f"{SITE}/films/{film_name}.jpg", "contentUrl": f"{SITE}/films/{film_name}.mp4", "uploadDate": FILM_DATE}
 
 
-def h1(lines: list[str]) -> str:
-    return "<h1>" + " ".join(f'<span class="ln"><span>{l}</span></span>' for l in lines) + "</h1>"
+def case_no(slug: str) -> str:
+    return f"{[c['slug'] for c in CASES].index(slug) + 1:03d}"
 
 
 def case_page(c: dict) -> str:
     path = f"/work/{c['slug']}"
     svc = c["service"]
+    n = case_no(c["slug"])
+    total = f"{len(CASES):03d}"
+    nxt = CASES[(CASES.index(c) + 1) % len(CASES)]
     schema = [
         {"@type": "CreativeWork", "@id": f"{SITE}{path}#work", "name": c["name"], "headline": c["title"], "description": c["description"], "url": f"{SITE}{path}", "author": person(), "image": f"{SITE}/films/{c['film']}.jpg", "video": video_schema(c["name"], c["description"], c["film"])},
         crumbs_schema([("Home", "/"), ("Work", "/#work"), (c["name"], path)]),
     ]
-    steps = "".join(f'<li class="step" data-n="{i+1:02d}" data-rv><h3>{e(t)}</h3><p>{e(p)}</p></li>' for i, (t, p) in enumerate(c["steps"]))
-    decisions = "".join(f'<li data-rv><div><h3>{e(t)}</h3><p>{e(p)}</p></div></li>' for t, p in c["decisions"])
-    def fact(v: str, label: str) -> str:
-        num = v.isdigit()
-        return f'<div><dt{f" data-count={chr(34)}{v}{chr(34)}" if num else ""}>{e(v)}</dt><dd>{e(label)}</dd></div>'
-    facts = "".join(fact(v, l) for v, l in c["facts"])
+    crumbs = f'<nav class="crumbs" aria-label="Breadcrumb" data-hi><a href="/">Home</a><span aria-hidden="true">/</span><a href="/#work">Work</a><span aria-hidden="true">/</span><span>{e(c["name"])}</span></nav>'
+    actions = f'<a href="mailto:{EMAIL}?subject={e(c["name"])}%20-%20something%20like%20this" class="btn btn-primary">Build something like this{ARROW}</a>'
     chips = "".join(f'<span class="chip">{e(x)}</span>' for x in c["chips"])
-    limits = f'<p class="limits" data-rv><b>Honest limits</b>{e(c["limits"])}</p>' if c["limits"] else ""
-    related = "".join(card(s) for s in c["related"])
-    return head(c["title"], c["description"], path, f"{SITE}/films/{c['film']}.jpg", schema) + f"""
-<section class="phero{' tall' if c['tall'] else ''}">
-  <div class="container phero-grid">
-    <div>
-      <nav class="crumbs" aria-label="Breadcrumb" data-hi><a href="/">Home</a><span aria-hidden="true">/</span><a href="/#work">Work</a><span aria-hidden="true">/</span><span>{e(c['name'])}</span></nav>
-      <div class="label" data-hi>{e(c['kind'])}</div>
-      {h1(c['h1'])}
-      <p class="lede" data-hi>{e(c['lede'])}</p>
-      <div class="actions" data-hi><a href="mailto:{EMAIL}?subject={e(c['name'])}%20-%20something%20like%20this" class="btn btn-primary">Build something like this{ARROW}</a><a href="/{svc}" class="btn btn-ghost">{e(SERVICE_NAMES[svc])}</a></div>
-      <div class="chips" data-hi>{chips}</div>
-    </div>
-    <div>
-      {film(c.get('hero_film', c['film']), c['tall'], c['note'], poster=c['film'])}
-    </div>
-  </div>
-</section>
+    steps = "".join(f'<li class="step"><span class="n">{i+1:02d}</span><h3>{e(t)}</h3><p>{e(p)}</p></li>' for i, (t, p) in enumerate(c["steps"]))
+    decisions = "".join(f'<li data-rv><span class="n">{i+1:02d}</span><h3>{e(t)}</h3><p>{e(p)}</p></li>' for i, (t, p) in enumerate(c["decisions"]))
+    limits = f'<div class="limits" data-rv><b>Honest limits</b><p>{e(c["limits"])}</p></div>' if c["limits"] else ""
+    hero_film = c.get("hero_film", c["film"])
+    tall = c["tall"]
+    return head(c["title"], c["description"], path, f"{SITE}/films/{c['film']}.jpg", schema,
+                f'CASE <b>{n}</b> / {total} &nbsp;·&nbsp; {e(c["name"])}') + hero(
+        crumbs=crumbs, idx_num=n, label=f"Case {n} / {total} · {c['kind']}", lines=c["h1"], lede=c["lede"],
+        actions=actions, chips=chips, film_name=hero_film, poster=c["film"], tall=tall, note=c["note"],
+        glass=c["facts"], watch_src=f"/films/{c['film']}.mp4") + f"""
 
-<section class="band" aria-labelledby="problem-h">
-  <div class="container split">
-    <div data-rv><div class="label" id="problem-h">The problem</div><p class="big">{c['problem']}</p></div>
-    <p class="lede" data-rv>{e(c['problem_p'])}</p>
+<section class="paper" aria-labelledby="problem-h">
+  <div class="container">
+    <div class="label" id="problem-h" data-rv>The problem</div>
+    <p class="quote" data-rv>{c['problem']}</p>
+    <div class="after"><p class="stamp" data-rv>Case {n} · {e(c['name'])}</p><p class="lede" data-rv>{e(c['problem_p'])}</p></div>
   </div>
 </section>
 
 <section aria-labelledby="how-h">
-  <div class="container split">
-    <div>
-      <div class="sec-head" data-rv><div class="label">How it works</div><h2 id="how-h">Step by step</h2></div>
-      <ol class="steps"><span class="rail" aria-hidden="true"></span>{steps}</ol>
+  <div class="container">
+    <div class="label" data-rv>How it works</div>
+    <h2 id="how-h" data-rv style="margin-bottom:clamp(36px,5vw,64px);max-width:14ch">Step by step, on real data.</h2>
+    <div class="how">
+      <div class="how-film{' tall' if tall else ''}">
+        <div class="film"><video data-src="/films/{hero_film}.mp4" poster="/films/{c['film']}.jpg" muted loop playsinline preload="none" aria-label="Walkthrough film of {e(c['name'])}"></video></div>
+        <p class="film-note">{e(c['note'])}</p>
+        <div class="meter" aria-hidden="true"><span>01 / {len(c['steps']):02d}</span><i><b></b></i></div>
+      </div>
+      <ol class="steps">{steps}</ol>
     </div>
-    <aside class="facts" data-rv><h3>At a glance</h3><dl>{facts}</dl></aside>
   </div>
 </section>
+""" + nums_band("At a glance", f"{c['name']} in numbers", c["facts"]) + f"""
 
-<section class="band" aria-labelledby="dec-h">
+<section aria-labelledby="dec-h">
   <div class="container">
-    <div class="sec-head" data-rv><div class="label">Under the hood</div><h2 id="dec-h">The decisions that mattered</h2></div>
+    <div class="label" data-rv>Under the hood</div>
+    <h2 id="dec-h" data-rv style="margin-bottom:clamp(32px,4vw,52px)">The decisions that mattered</h2>
     <ul class="decisions">{decisions}</ul>
     {limits}
+    <p class="lede" data-rv style="margin-top:36px">This is what I build as a service: <a class="wipe" href="/{svc}"><strong>{e(SERVICE_NAMES[svc])}</strong></a>.</p>
   </div>
 </section>
-
-<section aria-labelledby="rel-h">
-  <div class="container">
-    <div class="sec-head" data-rv><div class="label">More work</div><h2 id="rel-h">Related builds</h2><p class="lede">Or see what I build as a service: <a href="/{svc}"><strong>{e(SERVICE_NAMES[svc])}</strong></a>.</p></div>
-    <div class="related">{related}</div>
-  </div>
-</section>
-""" + cta("Want one of these for your business?") + foot()
+{marquee(c['chips'])}
+""" + next_teaser(f"Next case · {case_no(nxt['slug'])} / {total}", f"/work/{nxt['slug']}", nxt["name"], nxt["description"], nxt["film"]) + cta("Want one of these for your business?") + foot()
 
 
 def service_page(s: dict) -> str:
     path = f"/{s['slug']}"
+    name = SERVICE_NAMES[s["slug"]]
+    order = [x["slug"] for x in SERVICES]
+    nxt = SERVICES[(order.index(s["slug"]) + 1) % len(SERVICES)]
     schema = [
-        {"@type": "Service", "@id": f"{SITE}{path}#service", "name": SERVICE_NAMES[s["slug"]], "description": s["description"], "url": f"{SITE}{path}", "provider": person(), "areaServed": ["Pakistan", "Worldwide"]},
+        {"@type": "Service", "@id": f"{SITE}{path}#service", "name": name, "description": s["description"], "url": f"{SITE}{path}", "provider": person(), "areaServed": ["Pakistan", "Worldwide"]},
         {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in s["faq"]]},
-        crumbs_schema([("Home", "/"), (SERVICE_NAMES[s["slug"]], path)]),
+        crumbs_schema([("Home", "/"), (name, path)]),
     ]
-    offer = "".join(f'<li data-rv><h3>{e(t)}</h3><p>{e(p)}</p></li>' for t, p in s["offer"])
-    proof = "".join(card(x) for x in s["proof"])
+    crumbs = f'<nav class="crumbs" aria-label="Breadcrumb" data-hi><a href="/">Home</a><span aria-hidden="true">/</span><span>{e(name)}</span></nav>'
+    actions = f'<a href="mailto:{EMAIL}?subject={e(name)}" class="btn btn-primary">Book a free audit{ARROW}</a>'
+    offer = "".join(f'<li data-rv><span class="n">{i+1:02d}</span><h3>{e(t)}</h3><p>{e(p)}</p></li>' for i, (t, p) in enumerate(s["offer"]))
+    proof = "".join(pcard(x, i) for i, x in enumerate(s["proof"]))
     proc = "".join(f'<li data-rv><b>{n}</b><h3>{e(t)}</h3><p>{e(p)}</p></li>' for n, t, p in PROCESS)
     faq = "".join(f'<details data-rv><summary><h3>{e(q)}</h3><i aria-hidden="true"></i></summary><div class="a"><p>{e(a)}</p></div></details>' for q, a in s["faq"])
-    return head(s["title"], s["description"], path, f"{SITE}/films/{s['film']}.jpg", schema) + f"""
-<section class="phero">
-  <div class="container phero-grid">
-    <div>
-      <nav class="crumbs" aria-label="Breadcrumb" data-hi><a href="/">Home</a><span aria-hidden="true">/</span><span>{e(SERVICE_NAMES[s['slug']])}</span></nav>
-      <div class="label" data-hi>{e(s['label'])}</div>
-      {h1(s['h1'])}
-      <p class="lede" data-hi>{e(s['lede'])}</p>
-      <div class="actions" data-hi><a href="mailto:{EMAIL}?subject={e(SERVICE_NAMES[s['slug']])}" class="btn btn-primary">Book a free audit{ARROW}</a><a href="#proof" class="btn btn-ghost">See the work</a></div>
-    </div>
-    <div>
-      {film(s['film'], s['tall'], s['note'])}
-    </div>
-  </div>
-</section>
+    num = f"{order.index(s['slug']) + 1:02d}"
+    return head(s["title"], s["description"], path, f"{SITE}/films/{s['film']}.jpg", schema,
+                f'SERVICE <b>{num}</b> / {len(SERVICES):02d} &nbsp;·&nbsp; {e(name)}') + hero(
+        crumbs=crumbs, idx_num=num, label=s["label"], lines=s["h1"], lede=s["lede"], actions=actions, chips="",
+        film_name=s["film"], poster=s["film"], tall=s["tall"], note=s["note"], glass=s["glass"],
+        watch_src=f"/films/{s['film']}.mp4") + f"""
 
-<section class="band" aria-labelledby="offer-h">
+<section class="paper" aria-labelledby="offer-h">
   <div class="container">
-    <div class="sec-head" data-rv><div class="label">What I build</div><h2 id="offer-h">What you get</h2></div>
+    <div class="label" data-rv>What I build</div>
+    <h2 id="offer-h" data-rv style="max-width:16ch">What you get</h2>
     <ul class="offer">{offer}</ul>
   </div>
 </section>
 
-<section id="proof" aria-labelledby="proof-h">
-  <div class="container">
-    <div class="sec-head" data-rv><div class="label">Proof</div><h2 id="proof-h">Built and running</h2><p class="lede">Real systems, each with a walkthrough film of it working.</p></div>
-    <div class="related">{proof}</div>
+<section class="proof" aria-labelledby="proof-h">
+  <div class="container proof-head">
+    <div class="label" data-rv>Proof</div>
+    <h2 id="proof-h" data-rv>Built and running.</h2>
+    <p class="lede" data-rv>Real systems, each with a walkthrough film of it working.</p>
   </div>
+  <div class="track-wrap"><div class="track">{proof}</div></div>
 </section>
+""" + nums_band("Track record", f"{name} by the numbers", s["nums"]) + f"""
 
-<section class="band" aria-labelledby="proc-h">
+<section aria-labelledby="proc-h">
   <div class="container">
-    <div class="sec-head" data-rv><div class="label">How I work</div><h2 id="proc-h">Simple process. Clear handoff.</h2></div>
+    <div class="label" data-rv>How I work</div>
+    <h2 id="proc-h" data-rv style="margin-bottom:clamp(32px,4vw,52px)">Simple process. Clear handoff.</h2>
     <ol class="proc">{proc}</ol>
   </div>
 </section>
 
-<section aria-labelledby="faq-h">
-  <div class="container">
-    <div class="sec-head" data-rv><div class="label">Questions</div><h2 id="faq-h">What clients ask first</h2></div>
+<section aria-labelledby="faq-h" style="padding-top:0">
+  <div class="container faq-grid">
+    <div><div class="label" data-rv>Questions</div><h2 id="faq-h" data-rv>What clients ask first</h2></div>
     <div class="faq">{faq}</div>
   </div>
 </section>
-""" + cta("Got a process someone repeats every day?") + foot()
+""" + next_teaser("Next service", f"/{nxt['slug']}", SERVICE_NAMES[nxt["slug"]], nxt["description"], nxt["film"]) + cta("Got a process someone repeats every day?") + foot()
 
 
 def main() -> None:

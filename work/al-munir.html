@@ -17,6 +17,7 @@
 <meta property="og:image" content="https://rayyankhan.dev/films/almunir.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="theme-color" content="#05070C" />
+<link rel="preload" as="image" href="/films/almunir.jpg" fetchpriority="high" />
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -80,8 +81,9 @@
 <link rel="stylesheet" href="/assets/site.css" />
 </head>
 <body>
-<div class="field"><div class="orb a"></div><div class="orb b"></div></div>
 <div class="grain" aria-hidden="true"></div>
+<div class="frame bl" aria-hidden="true">CASE <b>003</b> / 005 &nbsp;·&nbsp; Al Munir UPVC</div>
+<div class="frame br" aria-hidden="true"><b id="framePct">00%</b> &nbsp;SCROLLED</div>
 <header class="topbar" id="topbar">
   <div class="container">
     <nav>
@@ -105,64 +107,76 @@
 </div></nav>
 <main>
 
-<section class="phero">
-  <div class="container phero-grid">
-    <div>
-      <nav class="crumbs" aria-label="Breadcrumb" data-hi><a href="/">Home</a><span aria-hidden="true">/</span><a href="/#work">Work</a><span aria-hidden="true">/</span><span>Al Munir UPVC</span></nav>
-      <div class="label" data-hi>Client build · manufacturing</div>
-      <h1><span class="ln"><span>A sales pipeline</span></span> <span class="ln"><span>that stays open</span></span> <span class="ln"><span><span class="grad">after the lights go off.</span></span></span></h1>
-      <p class="lede" data-hi>Al Munir makes UPVC windows in Lahore. Their office closes at 6pm, their customers don&#x27;t. This pipeline finds buyers in Facebook groups, calls them with a voice agent and sends a priced PDF quote on WhatsApp. Nobody touches a calculator.</p>
-      <div class="actions" data-hi><a href="mailto:agharayyan@gmail.com?subject=Al Munir UPVC%20-%20something%20like%20this" class="btn btn-primary">Build something like this<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a href="/whatsapp-automation" class="btn btn-ghost">WhatsApp automation</a></div>
-      <div class="chips" data-hi><span class="chip">n8n</span><span class="chip">Apify</span><span class="chip">Retell AI</span><span class="chip">UltraMsg</span><span class="chip">WhatsApp Cloud API</span><span class="chip">PDF.co</span><span class="chip">Google Sheets</span><span class="chip">Claude</span><span class="chip">Vercel</span></div>
-    </div>
-    <div>
-      <div class="film">
-        <video src="/films/almunir.mp4" poster="/films/almunir.jpg" muted loop playsinline preload="metadata" aria-label="Walkthrough film"></video>
-        <div class="film-bar"><button type="button" class="film-sound" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg><span>Play with sound</span></button></div>
-      </div>
-      <p class="film-note" data-hi>Walkthrough film · names and numbers are sample data</p>
-    </div>
+<section class="xhero light" aria-labelledby="h1">
+  <div class="xhero-bg" data-depth="0.25">
+    <img src="/films/almunir.jpg" alt="Still from the walkthrough film" fetchpriority="high" width="1280" height="720" />
+    <video data-src="/films/almunir.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+  </div>
+  <div class="xhero-shade" aria-hidden="true"></div>
+  <div class="floaters" aria-hidden="true"><div class="glass g1" data-depth="0.50"><span class="mono">At a glance</span><b>2</b><span>page branded PDF quote, priced automatically</span></div><div class="glass g2" data-depth="0.85"><span class="mono">And</span><b>0</b><span>calculators involved</span></div></div>
+  
+  <div class="container xhero-in">
+    <nav class="crumbs" aria-label="Breadcrumb" data-hi><a href="/">Home</a><span aria-hidden="true">/</span><a href="/#work">Work</a><span aria-hidden="true">/</span><span>Al Munir UPVC</span></nav>
+    <div class="idx" data-hi><span class="num">003</span><span class="label" style="margin:0">Case 003 / 005 · Client build · manufacturing</span></div>
+    <div id="h1"><h1><span class="ln"><span>A sales pipeline</span></span> <span class="ln"><span>that stays open</span></span> <span class="ln"><span><span class="grad">after the lights go off.</span></span></span></h1></div>
+    <p class="lede" data-hi>Al Munir makes UPVC windows in Lahore. Their office closes at 6pm, their customers don&#x27;t. This pipeline finds buyers in Facebook groups, calls them with a voice agent and sends a priced PDF quote on WhatsApp. Nobody touches a calculator.</p>
+    <div class="actions" data-hi><a href="mailto:agharayyan@gmail.com?subject=Al Munir UPVC%20-%20something%20like%20this" class="btn btn-primary">Build something like this<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><button type="button" class="btn btn-ghost" data-watch="/films/almunir.mp4" data-poster="/films/almunir.jpg"><svg class="play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch the film</button></div>
+    <div class="chips" data-hi><span class="chip">n8n</span><span class="chip">Apify</span><span class="chip">Retell AI</span><span class="chip">UltraMsg</span><span class="chip">WhatsApp Cloud API</span><span class="chip">PDF.co</span><span class="chip">Google Sheets</span><span class="chip">Claude</span><span class="chip">Vercel</span></div>
+    <p class="film-note" data-hi style="margin-top:16px">Walkthrough film · names and numbers are sample data</p>
   </div>
 </section>
 
-<section class="band" aria-labelledby="problem-h">
-  <div class="container split">
-    <div data-rv><div class="label" id="problem-h">The problem</div><p class="big">Someone comments <em>“price?”</em> on a Facebook post at 9pm. The team sees it at 9am. By then that person has bought windows from someone else.</p></div>
-    <p class="lede" data-rv>That gap was the whole problem. Not marketing. Not pricing. Office hours.</p>
+<section class="paper" aria-labelledby="problem-h">
+  <div class="container">
+    <div class="label" id="problem-h" data-rv>The problem</div>
+    <p class="quote" data-rv>Someone comments <em>“price?”</em> on a Facebook post at 9pm. The team sees it at 9am. By then that person has bought windows from someone else.</p>
+    <div class="after"><p class="stamp" data-rv>Case 003 · Al Munir UPVC</p><p class="lede" data-rv>That gap was the whole problem. Not marketing. Not pricing. Office hours.</p></div>
   </div>
 </section>
 
 <section aria-labelledby="how-h">
-  <div class="container split">
-    <div>
-      <div class="sec-head" data-rv><div class="label">How it works</div><h2 id="how-h">Step by step</h2></div>
-      <ol class="steps"><span class="rail" aria-hidden="true"></span><li class="step" data-n="01" data-rv><h3>Find buying intent</h3><p>Apify scans Facebook groups and Instagram hashtags for people asking about windows. Real leads land in a Google Sheet within minutes.</p></li><li class="step" data-n="02" data-rv><h3>First message, straight away</h3><p>UltraMsg sends the first WhatsApp message automatically.</p></li><li class="step" data-n="03" data-rv><h3>A voice agent calls</h3><p>A Retell voice agent calls the lead, asks what they need and logs the outcome.</p></li><li class="step" data-n="04" data-rv><h3>A priced quote on WhatsApp</h3><p>If the call goes well, a quote is priced and sent as a two-page PDF built from the company&#x27;s own branded template.</p></li><li class="step" data-n="05" data-rv><h3>Visits book themselves</h3><p>A measurement visit goes into Google Calendar and the team gets an email, so it never gets forgotten.</p></li><li class="step" data-n="06" data-rv><h3>DMs answered in Roman Urdu</h3><p>On Instagram, a Claude sales bot collects sizes and location in Roman Urdu, and knows not to quote prices.</p></li></ol>
+  <div class="container">
+    <div class="label" data-rv>How it works</div>
+    <h2 id="how-h" data-rv style="margin-bottom:clamp(36px,5vw,64px);max-width:14ch">Step by step, on real data.</h2>
+    <div class="how">
+      <div class="how-film">
+        <div class="film"><video data-src="/films/almunir.mp4" poster="/films/almunir.jpg" muted loop playsinline preload="none" aria-label="Walkthrough film of Al Munir UPVC"></video></div>
+        <p class="film-note">Walkthrough film · names and numbers are sample data</p>
+        <div class="meter" aria-hidden="true"><span>01 / 06</span><i><b></b></i></div>
+      </div>
+      <ol class="steps"><li class="step"><span class="n">01</span><h3>Find buying intent</h3><p>Apify scans Facebook groups and Instagram hashtags for people asking about windows. Real leads land in a Google Sheet within minutes.</p></li><li class="step"><span class="n">02</span><h3>First message, straight away</h3><p>UltraMsg sends the first WhatsApp message automatically.</p></li><li class="step"><span class="n">03</span><h3>A voice agent calls</h3><p>A Retell voice agent calls the lead, asks what they need and logs the outcome.</p></li><li class="step"><span class="n">04</span><h3>A priced quote on WhatsApp</h3><p>If the call goes well, a quote is priced and sent as a two-page PDF built from the company&#x27;s own branded template.</p></li><li class="step"><span class="n">05</span><h3>Visits book themselves</h3><p>A measurement visit goes into Google Calendar and the team gets an email, so it never gets forgotten.</p></li><li class="step"><span class="n">06</span><h3>DMs answered in Roman Urdu</h3><p>On Instagram, a Claude sales bot collects sizes and location in Roman Urdu, and knows not to quote prices.</p></li></ol>
     </div>
-    <aside class="facts" data-rv><h3>At a glance</h3><dl><div><dt data-count="2">2</dt><dd>page branded PDF quote, priced automatically</dd></div><div><dt data-count="0">0</dt><dd>calculators involved</dd></div><div><dt>After hours</dt><dd>Instagram DMs answered by the sales bot, even at midnight</dd></div></dl></aside>
   </div>
 </section>
 
-<section class="band" aria-labelledby="dec-h">
+<section class="red" aria-labelledby="nums-h">
   <div class="container">
-    <div class="sec-head" data-rv><div class="label">Under the hood</div><h2 id="dec-h">The decisions that mattered</h2></div>
-    <ul class="decisions"><li data-rv><div><h3>A person takes over when asked</h3><p>The moment a customer asks for a human, the conversation hands over to the team.</p></div></li><li data-rv><div><h3>Their quote, not a generic one</h3><p>Quotes render from Al Munir&#x27;s own branded template as a two-page PDF, so a midnight quote looks like one from the office.</p></div></li><li data-rv><div><h3>Scheduled jobs plus webhooks</h3><p>Schedulers run the scraping and calling on-site; anything inbound hits serverless webhooks on Vercel.</p></div></li></ul>
+    <div class="label" data-rv>At a glance</div>
+    <h2 id="nums-h" class="mono" style="font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;color:#ffd5db;margin-bottom:28px" data-rv>Al Munir UPVC in numbers</h2>
+    <dl class="nums"><div data-rv><dt data-count="2" data-suffix="">2</dt><dd>page branded PDF quote, priced automatically</dd></div><div data-rv><dt data-count="0" data-suffix="">0</dt><dd>calculators involved</dd></div><div data-rv><dt class="word">After hours</dt><dd>Instagram DMs answered by the sales bot, even at midnight</dd></div></dl>
+  </div>
+</section>
+
+<section aria-labelledby="dec-h">
+  <div class="container">
+    <div class="label" data-rv>Under the hood</div>
+    <h2 id="dec-h" data-rv style="margin-bottom:clamp(32px,4vw,52px)">The decisions that mattered</h2>
+    <ul class="decisions"><li data-rv><span class="n">01</span><h3>A person takes over when asked</h3><p>The moment a customer asks for a human, the conversation hands over to the team.</p></li><li data-rv><span class="n">02</span><h3>Their quote, not a generic one</h3><p>Quotes render from Al Munir&#x27;s own branded template as a two-page PDF, so a midnight quote looks like one from the office.</p></li><li data-rv><span class="n">03</span><h3>Scheduled jobs plus webhooks</h3><p>Schedulers run the scraping and calling on-site; anything inbound hits serverless webhooks on Vercel.</p></li></ul>
     
+    <p class="lede" data-rv style="margin-top:36px">This is what I build as a service: <a class="wipe" href="/whatsapp-automation"><strong>WhatsApp automation</strong></a>.</p>
   </div>
 </section>
+<div class="marquee" aria-label="Built with: n8n, Apify, Retell AI, UltraMsg, WhatsApp Cloud API, PDF.co, Google Sheets, Claude, Vercel"><div class="marquee-track" aria-hidden="true"><span>n8n</span><span>Apify</span><span>Retell AI</span><span>UltraMsg</span><span>WhatsApp Cloud API</span><span>PDF.co</span><span>Google Sheets</span><span>Claude</span><span>Vercel</span><span>n8n</span><span>Apify</span><span>Retell AI</span><span>UltraMsg</span><span>WhatsApp Cloud API</span><span>PDF.co</span><span>Google Sheets</span><span>Claude</span><span>Vercel</span><span>n8n</span><span>Apify</span><span>Retell AI</span><span>UltraMsg</span><span>WhatsApp Cloud API</span><span>PDF.co</span><span>Google Sheets</span><span>Claude</span><span>Vercel</span><span>n8n</span><span>Apify</span><span>Retell AI</span><span>UltraMsg</span><span>WhatsApp Cloud API</span><span>PDF.co</span><span>Google Sheets</span><span>Claude</span><span>Vercel</span></div></div>
 
-<section aria-labelledby="rel-h">
+<a class="next" href="/work/bresco" aria-label="Next case · 004 / 005: Bresco Properties">
+  <img src="/films/bresco.jpg" alt="" loading="lazy" width="1280" height="720" />
   <div class="container">
-    <div class="sec-head" data-rv><div class="label">More work</div><h2 id="rel-h">Related builds</h2><p class="lede">Or see what I build as a service: <a href="/whatsapp-automation"><strong>WhatsApp automation</strong></a>.</p></div>
-    <div class="related"><a class="rcard" href="/work/call-stream" data-rv>
-        <img src="/films/callstream.jpg" alt="Still from the Call Stream walkthrough film" loading="lazy" width="1280" height="720" />
-        <div class="rc-body"><div class="rc-kind">Voice AI · built with Shahwaiz</div><h3>Call Stream</h3><p>An Android phone and a normal Pakistani SIM become an AI call agent that answers in Urdu. No SIP trunk, no PTA paperwork, no new number.</p><span class="more">Read the case study <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </a><a class="rcard" href="/work/bresco" data-rv>
-        <img src="/films/bresco.jpg" alt="Still from the Bresco Properties walkthrough film" loading="lazy" width="1280" height="720" />
-        <div class="rc-body"><div class="rc-kind">Client build · real estate</div><h3>Bresco Properties</h3><p>A Lahore real estate agency&#x27;s pipeline: AI-drafted posts, five agents&#x27; WhatsApp numbers on one dashboard, AI replies in Roman Urdu and Urdu calls.</p><span class="more">Read the case study <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </a></div>
+    <span class="mono">Next case · 004 / 005</span>
+    <span class="title">Bresco Properties</span>
+    <p class="sub">A Lahore real estate agency&#x27;s pipeline: AI-drafted posts, five agents&#x27; WhatsApp numbers on one dashboard, AI replies in Roman Urdu and Urdu calls.</p>
+    <span class="go"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i>Open it</span>
   </div>
-</section>
-<section class="cta" aria-labelledby="cta-h">
+</a><section class="cta" aria-labelledby="cta-h">
   <div class="container cta-grid">
     <div data-rv>
       <div class="label">Work with me</div>
@@ -186,8 +200,10 @@
     <div class="foot-base"><span>© 2026 Agha Muhammad Rayyan Khan</span><span>AI SYSTEMS ENGINEER · LAHORE, PK · REMOTE</span></div>
   </div>
 </footer>
+<dialog class="fmodal" id="filmModal" aria-label="Walkthrough film"><button type="button" class="x" aria-label="Close film">×</button><video controls playsinline></video></dialog>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
 <script src="/assets/site.js" defer></script>
 </body>
 </html>

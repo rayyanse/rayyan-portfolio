@@ -17,6 +17,7 @@
 <meta property="og:image" content="https://rayyankhan.dev/films/callstream.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="theme-color" content="#05070C" />
+<link rel="preload" as="image" href="/films/callstream.jpg" fetchpriority="high" />
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -80,8 +81,9 @@
 <link rel="stylesheet" href="/assets/site.css" />
 </head>
 <body>
-<div class="field"><div class="orb a"></div><div class="orb b"></div></div>
 <div class="grain" aria-hidden="true"></div>
+<div class="frame bl" aria-hidden="true">CASE <b>001</b> / 005 &nbsp;·&nbsp; Call Stream</div>
+<div class="frame br" aria-hidden="true"><b id="framePct">00%</b> &nbsp;SCROLLED</div>
 <header class="topbar" id="topbar">
   <div class="container">
     <nav>
@@ -105,64 +107,76 @@
 </div></nav>
 <main>
 
-<section class="phero tall">
-  <div class="container phero-grid">
-    <div>
-      <nav class="crumbs" aria-label="Breadcrumb" data-hi><a href="/">Home</a><span aria-hidden="true">/</span><a href="/#work">Work</a><span aria-hidden="true">/</span><span>Call Stream</span></nav>
-      <div class="label" data-hi>Voice AI · built with Shahwaiz</div>
-      <h1><span class="ln"><span>An Urdu AI agent</span></span> <span class="ln"><span>on the number</span></span> <span class="ln"><span><span class="grad">you already have.</span></span></span></h1>
-      <p class="lede" data-hi>Call Stream turns an Android phone and a normal Pakistani SIM into an AI call agent that answers in Urdu. No SIP trunk, no PTA paperwork, no new number on your shop board. A property dealer runs it on his own line today. Built together with Shahwaiz.</p>
-      <div class="actions" data-hi><a href="mailto:agharayyan@gmail.com?subject=Call Stream%20-%20something%20like%20this" class="btn btn-primary">Build something like this<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a href="/ai-voice-agents" class="btn btn-ghost">AI voice agents</a></div>
-      <div class="chips" data-hi><span class="chip">Android + Pakistani SIM</span><span class="chip">Asterisk</span><span class="chip">SIP over TLS</span><span class="chip">Urdu voice AI</span></div>
-    </div>
-    <div>
-      <div class="film tall">
-        <video src="/films/callstream.mp4" poster="/films/callstream.jpg" muted loop playsinline preload="metadata" aria-label="Walkthrough film"></video>
-        <div class="film-bar"><button type="button" class="film-sound" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg><span>Play with sound</span></button></div>
-      </div>
-      <p class="film-note" data-hi>Example call for illustration · AI voices</p>
-    </div>
+<section class="xhero tall" aria-labelledby="h1">
+  <div class="xhero-bg" data-depth="0.25">
+    <img src="/films/callstream.jpg" alt="Still from the walkthrough film" fetchpriority="high" width="1280" height="720" />
+    <video data-src="/films/callstream.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+  </div>
+  <div class="xhero-shade" aria-hidden="true"></div>
+  <div class="floaters" aria-hidden="true"><div class="glass g1" data-depth="0.50"><span class="mono">At a glance</span><b>0</b><span>new numbers, trunks or carrier deals</span></div><div class="glass g2" data-depth="0.85"><span class="mono">And</span><b>8</b><span>industry demo films</span></div></div>
+  <div class="phone" data-depth="0.9"><img src="/films/callstream.jpg" alt="" width="720" height="1280" /><video data-src="/films/callstream.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div>
+  <div class="container xhero-in">
+    <nav class="crumbs" aria-label="Breadcrumb" data-hi><a href="/">Home</a><span aria-hidden="true">/</span><a href="/#work">Work</a><span aria-hidden="true">/</span><span>Call Stream</span></nav>
+    <div class="idx" data-hi><span class="num">001</span><span class="label" style="margin:0">Case 001 / 005 · Voice AI · built with Shahwaiz</span></div>
+    <div id="h1"><h1><span class="ln"><span>An Urdu AI agent</span></span> <span class="ln"><span>on the number</span></span> <span class="ln"><span><span class="grad">you already have.</span></span></span></h1></div>
+    <p class="lede" data-hi>Call Stream turns an Android phone and a normal Pakistani SIM into an AI call agent that answers in Urdu. No SIP trunk, no PTA paperwork, no new number on your shop board. A property dealer runs it on his own line today. Built together with Shahwaiz.</p>
+    <div class="actions" data-hi><a href="mailto:agharayyan@gmail.com?subject=Call Stream%20-%20something%20like%20this" class="btn btn-primary">Build something like this<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><button type="button" class="btn btn-ghost" data-watch="/films/callstream.mp4" data-poster="/films/callstream.jpg" data-tall><svg class="play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch the film</button></div>
+    <div class="chips" data-hi><span class="chip">Android + Pakistani SIM</span><span class="chip">Asterisk</span><span class="chip">SIP over TLS</span><span class="chip">Urdu voice AI</span></div>
+    <p class="film-note" data-hi style="margin-top:16px">Example call for illustration · AI voices</p>
   </div>
 </section>
 
-<section class="band" aria-labelledby="problem-h">
-  <div class="container split">
-    <div data-rv><div class="label" id="problem-h">The problem</div><p class="big">Every AI voice vendor in Pakistan opens with the same sentence: <em>“first, get a SIP trunk.”</em></p></div>
-    <p class="lede" data-rv>That means PTA paperwork, weeks of procurement and a brand new number nobody has ever called. For a business whose only line is printed on its shop board, that&#x27;s a dead end.</p>
+<section class="paper" aria-labelledby="problem-h">
+  <div class="container">
+    <div class="label" id="problem-h" data-rv>The problem</div>
+    <p class="quote" data-rv>Every AI voice vendor in Pakistan opens with the same sentence: <em>“first, get a SIP trunk.”</em></p>
+    <div class="after"><p class="stamp" data-rv>Case 001 · Call Stream</p><p class="lede" data-rv>That means PTA paperwork, weeks of procurement and a brand new number nobody has ever called. For a business whose only line is printed on its shop board, that&#x27;s a dead end.</p></div>
   </div>
 </section>
 
 <section aria-labelledby="how-h">
-  <div class="container split">
-    <div>
-      <div class="sec-head" data-rv><div class="label">How it works</div><h2 id="how-h">Step by step</h2></div>
-      <ol class="steps"><span class="rail" aria-hidden="true"></span><li class="step" data-n="01" data-rv><h3>The customer calls your normal number</h3><p>The call lands on a live mobile SIM in an Android phone, exactly like it does today.</p></li><li class="step" data-n="02" data-rv><h3>The phone hands the call to a bridge</h3><p>Over Bluetooth into an Asterisk bridge, then out to the AI agent over SIP, encrypted with TLS.</p></li><li class="step" data-n="03" data-rv><h3>The agent knows who&#x27;s calling</h3><p>The caller&#x27;s real number travels with the call, so the agent knows who it is before it says a word.</p></li><li class="step" data-n="04" data-rv><h3>It talks in Urdu, both ways</h3><p>Callers are answered in Urdu, and the same setup phones new leads back. Bresco Properties uses it to call every lead.</p></li></ol>
+  <div class="container">
+    <div class="label" data-rv>How it works</div>
+    <h2 id="how-h" data-rv style="margin-bottom:clamp(36px,5vw,64px);max-width:14ch">Step by step, on real data.</h2>
+    <div class="how">
+      <div class="how-film tall">
+        <div class="film"><video data-src="/films/callstream.mp4" poster="/films/callstream.jpg" muted loop playsinline preload="none" aria-label="Walkthrough film of Call Stream"></video></div>
+        <p class="film-note">Example call for illustration · AI voices</p>
+        <div class="meter" aria-hidden="true"><span>01 / 04</span><i><b></b></i></div>
+      </div>
+      <ol class="steps"><li class="step"><span class="n">01</span><h3>The customer calls your normal number</h3><p>The call lands on a live mobile SIM in an Android phone, exactly like it does today.</p></li><li class="step"><span class="n">02</span><h3>The phone hands the call to a bridge</h3><p>Over Bluetooth into an Asterisk bridge, then out to the AI agent over SIP, encrypted with TLS.</p></li><li class="step"><span class="n">03</span><h3>The agent knows who&#x27;s calling</h3><p>The caller&#x27;s real number travels with the call, so the agent knows who it is before it says a word.</p></li><li class="step"><span class="n">04</span><h3>It talks in Urdu, both ways</h3><p>Callers are answered in Urdu, and the same setup phones new leads back. Bresco Properties uses it to call every lead.</p></li></ol>
     </div>
-    <aside class="facts" data-rv><h3>At a glance</h3><dl><div><dt data-count="0">0</dt><dd>new numbers, trunks or carrier deals</dd></div><div><dt data-count="8">8</dt><dd>industry demo films</dd></div><div><dt data-count="1">1</dt><dd>call at a time per SIM</dd></div></dl></aside>
   </div>
 </section>
 
-<section class="band" aria-labelledby="dec-h">
+<section class="red" aria-labelledby="nums-h">
   <div class="container">
-    <div class="sec-head" data-rv><div class="label">Under the hood</div><h2 id="dec-h">The decisions that mattered</h2></div>
-    <ul class="decisions"><li data-rv><div><h3>The phone number was the hard part</h3><p>Most AI voice talk here is about which model sounds better in Urdu. The real blocker was getting a call off a normal SIM and into an agent without a carrier deal.</p></div></li><li data-rv><div><h3>TLS on port 5061</h3><p>The week that nearly killed it went to the ISP swallowing SIP on port 5060: every INVITE out, nothing back, not even a 100 Trying. Moving to TLS on 5061 fixed it.</p></div></li><li data-rv><div><h3>A demo film for every industry</h3><p>I made eight vertical demo films, one per industry: Umrah travel, real estate, healthcare, education, study abroad, BPO, AI agencies and car showrooms.</p></div></li></ul>
-    <p class="limits" data-rv><b>Honest limits</b>One SIM handles one call at a time. That&#x27;s fine for a business doing 20 calls a day, not 200.</p>
+    <div class="label" data-rv>At a glance</div>
+    <h2 id="nums-h" class="mono" style="font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;color:#ffd5db;margin-bottom:28px" data-rv>Call Stream in numbers</h2>
+    <dl class="nums"><div data-rv><dt data-count="0" data-suffix="">0</dt><dd>new numbers, trunks or carrier deals</dd></div><div data-rv><dt data-count="8" data-suffix="">8</dt><dd>industry demo films</dd></div><div data-rv><dt data-count="1" data-suffix="">1</dt><dd>call at a time per SIM</dd></div></dl>
   </div>
 </section>
 
-<section aria-labelledby="rel-h">
+<section aria-labelledby="dec-h">
   <div class="container">
-    <div class="sec-head" data-rv><div class="label">More work</div><h2 id="rel-h">Related builds</h2><p class="lede">Or see what I build as a service: <a href="/ai-voice-agents"><strong>AI voice agents</strong></a>.</p></div>
-    <div class="related"><a class="rcard" href="/work/bresco" data-rv>
-        <img src="/films/bresco.jpg" alt="Still from the Bresco Properties walkthrough film" loading="lazy" width="1280" height="720" />
-        <div class="rc-body"><div class="rc-kind">Client build · real estate</div><h3>Bresco Properties</h3><p>A Lahore real estate agency&#x27;s pipeline: AI-drafted posts, five agents&#x27; WhatsApp numbers on one dashboard, AI replies in Roman Urdu and Urdu calls.</p><span class="more">Read the case study <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </a><a class="rcard" href="/work/al-munir" data-rv>
-        <img src="/films/almunir.jpg" alt="Still from the Al Munir UPVC walkthrough film" loading="lazy" width="1280" height="720" />
-        <div class="rc-body"><div class="rc-kind">Client build · manufacturing</div><h3>Al Munir UPVC</h3><p>A UPVC manufacturer&#x27;s pipeline finds buyers in Facebook groups, calls them with a voice agent and sends a priced PDF quote on WhatsApp.</p><span class="more">Read the case study <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </a></div>
+    <div class="label" data-rv>Under the hood</div>
+    <h2 id="dec-h" data-rv style="margin-bottom:clamp(32px,4vw,52px)">The decisions that mattered</h2>
+    <ul class="decisions"><li data-rv><span class="n">01</span><h3>The phone number was the hard part</h3><p>Most AI voice talk here is about which model sounds better in Urdu. The real blocker was getting a call off a normal SIM and into an agent without a carrier deal.</p></li><li data-rv><span class="n">02</span><h3>TLS on port 5061</h3><p>The week that nearly killed it went to the ISP swallowing SIP on port 5060: every INVITE out, nothing back, not even a 100 Trying. Moving to TLS on 5061 fixed it.</p></li><li data-rv><span class="n">03</span><h3>A demo film for every industry</h3><p>I made eight vertical demo films, one per industry: Umrah travel, real estate, healthcare, education, study abroad, BPO, AI agencies and car showrooms.</p></li></ul>
+    <div class="limits" data-rv><b>Honest limits</b><p>One SIM handles one call at a time. That&#x27;s fine for a business doing 20 calls a day, not 200.</p></div>
+    <p class="lede" data-rv style="margin-top:36px">This is what I build as a service: <a class="wipe" href="/ai-voice-agents"><strong>AI voice agents</strong></a>.</p>
   </div>
 </section>
-<section class="cta" aria-labelledby="cta-h">
+<div class="marquee" aria-label="Built with: Android + Pakistani SIM, Asterisk, SIP over TLS, Urdu voice AI"><div class="marquee-track" aria-hidden="true"><span>Android + Pakistani SIM</span><span>Asterisk</span><span>SIP over TLS</span><span>Urdu voice AI</span><span>Android + Pakistani SIM</span><span>Asterisk</span><span>SIP over TLS</span><span>Urdu voice AI</span><span>Android + Pakistani SIM</span><span>Asterisk</span><span>SIP over TLS</span><span>Urdu voice AI</span><span>Android + Pakistani SIM</span><span>Asterisk</span><span>SIP over TLS</span><span>Urdu voice AI</span></div></div>
+
+<a class="next" href="/work/jennifer" aria-label="Next case · 002 / 005: Jennifer">
+  <img src="/films/jennifer.jpg" alt="" loading="lazy" width="1280" height="720" />
+  <div class="container">
+    <span class="mono">Next case · 002 / 005</span>
+    <span class="title">Jennifer</span>
+    <p class="sub">Jennifer manages leads, scores intent, tracks follow-ups, searches live market data and briefs the owner daily, all through a normal chat.</p>
+    <span class="go"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i>Open it</span>
+  </div>
+</a><section class="cta" aria-labelledby="cta-h">
   <div class="container cta-grid">
     <div data-rv>
       <div class="label">Work with me</div>
@@ -186,8 +200,10 @@
     <div class="foot-base"><span>© 2026 Agha Muhammad Rayyan Khan</span><span>AI SYSTEMS ENGINEER · LAHORE, PK · REMOTE</span></div>
   </div>
 </footer>
+<dialog class="fmodal" id="filmModal" aria-label="Walkthrough film"><button type="button" class="x" aria-label="Close film">×</button><video controls playsinline></video></dialog>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
 <script src="/assets/site.js" defer></script>
 </body>
 </html>
