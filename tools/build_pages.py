@@ -179,7 +179,7 @@ CASES = [
         "lede": "Sebastian lives inside ordinary WhatsApp and phone calls on your own Android phone. He introduces himself, stays quiet and takes notes. Say his name and he answers out loud, so both people hear him. He can search the web, book a follow-up or read a Notion doc mid-call, and the summary lands on WhatsApp when you hang up. Built for AssemblyAI's voice hackathon week.",
         "chips": ["Android + Kotlin", "AssemblyAI Universal Streaming", "LLM Gateway", "AssemblyAI TTS", "Cloudflare Workers", "Picovoice", "Notion"],
         # hero_start: the films start here (second) to skip the title card; 45 s is where the real call begins.
-        # share_image: the Sebastian logo alone; the film's poster frame is mostly empty at link-preview size.
+        # share_image: the site's brand (photo + name); the film's poster frame is mostly empty at link-preview size.
         "film": "sebastian", "share_image": "sebastian-share.jpg", "hero_start": 45, "tall": False, "note": "Showcase film · the call section is a real WhatsApp call recording",
         "problem": 'Meeting bots like Otter and Fireflies <em>only listen</em>, and only inside meeting apps. A WhatsApp call has no seat for them.',
         "problem_p": "And they never talk back. When someone asks a question mid-call, a note-taker writes it down. It can't look the answer up, book the follow-up or say a word.",
