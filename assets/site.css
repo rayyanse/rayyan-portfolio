@@ -342,6 +342,9 @@ a.u{border-bottom:1px solid var(--ink)}
 .band-in.nums-only{min-height:0;grid-template-columns:1fr 1fr;align-items:end}
 .band-in.nums-only .band-nums{margin-top:0}
 .band-nums dt.word{font-size:clamp(1.6rem,3vw,2.4rem)}
+/* must come after .nums-only: that rule is more specific than the 900px one above */
+@media(max-width:900px){.band-in.nums-only{grid-template-columns:1fr;gap:36px}}
+@media(max-width:560px){.band-nums{grid-template-columns:1fr;gap:22px}.band-nums dd{max-width:30ch}}
 /* ---- decisions + limits ---- */
 .decisions{border-top:1px solid var(--line-2)}
 .decisions li{display:grid;grid-template-columns:60px 1fr 1.2fr;gap:20px 32px;padding:30px 0;border-bottom:1px solid var(--line)}
