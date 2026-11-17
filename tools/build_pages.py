@@ -179,7 +179,8 @@ CASES = [
         "lede": "Sebastian lives inside ordinary WhatsApp and phone calls on your own Android phone. He introduces himself, stays quiet and takes notes. Say his name and he answers out loud, so both people hear him. He can search the web, book a follow-up or read a Notion doc mid-call, and the summary lands on WhatsApp when you hang up. Built for AssemblyAI's voice hackathon week.",
         "chips": ["Android + Kotlin", "AssemblyAI Universal Streaming", "LLM Gateway", "AssemblyAI TTS", "Cloudflare Workers", "Picovoice", "Notion"],
         # hero_start: the films start here (second) to skip the title card; 45 s is where the real call begins.
-        "film": "sebastian", "hero_start": 45, "tall": False, "note": "Showcase film · the call section is a real WhatsApp call recording",
+        # share_image: the Sebastian logo alone; the film's poster frame is mostly empty at link-preview size.
+        "film": "sebastian", "share_image": "sebastian-share.jpg", "hero_start": 45, "tall": False, "note": "Showcase film · the call section is a real WhatsApp call recording",
         "problem": 'Meeting bots like Otter and Fireflies <em>only listen</em>, and only inside meeting apps. A WhatsApp call has no seat for them.',
         "problem_p": "And they never talk back. When someone asks a question mid-call, a note-taker writes it down. It can't look the answer up, book the follow-up or say a word.",
         "steps": [
@@ -622,15 +623,17 @@ def case_page(c: dict) -> str:
     total = f"{len(CASES):03d}"
     nxt = CASES[(CASES.index(c) + 1) % len(CASES)]
     hero_film = c.get("hero_film", c["film"])
+    # share_image: optional link-preview image in /films; defaults to the film's poster.
+    share = f"{SITE}/films/{c.get('share_image', c['film'] + '.jpg')}"
     schema = [
-        {"@type": "CreativeWork", "@id": f"{SITE}{path}#work", "name": c["name"], "headline": c["title"], "description": c["description"], "url": f"{SITE}{path}", "author": person(), "image": f"{SITE}/films/{c['film']}.jpg", "video": video_schema(c["name"], c["description"], c["film"])},
+        {"@type": "CreativeWork", "@id": f"{SITE}{path}#work", "name": c["name"], "headline": c["title"], "description": c["description"], "url": f"{SITE}{path}", "author": person(), "image": share, "video": video_schema(c["name"], c["description"], c["film"])},
         crumbs_schema([("Home", "/"), ("Work", "/#work"), (c["name"], path)]),
     ]
     actions = f'<a href="mailto:{EMAIL}?subject={e(c["name"])}%20-%20something%20like%20this" class="btn btn-ink">Build something like this{ARROW}</a>'
     steps = "".join(f'<li class="step"><span class="n">{i+1:02d}</span><h3>{e(t)}</h3><p>{e(p)}</p></li>' for i, (t, p) in enumerate(c["steps"]))
     decisions = "".join(f'<li data-rv><span class="n">{i+1:02d}</span><h3>{e(t)}</h3><p>{e(p)}</p></li>' for i, (t, p) in enumerate(c["decisions"]))
     limits = f'<div class="limits" data-rv><b>Honest limits</b><p>{e(c["limits"])}</p></div>' if c["limits"] else ""
-    return head(c["title"], c["description"], path, f"{SITE}/films/{c['film']}.jpg", schema, preload=f"/films/{c['film']}.jpg") + sub_hero(
+    return head(c["title"], c["description"], path, share, schema, preload=f"/films/{c['film']}.jpg") + sub_hero(
         crumbs=[("Home", "/"), ("Work", "/#work"), (c["name"], None)], label=f"Case {n} / {total} · {c['kind']}",
         lines=c["h1"], lede=c["lede"], actions=actions, chips=c["chips"], facts=c["facts"], film=hero_film,
         poster=c["film"], name=c["name"], tall=c["tall"], note=c["note"], start=c.get("hero_start", 0)) + f"""
