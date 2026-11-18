@@ -19,8 +19,11 @@ NAME = "Agha Muhammad Rayyan Khan"
 EMAIL = "agharayyan@gmail.com"
 WHATSAPP = "https://wa.me/923218234852"
 ROOT = Path(__file__).resolve().parent.parent
-# Publish date of these pages and their films (VideoObject uploadDate, sitemap lastmod).
+# Publish date of these pages and their films (sitemap lastmod, and the day part of FILM_UPLOADED).
 FILM_DATE = "2026-11-16"
+# VideoObject uploadDate. Google wants a full ISO 8601 datetime with a timezone, not a bare date
+# (Search Console flags "missing a timezone" / "invalid datetime"). +05:00 is Pakistan time.
+FILM_UPLOADED = f"{FILM_DATE}T00:00:00+05:00"
 # Pages written by hand (not by this script) that still belong in sitemap.xml: (path, lastmod).
 HAND_PAGES = [("/seo-ray", "2026-11-16"), ("/privacy", "2026-11-16")]
 SAMPLE = "Walkthrough film · names and numbers are sample data"
@@ -607,7 +610,7 @@ def crumbs_schema(items: list[tuple[str, str]]) -> dict:
 
 
 def video_schema(name: str, description: str, film_name: str) -> dict:
-    return {"@type": "VideoObject", "name": f"{name} walkthrough film", "description": description, "thumbnailUrl": f"{SITE}/films/{film_name}.jpg", "contentUrl": f"{SITE}/films/{film_name}.mp4", "uploadDate": FILM_DATE}
+    return {"@type": "VideoObject", "name": f"{name} walkthrough film", "description": description, "thumbnailUrl": f"{SITE}/films/{film_name}.jpg", "contentUrl": f"{SITE}/films/{film_name}.mp4", "uploadDate": FILM_UPLOADED}
 
 
 def case_no(slug: str) -> str:
