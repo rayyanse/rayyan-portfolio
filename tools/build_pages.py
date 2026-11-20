@@ -18,6 +18,7 @@ SITE = "https://rayyankhan.dev"
 NAME = "Agha Muhammad Rayyan Khan"
 EMAIL = "agharayyan@gmail.com"
 WHATSAPP = "https://wa.me/923218234852"
+UPWORK = "https://www.upwork.com/freelancers/~010f3dc36382e38053"
 ROOT = Path(__file__).resolve().parent.parent
 # Publish date of these pages and their films (sitemap lastmod, and the day part of FILM_UPLOADED).
 FILM_DATE = "2026-11-16"
@@ -444,7 +445,7 @@ def foot(scripts: str = "") -> str:
       <div><div class="me-line"><img src="{PHOTO}" alt="" width="40" height="40" loading="lazy" />{NAME}</div><p class="lede" style="font-size:.9rem;margin-top:14px">AI systems that do real work. {len(PROJECTS)} shipped, most with a walkthrough film.</p></div>
       <div><h3>Case studies</h3>{work}</div>
       <div><h3>Services</h3>{serv}<a href="/projects">All {len(PROJECTS)} projects</a></div>
-      <div><h3>Elsewhere</h3><a href="mailto:{EMAIL}">Email</a><a href="https://www.linkedin.com/in/rayyan45/" rel="me noopener" target="_blank">LinkedIn</a><a href="https://github.com/rayyanse" rel="me noopener" target="_blank">GitHub</a><a href="/seo-ray">SEO-Ray</a></div>
+      <div><h3>Elsewhere</h3><a href="mailto:{EMAIL}">Email</a><a href="https://www.linkedin.com/in/rayyan45/" rel="me noopener" target="_blank">LinkedIn</a><a href="https://github.com/rayyanse" rel="me noopener" target="_blank">GitHub</a><a href="{UPWORK}" rel="me noopener" target="_blank">Upwork</a><a href="/seo-ray">SEO-Ray</a></div>
     </div>
     <div class="foot-base"><span>© 2026 {NAME}</span><span>AI systems engineer · Lahore, PK · remote</span></div>
   </div>
@@ -471,7 +472,7 @@ def contact(heading: str, dim: str) -> str:
         <div data-rv>
           <p class="lede">Send me the workflow, your tool stack, or just describe the manual thing that eats your week. I'll tell you what can be automated, what shouldn't be, and what the first useful version looks like.</p>
           <a class="mail" href="mailto:{EMAIL}">{EMAIL}</a>
-          <div class="ways"><a href="{WHATSAPP}" target="_blank" rel="noopener">WhatsApp +92 321 8234852</a><a href="https://www.linkedin.com/in/rayyan45/" target="_blank" rel="me noopener">LinkedIn</a><a href="https://github.com/rayyanse" target="_blank" rel="me noopener">GitHub</a></div>
+          <div class="ways"><a href="{WHATSAPP}" target="_blank" rel="noopener">WhatsApp +92 321 8234852</a><a href="https://www.linkedin.com/in/rayyan45/" target="_blank" rel="me noopener">LinkedIn</a><a href="https://github.com/rayyanse" target="_blank" rel="me noopener">GitHub</a><a href="{UPWORK}" target="_blank" rel="me noopener">Upwork</a></div>
         </div>
         <div class="contact-acts" data-rv>
           <a href="mailto:{EMAIL}?subject=Free%20automation%20audit" class="btn btn-ink">Book a free audit{ARROW}</a>
@@ -871,7 +872,7 @@ def home_page() -> str:
          "description": "Builds AI agents, voice assistants, automation pipelines and full-stack dashboards for businesses.",
          "address": {"@type": "PostalAddress", "addressLocality": "Lahore", "addressCountry": "PK"},
          "knowsAbout": ["AI agents", "Voice AI", "Workflow automation", "n8n", "WhatsApp automation", "Retrieval-augmented generation"],
-         "sameAs": ["https://www.linkedin.com/in/rayyan45/", "https://github.com/rayyanse"]},
+         "sameAs": ["https://www.linkedin.com/in/rayyan45/", "https://github.com/rayyanse", UPWORK]},
         {"@type": "WebSite", "@id": f"{SITE}/#website", "url": f"{SITE}/", "name": NAME, "publisher": {"@id": f"{SITE}/#person"}},
         {"@type": "ItemList", "name": "Case studies", "itemListElement": [
             {"@type": "ListItem", "position": i + 1, "url": f"{SITE}/work/{s}", "name": CASE_BY[s]["name"]} for i, s in enumerate(HOME_CASES)]},
