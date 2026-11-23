@@ -299,6 +299,62 @@ SERVICES = [
     },
 ]
 
+# ------------------------------------------------------------------ career (the /about page and the résumé PDF)
+# One source for both: tools/build_resume.py imports these. Dates and bullets come from Rayyan's
+# résumé of 2026-11-16; titles follow his LinkedIn (VideosGeeks: "Founding AI Engineer").
+ROLE = "Independent AI Engineer"
+RESUME_PDF = "/agha-muhammad-rayyan-khan-resume.pdf"
+SUMMARY = ("AI engineer with five years of building software, the last two on AI agents, voice agents and automation "
+           "that do real business work. Built an AI department from zero as a software house's first AI engineer, "
+           "hiring and training seven interns. Now independent: shipping client systems end to end and open to a "
+           "full-time AI engineering role.")
+# (dates, title, company, place, bullets, case-study slugs that came out of the role)
+EXPERIENCE = [
+    ("Sep 2026 – Present", ROLE, "Self-employed", "Lahore · remote", [
+        "Builds AI agents, voice agents and WhatsApp automation for businesses in Pakistan and abroad, from scoping to handover.",
+        "Call Stream, with Shahwaiz: an Urdu AI call agent on a normal Pakistani SIM, plus eight industry demo films made in code.",
+        "SEO-Ray: a website audit tool that checks about 150 things and writes an owner report and a developer report.",
+    ], ["call-stream"]),
+    ("Mar 2026 – Sep 2026", "Founding AI Engineer", "VideosGeeks", "Lahore", [
+        "Joined as the company's first AI engineer and built the AI department from nothing.",
+        "Ran hiring for seven interns, then trained them from onboarding to delivering client work on their own.",
+        "Built an attendance system (check-in, check-out, breaks) for about 60 staff, replacing manual copy-paste into Google Sheets.",
+        "Shipped an internal CRM, Google Sheets automations and a camera surveillance system, alongside client projects.",
+    ], []),
+    ("Feb 2025 – Feb 2026", "AI and Business Development Associate Engineer", "Xeven Solutions", "Lahore", [
+        "Tested Covis, an AI operations platform, through release cycles and caught defects before launch.",
+        "Maintained the Covis mobile app in React Native and Expo: UI defects, layout bugs, copy errors.",
+        "Wrote and sent client proposals on Upwork for the business development team.",
+    ], []),
+    ("Mar 2024 – Jan 2025", "Business Development Officer and Automation Engineer", "BGMC (Bilal Global Manufacturing Companies)", "Lahore", [
+        "Built a WhatsApp lead system on the Meta Cloud API, n8n, Claude and Google Sheets: qualifies leads, detects the service, assigns round-robin and emails the associate a summary.",
+        "Built an n8n cold email workflow that personalises outreach and threads follow-ups into the original email.",
+        "Pitched Lean Six Sigma and HSE consulting services and closed three clients.",
+    ], ["whatsapp-lead-system"]),
+    ("Sep 2021 – Feb 2024", "Web Developer and E-commerce Associate", "Ecom Hunt", "Lahore", [
+        "Designed and built websites and custom UI for wholesale Amazon businesses over two and a half years.",
+        "Handled UK LTD company registrations and Amazon seller account setup.",
+    ], []),
+    ("Nov 2023 – Jan 2024", "Game Development Intern", "Ghost Hunter", "Lahore", [
+        "Built gameplay in Unreal Engine 5: character movement, enemy AI and game state. Modelled 3D assets in Blender.",
+    ], []),
+]
+EDUCATION = [
+    ("Aug 2020 – May 2024", "BS Software Engineering", "University of Management and Technology, Lahore",
+     "Teaching assistant for Linear Algebra and Probability, Mar – Jun 2022."),
+    ("2018 – 2020", "Intermediate, Pre-Engineering", "Punjab College, Lahore", ""),
+]
+# (group, items). Uneven on purpose: it's what he actually uses, most-used first.
+SKILLS = [
+    ("AI and agents", ["Claude API", "Gemini", "OpenAI API", "Groq", "OpenRouter", "RAG", "tool calling", "prompt engineering", "Tavily"]),
+    ("Voice", ["LiveKit", "ElevenLabs", "AssemblyAI", "Retell AI", "Asterisk", "SIP over TLS", "Android telephony"]),
+    ("Automation", ["n8n", "Make.com", "WhatsApp Cloud API", "Baileys", "Apify", "Google Apps Script", "Gmail API"]),
+    ("Code", ["TypeScript", "JavaScript", "Python", "Kotlin", "C++", "SQL"]),
+    ("Apps and data", ["Next.js", "React", "React Native + Expo", "Node.js", "Supabase + RLS", "Postgres", "MongoDB", "Vercel", "Cloudflare Workers", "Docker", "Git"]),
+]
+# The three case studies with the most engineering in them, shown to hiring teams.
+HIRE_CASES = ["call-stream", "jennifer", "sebastian"]
+
 CASE_BY = {c["slug"]: c for c in CASES}
 SERVICE_BY = {s["slug"]: s for s in SERVICES}
 SERVICE_NAMES = {"ai-voice-agents": "AI voice agents", "whatsapp-automation": "WhatsApp automation", "ai-agents-automation": "AI agents & automation"}
@@ -367,7 +423,7 @@ FEED = [("WA", "lead.inbound", "New WhatsApp lead, answered"),
 def nav(home: bool) -> str:
     """The pill nav and the phone menu sheet. On the homepage links are in-page anchors."""
     pre = "" if home else "/"
-    links = [(f"{pre}#work", "Work"), (f"{pre}#services", "Services"), (f"{pre}#process", "Process"), ("/projects", "All projects")]
+    links = [(f"{pre}#work", "Work"), (f"{pre}#services", "Services"), (f"{pre}#process", "Process"), ("/projects", "All projects"), ("/about", "About")]
     serv = "".join(f'<a href="/{s["slug"]}" class="sm">{e(SERVICE_NAMES[s["slug"]])}</a>' for s in SERVICES)
     work = "".join(f'<a href="/work/{c["slug"]}" class="sm">{e(c["name"])}</a>' for c in CASES)
     return f"""<header class="pill" id="pill">
@@ -445,7 +501,7 @@ def foot(scripts: str = "") -> str:
       <div><div class="me-line"><img src="{PHOTO}" alt="" width="40" height="40" loading="lazy" />{NAME}</div><p class="lede" style="font-size:.9rem;margin-top:14px">AI systems that do real work. {len(PROJECTS)} shipped, most with a walkthrough film.</p></div>
       <div><h3>Case studies</h3>{work}</div>
       <div><h3>Services</h3>{serv}<a href="/projects">All {len(PROJECTS)} projects</a></div>
-      <div><h3>Elsewhere</h3><a href="mailto:{EMAIL}">Email</a><a href="https://www.linkedin.com/in/rayyan45/" rel="me noopener" target="_blank">LinkedIn</a><a href="https://github.com/rayyanse" rel="me noopener" target="_blank">GitHub</a><a href="{UPWORK}" rel="me noopener" target="_blank">Upwork</a><a href="/seo-ray">SEO-Ray</a></div>
+      <div><h3>Elsewhere</h3><a href="/about">About</a><a href="{RESUME_PDF}">Résumé</a><a href="mailto:{EMAIL}">Email</a><a href="https://www.linkedin.com/in/rayyan45/" rel="me noopener" target="_blank">LinkedIn</a><a href="https://github.com/rayyanse" rel="me noopener" target="_blank">GitHub</a><a href="{UPWORK}" rel="me noopener" target="_blank">Upwork</a><a href="/seo-ray">SEO-Ray</a></div>
     </div>
     <div class="foot-base"><span>© 2026 {NAME}</span><span>AI systems engineer · Lahore, PK · remote</span></div>
   </div>
@@ -883,6 +939,126 @@ def home_page() -> str:
             + contact("Got a process someone repeats every day?", "That's the one.") + foot(SCENES_JS + NET_JS))
 
 
+# ================================================================== about (for hiring teams)
+
+def about_page() -> str:
+    path = "/about"
+    title = f"About {NAME}, {ROLE}"
+    desc = (f"{NAME} is an independent AI engineer in Lahore: five years building software, founding AI engineer at "
+            f"VideosGeeks, now shipping AI agents and voice systems. Experience, skills and résumé.")
+    schema = [
+        {"@type": "ProfilePage", "@id": f"{SITE}{path}#page", "url": f"{SITE}{path}", "name": title,
+         "mainEntity": {"@type": "Person", "@id": f"{SITE}/#person", "name": NAME, "url": f"{SITE}/", "image": f"{SITE}{PHOTO_JPG}",
+                        "jobTitle": ROLE, "description": SUMMARY,
+                        "alumniOf": {"@type": "CollegeOrUniversity", "name": "University of Management and Technology"},
+                        "sameAs": ["https://www.linkedin.com/in/rayyan45/", "https://github.com/rayyanse", UPWORK]}},
+        crumbs_schema([("Home", "/"), ("About", path)]),
+    ]
+    years = 2026 - 2021
+    facts = [(str(years), "Years building software"), ("7", "Interns hired and trained"), (str(len(PROJECTS)), "Systems shipped")]
+    xp = []
+    for i, (dates, role, co, place, bullets, cases) in enumerate(EXPERIENCE):
+        lis = "".join(f"<li>{e(b)}</li>" for b in bullets)
+        links = "".join(f'<a class="u" href="/work/{s}">{e(CASE_BY[s]["name"])} case study {ARROW_SM}</a>' for s in cases)
+        now = ' <span class="xp-now"><span class="pulse" aria-hidden="true"></span>now</span>' if i == 0 else ""
+        xp.append(f"""<li data-rv>
+        <span class="xp-when">{e(dates)}</span>
+        <div class="xp-role"><h3>{e(role)}{now}</h3><span class="xp-co">{e(co)} · {e(place)}</span></div>
+        <div class="xp-body"><ul>{lis}</ul>{f'<div class="xp-links">{links}</div>' if links else ''}</div>
+      </li>""")
+    skills = "".join(f'<div class="sk" data-rv><h3>{e(g)}</h3><div class="chips">{"".join(f"<span class=chip>{e(x)}</span>" for x in items)}</div></div>' for g, items in SKILLS)
+    edu = "".join(f'<li data-rv><span class="xp-when">{e(d)}</span><div class="xp-role"><h3>{e(t)}</h3><span class="xp-co">{e(w)}</span></div><div class="xp-body">{f"<p>{e(n)}</p>" if n else ""}</div></li>' for d, t, w, n in EDUCATION)
+    proof = "\n".join(work_card(s, TINTS[i]) for i, s in enumerate(HIRE_CASES))
+    cv = f'<a href="{RESUME_PDF}" class="btn btn-ink" download>Download résumé (PDF){ARROW}</a>'
+    return head(title, desc, path, f"{SITE}/og.png", schema, og_type="profile", preload=PHOTO) + f"""
+<section class="hero sub" aria-labelledby="h1">
+  <div class="container">
+    <div class="hero-panel">
+      <div class="hero-copy">
+        <nav class="crumbs" aria-label="Breadcrumb" data-hi><a href="/">Home</a><span aria-hidden="true">/</span><span>About</span></nav>
+        <div class="status" data-hi><span class="pulse" aria-hidden="true"></span>Open to full-time AI engineering roles</div>
+        {h1(['I build AI', 'that does the job,', '<span class="grad">not the demo.</span>'])}
+        <p class="lede">I'm {NAME}, an <strong>{e(ROLE.lower())}</strong> in Lahore. I built the AI department at VideosGeeks from zero. Before that: four years of websites, automation and a mobile app. Now I ship voice agents, AI agents and WhatsApp systems for clients, and I'm looking for a team to build them with full time.</p>
+        <div class="actions" data-hi>{cv}<a href="mailto:{EMAIL}?subject=AI%20engineering%20role" class="btn btn-line">Email me about a role</a></div>
+        {facts_dl(facts, 'stats')}
+      </div>
+      <div class="hero-vis">
+        <figure class="me">
+          <img src="{PHOTO}" alt="{e(PHOTO_ALT)}" width="400" height="400" fetchpriority="high" />
+          <figcaption><span><b>Rayyan</b> · Lahore, PK</span><span class="live"><span class="pulse" aria-hidden="true"></span>open to roles</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="xp-h">
+  <div class="container">
+    <div class="sec-head">
+      <div><div class="label" data-rv>Experience</div><h2 id="xp-h" data-rv>Websites, then automation, <span class="dim">then AI.</span></h2></div>
+      <div class="side"><p class="lede" data-rv>Each move came from the last one: the websites needed leads, the leads needed answering, and the answering needed AI.</p></div>
+    </div>
+    <ol class="xp">{''.join(xp)}</ol>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0" aria-labelledby="proof-h">
+  <div class="container">
+    <div class="sec-head">
+      <div><div class="label" data-rv>For engineering teams</div><h2 id="proof-h" data-rv>Three builds <span class="dim">worth your time.</span></h2></div>
+      <div class="side"><p class="lede" data-rv>The ones with the hardest engineering problems: telephony on a consumer SIM, a CRM agent with a four-provider fallback, and live call audio on Android.</p></div>
+    </div>
+    <div class="works">
+{proof}
+      <a class="tile all" href="/projects" data-rv><div class="tile-body"><span class="big">{len(PROJECTS)}</span><h3>Everything else I've shipped.</h3><p>Filter the archive by voice, agents, automation or platforms.</p><span class="more">Open the archive {ARROW_SM}</span></div></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0" aria-labelledby="sk-h">
+  <div class="container">
+    <div class="sec-head">
+      <div><div class="label" data-rv>Tools</div><h2 id="sk-h" data-rv>What I work in <span class="dim">most weeks.</span></h2></div>
+    </div>
+    <div class="skills">{skills}</div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0" aria-labelledby="edu-h">
+  <div class="container">
+    <div class="sec-head">
+      <div><div class="label" data-rv>Education</div><h2 id="edu-h" data-rv>Software engineering, <span class="dim">UMT Lahore.</span></h2></div>
+    </div>
+    <ol class="xp">{edu}</ol>
+  </div>
+</section>
+""" + about_contact() + foot()
+
+
+def about_contact() -> str:
+    """The contact panel, worded for hiring teams instead of clients."""
+    return f"""
+<section id="contact" class="contact" aria-labelledby="contact-h">
+  <div class="container">
+    <div class="contact-panel">
+      <div class="label" data-rv>Hiring?</div>
+      <h2 id="contact-h" data-rv style="margin-top:18px">Building AI agents or voice? <span class="dim">Let's talk.</span></h2>
+      <div class="contact-grid">
+        <div data-rv>
+          <p class="lede">I'm looking for a full-time AI engineering role, remote or in Lahore. Send me the role and what your team is building. Happy to walk through any of these systems on a call.</p>
+          <a class="mail" href="mailto:{EMAIL}">{EMAIL}</a>
+          <div class="ways"><a href="https://www.linkedin.com/in/rayyan45/" target="_blank" rel="me noopener">LinkedIn</a><a href="https://github.com/rayyanse" target="_blank" rel="me noopener">GitHub</a><a href="{WHATSAPP}" target="_blank" rel="noopener">WhatsApp +92 321 8234852</a></div>
+        </div>
+        <div class="contact-acts" data-rv>
+          <a href="{RESUME_PDF}" class="btn btn-ink" download>Download résumé{ARROW}</a>
+          <button type="button" class="btn btn-line copy" data-copy="{EMAIL}">Copy email<span class="toast" role="status">Copied. Talk soon.</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>"""
+
+
 # ================================================================== project archive
 
 def project_card(p: dict) -> str:
@@ -958,15 +1134,16 @@ def main() -> None:
     for s in SERVICES:
         (ROOT / f"{s['slug']}.html").write_text(service_page(s), encoding="utf-8")
     (ROOT / "projects.html").write_text(projects_page(), encoding="utf-8")
+    (ROOT / "about.html").write_text(about_page(), encoding="utf-8")
     (ROOT / "index.html").write_text(home_page(), encoding="utf-8")
     write_sitemap()
-    print(f"built the homepage, the {len(PROJECTS)}-project archive, {len(CASES)} case studies, {len(SERVICES)} service pages and sitemap.xml")
+    print(f"built the homepage, the {len(PROJECTS)}-project archive, {len(CASES)} case studies, {len(SERVICES)} service pages, /about and sitemap.xml")
 
 
 def write_sitemap() -> None:
     """Every generated page, plus the hand-written pages in HAND_PAGES. lastmod is the build date
     (FILM_DATE) for generated pages; bump it when content changes."""
-    paths = ["/", "/projects"] + [f"/{s['slug']}" for s in SERVICES] + [f"/work/{c['slug']}" for c in CASES]
+    paths = ["/", "/projects", "/about"] + [f"/{s['slug']}" for s in SERVICES] + [f"/work/{c['slug']}" for c in CASES]
     entries = [(p, FILM_DATE) for p in paths] + HAND_PAGES
     urls = "".join(f"  <url>\n    <loc>{SITE}{p}</loc>\n    <lastmod>{d}</lastmod>\n  </url>\n" for p, d in entries)
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + "</urlset>\n"

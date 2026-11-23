@@ -489,3 +489,31 @@ a.u{border-bottom:1px solid var(--ink)}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   .marquee-track{animation:none}
 }
+
+/* ============ ABOUT (/about, for hiring teams) ============ */
+/* Career timeline: dates | role | what happened. A thin rail on the left grows as it scrolls in. */
+.xp{border-top:1px solid var(--line-2)}
+.xp li{display:grid;grid-template-columns:170px minmax(0,1fr) minmax(0,1.35fr);gap:14px 36px;padding:30px 0;border-bottom:1px solid var(--line)}
+.xp-when{font-family:var(--mono);font-size:.72rem;letter-spacing:.03em;color:var(--grey-t);padding-top:6px}
+.xp-role h3{font-size:clamp(1.2rem,1.8vw,1.45rem);letter-spacing:-.03em;line-height:1.2}
+.xp-co{display:block;margin-top:6px;font-size:.9rem;color:var(--ink-2)}
+.xp-now{display:inline-flex;align-items:center;gap:6px;margin-left:8px;vertical-align:middle;padding:3px 9px;border-radius:999px;background:#fff;border:1px solid var(--line);font-family:var(--mono);font-size:.62rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2)}
+.xp-body ul{display:grid;gap:8px}
+.xp-body li{display:block;padding:0 0 0 18px;border:0;position:relative;color:var(--ink-2);font-size:.95rem}
+.xp-body li::before{content:"";position:absolute;left:0;top:.72em;width:8px;height:1px;background:var(--ink-2)}
+.xp-body p{color:var(--ink-2);font-size:.95rem}
+.xp-links{margin-top:14px;display:flex;flex-wrap:wrap;gap:16px}
+.xp-links a{display:inline-flex;align-items:center;gap:6px;font-size:.9rem;font-weight:500}
+@media(max-width:900px){.xp li{grid-template-columns:1fr 1.4fr}.xp-when{grid-column:1/-1;padding-top:0}}
+@media(max-width:620px){.xp li{grid-template-columns:1fr;gap:10px}}
+.skills{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.sk{grid-column:span 2;padding:26px;border-radius:22px;background:#fff;border:1px solid var(--line)}
+.sk:nth-child(4),.sk:nth-child(5){grid-column:span 3}
+.sk h3{font-size:1.15rem;letter-spacing:-.03em}
+.sk .chips{margin-top:14px}
+.sk .chip{background:var(--bg)}
+@media(max-width:1000px){.skills{grid-template-columns:1fr 1fr}.sk,.sk:nth-child(4),.sk:nth-child(5){grid-column:auto}.sk:last-child{grid-column:1/-1}}
+@media(max-width:620px){.skills{grid-template-columns:1fr}}
+/* the archive tile takes the 4th cell beside the three case cards */
+.works .tile.all{grid-column:auto;flex-direction:column}
+.works .tile.all .tile-body{display:flex;flex-direction:column;justify-content:flex-end;gap:10px;padding:32px}
