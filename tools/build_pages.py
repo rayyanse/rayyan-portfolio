@@ -27,7 +27,8 @@ FILM_DATE = "2026-11-16"
 # (Search Console flags "missing a timezone" / "invalid datetime"). +05:00 is Pakistan time.
 FILM_UPLOADED = f"{FILM_DATE}T00:00:00+05:00"
 # Pages written by hand (not by this script) that still belong in sitemap.xml: (path, lastmod).
-HAND_PAGES = [("/seo-ray", "2026-11-16"), ("/privacy", "2026-11-16")]
+# /privacy is left out on purpose: it is noindex, because it outranked the homepage for "rayyankhan.dev".
+HAND_PAGES = [("/seo-ray", "2026-11-16")]
 SAMPLE = "Walkthrough film · names and numbers are sample data"
 
 e = html.escape
@@ -245,6 +246,36 @@ SERVICES = [
         ],
     },
     {
+        # For Pakistani buyers ("ai calling agent pakistan", "urdu voice bot"). /ai-voice-agents is the general
+        # hire-a-developer page. Every claim here comes from the Call Stream, Bresco and Al Munir case data above.
+        "slug": "ai-calling-agent-pakistan",
+        "glass": [("Urdu", "on every call, inbound and outbound"), ("0", "SIP trunks or PTA paperwork")],
+        "nums": [("8", "industry demo films for Call Stream"), ("1", "call at a time per SIM"), ("24/7", "answering, with no office hours")],
+        "label": "Service · Urdu AI calling agent",
+        "title": "AI Calling Agent in Pakistan: Urdu Voice Bot for Business",
+        "description": "An Urdu AI calling agent for Pakistani businesses. It answers your normal mobile number, calls every new lead back and books the visit. No SIP trunk.",
+        "h1": ["An Urdu AI", "calling agent", '<span class="grad">on your own number.</span>'],
+        "lede": "Most AI calling agents sold in Pakistan start with “first, get a SIP trunk.” This one doesn't. It runs on a normal Pakistani SIM in an Android phone, talks to callers in Urdu, calls new leads back and books them in. Your customers keep calling the number on your shop board.",
+        "film": "callstream", "tall": True, "note": "Example call for illustration · AI voices",
+        "offer": [
+            ("An Urdu voice bot that picks up", "Every call to your mobile number gets answered in Urdu, after hours and when the whole team is busy."),
+            ("Every new lead called back", "Leads from your ads or sheets get a call from the agent. Bresco Properties uses it to call every lead."),
+            ("No new number, no carrier deal", "No SIP trunk, no PTA paperwork, no weeks of procurement. The SIM you already use is the line."),
+            ("It knows who's calling", "The caller's real number travels with the call, so the agent knows who it is before it says a word."),
+            ("Visits and appointments booked", "The agent checks your Google Calendar, confirms a slot and sends the confirmation and reminders."),
+            ("Follow-up on WhatsApp", "When a customer misses the appointment, a WhatsApp and email follow-up goes out on its own."),
+        ],
+        "proof": ["call-stream", "bresco", "al-munir"],
+        "faq": [
+            ("Does the AI calling agent really speak Urdu?", "Yes. Callers are answered in Urdu, and the same agent calls leads back in Urdu. English works too if your customers prefer it."),
+            ("Do I need a SIP trunk or a new number in Pakistan?", "No. Call Stream runs on a normal Pakistani SIM inside an Android phone, so there's no PTA paperwork, no carrier deal and no new number for customers to learn."),
+            ("How many calls can it handle?", "One call at a time per SIM. That suits a business doing around 20 calls a day, not 200. For more volume, we plan a proper phone line together."),
+            ("Which businesses is it for?", "Any business where leads phone in or need a call back. Call Stream has demo films for Umrah travel, real estate, healthcare, education, study abroad, BPO, AI agencies and car showrooms."),
+            ("Do you also build on Retell AI?", "Yes. In Al Munir's sales pipeline a Retell voice agent calls the lead, asks what they need and logs the outcome. I pick the platform that fits your call volume and budget."),
+            OWN,
+        ],
+    },
+    {
         "slug": "whatsapp-automation",
         "glass": [("Seconds", "to the first reply after an ad click"), ("2", "reply languages: Roman Urdu and English")],
         "nums": [("20+", "systems shipped, each with a walkthrough film"), ("5", "agents' WhatsApp numbers on one Bresco dashboard"), ("0", "leads left waiting when the team is busy")],
@@ -361,7 +392,7 @@ HIRE_CASES = ["call-stream", "jennifer", "sebastian"]
 
 CASE_BY = {c["slug"]: c for c in CASES}
 SERVICE_BY = {s["slug"]: s for s in SERVICES}
-SERVICE_NAMES = {"ai-voice-agents": "AI voice agents", "whatsapp-automation": "WhatsApp automation", "ai-agents-automation": "AI agents & automation"}
+SERVICE_NAMES = {"ai-voice-agents": "AI voice agents", "ai-calling-agent-pakistan": "Urdu AI calling agent", "whatsapp-automation": "WhatsApp automation", "ai-agents-automation": "AI agents & automation"}
 
 ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
 ARROW_SM = ARROW.replace('<svg ', '<svg width="14" height="14" ', 1)
@@ -401,8 +432,8 @@ MOTION_FLAG = "(function(){var d=document.documentElement;if(!matchMedia('(prefe
 # Boot screen once per session (homepage). site.js runs it and clears the flag; the 4.5 s cap keeps a failed script from hiding the page.
 BOOT_FLAG = "(function(){var d=document.documentElement;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var b=false;try{b=!sessionStorage.getItem('booted')}catch(e){}if(b){d.classList.add('booting');setTimeout(function(){d.classList.remove('booting')},4500)}})();"
 
-HOME_TITLE = f"{NAME}, AI Automation Engineer in Lahore"
-HOME_DESC = f"{NAME} builds AI agents, voice assistants and automation pipelines that run business operations without manual work."
+HOME_TITLE = f"{NAME}: AI Automation Engineer Portfolio, Lahore"
+HOME_DESC = f"The portfolio of {NAME} (Rayyan Khan), who builds AI agents, voice assistants and automation pipelines that run business operations without manual work."
 STACK = ["n8n", "Make.com", "Claude", "Gemini", "Groq", "OpenRouter", "LiveKit", "ElevenLabs", "Tavily", "WhatsApp API",
          "Google Calendar", "Supabase", "Next.js", "Three.js", "Python"]
 SCENES_JS = '<script src="/assets/scenes.js" defer></script>\n'
@@ -502,7 +533,7 @@ def foot(scripts: str = "") -> str:
 <footer>
   <div class="container">
     <div class="foot">
-      <div><div class="me-line"><img src="{PHOTO}" alt="" width="40" height="40" loading="lazy" />{NAME}</div><p class="lede" style="font-size:.9rem;margin-top:14px">AI systems that do real work. {len(PROJECTS)} shipped, most with a walkthrough film.</p></div>
+      <div><div class="me-line"><img src="{PHOTO}" alt="" width="40" height="40" loading="lazy" />{NAME}</div><p class="lede" style="font-size:.9rem;margin-top:14px">Rayyan Khan's portfolio of AI systems that do real work. {len(PROJECTS)} shipped, most with a walkthrough film.</p></div>
       <div><h3>Case studies</h3>{work}</div>
       <div><h3>Services</h3>{serv}<a href="/projects">All {len(PROJECTS)} projects</a></div>
       <div><h3>Elsewhere</h3><a href="/about">About</a><a href="{RESUME_PDF}">Résumé</a><a href="mailto:{EMAIL}">Email</a><a href="https://www.linkedin.com/in/rayyan45/" rel="me noopener" target="_blank">LinkedIn</a><a href="https://github.com/rayyanse" rel="me noopener" target="_blank">GitHub</a><a href="{UPWORK}" rel="me noopener" target="_blank">Upwork</a><a href="/seo-ray">SEO-Ray</a></div>
@@ -933,7 +964,7 @@ def home_page() -> str:
          "address": {"@type": "PostalAddress", "addressLocality": "Lahore", "addressCountry": "PK"},
          "knowsAbout": ["AI agents", "Voice AI", "Workflow automation", "n8n", "WhatsApp automation", "Retrieval-augmented generation"],
          "sameAs": ["https://www.linkedin.com/in/rayyan45/", "https://github.com/rayyanse", UPWORK]},
-        {"@type": "WebSite", "@id": f"{SITE}/#website", "url": f"{SITE}/", "name": NAME, "publisher": {"@id": f"{SITE}/#person"}},
+        {"@type": "WebSite", "@id": f"{SITE}/#website", "url": f"{SITE}/", "name": NAME, "alternateName": "Rayyan Khan portfolio", "publisher": {"@id": f"{SITE}/#person"}},
         {"@type": "ItemList", "name": "Case studies", "itemListElement": [
             {"@type": "ListItem", "position": i + 1, "url": f"{SITE}/work/{s}", "name": CASE_BY[s]["name"]} for i, s in enumerate(HOME_CASES)]},
     ]
@@ -1098,8 +1129,8 @@ def project_card(p: dict) -> str:
 
 def projects_page() -> str:
     path = "/projects"
-    title = f"All {len(PROJECTS)} projects by {NAME}"
-    desc = f"Every AI agent, voice system, automation pipeline, platform and website {NAME} has shipped: {len(PROJECTS)} projects, most with a walkthrough film."
+    title = f"Portfolio: all {len(PROJECTS)} projects by {NAME}"
+    desc = f"Rayyan Khan's full portfolio. Every AI agent, voice system, automation pipeline, platform and website {NAME} has shipped: {len(PROJECTS)} projects, most with a walkthrough film."
     schema = [
         {"@type": "CollectionPage", "@id": f"{SITE}{path}#page", "name": f"All {len(PROJECTS)} projects", "description": desc, "url": f"{SITE}{path}",
          "author": person(), "mainEntity": {"@type": "ItemList", "itemListElement": [
