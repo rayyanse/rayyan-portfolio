@@ -28,7 +28,7 @@ FILM_DATE = "2026-11-16"
 FILM_UPLOADED = f"{FILM_DATE}T00:00:00+05:00"
 # Pages written by hand (not by this script) that still belong in sitemap.xml: (path, lastmod).
 # /privacy is left out on purpose: it is noindex, because it outranked the homepage for "rayyankhan.dev".
-HAND_PAGES = [("/seo-ray", "2026-11-16")]
+HAND_PAGES = [("/seo-ray", "2026-11-23")]
 SAMPLE = "Walkthrough film · names and numbers are sample data"
 
 e = html.escape
@@ -475,7 +475,7 @@ def nav(home: bool) -> str:
 
 
 def head(title: str, description: str, path: str, image: str, schema: list[dict], *, og_type: str = "article",
-         og_title: str | None = None, preload: str | None = None, boot: bool = False) -> str:
+         og_title: str | None = None, preload: str | None = None, boot: bool = False, noindex: bool = False) -> str:
     url = f"{SITE}{path}"
     pre = preload or image.replace(SITE, "")
     ptype = ' type="image/webp"' if pre.endswith(".webp") else ""
@@ -493,7 +493,7 @@ def head(title: str, description: str, path: str, image: str, schema: list[dict]
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>{e(title)}</title>
 <meta name="description" content="{e(description)}" />
-<link rel="canonical" href="{url}" />
+{'<meta name="robots" content="noindex" />' if noindex else f'<link rel="canonical" href="{url}" />'}
 <link rel="icon" href="/favicon.ico" sizes="32x32 48x48" />
 <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -979,8 +979,7 @@ def home_page() -> str:
 def about_page() -> str:
     path = "/about"
     title = f"About {NAME}, {ROLE}"
-    desc = (f"{NAME} is an independent AI engineer in Lahore: five years building software, founding AI engineer at "
-            f"VideosGeeks, now shipping AI agents and voice systems. Experience, skills and résumé.")
+    desc = "Independent AI engineer in Lahore, formerly founding AI engineer at VideosGeeks. Five years building software. Experience, skills and résumé."
     schema = [
         {"@type": "ProfilePage", "@id": f"{SITE}{path}#page", "url": f"{SITE}{path}", "name": title,
          "mainEntity": {"@type": "Person", "@id": f"{SITE}/#person", "name": NAME, "url": f"{SITE}/", "image": f"{SITE}{PHOTO_JPG}",
@@ -1094,6 +1093,27 @@ def about_contact() -> str:
 </section>"""
 
 
+# ================================================================== 404
+
+def not_found_page() -> str:
+    """Served by Vercel for any missing path. noindex, no canonical."""
+    links = "".join(f'<a class="btn btn-line btn-sm" href="{h}">{e(t)}</a>' for h, t in
+                    [("/projects", f"All {len(PROJECTS)} projects"), ("/about", "About me"), ("/#contact", "Contact")])
+    return head(f"Page not found | {NAME}", "This page doesn't exist on rayyankhan.dev.", "/404", f"{SITE}/og.png", [],
+                og_type="website", preload=PHOTO, noindex=True) + f"""
+<section class="hero sub" aria-labelledby="h1">
+  <div class="container">
+    <div class="hero-panel solo">
+      <div class="label" data-hi style="margin-bottom:22px">Error 404</div>
+      {h1(['This page', '<span class="grad">doesn&#x27;t exist.</span>'])}
+      <p class="lede">The link is old or has a typo. Everything I've built is still here.</p>
+      <div class="actions" data-hi><a href="/" class="btn btn-ink">Back to the homepage{ARROW}</a>{links}</div>
+    </div>
+  </div>
+</section>
+""" + foot()
+
+
 # ================================================================== project archive
 
 def project_card(p: dict) -> str:
@@ -1170,6 +1190,7 @@ def main() -> None:
         (ROOT / f"{s['slug']}.html").write_text(service_page(s), encoding="utf-8")
     (ROOT / "projects.html").write_text(projects_page(), encoding="utf-8")
     (ROOT / "about.html").write_text(about_page(), encoding="utf-8")
+    (ROOT / "404.html").write_text(not_found_page(), encoding="utf-8")
     (ROOT / "index.html").write_text(home_page(), encoding="utf-8")
     write_sitemap()
     print(f"built the homepage, the {len(PROJECTS)}-project archive, {len(CASES)} case studies, {len(SERVICES)} service pages, /about and sitemap.xml")
