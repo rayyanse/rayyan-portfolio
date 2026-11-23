@@ -2,7 +2,7 @@
    Every failure ends in a visible message with the WhatsApp number. */
 (function () {
 const BOT='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4M8 14h.01M16 14h.01"/></svg>';
-const WA='+92 321 8234852';
+const WA='+92 333 9778846';
 const bubble=document.getElementById('chatBubble'), panel=document.getElementById('chatPanel'),
       closeBtn=document.getElementById('chatClose'), input=document.getElementById('chatInput'),
       sendBtn=document.getElementById('chatSend'), messagesEl=document.getElementById('chatMessages'),

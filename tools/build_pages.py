@@ -17,7 +17,8 @@ from pathlib import Path
 SITE = "https://rayyankhan.dev"
 NAME = "Agha Muhammad Rayyan Khan"
 EMAIL = "agharayyan@gmail.com"
-WHATSAPP = "https://wa.me/923218234852"
+PHONE = "+92 333 9778846"  # WhatsApp too; the one place to change it (site, résumé)
+WHATSAPP = "https://wa.me/923339778846"
 UPWORK = "https://www.upwork.com/freelancers/~010f3dc36382e38053"
 ROOT = Path(__file__).resolve().parent.parent
 # Publish date of these pages and their films (sitemap lastmod, and the day part of FILM_UPLOADED).
@@ -530,7 +531,7 @@ def contact(heading: str, dim: str) -> str:
         <div data-rv>
           <p class="lede">Send me the workflow, your tool stack, or just describe the manual thing that eats your week. I'll tell you what can be automated, what shouldn't be, and what the first useful version looks like.</p>
           <a class="mail" href="mailto:{EMAIL}">{EMAIL}</a>
-          <div class="ways"><a href="{WHATSAPP}" target="_blank" rel="noopener">WhatsApp +92 321 8234852</a><a href="https://www.linkedin.com/in/rayyan45/" target="_blank" rel="me noopener">LinkedIn</a><a href="https://github.com/rayyanse" target="_blank" rel="me noopener">GitHub</a><a href="{UPWORK}" target="_blank" rel="me noopener">Upwork</a></div>
+          <div class="ways"><a href="{WHATSAPP}" target="_blank" rel="noopener">WhatsApp {PHONE}</a><a href="https://www.linkedin.com/in/rayyan45/" target="_blank" rel="me noopener">LinkedIn</a><a href="https://github.com/rayyanse" target="_blank" rel="me noopener">GitHub</a><a href="{UPWORK}" target="_blank" rel="me noopener">Upwork</a></div>
         </div>
         <div class="contact-acts" data-rv>
           <a href="mailto:{EMAIL}?subject=Free%20automation%20audit" class="btn btn-ink">Book a free audit{ARROW}</a>
@@ -1049,7 +1050,7 @@ def about_contact() -> str:
         <div data-rv>
           <p class="lede">I'm looking for a full-time AI engineering role, remote or in Lahore. Send me the role and what your team is building. Happy to walk through any of these systems on a call.</p>
           <a class="mail" href="mailto:{EMAIL}">{EMAIL}</a>
-          <div class="ways"><a href="https://www.linkedin.com/in/rayyan45/" target="_blank" rel="me noopener">LinkedIn</a><a href="https://github.com/rayyanse" target="_blank" rel="me noopener">GitHub</a><a href="{WHATSAPP}" target="_blank" rel="noopener">WhatsApp +92 321 8234852</a></div>
+          <div class="ways"><a href="https://www.linkedin.com/in/rayyan45/" target="_blank" rel="me noopener">LinkedIn</a><a href="https://github.com/rayyanse" target="_blank" rel="me noopener">GitHub</a><a href="{WHATSAPP}" target="_blank" rel="noopener">WhatsApp {PHONE}</a></div>
         </div>
         <div class="contact-acts" data-rv>
           <a href="{RESUME_PDF}" class="btn btn-ink" download>Download résumé{ARROW}</a>

@@ -18,7 +18,7 @@ export default async function handler(req, res) {
 ABOUT RAYYAN:
 Muhammad Rayyan Khan is a 23-year-old Full-Stack AI Engineer from Lahore, Pakistan, holding a Software Engineering degree from the University of Management and Technology. He has 1.5 years of hands-on experience building AI systems and automation pipelines. He is execution-focused, ships fast, and figures things out as he goes. His passion sits at the intersection of AI engineering, tech tinkering, and building tools that actually work in production. He works with clients both locally in Pakistan and globally on a remote basis.
 - Email: agharayyan@gmail.com
-- WhatsApp: +92 321 8234852
+- WhatsApp: +92 333 9778846
 - LinkedIn: linkedin.com/in/rayyan45
 
 WHAT HE BUILDS:
@@ -66,14 +66,14 @@ n8n, Make.com, Zapier, Next.js, Supabase, Claude AI, GPT, Gemini, Groq, OpenRout
 
 WHEN SOMEONE WANTS TO HIRE:
 - Collect their name and what they want to build
-- Then say: "Great! Reach Rayyan directly on WhatsApp at +92 321 8234852 or email agharayyan@gmail.com — mention what you told me and he'll get back to you quickly."
+- Then say: "Great! Reach Rayyan directly on WhatsApp at +92 333 9778846 or email agharayyan@gmail.com — mention what you told me and he'll get back to you quickly."
 
 RULES FOR OFF-TOPIC OR PERSONAL QUESTIONS:
 If someone asks personal questions about Rayyan that aren't about his work, or anything unrelated to his services, politely say you can only help with his work and projects, then offer to show what he has built.
 
 RULES:
 - Never make up projects, prices, or capabilities not listed above
-- If unsure, say "Best to ask Rayyan directly on WhatsApp: +92 321 8234852"
+- If unsure, say "Best to ask Rayyan directly on WhatsApp: +92 333 9778846"
 - Always end hiring-related messages with WhatsApp CTA`;
 
   if (!process.env.GEMINI_API_KEY) {

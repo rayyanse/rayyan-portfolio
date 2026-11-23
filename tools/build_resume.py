@@ -70,7 +70,7 @@ def render() -> str:
     skills = "".join(f"<div><b>{e(g)}</b>{e(', '.join(items))}</div>" for g, items in bp.SKILLS)
     edu = "".join(f"""<div class="job"><div class="job-top"><b>{e(t)}</b><span class="when">{e(d)}</span></div>
 <div class="co">{e(w)}</div>{f'<div>{e(n)}</div>' if n else ''}</div>""" for d, t, w, n in bp.EDUCATION)
-    phone = "+92 321 8234852"
+    phone = bp.PHONE
     return f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>{e(bp.NAME)} résumé</title><style>{CSS}</style></head><body>
 <header><div><h1>{e(bp.NAME)}</h1><div class="role">{e(bp.ROLE)} · Lahore, Pakistan · open to remote</div></div>
 <div class="contact"><a href="mailto:{bp.EMAIL}">{bp.EMAIL}</a> · {phone}<br><a href="{bp.SITE}">rayyankhan.dev</a> · <a href="https://www.linkedin.com/in/rayyan45/">linkedin.com/in/rayyan45</a><br><a href="https://github.com/rayyanse">github.com/rayyanse</a></div></header>
