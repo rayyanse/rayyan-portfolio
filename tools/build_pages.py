@@ -312,9 +312,11 @@ SUMMARY = ("AI engineer with five years of building software, the last two on AI
 EXPERIENCE = [
     ("Sep 2026 – Present", ROLE, "Self-employed", "Lahore · remote", [
         "Builds AI agents, voice agents and WhatsApp automation for businesses in Pakistan and abroad, from scoping to handover.",
+        "Al Munir UPVC: a sales pipeline that finds buyers in Facebook groups, calls them with a voice agent and sends a priced PDF quote on WhatsApp.",
+        "Bresco Properties: five agents' WhatsApp numbers on one dashboard, with AI replies in Roman Urdu. Live at the agency.",
         "Call Stream, with Shahwaiz: an Urdu AI call agent on a normal Pakistani SIM, plus eight industry demo films made in code.",
         "SEO-Ray: a website audit tool that checks about 150 things and writes an owner report and a developer report.",
-    ], ["call-stream"]),
+    ], ["al-munir", "bresco", "call-stream"]),
     ("Mar 2026 – Sep 2026", "Founding AI Engineer", "VideosGeeks", "Lahore", [
         "Joined as the company's first AI engineer and built the AI department from nothing.",
         "Ran hiring for seven interns, then trained them from onboarding to delivering client work on their own.",
