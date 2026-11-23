@@ -17,7 +17,7 @@ from pathlib import Path
 SITE = "https://rayyankhan.dev"
 NAME = "Agha Muhammad Rayyan Khan"
 EMAIL = "agharayyan@gmail.com"
-PHONE = "+92 333 9778846"  # WhatsApp too; the one place to change it (site, résumé)
+PHONE = "+92 333 9778846"  # WhatsApp too; the one place to change it on the site (the résumé PDF has its own copy)
 WHATSAPP = "https://wa.me/923339778846"
 UPWORK = "https://www.upwork.com/freelancers/~010f3dc36382e38053"
 ROOT = Path(__file__).resolve().parent.parent
@@ -300,9 +300,10 @@ SERVICES = [
     },
 ]
 
-# ------------------------------------------------------------------ career (the /about page and the résumé PDF)
-# One source for both: tools/build_resume.py imports these. Dates and bullets come from Rayyan's
-# résumé of 2026-11-16; titles follow his LinkedIn (VideosGeeks: "Founding AI Engineer").
+# ------------------------------------------------------------------ career (the /about page)
+# Dates and bullets come from Rayyan's résumé of 2026-11-16; titles follow his LinkedIn (VideosGeeks:
+# "Founding AI Engineer"). The résumé PDF at RESUME_PDF is Rayyan's own file, not generated: replace it
+# by hand. When his career changes, update both this data and that PDF.
 ROLE = "Independent AI Engineer"
 RESUME_PDF = "/agha-muhammad-rayyan-khan-resume.pdf"
 SUMMARY = ("AI engineer with five years of building software, the last two on AI agents, voice agents and automation "

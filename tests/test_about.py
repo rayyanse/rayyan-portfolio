@@ -1,6 +1,6 @@
 """Checks the generated /about page and the résumé against the files on disk.
 
-    python tests/test_about.py      (run after tools/build_pages.py and tools/build_resume.py)
+    python tests/test_about.py      (run after tools/build_pages.py)
 """
 import re
 import sys
