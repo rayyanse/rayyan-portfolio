@@ -20,7 +20,23 @@ EMAIL = "agharayyan@gmail.com"
 PHONE = "+92 333 9778846"  # WhatsApp too; the one place to change it on the site (the résumé PDF has its own copy)
 WHATSAPP = "https://wa.me/923339778846"
 UPWORK = "https://www.upwork.com/freelancers/~010f3dc36382e38053"
+# Every public profile that is Rayyan, for schema.org sameAs. Search engines and AI assistants use this
+# list to tie the profiles to one person. Add a profile here only once it is live and public.
+SAME_AS = [
+    "https://www.linkedin.com/in/rayyan45/",
+    "https://github.com/rayyanse",
+    UPWORK,
+    "https://clutch.co/profile/agha-muhammad-rayyan-khan",
+    "https://www.sortlist.com/agency/agha-muhammad-rayyan-khan",
+    "https://dev.to/agharayyankhan",
+    "https://hashnode.com/@agharayyankhan",
+    "https://www.producthunt.com/@agharayyankhan",
+]
 ROOT = Path(__file__).resolve().parent.parent
+# schema.org knowsAbout. Only tools and skills a shipped project on this site actually uses.
+KNOWS_ABOUT = ["AI agents", "AI voice agents", "Urdu voice agents", "AI calling agents", "Voice AI",
+               "Retell AI", "LiveKit", "Asterisk", "WhatsApp automation", "Roman Urdu chatbots",
+               "n8n", "Workflow automation", "Retrieval-augmented generation"]
 # Publish date of these pages and their films (sitemap lastmod, and the day part of FILM_UPLOADED).
 FILM_DATE = "2026-11-16"
 # VideoObject uploadDate. Google wants a full ISO 8601 datetime with a timezone, not a bare date
@@ -960,10 +976,10 @@ def home_page() -> str:
         {"@type": "Person", "@id": f"{SITE}/#person", "name": NAME,
          "alternateName": ["Muhammad Rayyan Khan", "Agha Rayyan", "Muhammad Rayyan", "Rayyan Khan"],
          "url": f"{SITE}/", "image": f"{SITE}{PHOTO_JPG}", "jobTitle": "AI Systems & Automation Engineer",
-         "description": "Builds AI agents, voice assistants, automation pipelines and full-stack dashboards for businesses.",
+         "description": "Builds AI agents, Urdu and English AI voice agents, WhatsApp automation and automation pipelines for businesses.",
          "address": {"@type": "PostalAddress", "addressLocality": "Lahore", "addressCountry": "PK"},
-         "knowsAbout": ["AI agents", "Voice AI", "Workflow automation", "n8n", "WhatsApp automation", "Retrieval-augmented generation"],
-         "sameAs": ["https://www.linkedin.com/in/rayyan45/", "https://github.com/rayyanse", UPWORK]},
+         "knowsAbout": KNOWS_ABOUT,
+         "sameAs": SAME_AS},
         {"@type": "WebSite", "@id": f"{SITE}/#website", "url": f"{SITE}/", "name": NAME, "alternateName": "Rayyan Khan portfolio", "publisher": {"@id": f"{SITE}/#person"}},
         {"@type": "ItemList", "name": "Case studies", "itemListElement": [
             {"@type": "ListItem", "position": i + 1, "url": f"{SITE}/work/{s}", "name": CASE_BY[s]["name"]} for i, s in enumerate(HOME_CASES)]},
@@ -985,7 +1001,7 @@ def about_page() -> str:
          "mainEntity": {"@type": "Person", "@id": f"{SITE}/#person", "name": NAME, "url": f"{SITE}/", "image": f"{SITE}{PHOTO_JPG}",
                         "jobTitle": ROLE, "description": SUMMARY,
                         "alumniOf": {"@type": "CollegeOrUniversity", "name": "University of Management and Technology"},
-                        "sameAs": ["https://www.linkedin.com/in/rayyan45/", "https://github.com/rayyanse", UPWORK]}},
+                        "sameAs": SAME_AS}},
         crumbs_schema([("Home", "/"), ("About", path)]),
     ]
     years = 2026 - 2021
@@ -1193,7 +1209,8 @@ def main() -> None:
     (ROOT / "404.html").write_text(not_found_page(), encoding="utf-8")
     (ROOT / "index.html").write_text(home_page(), encoding="utf-8")
     write_sitemap()
-    print(f"built the homepage, the {len(PROJECTS)}-project archive, {len(CASES)} case studies, {len(SERVICES)} service pages, /about and sitemap.xml")
+    write_llms()
+    print(f"built the homepage, the {len(PROJECTS)}-project archive, {len(CASES)} case studies, {len(SERVICES)} service pages, /about, sitemap.xml and llms.txt")
 
 
 def write_sitemap() -> None:
@@ -1204,6 +1221,44 @@ def write_sitemap() -> None:
     urls = "".join(f"  <url>\n    <loc>{SITE}{p}</loc>\n    <lastmod>{d}</lastmod>\n  </url>\n" for p, d in entries)
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + "</urlset>\n"
     (ROOT / "sitemap.xml").write_text(xml, encoding="utf-8")
+
+
+def llms_txt() -> str:
+    """llms.txt (llmstxt.org): a plain summary of the site for AI assistants, built from the same data
+    as the pages so it can't drift from them."""
+    services = chr(10).join(f"- [{s['title']}]({SITE}/{s['slug']}): {s['description']}" for s in SERVICES)
+    cases = chr(10).join(f"- [{c['title']}]({SITE}/work/{c['slug']}): {c['description']}" for c in CASES)
+    profiles = chr(10).join(f"- {u}" for u in SAME_AS)
+    return f"""# {NAME}
+
+> {NAME} (Rayyan Khan) is an independent AI engineer in Lahore, Pakistan. He builds AI agents, Urdu and English AI voice agents, WhatsApp automation and automation pipelines for businesses, and ships each one end to end.
+
+## Services
+
+{services}
+
+## Case studies
+
+{cases}
+
+## More
+
+- [All {len(PROJECTS)} projects]({SITE}/projects): every system with its problem, stack and walkthrough film
+- [About]({SITE}/about): experience, skills and résumé
+
+## Contact
+
+- Email: {EMAIL}
+- WhatsApp: {PHONE}
+
+## Profiles
+
+{profiles}
+"""
+
+
+def write_llms() -> None:
+    (ROOT / "llms.txt").write_text(llms_txt(), encoding="utf-8")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,40 @@
+# Agha Muhammad Rayyan Khan
+
+> Agha Muhammad Rayyan Khan (Rayyan Khan) is an independent AI engineer in Lahore, Pakistan. He builds AI agents, Urdu and English AI voice agents, WhatsApp automation and automation pipelines for businesses, and ships each one end to end.
+
+## Services
+
+- [AI Voice Agent Developer: Urdu and English Call Agents](https://rayyankhan.dev/ai-voice-agents): AI voice agents that answer your phone in Urdu or English, book appointments into your calendar and call leads back, even on your existing number.
+- [AI Calling Agent in Pakistan: Urdu Voice Bot for Business](https://rayyankhan.dev/ai-calling-agent-pakistan): An Urdu AI calling agent for Pakistani businesses. It answers your normal mobile number, calls every new lead back and books the visit. No SIP trunk.
+- [WhatsApp Automation in Pakistan: Bots, Routing, Campaigns](https://rayyankhan.dev/whatsapp-automation): WhatsApp bots that reply to leads in seconds in Roman Urdu or English, route them to the right person and send quotes, built in Lahore.
+- [Hire an AI Agent Developer: Custom AI Agents & Automation](https://rayyankhan.dev/ai-agents-automation): Custom AI agents that decide and act on your systems, plus n8n and Make automation with retries and alerts. Built by Agha Muhammad Rayyan Khan.
+
+## Case studies
+
+- [Call Stream: Urdu AI Call Agent on a Normal SIM](https://rayyankhan.dev/work/call-stream): An Android phone and a normal Pakistani SIM become an AI call agent that answers in Urdu. No SIP trunk, no PTA paperwork, no new number.
+- [Jennifer: An AI Employee for Real Estate Agencies](https://rayyankhan.dev/work/jennifer): Jennifer manages leads, scores intent, tracks follow-ups, searches live market data and briefs the owner daily, all through a normal chat.
+- [Al Munir UPVC: A Sales Pipeline That Runs After Hours](https://rayyankhan.dev/work/al-munir): A UPVC manufacturer's pipeline finds buyers in Facebook groups, calls them with a voice agent and sends a priced PDF quote on WhatsApp.
+- [Bresco Properties: An AI Sales Stack for Real Estate](https://rayyankhan.dev/work/bresco): A Lahore real estate agency's pipeline: AI-drafted posts, five agents' WhatsApp numbers on one dashboard, AI replies in Roman Urdu and Urdu calls.
+- [WhatsApp Lead Management: Instant Replies and Routing](https://rayyankhan.dev/work/whatsapp-lead-system): Instagram ad leads get a WhatsApp reply in seconds, their needs captured and routed round-robin to the right associate, in the same chat.
+- [Sebastian: An AI Teammate Inside Real WhatsApp Calls](https://rayyankhan.dev/work/sebastian): Sebastian joins real WhatsApp and phone calls on an Android phone, takes notes, answers out loud when you say his name and sends the summary after.
+
+## More
+
+- [All 19 projects](https://rayyankhan.dev/projects): every system with its problem, stack and walkthrough film
+- [About](https://rayyankhan.dev/about): experience, skills and résumé
+
+## Contact
+
+- Email: agharayyan@gmail.com
+- WhatsApp: +92 333 9778846
+
+## Profiles
+
+- https://www.linkedin.com/in/rayyan45/
+- https://github.com/rayyanse
+- https://www.upwork.com/freelancers/~010f3dc36382e38053
+- https://clutch.co/profile/agha-muhammad-rayyan-khan
+- https://www.sortlist.com/agency/agha-muhammad-rayyan-khan
+- https://dev.to/agharayyankhan
+- https://hashnode.com/@agharayyankhan
+- https://www.producthunt.com/@agharayyankhan
