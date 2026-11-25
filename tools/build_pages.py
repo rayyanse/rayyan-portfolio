@@ -381,6 +381,104 @@ SERVICES = [
             OWN,
         ],
     },
+    {
+        # "website developer lahore" / "web development company lahore": strong Google PK autocomplete demand,
+        # 1-4 big platforms in the top 10 (2026-11-24 research). Proof is the archive's web projects plus the
+        # Ecom Hunt years from EXPERIENCE. The speed numbers are SEO-Ray's measured pass on this site (/seo-ray).
+        "slug": "website-developer-lahore",
+        "lastmod": "2026-11-25",
+        "area": [{"@type": "City", "name": "Lahore"}, "Pakistan", "Worldwide"],
+        "whatsapp": True,
+        "cta": "Get a free consultation",
+        "contact": ("Need a website that brings in leads?", "Let's talk."),
+        "glass": [("4.3 → 2.0 s", "phone load time on this site after one SEO-Ray pass"), ("Johar Town", "Lahore. We can meet at your office")],
+        "nums": [("3", "brand and 3D sites in the portfolio"), ("4.3 → 2.0 s", "phone load time here, after one SEO-Ray pass"), ("2.5 yrs", "as a web developer at Ecom Hunt, Lahore")],
+        "label": "Service · Websites in Lahore",
+        "title": "Website Developer in Lahore: Fast Sites With AI Built In",
+        "description": "Website developer in Lahore building fast brand sites, 3D product pages and business websites with AI chat and WhatsApp lead capture built in.",
+        "h1": ["Websites that", "load fast, rank,", '<span class="grad">and answer leads.</span>'],
+        "lede": "I'm Agha Muhammad Rayyan Khan, a website developer in Johar Town, Lahore. I build brand sites, 3D product pages and business websites with an AI assistant and WhatsApp lead capture built in, and with SEO set up before launch, not after.",
+        "film": "zephra", "tall": False, "note": "ZEPHRA walkthrough · a 3D brand site built in Next.js and Three.js",
+        "offer": [
+            ("Fast on a phone", "Most of your visitors are on a phone. Pages are built and measured for phone speed: this site went from 4.3 to 2.0 seconds in one pass."),
+            ("An AI assistant on your site", "A chat assistant that answers visitors from your own facts, day and night. This site has one, bottom right."),
+            ("Leads straight to WhatsApp", "Enquiry buttons and forms that land in WhatsApp, where Lahore customers already want to talk."),
+            ("3D and motion", "A real-time 3D product viewer like ZEPHRA, or scroll-driven scenes like Maison Aurelle, when the brand needs to feel premium."),
+            ("SEO from day one", "Titles, schema, sitemap and Google Search Console set up before launch, then checked with SEO-Ray, my own audit tool."),
+            ("Yours to keep", "Built in Next.js or React, documented, on your own domain and hosting. You own the code."),
+        ],
+        "extra": [
+            {"label": "Agency or freelancer", "h2": "Looking for a web development company in Lahore?", "dim": "Here's the honest answer.",
+             "lede": "I'm one developer, not a company. Here's when that fits.",
+             "items": [
+                 ("Choose a company when…", "you need a large team, a long support contract, or apps, design and marketing all from one supplier."),
+                 ("Choose me when…", "you want a fast, well-built site with AI and lead capture, made by the person you actually talk to."),
+                 ("We can meet", "I'm in Johar Town. For a Lahore business, the first meeting can happen at your office."),
+             ]},
+        ],
+        "proof_projects": ["zephra", "maison-aurelle", "ai-human-labs"],
+        "proof_lede": "Brand sites and 3D builds from the portfolio. Each opens in the project archive.",
+        "faq": [
+            ("Where are you based?", "Johar Town, Lahore, Pakistan. I meet Lahore clients in person, and build for businesses elsewhere remotely."),
+            ("Are you a web development company?", "No. I'm a freelance website developer. You work with me directly, from the first meeting to launch."),
+            ("How much experience do you have with websites?", "I was a web developer at Ecom Hunt in Lahore from 2021 to 2024, building websites and custom UI for wholesale Amazon businesses. I've been building software for five years."),
+            ("How much does a website cost?", "Every website gets a fixed quote after a free consultation. The price depends on the number of pages, 3D or motion work, and any AI or WhatsApp features."),
+            ("Will my website show up on Google?", "It launches with the SEO basics done and Google Search Console set up. Rankings still take weeks to months, and I'd rather show you measured progress than promise a spot."),
+            ("Can you add AI chat or WhatsApp to my existing website?", "Yes. An AI assistant or WhatsApp lead capture can be added to most existing sites without a rebuild."),
+            ("Who owns the website?", "You do: the code, the domain and the hosting account. I hand over everything with a short walkthrough."),
+        ],
+    },
+    {
+        # "seo services lahore" / "seo expert lahore": strong demand, 0-1 big platforms in the top 10
+        # (2026-11-24 research). Sells the service; /seo-ray stays the product page and ranks for SEO-Ray searches.
+        # Numbers: 77 → 98 and 4.3 → 2.0 s are on /seo-ray; the #1 is the 2026-11-22 rank check
+        # (research/rayyankhan-dev-rank-check-2026-11-22.md), 9 days after the 2026-11-13 launch.
+        # No client SEO results yet, so none are claimed.
+        "slug": "seo-services-lahore",
+        "lastmod": "2026-11-25",
+        "area": [{"@type": "City", "name": "Lahore"}, "Pakistan"],
+        "whatsapp": True,
+        "cta": "Get a free SEO audit",
+        "contact": ("Want to see how Google reads your site?", "The audit is free."),
+        "hero_img": {"src": "/seo-ray-report.jpg", "w": 1588, "h": 1180,
+                     "alt": "A page from an SEO-Ray owner report for rayyankhan.dev: category scores, a score trend and finding counts."},
+        "film": None, "tall": False, "note": "A real SEO-Ray owner report · rayyankhan.dev, 16 Nov 2026",
+        "glass": [("Free", "SEO-Ray audit, with two reports"), ("77 → 98", "SEO-Ray score on this site after one fix pass")],
+        "nums": [("77 → 98", "SEO-Ray score on this site, one fix pass"), ("4.3 → 2.0 s", "phone load time, same pass"), ("#1", "on Google Pakistan for the owner's name, 9 days after launch")],
+        "label": "Service · SEO in Lahore",
+        "title": "SEO Services in Lahore: Audits, Fixes and Google Setup",
+        "description": "SEO services in Lahore from a developer who fixes the site himself: a free SEO-Ray audit, a plain-English report, technical fixes and Search Console setup.",
+        "h1": ["SEO in Lahore,", "from the developer", '<span class="grad">who fixes it himself.</span>'],
+        "lede": "I'm Agha Muhammad Rayyan Khan, a developer in Johar Town, Lahore, and I built SEO-Ray, my own audit tool. It shows how Google and AI assistants read your site. Then, unlike most SEO shops, I fix the problems in the code myself.",
+        "offer": [
+            ("A free audit, two reports", "SEO-Ray writes one report in plain English for you and one with the exact fixes for whoever touches the code."),
+            ("Fixes, not just a list", "Robots rules, redirects, canonical tags, sitemaps, broken pages and structured data, fixed in the site itself."),
+            ("Speed on a phone", "Measured with Google's own data and Lighthouse, then fixed. This site went from 4.3 to 2.0 seconds."),
+            ("Google Search Console and Bing", "With your permission, your site gets added, verified and its sitemap submitted. You sign in on Google's own screen."),
+            ("Keywords and rank tracking", "Which searches your customers use in Pakistan, where you rank in Google's top 50, and how that moves each month."),
+            ("Ready for AI search", "Checks that ChatGPT-style assistants can read your site and whether Gemini knows your business."),
+        ],
+        "extra": [
+            {"label": "Why a developer", "h2": "Most SEO reports", "dim": "never get fixed.",
+             "lede": "An SEO shop finds the problems, then you look for a developer to fix them. Here it's the same person.",
+             "items": [
+                 ("I change the code", "The fixes in your report get done in your site, not handed to someone else to schedule."),
+                 ("Every rule is checked", "SEO-Ray's checks follow Google's own documentation, so you don't pay for myths."),
+                 ("We can meet", "I'm in Johar Town. For a Lahore business, we can go through the report at your office."),
+             ]},
+        ],
+        "proof_projects": ["seo-ray"],
+        "proof_lede": "SEO-Ray is my own tool. It ran on this site first, and the numbers above are from that pass.",
+        "faq": [
+            ("Where are you based?", "Johar Town, Lahore, Pakistan. I meet Lahore clients in person, and work with businesses elsewhere remotely."),
+            ("Are you an SEO agency?", "No. I'm a freelance developer who built his own SEO tool. You work with me directly, and the same person who finds a problem fixes it."),
+            ("What's in the free SEO audit?", "SEO-Ray crawls your site, measures phone speed, checks what Google has indexed and whether AI assistants can read it, then writes two reports: a plain-English one for you and a fix list for the developer."),
+            ("Can you guarantee the #1 spot on Google?", "No, and nobody honest can. I fix what's measurably wrong, track your positions every month and show you the before and after."),
+            ("How long does SEO take?", "Technical fixes take days. Rankings usually take weeks to months to move, which is why progress is re-checked monthly, not promised."),
+            ("How much do SEO services cost?", "The audit is free. After it, you get a fixed quote for the fixes and, if you want it, monthly tracking."),
+            ("Do I have to give you my Google account?", "No. Connecting Search Console is optional. If you choose to, you sign in on Google's own screen and can disconnect at any time."),
+        ],
+    },
 ]
 
 # ------------------------------------------------------------------ career (the /about page)
@@ -444,7 +542,7 @@ HIRE_CASES = ["call-stream", "jennifer", "sebastian"]
 
 CASE_BY = {c["slug"]: c for c in CASES}
 SERVICE_BY = {s["slug"]: s for s in SERVICES}
-SERVICE_NAMES = {"ai-automation-lahore": "AI automation in Lahore", "ai-voice-agents": "AI voice agents", "ai-calling-agent-pakistan": "Urdu AI calling agent", "whatsapp-automation": "WhatsApp automation", "ai-agents-automation": "AI agents & automation"}
+SERVICE_NAMES = {"ai-automation-lahore": "AI automation in Lahore", "website-developer-lahore": "Websites in Lahore", "seo-services-lahore": "SEO in Lahore","ai-voice-agents": "AI voice agents", "ai-calling-agent-pakistan": "Urdu AI calling agent", "whatsapp-automation": "WhatsApp automation", "ai-agents-automation": "AI agents & automation"}
 
 ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
 ARROW_SM = ARROW.replace('<svg ', '<svg width="14" height="14" ', 1)
@@ -472,7 +570,7 @@ CAPABILITIES = [
     ("Full-Stack Platforms", "The product around the intelligence: dashboards, directories, portals and real-time apps, built so someone else can maintain them.",
      ["Next.js, React and Node with Postgres, Mongo or Convex", "Auth, roles and row-level permissions", "Real-time sockets, presence and live updates"], None, "bresco"),
     ("Websites & 3D Web", "Brand sites and launch pages, from a single-page site to a 3D product viewer that runs in the browser.",
-     ["Brand direction, copy and front-end build", "Three.js, WebGL and GSAP scroll-driven motion", "Fast and responsive on real phones, not just a desktop screen"], None, "aurelle"),
+     ["Brand direction, copy and front-end build", "Three.js, WebGL and GSAP scroll-driven motion", "Fast and responsive on real phones, not just a desktop screen"], "/website-developer-lahore", "aurelle"),
 ]
 
 
@@ -678,11 +776,18 @@ def work_card(slug: str, tint: str, feat: bool = False, tag: str | None = None) 
 
 def sub_hero(*, crumbs: list[tuple[str, str | None]], label: str, lines: list[str], lede: str, actions: str,
              chips: list[str], facts: list[tuple[str, str]], film: str, poster: str, name: str, tall: bool,
-             note: str, start: int) -> str:
+             note: str, start: int, image: dict | None = None) -> str:
     """Case and service pages: copy left, the film's framed screen right, facts under the copy.
-    The lede is the LCP text and is visible from the first paint."""
+    The lede is the LCP text and is visible from the first paint. `image` ({src, w, h, alt}) replaces
+    the film with a still, for a page with no film (no "Watch the film" button then)."""
     cr = "".join((f'<a href="{h}">{e(t)}</a><span aria-hidden="true">/</span>' if h else f"<span>{e(t)}</span>") for t, h in crumbs)
     chip = "".join(f'<span class="chip">{e(x)}</span>' for x in chips)
+    if image:
+        watch = ""
+        media = f'<div class="screen"><img src="{image["src"]}" alt="{e(image["alt"])}" fetchpriority="high" width="{image["w"]}" height="{image["h"]}" /></div>'
+    else:
+        watch = f'<button type="button" class="btn btn-line" data-watch="/films/{film}.mp4" data-poster="/films/{poster}.jpg"{" data-tall" if tall else ""}>{PLAY}Watch the film</button>'
+        media = screen(film, poster, name, tall, hero=True, start=start)
     return f"""
 <section class="hero sub" aria-labelledby="h1">
   <div class="container">
@@ -692,11 +797,11 @@ def sub_hero(*, crumbs: list[tuple[str, str | None]], label: str, lines: list[st
         <div class="label" data-hi style="margin-bottom:22px">{e(label)}</div>
         {h1(lines)}
         <p class="lede">{e(lede)}</p>
-        <div class="actions" data-hi>{actions}<button type="button" class="btn btn-line" data-watch="/films/{film}.mp4" data-poster="/films/{poster}.jpg"{' data-tall' if tall else ''}>{PLAY}Watch the film</button></div>
+        <div class="actions" data-hi>{actions}{watch}</div>
         {facts_dl(facts, 'stats') if facts else ''}
       </div>
       <div class="hero-film{' tall' if tall else ''}" data-hi>
-        {screen(film, poster, name, tall, hero=True, start=start)}
+        {media}
         <p class="film-note">{e(note)}</p>
       </div>
     </div>
@@ -724,7 +829,7 @@ def next_card(kind: str, href: str, title: str, sub: str, poster: str, tall: boo
 <section class="sec" style="padding-top:0" aria-label="{e(kind)}">
   <div class="container">
     <a class="next-card" href="{href}" data-rv>
-      <div class="stage t-a"><div class="screen{' phone' if tall else ''}"><img src="/films/{poster}.jpg" alt="" loading="lazy" width="{720 if tall else 1280}" height="{1280 if tall else 720}" /></div></div>
+      <div class="stage t-a"><div class="screen{' phone' if tall else ''}"><img src="{poster if poster.startswith('/') else f'/films/{poster}.jpg'}" alt="" loading="lazy" width="{720 if tall else 1280}" height="{1280 if tall else 720}" /></div></div>
       <div class="next-body"><span class="kind">{e(kind)}</span><h2>{e(title)}</h2><p>{e(sub)}</p><span class="btn btn-ink">Open it{ARROW}</span></div>
     </a>
   </div>
@@ -856,17 +961,24 @@ def service_page(s: dict) -> str:
         {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in s["faq"]]},
         crumbs_schema([("Home", "/"), (name, path)]),
     ]
-    actions = f'<a href="mailto:{EMAIL}?subject={e(name)}" class="btn btn-ink">Book a free audit{ARROW}</a>'
+    actions = f'<a href="mailto:{EMAIL}?subject={e(name)}" class="btn btn-ink">{e(s.get("cta", "Book a free audit"))}{ARROW}</a>'
     if s.get("whatsapp"):
         actions += f'<a href="{WHATSAPP}" class="btn btn-line" target="_blank" rel="noopener">WhatsApp me</a>'
     extra = "".join(extra_section(x, i) for i, x in enumerate(s.get("extra", [])))
     offer ="".join(f'<li data-rv><span class="n">{i+1:02d}</span><h3>{e(t)}</h3><p>{e(p)}</p></li>' for i, (t, p) in enumerate(s["offer"]))
-    proof = "\n".join(work_card(x, TINTS[i % len(TINTS)]) for i, x in enumerate(s["proof"]))
+    if s.get("proof_projects"):  # archive projects (no case study): animated tiles, like the homepage's "More builds"
+        by = {p["slug"]: p for p in PROJECTS}
+        proof = f'    <div class="tiles">{"".join(project_tile(by[x]) for x in s["proof_projects"])}</div>'
+    else:
+        proof = '    <div class="works">\n' + "\n".join(work_card(x, TINTS[i % len(TINTS)]) for i, x in enumerate(s["proof"])) + "\n    </div>"
     faq = "".join(f'<details data-rv><summary><h3>{e(q)}</h3><i aria-hidden="true"></i></summary><div class="a"><p>{e(a)}</p></div></details>' for q, a in s["faq"])
     num = f"{order.index(s['slug']) + 1:02d}"
-    return head(s["title"], s["description"], path, f"{SITE}/films/{s['film']}.jpg", schema, preload=f"/films/{s['film']}.jpg") + sub_hero(
+    img = s.get("hero_img")
+    still = img["src"] if img else f"/films/{s['film']}.jpg"
+    return head(s["title"], s["description"], path, f"{SITE}{still}", schema, preload=still) + sub_hero(
         crumbs=[("Home", "/"), (name, None)], label=f"Service {num} / {len(SERVICES):02d} · {name}", lines=s["h1"], lede=s["lede"],
-        actions=actions, chips=[], facts=s["glass"], film=s["film"], poster=s["film"], name=name, tall=s["tall"], note=s["note"], start=0) + f"""
+        actions=actions, chips=[], facts=s["glass"], film=s["film"], poster=s["film"], name=name, tall=s["tall"], note=s["note"], start=0,
+        image=img) + f"""
 
 <section class="sec" aria-labelledby="offer-h">
   <div class="container">
@@ -881,11 +993,9 @@ def service_page(s: dict) -> str:
   <div class="container">
     <div class="sec-head">
       <div><div class="label" data-rv>Proof</div><h2 id="proof-h" data-rv>Built and <span class="dim">running.</span></h2></div>
-      <div class="side"><p class="lede" data-rv>Real systems, each with a walkthrough film of it working.</p></div>
+      <div class="side"><p class="lede" data-rv>{e(s.get("proof_lede", "Real systems, each with a walkthrough film of it working."))}</p></div>
     </div>
-    <div class="works">
 {proof}
-    </div>
   </div>
 </section>
 """ + dark_band("Track record", name, "by the numbers.", s["nums"]) + process_section() + f"""
@@ -896,8 +1006,9 @@ def service_page(s: dict) -> str:
     <div class="faq">{faq}</div>
   </div>
 </section>
-""" + next_card("Next service", f"/{nxt['slug']}", SERVICE_NAMES[nxt["slug"]], nxt["description"], nxt["film"], nxt["tall"]) + contact(
-        "Got a process someone repeats every day?", "That's the one.") + foot()
+""" + next_card("Next service", f"/{nxt['slug']}", SERVICE_NAMES[nxt["slug"]], nxt["description"],
+                nxt["hero_img"]["src"] if nxt.get("hero_img") else nxt["film"], nxt["tall"]) + contact(
+        *s.get("contact", ("Got a process someone repeats every day?", "That's the one."))) + foot(SCENES_JS if s.get("proof_projects") else "")
 
 
 # ================================================================== homepage
@@ -1005,13 +1116,18 @@ def home_build() -> str:
 </section>"""
 
 
+def project_tile(p: dict) -> str:
+    """An archive project as a tile with its animated scene, linking to its place in /projects."""
+    return f"""<a class="tile" href="/projects#{p['slug']}" data-rv>
+        <div class="proj-viz" data-viz="{p['viz']}"></div>
+        <div class="tile-body"><span class="kind">{e(p['tag'])}</span><h3>{e(p['title'])}</h3><p>{e(p['text'])}</p><span class="more">See it in the archive {ARROW_SM}</span></div>
+      </a>"""
+
+
 def home_more() -> str:
     by = {p["slug"]: p for p in PROJECTS}
     more = [by[s] for s in HOME_MORE]
-    tiles = "".join(f"""<a class="tile" href="/projects#{p['slug']}" data-rv>
-        <div class="proj-viz" data-viz="{p['viz']}"></div>
-        <div class="tile-body"><span class="kind">{e(p['tag'])}</span><h3>{e(p['title'])}</h3><p>{e(p['text'])}</p><span class="more">See it in the archive {ARROW_SM}</span></div>
-      </a>""" for p in more)
+    tiles = "".join(project_tile(p) for p in more)
     rest = len(PROJECTS) - len(CASES) - len(more)
     end = f"""<a class="tile all" href="/projects" data-rv><div class="tile-body"><span class="big">{len(PROJECTS)}</span><h3>Every project, in one place.</h3><p>These {len(more)}, {rest} more and the {len(CASES)} case studies. Filter by what you need built.</p><span class="more">Open the archive {ARROW_SM}</span></div></a>"""
     return f"""
