@@ -13,6 +13,7 @@ from __future__ import annotations
 import html
 import json
 from pathlib import Path
+from urllib.parse import quote
 
 SITE = "https://rayyankhan.dev"
 NAME = "Agha Muhammad Rayyan Khan"
@@ -228,21 +229,23 @@ SERVICES = [
         "lastmod": "2026-11-25",
         "area": [{"@type": "City", "name": "Lahore"}, "Pakistan"],
         "whatsapp": True,
-        "glass": [("Johar Town", "Lahore. The audit can happen at your office"), ("2", "Lahore client builds: Bresco Properties and Al Munir UPVC")],
-        "nums": [("2", "Lahore client builds, each with a walkthrough film"), ("Urdu", "voice calls and Roman Urdu WhatsApp replies"), ("24/7", "answering, after the office closes")],
+        # Hero is an animated scene, not a film: no single client's film fits a general page (Rayyan, 2026-11-25).
+        "glass": [("2", "Lahore client builds: Bresco Properties and Al Munir UPVC"), ("Urdu", "voice calls and Roman Urdu WhatsApp replies")],
+        "nums": [("24/7", "answering, after the office closes"), ("1", "person from the first audit to the handoff"), ("Free", "first audit for Lahore businesses")],
         "label": "Service · AI automation in Lahore",
         "title": "AI Automation in Lahore: WhatsApp, Urdu Voice, AI Agents",
         "description": "AI automation for Lahore businesses: WhatsApp bots, Urdu AI calling agents, n8n workflows and AI CRMs, built by a freelance developer in Johar Town.",
         "h1": ["AI automation", "for Lahore businesses,", '<span class="grad">built by someone you can meet.</span>'],
         "lede": "I'm Agha Muhammad Rayyan Khan, a freelance AI automation developer in Johar Town, Lahore. I build WhatsApp bots, Urdu AI calling agents, n8n workflows and AI CRMs that answer your leads, qualify them and update your records, for Lahore businesses like Bresco Properties and Al Munir UPVC.",
-        "film": "bresco", "tall": False, "note": "Bresco Properties walkthrough · example data for illustration",
+        "hero_img": {"viz": "lahore", "alt": "Animation: leads from WhatsApp, Facebook and a missed call go to an AI step, which replies in Roman Urdu, scores the lead in the CRM and books a visit."},
+        "film": None, "tall": False, "note": "How a lead moves through the system · illustration",
         "offer": [
-            ("WhatsApp leads answered in seconds", "A bot replies in Roman Urdu or English and hands the chat to the right agent. Bresco runs five agents' numbers from one inbox."),
-            ("Every lead called in Urdu", "A calling agent phones each new lead in Urdu on a normal Pakistani SIM, with Call Stream. No SIP trunk, no new number."),
-            ("“Price?” comments turned into quotes", "Al Munir's pipeline finds buyers in Facebook groups, calls them and sends a priced PDF quote on WhatsApp, even at night."),
-            ("An AI CRM your agents use on their phones", "Jennifer writes the lead status, score and follow-up from a plain message, so nobody updates a CRM by hand."),
-            ("Workflows between your tools", "n8n, Make.com and Zapier pipelines that move data between Sheets, CRMs and email, with retries and failure alerts."),
-            ("Visits booked without a phone call", "Measurement visits and appointments go straight into Google Calendar, and the team gets an email."),
+            ("WhatsApp leads answered in seconds", "A bot replies in Roman Urdu or English and hands the chat to the right person on your team, in the same conversation."),
+            ("Every lead called in Urdu", "A calling agent phones each new lead in Urdu on a normal Pakistani SIM. No SIP trunk, no new number."),
+            ("“Price?” comments turned into quotes", "Buyers asking in Facebook groups get found, called and sent a priced PDF quote on WhatsApp, even at night. Al Munir UPVC runs this."),
+            ("A CRM that updates itself", "Your team describes what happened in plain words, and the AI writes the lead status, score and next follow-up."),
+            ("n8n workflows between your tools", "Data moves between Sheets, your CRM, email and WhatsApp on its own, with retries and an alert when a step fails."),
+            ("Appointments booked without a phone call", "Visits and appointments go straight into Google Calendar, and your team gets an email."),
         ],
         "extra": [
             {"label": "Agency or freelancer", "h2": "Looking for an AI automation agency in Lahore?", "dim": "Here's the honest answer.",
@@ -255,18 +258,20 @@ SERVICES = [
             {"label": "Why someone in Lahore", "h2": "Built here, for the way", "dim": "Lahore sells.",
              "items": [
                  ("I write the way your customers do", "Pakistani customers message in Roman Urdu. The bots I build reply the same way, and the voice agents talk in Urdu."),
-                 ("I know where the phone setup gets stuck", "Most AI voice vendors here start with “get a SIP trunk”. Call Stream runs on the SIM you already use."),
+                 ("I know where the phone setup gets stuck", "Most AI voice vendors here start with “get a SIP trunk”. My calling setup runs on the SIM you already use."),
                  ("We can meet", "I'm in Johar Town. For a Lahore business, the free audit can happen at your office."),
              ]},
         ],
-        "proof": ["bresco", "al-munir", "jennifer", "call-stream"],
+        "proof": ["bresco", "al-munir"],
+        "proof_h": ("Built for", "Lahore clients."),
+        "proof_lede": "Two Lahore businesses running systems I built. Each case study shows how it works.",
         "faq": [
-            ("Where are you based?", "Johar Town, Lahore, Pakistan. I meet Lahore clients in person, and work with businesses elsewhere remotely."),
+            ("Where are you based?", "Johar Town, Lahore, Pakistan. I work with Lahore businesses in person and with everyone else remotely."),
             ("Are you an AI automation agency?", "No. I'm a freelance AI automation developer. You work with me directly, from the first audit to the handoff, with no account manager in between."),
             ("What have you built for Lahore businesses?", "Bresco Properties, a real estate agency: AI WhatsApp replies and an Urdu call for every lead. Al Munir UPVC, a windows manufacturer: a pipeline that finds buyers in Facebook groups, calls them and sends a priced PDF quote on WhatsApp."),
             ("Do the bots work in Urdu?", "Yes. The voice agents talk in Urdu, and the WhatsApp bots reply in Roman Urdu and English, the way customers actually write."),
             ("How much does AI automation cost?", "Every project gets a fixed quote after a free audit. The price depends on how many tools the system connects and how many conversations it handles, so I quote after seeing your process, not before."),
-            ("Which industries do you work with?", "Real estate (Bresco, Jennifer) and manufacturing (Al Munir) so far. Call Stream also has demo films for Umrah travel, healthcare, education, study abroad, BPO, AI agencies and car showrooms."),
+            ("Which industries do you work with?", "So far real estate (Bresco Properties) and manufacturing (Al Munir UPVC). The same building blocks, WhatsApp replies, Urdu calls, quotes and booking, fit any business whose leads arrive on WhatsApp or the phone."),
             OWN,
         ],
     },
@@ -385,41 +390,52 @@ SERVICES = [
         # "website developer lahore" / "web development company lahore": strong Google PK autocomplete demand,
         # 1-4 big platforms in the top 10 (2026-11-24 research). Proof is the archive's web projects plus the
         # Ecom Hunt years from EXPERIENCE. The speed numbers are SEO-Ray's measured pass on this site (/seo-ray).
+        # Process, contact and labels are website-specific (the automation wording was wrong here, 2026-11-25 audit).
         "slug": "website-developer-lahore",
         "lastmod": "2026-11-25",
         "area": [{"@type": "City", "name": "Lahore"}, "Pakistan", "Worldwide"],
         "whatsapp": True,
         "cta": "Get a free consultation",
-        "contact": ("Need a website that brings in leads?", "Let's talk."),
-        "glass": [("4.3 → 2.0 s", "phone load time on this site after one SEO-Ray pass"), ("Johar Town", "Lahore. We can meet at your office")],
-        "nums": [("3", "brand and 3D sites in the portfolio"), ("4.3 → 2.0 s", "phone load time here, after one SEO-Ray pass"), ("2.5 yrs", "as a web developer at Ecom Hunt, Lahore")],
+        "contact": ("Need a website that brings in leads?", "Let's talk.",
+                    "Tell me what the site is for and who should find it. I'll come back with a page plan, a fixed quote and examples close to what you need.",
+                    "Get a free consultation", "Website consultation"),
+        "process": ([
+            ("01", "Brief", "What the site is for, who should find it, and what a visitor should do: call, WhatsApp or fill a form."),
+            ("02", "Design", "Page plan, layout and copy, agreed before any code, so there are no surprises at launch."),
+            ("03", "Build", "Built and tested on real phones, with titles, schema and sitemap done, plus AI chat or WhatsApp if you want them."),
+            ("04", "Launch", "Live on your domain, added to Google Search Console, and handed over with a short walkthrough."),
+        ], "You see the plan and the design before a line of code, and you own all of it at the end."),
+        "glass": [("Johar Town", "Lahore. We can meet at your office"), ("Next.js", "React and Three.js, on your own domain")],
+        "nums": [("2.5 yrs", "as a web developer at Ecom Hunt, Lahore"), ("5 yrs", "building software"), ("1", "person from the brief to launch")],
         "label": "Service · Websites in Lahore",
         "title": "Website Developer in Lahore: Fast Sites With AI Built In",
         "description": "Website developer in Lahore building fast brand sites, 3D product pages and business websites with AI chat and WhatsApp lead capture built in.",
         "h1": ["Websites that", "load fast, rank,", '<span class="grad">and answer leads.</span>'],
         "lede": "I'm Agha Muhammad Rayyan Khan, a website developer in Johar Town, Lahore. I build brand sites, 3D product pages and business websites with an AI assistant and WhatsApp lead capture built in, and with SEO set up before launch, not after.",
-        "film": "zephra", "tall": False, "note": "ZEPHRA walkthrough · a 3D brand site built in Next.js and Three.js",
+        "film": "zephra", "tall": False, "note": "ZEPHRA · a real screen recording of the live 3D site",
+        "offer_label": "What you get",
         "offer": [
-            ("Fast on a phone", "Most of your visitors are on a phone. Pages are built and measured for phone speed: this site went from 4.3 to 2.0 seconds in one pass."),
+            ("Fast on a phone", "Most of your visitors are on a phone. Pages are measured for phone speed: this site went from 4.3 to 2.0 seconds in one pass."),
             ("An AI assistant on your site", "A chat assistant that answers visitors from your own facts, day and night. This site has one, bottom right."),
             ("Leads straight to WhatsApp", "Enquiry buttons and forms that land in WhatsApp, where Lahore customers already want to talk."),
             ("3D and motion", "A real-time 3D product viewer like ZEPHRA, or scroll-driven scenes like Maison Aurelle, when the brand needs to feel premium."),
             ("SEO from day one", "Titles, schema, sitemap and Google Search Console set up before launch, then checked with SEO-Ray, my own audit tool."),
-            ("Yours to keep", "Built in Next.js or React, documented, on your own domain and hosting. You own the code."),
+            ("Yours to keep", "Built in Next.js or React, documented, on your own domain and hosting."),
         ],
         "extra": [
-            {"label": "Agency or freelancer", "h2": "Looking for a web development company in Lahore?", "dim": "Here's the honest answer.",
+            {"label": "Company or freelancer", "h2": "Looking for a web development company in Lahore?", "dim": "Here's the honest answer.",
              "lede": "I'm one developer, not a company. Here's when that fits.",
              "items": [
                  ("Choose a company when…", "you need a large team, a long support contract, or apps, design and marketing all from one supplier."),
                  ("Choose me when…", "you want a fast, well-built site with AI and lead capture, made by the person you actually talk to."),
-                 ("We can meet", "I'm in Johar Town. For a Lahore business, the first meeting can happen at your office."),
+                 ("A fixed quote", "The page list and features are agreed up front, so the price doesn't grow halfway through."),
              ]},
         ],
-        "proof_projects": ["zephra", "maison-aurelle", "ai-human-labs"],
-        "proof_lede": "Brand sites and 3D builds from the portfolio. Each opens in the project archive.",
+        "proof_projects": ["zephra", "ai-human-labs", "maison-aurelle"],
+        "proof_h": ("Sites I've", "built."),
+        "proof_lede": "ZEPHRA and AI Human Labs open live in a new tab. Maison Aurelle has no public link, so it opens in the archive.",
         "faq": [
-            ("Where are you based?", "Johar Town, Lahore, Pakistan. I meet Lahore clients in person, and build for businesses elsewhere remotely."),
+            ("Where are you based?", "Johar Town, Lahore, Pakistan. I work with Lahore businesses in person and with everyone else remotely."),
             ("Are you a web development company?", "No. I'm a freelance website developer. You work with me directly, from the first meeting to launch."),
             ("How much experience do you have with websites?", "I was a web developer at Ecom Hunt in Lahore from 2021 to 2024, building websites and custom UI for wholesale Amazon businesses. I've been building software for five years."),
             ("How much does a website cost?", "Every website gets a fixed quote after a free consultation. The price depends on the number of pages, 3D or motion work, and any AI or WhatsApp features."),
@@ -430,33 +446,41 @@ SERVICES = [
     },
     {
         # "seo services lahore" / "seo expert lahore": strong demand, 0-1 big platforms in the top 10
-        # (2026-11-24 research). Sells the service; /seo-ray stays the product page and ranks for SEO-Ray searches.
-        # Numbers: 77 → 98 and 4.3 → 2.0 s are on /seo-ray; the #1 is the 2026-11-22 rank check
-        # (research/rayyankhan-dev-rank-check-2026-11-22.md), 9 days after the 2026-11-13 launch.
-        # No client SEO results yet, so none are claimed.
+        # (2026-11-24 research). Sells the service; /seo-ray stays the product page (the proof tile links to it).
+        # Numbers: 77 → 98 and 4.3 → 2.0 s are on /seo-ray. No client SEO results yet, so none are claimed.
+        # Local SEO (Google Business Profile, Maps) is the first thing a Lahore business buys, so it has a card.
         "slug": "seo-services-lahore",
         "lastmod": "2026-11-25",
         "area": [{"@type": "City", "name": "Lahore"}, "Pakistan"],
         "whatsapp": True,
         "cta": "Get a free SEO audit",
-        "contact": ("Want to see how Google reads your site?", "The audit is free."),
+        "contact": ("Want to see how Google reads your site?", "The audit is free.",
+                    "Send me your website address. SEO-Ray audits it, and you get both reports free: one in plain English for you, one with the exact fixes for your developer.",
+                    "Get a free SEO audit", "Free SEO audit"),
+        "process": ([
+            ("01", "Audit", "SEO-Ray crawls the site, measures phone speed and checks what Google has indexed, then writes the two reports."),
+            ("02", "Plan", "The fixes, ranked by how much they matter, with a fixed quote. You decide what gets done."),
+            ("03", "Fix", "The fixes go into the site itself, then SEO-Ray runs again to show what changed."),
+            ("04", "Track", "Your Google positions and Search Console numbers, checked every month, so progress is measured, not promised."),
+        ], "Every fix is measured before and after, so you can see what you paid for."),
         "hero_img": {"src": "/seo-ray-report.jpg", "w": 1588, "h": 1180,
                      "alt": "A page from an SEO-Ray owner report for rayyankhan.dev: category scores, a score trend and finding counts."},
         "film": None, "tall": False, "note": "A real SEO-Ray owner report · rayyankhan.dev, 16 Nov 2026",
-        "glass": [("Free", "SEO-Ray audit, with two reports"), ("77 → 98", "SEO-Ray score on this site after one fix pass")],
-        "nums": [("77 → 98", "SEO-Ray score on this site, one fix pass"), ("4.3 → 2.0 s", "phone load time, same pass"), ("#1", "on Google Pakistan for the owner's name, 9 days after launch")],
+        "glass": [("Free", "SEO-Ray audit, with two reports"), ("Johar Town", "Lahore. We go through the report at your office")],
+        "nums": [("77 → 98", "SEO-Ray score on this site, one fix pass"), ("4.3 → 2.0 s", "phone load time, same pass")],
         "label": "Service · SEO in Lahore",
         "title": "SEO Services in Lahore: Audits, Fixes and Google Setup",
         "description": "SEO services in Lahore from a developer who fixes the site himself: a free SEO-Ray audit, a plain-English report, technical fixes and Search Console setup.",
         "h1": ["SEO in Lahore,", "from the developer", '<span class="grad">who fixes it himself.</span>'],
         "lede": "I'm Agha Muhammad Rayyan Khan, a developer in Johar Town, Lahore, and I built SEO-Ray, my own audit tool. It shows how Google and AI assistants read your site. Then, unlike most SEO shops, I fix the problems in the code myself.",
+        "offer_label": "What's included",
         "offer": [
-            ("A free audit, two reports", "SEO-Ray writes one report in plain English for you and one with the exact fixes for whoever touches the code."),
+            ("A free audit, two reports", "How Google and AI assistants read your site, in one plain-English report for you and one fix list for whoever touches the code."),
             ("Fixes, not just a list", "Robots rules, redirects, canonical tags, sitemaps, broken pages and structured data, fixed in the site itself."),
-            ("Speed on a phone", "Measured with Google's own data and Lighthouse, then fixed. This site went from 4.3 to 2.0 seconds."),
+            ("Speed on a phone", "Measured with Google's own visitor data and Lighthouse, then fixed in the code."),
+            ("Google Maps and your Business Profile", "Your Google Business Profile set up or cleaned up, with the right categories and service area for Lahore searches."),
             ("Google Search Console and Bing", "With your permission, your site gets added, verified and its sitemap submitted. You sign in on Google's own screen."),
             ("Keywords and rank tracking", "Which searches your customers use in Pakistan, where you rank in Google's top 50, and how that moves each month."),
-            ("Ready for AI search", "Checks that ChatGPT-style assistants can read your site and whether Gemini knows your business."),
         ],
         "extra": [
             {"label": "Why a developer", "h2": "Most SEO reports", "dim": "never get fixed.",
@@ -464,13 +488,14 @@ SERVICES = [
              "items": [
                  ("I change the code", "The fixes in your report get done in your site, not handed to someone else to schedule."),
                  ("Every rule is checked", "SEO-Ray's checks follow Google's own documentation, so you don't pay for myths."),
-                 ("We can meet", "I'm in Johar Town. For a Lahore business, we can go through the report at your office."),
+                 ("Proof after every fix", "SEO-Ray runs again after the fixes, so you see the score and the speed move."),
              ]},
         ],
         "proof_projects": ["seo-ray"],
-        "proof_lede": "SEO-Ray is my own tool. It ran on this site first, and the numbers above are from that pass.",
+        "proof_h": ("The tool", "behind it."),
+        "proof_lede": "SEO-Ray is my own tool. It ran on this site first, and the numbers on this page are from that pass.",
         "faq": [
-            ("Where are you based?", "Johar Town, Lahore, Pakistan. I meet Lahore clients in person, and work with businesses elsewhere remotely."),
+            ("Where are you based?", "Johar Town, Lahore, Pakistan. I work with Lahore businesses in person and with everyone else remotely."),
             ("Are you an SEO agency?", "No. I'm a freelance developer who built his own SEO tool. You work with me directly, and the same person who finds a problem fixes it."),
             ("What's in the free SEO audit?", "SEO-Ray crawls your site, measures phone speed, checks what Google has indexed and whether AI assistants can read it, then writes two reports: a plain-English one for you and a fix list for the developer."),
             ("Can you guarantee the #1 spot on Google?", "No, and nobody honest can. I fix what's measurably wrong, track your positions every month and show you the before and after."),
@@ -702,7 +727,10 @@ def foot(scripts: str = "") -> str:
 """
 
 
-def contact(heading: str, dim: str) -> str:
+CONTACT_LEDE = "Send me the workflow, your tool stack, or just describe the manual thing that eats your week. I'll tell you what can be automated, what shouldn't be, and what the first useful version looks like."
+
+
+def contact(heading: str, dim: str, lede: str = CONTACT_LEDE, button: str = "Book a free audit", subject: str = "Free automation audit") -> str:
     return f"""
 <section id="contact" class="contact" aria-labelledby="contact-h">
   <div class="container">
@@ -711,12 +739,12 @@ def contact(heading: str, dim: str) -> str:
       <h2 id="contact-h" data-rv style="margin-top:18px">{e(heading)} <span class="dim">{e(dim)}</span></h2>
       <div class="contact-grid">
         <div data-rv>
-          <p class="lede">Send me the workflow, your tool stack, or just describe the manual thing that eats your week. I'll tell you what can be automated, what shouldn't be, and what the first useful version looks like.</p>
+          <p class="lede">{html.escape(lede, quote=False)}</p>
           <a class="mail" href="mailto:{EMAIL}">{EMAIL}</a>
           <div class="ways"><a href="{WHATSAPP}" target="_blank" rel="noopener">WhatsApp {PHONE}</a><a href="https://www.linkedin.com/in/rayyan45/" target="_blank" rel="me noopener">LinkedIn</a><a href="https://github.com/rayyanse" target="_blank" rel="me noopener">GitHub</a><a href="{UPWORK}" target="_blank" rel="me noopener">Upwork</a></div>
         </div>
         <div class="contact-acts" data-rv>
-          <a href="mailto:{EMAIL}?subject=Free%20automation%20audit" class="btn btn-ink">Book a free audit{ARROW}</a>
+          <a href="mailto:{EMAIL}?subject={quote(subject)}" class="btn btn-ink">{e(button)}{ARROW}</a>
           <button type="button" class="btn btn-line copy" data-copy="{EMAIL}">Copy email<span class="toast" role="status">Copied. Talk soon.</span></button>
         </div>
       </div>
@@ -782,9 +810,12 @@ def sub_hero(*, crumbs: list[tuple[str, str | None]], label: str, lines: list[st
     the film with a still, for a page with no film (no "Watch the film" button then)."""
     cr = "".join((f'<a href="{h}">{e(t)}</a><span aria-hidden="true">/</span>' if h else f"<span>{e(t)}</span>") for t, h in crumbs)
     chip = "".join(f'<span class="chip">{e(x)}</span>' for x in chips)
-    if image:
+    if image and image.get("viz"):
         watch = ""
-        media = f'<div class="screen"><img src="{image["src"]}" alt="{e(image["alt"])}" fetchpriority="high" width="{image["w"]}" height="{image["h"]}" /></div>'
+        media = f'<div class="screen"><div class="proj-viz" data-viz="{image["viz"]}" style="aspect-ratio:16/9" role="img" aria-label="{e(image["alt"])}"></div></div>'
+    elif image:
+        watch = ""
+        media = f'<div class="screen"><img src="{image["src"]}" alt="{e(image["alt"])}" fetchpriority="high" width="{image["w"]}" height="{image["h"]}" style="aspect-ratio:{image["w"]}/{image["h"]};object-fit:contain" /></div>'
     else:
         watch = f'<button type="button" class="btn btn-line" data-watch="/films/{film}.mp4" data-poster="/films/{poster}.jpg"{" data-tall" if tall else ""}>{PLAY}Watch the film</button>'
         media = screen(film, poster, name, tall, hero=True, start=start)
@@ -836,14 +867,17 @@ def next_card(kind: str, href: str, title: str, sub: str, poster: str, tall: boo
 </section>"""
 
 
-def process_section() -> str:
-    proc = "".join(f'<li data-rv><b>{n}</b><h3>{e(t)}</h3><p>{e(p)}</p></li>' for n, t, p in PROCESS)
+PROCESS_LEDE = "The goal isn't just a system that works. It's one you understand well enough to explain to your own team without calling me."
+
+
+def process_section(steps: list[tuple[str, str, str]] = PROCESS, lede: str = PROCESS_LEDE) -> str:
+    proc = "".join(f'<li data-rv><b>{n}</b><h3>{e(t)}</h3><p>{e(p)}</p></li>' for n, t, p in steps)
     return f"""
 <section id="process" class="sec" aria-labelledby="proc-h">
   <div class="container">
     <div class="sec-head">
       <div><div class="label" data-rv>How I work</div><h2 id="proc-h" data-rv>Simple process. <span class="dim">Clear handoff.</span></h2></div>
-      <div class="side"><p class="lede" data-rv>The goal isn't just a system that works. It's one you understand well enough to explain to your own team without calling me.</p></div>
+      <div class="side"><p class="lede" data-rv>{html.escape(lede, quote=False)}</p></div>
     </div>
     <ol class="proc">{proc}</ol>
   </div>
@@ -968,14 +1002,15 @@ def service_page(s: dict) -> str:
     offer ="".join(f'<li data-rv><span class="n">{i+1:02d}</span><h3>{e(t)}</h3><p>{e(p)}</p></li>' for i, (t, p) in enumerate(s["offer"]))
     if s.get("proof_projects"):  # archive projects (no case study): animated tiles, like the homepage's "More builds"
         by = {p["slug"]: p for p in PROJECTS}
-        proof = f'    <div class="tiles">{"".join(project_tile(by[x]) for x in s["proof_projects"])}</div>'
+        proof = f'    <div class="tiles">{"".join(project_tile(by[x], own_link=True) for x in s["proof_projects"])}</div>'
     else:
         proof = '    <div class="works">\n' + "\n".join(work_card(x, TINTS[i % len(TINTS)]) for i, x in enumerate(s["proof"])) + "\n    </div>"
     faq = "".join(f'<details data-rv><summary><h3>{e(q)}</h3><i aria-hidden="true"></i></summary><div class="a"><p>{e(a)}</p></div></details>' for q, a in s["faq"])
     num = f"{order.index(s['slug']) + 1:02d}"
     img = s.get("hero_img")
-    still = img["src"] if img else f"/films/{s['film']}.jpg"
-    return head(s["title"], s["description"], path, f"{SITE}{still}", schema, preload=still) + sub_hero(
+    still = img.get("src", "/og.png") if img else f"/films/{s['film']}.jpg"
+    # An animated-scene hero shows no image, so preload the nav photo (visible at first paint) instead.
+    return head(s["title"], s["description"], path, f"{SITE}{still}", schema, preload=PHOTO if img and img.get("viz") else still) + sub_hero(
         crumbs=[("Home", "/"), (name, None)], label=f"Service {num} / {len(SERVICES):02d} · {name}", lines=s["h1"], lede=s["lede"],
         actions=actions, chips=[], facts=s["glass"], film=s["film"], poster=s["film"], name=name, tall=s["tall"], note=s["note"], start=0,
         image=img) + f"""
@@ -983,7 +1018,7 @@ def service_page(s: dict) -> str:
 <section class="sec" aria-labelledby="offer-h">
   <div class="container">
     <div class="sec-head">
-      <div><div class="label" data-rv>What I build</div><h2 id="offer-h" data-rv>What you <span class="dim">get.</span></h2></div>
+      <div><div class="label" data-rv>{e(s.get("offer_label", "What I build"))}</div><h2 id="offer-h" data-rv>What you <span class="dim">get.</span></h2></div>
     </div>
     <ul class="offer">{offer}</ul>
   </div>
@@ -992,13 +1027,13 @@ def service_page(s: dict) -> str:
 <section class="sec" style="padding-top:0" aria-labelledby="proof-h">
   <div class="container">
     <div class="sec-head">
-      <div><div class="label" data-rv>Proof</div><h2 id="proof-h" data-rv>Built and <span class="dim">running.</span></h2></div>
+      <div><div class="label" data-rv>Proof</div><h2 id="proof-h" data-rv>{e(s.get("proof_h", ("Built and", "running."))[0])} <span class="dim">{e(s.get("proof_h", ("Built and", "running."))[1])}</span></h2></div>
       <div class="side"><p class="lede" data-rv>{e(s.get("proof_lede", "Real systems, each with a walkthrough film of it working."))}</p></div>
     </div>
 {proof}
   </div>
 </section>
-""" + dark_band("Track record", name, "by the numbers.", s["nums"]) + process_section() + f"""
+""" + dark_band("Track record", name, "by the numbers.", s["nums"]) + process_section(*s.get("process", (PROCESS, PROCESS_LEDE))) + f"""
 
 <section class="sec" style="padding-top:0" aria-labelledby="faq-h">
   <div class="container faq-grid">
@@ -1007,8 +1042,8 @@ def service_page(s: dict) -> str:
   </div>
 </section>
 """ + next_card("Next service", f"/{nxt['slug']}", SERVICE_NAMES[nxt["slug"]], nxt["description"],
-                nxt["hero_img"]["src"] if nxt.get("hero_img") else nxt["film"], nxt["tall"]) + contact(
-        *s.get("contact", ("Got a process someone repeats every day?", "That's the one."))) + foot(SCENES_JS if s.get("proof_projects") else "")
+                nxt["hero_img"].get("src", "/og.png") if nxt.get("hero_img") else nxt["film"], nxt["tall"]) + contact(
+        *s.get("contact", ("Got a process someone repeats every day?", "That's the one."))) + foot(SCENES_JS if s.get("proof_projects") or (s.get("hero_img") or {}).get("viz") else "")
 
 
 # ================================================================== homepage
@@ -1116,11 +1151,17 @@ def home_build() -> str:
 </section>"""
 
 
-def project_tile(p: dict) -> str:
-    """An archive project as a tile with its animated scene, linking to its place in /projects."""
-    return f"""<a class="tile" href="/projects#{p['slug']}" data-rv>
+def project_tile(p: dict, own_link: bool = False) -> str:
+    """An archive project as a tile with its animated scene, linking to its place in /projects
+    (or, with own_link, to the project's own site or page when it has one)."""
+    site = p.get("site") if own_link else None
+    ext = bool(site and site.startswith("http"))
+    href = site or f"/projects#{p['slug']}"
+    more = (p.get("site_label") or "Open it") + (" ↗" if ext else "") if site else "See it in the archive"
+    target = ' target="_blank" rel="noopener"' if ext else ""
+    return f"""<a class="tile" href="{href}"{target} data-rv>
         <div class="proj-viz" data-viz="{p['viz']}"></div>
-        <div class="tile-body"><span class="kind">{e(p['tag'])}</span><h3>{e(p['title'])}</h3><p>{e(p['text'])}</p><span class="more">See it in the archive {ARROW_SM}</span></div>
+        <div class="tile-body"><span class="kind">{e(p['tag'])}</span><h3>{e(p['title'])}</h3><p>{e(p['text'])}</p><span class="more">{e(more)} {ARROW_SM}</span></div>
       </a>"""
 
 

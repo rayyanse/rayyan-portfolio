@@ -175,6 +175,21 @@ flowstate:()=>{
   s+=T(302,24,'3 / 6','ac s-in',1.5,END)+Rc(242,32,60,3,'vg',null,1.5)+Rc(242,32,30,3,'vf s-gx',1.5,1.5);
   return s;},
 
+/* /ai-automation-lahore hero: a generic lead flow, no client names. Three ways a lead arrives,
+   one AI step, three things that happen on their own. */
+lahore:()=>
+  T(18,14,'LEADS IN','sm lo')+T(302,14,'DONE FOR YOU','sm lo',null,END)+
+  G('s-pop',.1,Rc(18,22,92,20,'vp',null,6)+T(26,35,'WhatsApp · 11:42pm','sm hi'))+
+  G('s-pop',.3,Rc(18,60,92,20,'vp',null,6)+T(26,73,'Facebook · “price?”','sm hi'))+
+  G('s-pop',.5,Rc(18,98,92,20,'vp',null,6)+T(26,111,'Missed call','sm hi'))+
+  P('M110 32 C134 32 132 70 146 70','vl s-draw',.7)+P('M110 70H146','va s-draw',.8)+P('M110 108 C134 108 132 70 146 70','vl s-draw',.9)+
+  G('s-pop',1.1,C(160,70,15,'vf')+T(160,73.5,'AI','hi',null,MID))+
+  P('M174 70 C188 70 186 32 210 32','vl s-draw',1.4)+P('M174 70H210','va s-draw',1.5)+P('M174 70 C188 70 186 108 210 108','vl s-draw',1.6)+
+  G('s-in',1.7,Rc(210,22,92,20,'vp',null,6)+T(218,35,'Reply · Roman Urdu','sm hi'))+
+  G('s-in',1.9,Rc(210,60,92,20,'vp',null,6,'style="stroke:#3B7DE0"')+T(218,73,'CRM · lead scored','sm hi'))+
+  G('s-in',2.1,Rc(210,98,92,20,'vp',null,6)+T(218,111,'Visit · booked Thu','sm hi'))+
+  T(160,134,'✓ 0 leads left waiting','sm gn s-in',2.4,MID),
+
 aurelle:()=>
   G('s-drift',0,Rc(56,30,118,78,'vp',null,3),'--px:4px')+
   G('s-drift',-2,Rc(110,20,112,90,'vp',null,3,'opacity=".9"'),'--px:9px')+
