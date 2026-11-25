@@ -446,7 +446,7 @@ SERVICES = [
         ],
         "proof_projects": ["zephra", "ai-human-labs", "maison-aurelle"],
         "proof_h": ("Sites I've", "built."),
-        "proof_lede": "ZEPHRA and AI Human Labs open live in a new tab. Maison Aurelle has no public link, so it opens in the archive.",
+        "proof_lede": "All three are live. Each card opens the real site in a new tab.",
         "faq": [
             ("Where are you based?", "Johar Town, Lahore, Pakistan. I work with Lahore businesses in person and with everyone else remotely."),
             ("Are you a web development company?", "No. I'm a freelance website developer. You work with me directly, from the first meeting to launch."),

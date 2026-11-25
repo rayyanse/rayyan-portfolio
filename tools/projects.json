@@ -430,8 +430,8 @@
    "Tailwind"
   ],
   "film": null,
-  "site": null,
-  "site_label": null,
+  "site": "https://maison-aurelle.vercel.app",
+  "site_label": "Open site",
   "case": null,
   "slug": "maison-aurelle",
   "metric": null,
