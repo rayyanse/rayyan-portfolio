@@ -275,6 +275,53 @@
 
   showCap(0);
 
+  /* ---------- live leads dashboard (/ai-automation-lahore hero) ----------
+     Every DASH_MS a sample lead arrives at the top as "new", then moves to replied / called / booked;
+     the counters tick with it. Runs only while on screen and the tab is visible, and doesn't need GSAP,
+     so it sits before the no-GSAP early return. Example data,
+     labelled under the panel. With reduced motion the server-rendered rows stay as they are. */
+  var dash = $('[data-dash]');
+  if (dash && !reduce) {
+    var DASH_MS = 2400, DASH_ROWS_MAX = 5;
+    var DASH_LEADS = [
+      ['WA', 'Ayesha N.', 'DHA mein 1 kanal?', ['replied', 'booked']],
+      ['FB', 'Hamza S.', 'price?', ['replied', 'called']],
+      ['☎', 'Zara F.', 'missed call, 11:05pm', ['called', 'booked']],
+      ['WA', 'Usman K.', 'windows ka rate?', ['replied', 'booked']],
+      ['FB', 'Maria J.', 'location bhej dein', ['replied']],
+      ['WA', 'Fahad M.', 'abhi call karein', ['called', 'booked']],
+      ['☎', 'Noor A.', 'missed call, 8:15am', ['called']],
+      ['WA', 'Saad H.', 'quote chahiye', ['replied', 'booked']]
+    ];
+    var list = $('.dash-list', dash), di = 0, dashOn = false;
+    var num = function (k) { return $('[data-dash-n="' + k + '"]', dash); };
+    var bump = function (k) {
+      var el = num(k); if (!el) return;
+      el.textContent = (+el.textContent || 0) + 1;
+      el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump');
+    };
+    var setSt = function (st, s) { st.className = 'st ' + s; st.textContent = s; bump(s); };
+    var addLead = function () {
+      var L = DASH_LEADS[di++ % DASH_LEADS.length];
+      var li = document.createElement('li'); li.className = 'in';
+      li.innerHTML = '<i></i><span class="nm"></span><span class="msg"></span><em class="st new">new</em>';
+      $('i', li).textContent = L[0]; $('.nm', li).textContent = L[1]; $('.msg', li).textContent = L[2];
+      list.insertBefore(li, list.firstChild);
+      while (list.children.length > DASH_ROWS_MAX) list.removeChild(list.lastChild);
+      bump('total');
+      var st = $('.st', li);
+      L[3].forEach(function (s, i) { setTimeout(function () { setSt(st, s); if (i === L[3].length - 1) li.classList.remove('in'); }, 700 + i * 900); });
+    };
+    var dashTimer = null;
+    var dashRun = function (on) {
+      if (on === dashOn) return; dashOn = on;
+      if (on) { addLead(); dashTimer = setInterval(function () { if (!document.hidden) addLead(); }, DASH_MS); }
+      else clearInterval(dashTimer);
+    };
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { dashRun(es[0].isIntersecting); }, { threshold: 0.2 }).observe(dash);
+    else dashRun(true);
+  }
+
   if (!d.classList.contains('js-motion') || !window.gsap) {
     d.classList.remove('js-motion');
     $$('[data-count]').forEach(countUp);

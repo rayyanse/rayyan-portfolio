@@ -226,17 +226,14 @@ SERVICES = [
         # In-person meetings in Lahore confirmed by Rayyan 2026-11-25. No outcome numbers yet: add them when
         # the Bresco and Al Munir review requests come back. Every other claim comes from the case data above.
         "slug": "ai-automation-lahore",
-        # Homepage-style hero extras (2026-11-25): each event is something Bresco's or Al Munir's system does.
+        # Hero (Rayyan's pick, 2026-11-25): a live leads dashboard (site.js [data-dash]) instead of the
+        # lead-flow scene and floating cards, which covered each other. Sample names, labelled as example data.
         "status": "Taking AI automation projects in Lahore",
-        "events": [("WA", "lead.inbound", "WhatsApp lead answered in Roman Urdu"), ("☎", "call.urdu", "Lead called in Urdu, visit booked"),
-                   ("CRM", "crm.sync", "Lead scored, follow-up set"), ("FB", "fb.intent", "“Price?” comment found in a group"),
-                   ("PDF", "quote.sent", "Priced quote sent on WhatsApp"), ("✓", "followup.sent", "Follow-up sent on schedule")],
         "ticker": ["WhatsApp bots", "Urdu voice calls", "Roman Urdu replies", "n8n workflows", "AI CRM", "Lead scoring", "PDF quotes on WhatsApp", "Google Calendar booking"],
         "lastmod": "2026-11-25",
         "motion": True,  # hero float + cursor tilt, lifting cards (Rayyan asked for more animation, 2026-11-25)
         "area": [{"@type": "City", "name": "Lahore"}, "Pakistan"],
         "whatsapp": True,
-        # Hero is an animated scene, not a film: no single client's film fits a general page (Rayyan, 2026-11-25).
         "glass": [("2", "Lahore client builds: Bresco Properties and Al Munir UPVC"), ("Urdu", "voice calls and Roman Urdu WhatsApp replies")],
         "nums": [("24/7", "answering, after the office closes"), ("1", "person from the first audit to the handoff"), ("Free", "first audit for Lahore businesses")],
         "label": "Service · AI automation in Lahore",
@@ -244,8 +241,8 @@ SERVICES = [
         "description": "AI automation for Lahore businesses: WhatsApp bots, Urdu AI calling agents, n8n workflows and AI CRMs, built by a freelance developer in Johar Town.",
         "h1": ["AI automation", "for Lahore businesses,", '<span class="grad">built by someone you can meet.</span>'],
         "lede": "I'm Agha Muhammad Rayyan Khan, a freelance AI automation developer in Johar Town, Lahore. I build WhatsApp bots, Urdu AI calling agents, n8n workflows and AI CRMs that answer your leads, qualify them and update your records, for Lahore businesses like Bresco Properties and Al Munir UPVC.",
-        "hero_img": {"viz": "lahore", "alt": "Animation: leads from WhatsApp, Facebook and a missed call go to an AI step, which replies in Roman Urdu, scores the lead in the CRM and books a visit."},
-        "film": None, "tall": False, "note": "How a lead moves through the system · illustration",
+        "hero_img": {"dash": True, "alt": "Animation: a leads dashboard where new WhatsApp, Facebook and phone leads arrive and move from new to replied, called and booked."},
+        "film": None, "tall": False, "note": "Example data · how leads move through the system",
         "offer": [
             ("WhatsApp leads answered in seconds", "A bot replies in Roman Urdu or English and hands the chat to the right person on your team, in the same conversation."),
             ("Every lead called in Urdu", "A calling agent phones each new lead in Urdu on a normal Pakistani SIM. No SIP trunk, no new number."),
@@ -828,6 +825,22 @@ def work_card(slug: str, tint: str, feat: bool = False, tag: str | None = None) 
       </article>"""
 
 
+# The live leads dashboard on /ai-automation-lahore. These rows are the no-JS / reduced-motion state;
+# site.js ([data-dash]) streams in more from DASH_LEADS. Sample names: the page labels it example data.
+DASH_ROWS = [("WA", "Ali R.", "3 marla plot available?", "booked"), ("FB", "Sana K.", "price kya hai?", "replied"),
+             ("☎", "Umer T.", "missed call, 9:40pm", "called"), ("WA", "Hina M.", "kal visit ho sakti hai?", "booked"),
+             ("FB", "Bilal A.", "quote bhej dein", "replied")]
+
+
+def lead_dash(alt: str) -> str:
+    rows = "".join(f'<li><i>{e(s)}</i><span class="nm">{e(n)}</span><span class="msg">{e(m)}</span><em class="st {st}">{st}</em></li>' for s, n, m, st in DASH_ROWS)
+    return f"""<div class="dash" data-dash role="img" aria-label="{e(alt)}">
+          <div class="dash-top"><span>Leads today</span><b data-dash-n="total">24</b></div>
+          <ul class="dash-list" aria-hidden="true">{rows}</ul>
+          <div class="dash-foot" aria-hidden="true"><span>replied <b data-dash-n="replied">18</b></span><span>called <b data-dash-n="called">9</b></span><span>booked <b data-dash-n="booked">6</b></span><span class="ok">waiting <b>0</b></span></div>
+        </div>"""
+
+
 def sub_hero(*, crumbs: list[tuple[str, str | None]], label: str, lines: list[str], lede: str, actions: str,
              chips: list[str], facts: list[tuple[str, str]], film: str, poster: str, name: str, tall: bool,
              note: str, start: int, image: dict | None = None, float_: bool = False,
@@ -845,7 +858,10 @@ def sub_hero(*, crumbs: list[tuple[str, str | None]], label: str, lines: list[st
         notes = "".join(f'<div class="note n{i+1}"><i>{e(a)}</i><div><b>{e(b)}</b><span>{e(c)}</span></div></div>' for i, (a, b, c) in enumerate(events[:3]))
         feed = (f'<div class="feed" aria-hidden="true" data-depth="1" data-events="{e(json.dumps(events, ensure_ascii=False))}">{notes}</div>'
                 '<span class="feed-label" aria-hidden="true">Example events</span>')
-    if image and image.get("viz"):
+    if image and image.get("dash"):
+        watch = ""
+        media = f'<div class="screen">{lead_dash(image["alt"])}</div>'
+    elif image and image.get("viz"):
         watch = ""
         media = f'<div class="screen"><div class="proj-viz" data-viz="{image["viz"]}" style="aspect-ratio:16/9" role="img" aria-label="{e(image["alt"])}"></div></div>'
     elif image:
@@ -1045,7 +1061,7 @@ def service_page(s: dict) -> str:
     img = s.get("hero_img")
     still = img.get("src", "/og.png") if img else f"/films/{s['film']}.jpg"
     # An animated-scene hero shows no image, so preload the nav photo (visible at first paint) instead.
-    return head(s["title"], s["description"], path, f"{SITE}{still}", schema, preload=PHOTO if img and img.get("viz") else still) + sub_hero(
+    return head(s["title"], s["description"], path, f"{SITE}{still}", schema, preload=PHOTO if img and (img.get("viz") or img.get("dash")) else still) + sub_hero(
         crumbs=[("Home", "/"), (name, None)], label=f"Service {num} / {len(SERVICES):02d} · {name}", lines=s["h1"], lede=s["lede"],
         actions=actions, chips=[], facts=s["glass"], film=s["film"], poster=s["film"], name=name, tall=s["tall"], note=s["note"], start=0,
         image=img, float_=s.get("motion", False), status=s.get("status"), events=s.get("events"), ticker=s.get("ticker")) + f"""
