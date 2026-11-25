@@ -219,6 +219,58 @@ OWN = ("Who owns the system when it's done?", "You do. You get documentation, wo
 
 SERVICES = [
     {
+        # The local page for "ai automation agency lahore", "ai agency lahore" and "ai automation lahore"
+        # (research/rayyankhan-dev-kw-research-pakistan-2026-11-24.md). Rayyan is a freelancer, not an agency
+        # (Rawaiz Tech isn't registered), so the "agency" search is answered honestly in its own section.
+        # In-person meetings in Lahore confirmed by Rayyan 2026-11-25. No outcome numbers yet: add them when
+        # the Bresco and Al Munir review requests come back. Every other claim comes from the case data above.
+        "slug": "ai-automation-lahore",
+        "lastmod": "2026-11-25",
+        "area": [{"@type": "City", "name": "Lahore"}, "Pakistan"],
+        "whatsapp": True,
+        "glass": [("Johar Town", "Lahore. The audit can happen at your office"), ("2", "Lahore client builds: Bresco Properties and Al Munir UPVC")],
+        "nums": [("2", "Lahore client builds, each with a walkthrough film"), ("Urdu", "voice calls and Roman Urdu WhatsApp replies"), ("24/7", "answering, after the office closes")],
+        "label": "Service · AI automation in Lahore",
+        "title": "AI Automation in Lahore: WhatsApp, Urdu Voice, AI Agents",
+        "description": "AI automation for Lahore businesses: WhatsApp bots, Urdu AI calling agents, n8n workflows and AI CRMs, built by a freelance developer in Johar Town.",
+        "h1": ["AI automation", "for Lahore businesses,", '<span class="grad">built by someone you can meet.</span>'],
+        "lede": "I'm Agha Muhammad Rayyan Khan, a freelance AI automation developer in Johar Town, Lahore. I build WhatsApp bots, Urdu AI calling agents, n8n workflows and AI CRMs that answer your leads, qualify them and update your records, for Lahore businesses like Bresco Properties and Al Munir UPVC.",
+        "film": "bresco", "tall": False, "note": "Bresco Properties walkthrough · example data for illustration",
+        "offer": [
+            ("WhatsApp leads answered in seconds", "A bot replies in Roman Urdu or English and hands the chat to the right agent. Bresco runs five agents' numbers from one inbox."),
+            ("Every lead called in Urdu", "A calling agent phones each new lead in Urdu on a normal Pakistani SIM, with Call Stream. No SIP trunk, no new number."),
+            ("“Price?” comments turned into quotes", "Al Munir's pipeline finds buyers in Facebook groups, calls them and sends a priced PDF quote on WhatsApp, even at night."),
+            ("An AI CRM your agents use on their phones", "Jennifer writes the lead status, score and follow-up from a plain message, so nobody updates a CRM by hand."),
+            ("Workflows between your tools", "n8n, Make.com and Zapier pipelines that move data between Sheets, CRMs and email, with retries and failure alerts."),
+            ("Visits booked without a phone call", "Measurement visits and appointments go straight into Google Calendar, and the team gets an email."),
+        ],
+        "extra": [
+            {"label": "Agency or freelancer", "h2": "Looking for an AI automation agency in Lahore?", "dim": "Here's the honest answer.",
+             "lede": "I'm one developer, not an agency. That's the right choice for some projects and the wrong one for others.",
+             "items": [
+                 ("Choose an agency when…", "you need a team of ten on one project, a long contract with an SLA, or design, mobile apps and marketing from one supplier."),
+                 ("Choose me when…", "you want one system that answers leads, books visits or follows up, built quickly by the person you actually talk to."),
+                 ("No lock-in either way", "You own the workflows and accounts. Everything is documented, so an agency or your own hire can take it over later."),
+             ]},
+            {"label": "Why someone in Lahore", "h2": "Built here, for the way", "dim": "Lahore sells.",
+             "items": [
+                 ("I write the way your customers do", "Pakistani customers message in Roman Urdu. The bots I build reply the same way, and the voice agents talk in Urdu."),
+                 ("I know where the phone setup gets stuck", "Most AI voice vendors here start with “get a SIP trunk”. Call Stream runs on the SIM you already use."),
+                 ("We can meet", "I'm in Johar Town. For a Lahore business, the free audit can happen at your office."),
+             ]},
+        ],
+        "proof": ["bresco", "al-munir", "jennifer", "call-stream"],
+        "faq": [
+            ("Where are you based?", "Johar Town, Lahore, Pakistan. I meet Lahore clients in person, and work with businesses elsewhere remotely."),
+            ("Are you an AI automation agency?", "No. I'm a freelance AI automation developer. You work with me directly, from the first audit to the handoff, with no account manager in between."),
+            ("What have you built for Lahore businesses?", "Bresco Properties, a real estate agency: AI WhatsApp replies and an Urdu call for every lead. Al Munir UPVC, a windows manufacturer: a pipeline that finds buyers in Facebook groups, calls them and sends a priced PDF quote on WhatsApp."),
+            ("Do the bots work in Urdu?", "Yes. The voice agents talk in Urdu, and the WhatsApp bots reply in Roman Urdu and English, the way customers actually write."),
+            ("How much does AI automation cost?", "Every project gets a fixed quote after a free audit. The price depends on how many tools the system connects and how many conversations it handles, so I quote after seeing your process, not before."),
+            ("Which industries do you work with?", "Real estate (Bresco, Jennifer) and manufacturing (Al Munir) so far. Call Stream also has demo films for Umrah travel, healthcare, education, study abroad, BPO, AI agencies and car showrooms."),
+            OWN,
+        ],
+    },
+    {
         "slug": "ai-voice-agents",
         "glass": [("2", "languages the agents talk in: Urdu and English"), ("0", "new numbers needed with Call Stream")],
         "nums": [("20+", "systems shipped, each with a walkthrough film"), ("8", "industry demo films for Call Stream"), ("24/7", "answering, with no office hours")],
@@ -392,7 +444,7 @@ HIRE_CASES = ["call-stream", "jennifer", "sebastian"]
 
 CASE_BY = {c["slug"]: c for c in CASES}
 SERVICE_BY = {s["slug"]: s for s in SERVICES}
-SERVICE_NAMES = {"ai-voice-agents": "AI voice agents", "ai-calling-agent-pakistan": "Urdu AI calling agent", "whatsapp-automation": "WhatsApp automation", "ai-agents-automation": "AI agents & automation"}
+SERVICE_NAMES = {"ai-automation-lahore": "AI automation in Lahore", "ai-voice-agents": "AI voice agents", "ai-calling-agent-pakistan": "Urdu AI calling agent", "whatsapp-automation": "WhatsApp automation", "ai-agents-automation": "AI agents & automation"}
 
 ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
 ARROW_SM = ARROW.replace('<svg ', '<svg width="14" height="14" ', 1)
@@ -778,18 +830,37 @@ def case_page(c: dict) -> str:
 
 # ================================================================== service pages
 
+def extra_section(x: dict, i: int) -> str:
+    """An optional service-page section (label, heading, lede, cards), styled like "What you get"."""
+    items = "".join(f'<li data-rv><h3>{e(t)}</h3><p>{e(p)}</p></li>' for t, p in x["items"])
+    return f"""
+<section class="sec" style="padding-top:0" aria-labelledby="extra-h{i}">
+  <div class="container">
+    <div class="sec-head">
+      <div><div class="label" data-rv>{e(x['label'])}</div><h2 id="extra-h{i}" data-rv>{e(x['h2'])} <span class="dim">{e(x['dim'])}</span></h2></div>
+      {f'<div class="side"><p class="lede" data-rv>{e(x["lede"])}</p></div>' if x.get('lede') else ''}
+    </div>
+    <ul class="offer">{items}</ul>
+  </div>
+</section>
+"""
+
+
 def service_page(s: dict) -> str:
     path = f"/{s['slug']}"
     name = SERVICE_NAMES[s["slug"]]
     order = [x["slug"] for x in SERVICES]
     nxt = SERVICES[(order.index(s["slug"]) + 1) % len(SERVICES)]
     schema = [
-        {"@type": "Service", "@id": f"{SITE}{path}#service", "name": name, "description": s["description"], "url": f"{SITE}{path}", "provider": person(), "areaServed": ["Pakistan", "Worldwide"]},
+        {"@type": "Service", "@id": f"{SITE}{path}#service", "name": name, "description": s["description"], "url": f"{SITE}{path}", "provider": person(), "areaServed": s.get("area", ["Pakistan", "Worldwide"])},
         {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in s["faq"]]},
         crumbs_schema([("Home", "/"), (name, path)]),
     ]
     actions = f'<a href="mailto:{EMAIL}?subject={e(name)}" class="btn btn-ink">Book a free audit{ARROW}</a>'
-    offer = "".join(f'<li data-rv><span class="n">{i+1:02d}</span><h3>{e(t)}</h3><p>{e(p)}</p></li>' for i, (t, p) in enumerate(s["offer"]))
+    if s.get("whatsapp"):
+        actions += f'<a href="{WHATSAPP}" class="btn btn-line" target="_blank" rel="noopener">WhatsApp me</a>'
+    extra = "".join(extra_section(x, i) for i, x in enumerate(s.get("extra", [])))
+    offer ="".join(f'<li data-rv><span class="n">{i+1:02d}</span><h3>{e(t)}</h3><p>{e(p)}</p></li>' for i, (t, p) in enumerate(s["offer"]))
     proof = "\n".join(work_card(x, TINTS[i % len(TINTS)]) for i, x in enumerate(s["proof"]))
     faq = "".join(f'<details data-rv><summary><h3>{e(q)}</h3><i aria-hidden="true"></i></summary><div class="a"><p>{e(a)}</p></div></details>' for q, a in s["faq"])
     num = f"{order.index(s['slug']) + 1:02d}"
@@ -805,7 +876,7 @@ def service_page(s: dict) -> str:
     <ul class="offer">{offer}</ul>
   </div>
 </section>
-
+{extra}
 <section class="sec" style="padding-top:0" aria-labelledby="proof-h">
   <div class="container">
     <div class="sec-head">
@@ -1198,9 +1269,10 @@ def main() -> None:
 
 def write_sitemap() -> None:
     """Every generated page, plus the hand-written pages in HAND_PAGES. lastmod is the build date
-    (FILM_DATE) for generated pages; bump it when content changes."""
-    paths = ["/", "/projects", "/about"] + [f"/{s['slug']}" for s in SERVICES] + [f"/work/{c['slug']}" for c in CASES]
-    entries = [(p, FILM_DATE) for p in paths] + HAND_PAGES
+    (FILM_DATE) for generated pages, or a service's own "lastmod"; bump it when content changes."""
+    entries = ([(p, FILM_DATE) for p in ["/", "/projects", "/about"]]
+               + [(f"/{s['slug']}", s.get("lastmod", FILM_DATE)) for s in SERVICES]
+               + [(f"/work/{c['slug']}", FILM_DATE) for c in CASES] + HAND_PAGES)
     urls = "".join(f"  <url>\n    <loc>{SITE}{p}</loc>\n    <lastmod>{d}</lastmod>\n  </url>\n" for p, d in entries)
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + "</urlset>\n"
     (ROOT / "sitemap.xml").write_text(xml, encoding="utf-8")
