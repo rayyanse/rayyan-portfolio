@@ -369,6 +369,11 @@ a.u{border-bottom:1px solid var(--ink)}
 /* ---- service: what you get ---- */
 .offer{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .offer li{position:relative;padding:28px;border-radius:22px;background:#fff;border:1px solid var(--line)}
+/* service-page hero: event cards around the visual (same .note cards as the homepage) */
+.hero-side{position:relative}
+.hero-side .note.n1{top:-22%;left:-4%}.hero-side .note.n2{top:-8%;right:-6%;left:auto;bottom:auto}.hero-side .note.n3{bottom:-6%;left:-12%;top:auto}
+.hero-side .feed-label{top:-34%;bottom:auto}
+@media(max-width:1000px){.hero-side .note.n1{left:0}.hero-side .note.n2{right:0}.hero-side .note.n3{left:2%}}
 .offer.lift li{transition:transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s cubic-bezier(.16,1,.3,1),border-color .5s}
 @media(hover:hover){.offer.lift li:hover{transform:translateY(-6px);border-color:rgba(59,125,224,.45);box-shadow:0 24px 50px -28px rgba(30,79,168,.45)}}
 .offer .n{font-family:var(--mono);font-size:.72rem;color:var(--blue)}

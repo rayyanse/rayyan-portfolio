@@ -197,6 +197,9 @@
     ['PDF', 'quote.sent', '2-page quote sent on WhatsApp'],
     ['✓', 'followup.sent', 'Follow-up sent on schedule'],
   ];
+  /* a service page brings its own events: <div class="feed" data-events='[["WA","lead.inbound","…"],…]'> */
+  var feedEl = $('.feed[data-events]');
+  if (feedEl) { try { EVENTS = JSON.parse(feedEl.getAttribute('data-events')); } catch (err) { console.warn('feed events unreadable', err); } }
   var notes = $$('.note'), evI = notes.length;
   function swapNote() {
     var slot = notes[evI % notes.length], ev = EVENTS[evI % EVENTS.length]; evI++;
@@ -302,6 +305,9 @@
   if ($('.me')) tl.to('.me', { y: 0, rotation: -3.5, scale: 1, duration: 1.6, ease: 'elastic.out(1,.75)' }, 0.25)
     .fromTo('.note', { opacity: 0, y: 24, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.9, stagger: 0.18 }, 0.9)
     .fromTo('.feed-label', { opacity: 0 }, { opacity: 1, duration: 0.8 }, 1.4);
+  /* service pages: the event cards around the hero visual pop in after it */
+  else if ($('.hero-side .note')) tl.fromTo('.hero-side .note', { opacity: 0, y: 24, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.9, stagger: 0.18, ease: 'back.out(1.6)' }, 0.8)
+    .fromTo('.hero-side .feed-label', { opacity: 0 }, { opacity: 1, duration: 0.8 }, 1.3);
   onIntro(function () {
     tl.play();
     setTimeout(function () { $$('.hero .stats [data-count]').forEach(countUp); }, 700);
@@ -334,11 +340,14 @@
     gsap.set(f, { transformPerspective: 1000 });
     var rx = gsap.quickTo(f, 'rotationY', { duration: 0.9, ease: 'power3.out' }), ry = gsap.quickTo(f, 'rotationX', { duration: 0.9, ease: 'power3.out' });
     var hero = f.closest('.hero');
+    /* the event cards sit on a nearer layer, so they move more than the visual (depth) */
+    var layers = $$('[data-depth]', hero).map(function (el) { var k = parseFloat(el.getAttribute('data-depth')); return { k: k, x: gsap.quickTo(el, 'x', { duration: 1.2, ease: 'power3.out' }), y: gsap.quickTo(el, 'y', { duration: 1.2, ease: 'power3.out' }) }; });
     hero.addEventListener('mousemove', function (e) {
-      var r = f.getBoundingClientRect(), nx = (e.clientX - r.left) / r.width - 0.5, ny = (e.clientY - r.top) / r.height - 0.5;
-      rx(Math.max(-1, Math.min(1, nx)) * 8); ry(-Math.max(-1, Math.min(1, ny)) * 6);
+      var r = f.getBoundingClientRect(), nx = Math.max(-1, Math.min(1, (e.clientX - r.left) / r.width - 0.5)), ny = Math.max(-1, Math.min(1, (e.clientY - r.top) / r.height - 0.5));
+      rx(nx * 8); ry(-ny * 6);
+      layers.forEach(function (l) { l.x(nx * l.k * 40); l.y(ny * l.k * 28); });
     });
-    hero.addEventListener('mouseleave', function () { rx(0); ry(0); });
+    hero.addEventListener('mouseleave', function () { rx(0); ry(0); layers.forEach(function (l) { l.x(0); l.y(0); }); });
   });
 
   /* ---------- scroll reveals (from the original homepage) ----------

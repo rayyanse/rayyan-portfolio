@@ -226,6 +226,12 @@ SERVICES = [
         # In-person meetings in Lahore confirmed by Rayyan 2026-11-25. No outcome numbers yet: add them when
         # the Bresco and Al Munir review requests come back. Every other claim comes from the case data above.
         "slug": "ai-automation-lahore",
+        # Homepage-style hero extras (2026-11-25): each event is something Bresco's or Al Munir's system does.
+        "status": "Taking AI automation projects in Lahore",
+        "events": [("WA", "lead.inbound", "WhatsApp lead answered in Roman Urdu"), ("☎", "call.urdu", "Lead called in Urdu, visit booked"),
+                   ("CRM", "crm.sync", "Lead scored, follow-up set"), ("FB", "fb.intent", "“Price?” comment found in a group"),
+                   ("PDF", "quote.sent", "Priced quote sent on WhatsApp"), ("✓", "followup.sent", "Follow-up sent on schedule")],
+        "ticker": ["WhatsApp bots", "Urdu voice calls", "Roman Urdu replies", "n8n workflows", "AI CRM", "Lead scoring", "PDF quotes on WhatsApp", "Google Calendar booking"],
         "lastmod": "2026-11-25",
         "motion": True,  # hero float + cursor tilt, lifting cards (Rayyan asked for more animation, 2026-11-25)
         "area": [{"@type": "City", "name": "Lahore"}, "Pakistan"],
@@ -393,6 +399,11 @@ SERVICES = [
         # Ecom Hunt years from EXPERIENCE. The speed numbers are SEO-Ray's measured pass on this site (/seo-ray).
         # Process, contact and labels are website-specific (the automation wording was wrong here, 2026-11-25 audit).
         "slug": "website-developer-lahore",
+        "status": "Taking website projects in Lahore",
+        "events": [("AI", "chat.reply", "Visitor question answered"), ("WA", "lead.whatsapp", "Enquiry sent to WhatsApp"),
+                   ("⚡", "page.speed", "Phone load: 2.0 s"), ("3D", "viewer.ready", "3D product viewer loaded"),
+                   ("GSC", "sitemap.sent", "Sitemap submitted to Google"), ("✓", "site.live", "Live on your own domain")],
+        "ticker": ["Next.js", "React", "Three.js", "GSAP", "AI chat assistant", "WhatsApp lead capture", "Schema and sitemap", "Fast on phones"],
         "lastmod": "2026-11-25",
         "motion": True,  # hero float + cursor tilt, lifting cards (Rayyan asked for more animation, 2026-11-25)
         "area": [{"@type": "City", "name": "Lahore"}, "Pakistan", "Worldwide"],
@@ -452,6 +463,11 @@ SERVICES = [
         # Numbers: 77 → 98 and 4.3 → 2.0 s are on /seo-ray. No client SEO results yet, so none are claimed.
         # Local SEO (Google Business Profile, Maps) is the first thing a Lahore business buys, so it has a card.
         "slug": "seo-services-lahore",
+        "status": "Free SEO audits for Lahore businesses",
+        "events": [("SEO", "audit.done", "Audit done: 2 reports written"), ("FIX", "fix.applied", "Canonical tags fixed"),
+                   ("GSC", "sitemap.sent", "Sitemap submitted to Google"), ("⚡", "speed.check", "Phone load 4.3 s → 2.0 s"),
+                   ("MAP", "profile.updated", "Business Profile categories set"), ("↑", "rank.check", "Monthly rank check done")],
+        "ticker": ["SEO-Ray audits", "Google Search Console", "Bing Webmaster Tools", "Lighthouse", "Core Web Vitals", "Structured data", "Google Business Profile", "Rank tracking"],
         "lastmod": "2026-11-25",
         "motion": True,  # hero float + cursor tilt, lifting cards (Rayyan asked for more animation, 2026-11-25)
         "area": [{"@type": "City", "name": "Lahore"}, "Pakistan"],
@@ -814,12 +830,21 @@ def work_card(slug: str, tint: str, feat: bool = False, tag: str | None = None) 
 
 def sub_hero(*, crumbs: list[tuple[str, str | None]], label: str, lines: list[str], lede: str, actions: str,
              chips: list[str], facts: list[tuple[str, str]], film: str, poster: str, name: str, tall: bool,
-             note: str, start: int, image: dict | None = None, float_: bool = False) -> str:
+             note: str, start: int, image: dict | None = None, float_: bool = False,
+             status: str | None = None, events: list[tuple[str, str, str]] | None = None, ticker: list[str] | None = None) -> str:
     """Case and service pages: copy left, the film's framed screen right, facts under the copy.
     The lede is the LCP text and is visible from the first paint. `image` ({src, w, h, alt}) replaces
-    the film with a still, for a page with no film (no "Watch the film" button then)."""
+    the film with a still, for a page with no film (no "Watch the film" button then). Like the
+    homepage hero, a page can add a `status` pill, example `events` floating around the visual
+    (site.js rotates them; labelled as examples) and a `ticker` marquee under the panel."""
     cr = "".join((f'<a href="{h}">{e(t)}</a><span aria-hidden="true">/</span>' if h else f"<span>{e(t)}</span>") for t, h in crumbs)
     chip = "".join(f'<span class="chip">{e(x)}</span>' for x in chips)
+    pill = f'<div class="status" data-hi><span class="pulse" aria-hidden="true"></span>{e(status)}</div>' if status else ""
+    feed = ""
+    if events:
+        notes = "".join(f'<div class="note n{i+1}"><i>{e(a)}</i><div><b>{e(b)}</b><span>{e(c)}</span></div></div>' for i, (a, b, c) in enumerate(events[:3]))
+        feed = (f'<div class="feed" aria-hidden="true" data-depth="1" data-events="{e(json.dumps(events, ensure_ascii=False))}">{notes}</div>'
+                '<span class="feed-label" aria-hidden="true">Example events</span>')
     if image and image.get("viz"):
         watch = ""
         media = f'<div class="screen"><div class="proj-viz" data-viz="{image["viz"]}" style="aspect-ratio:16/9" role="img" aria-label="{e(image["alt"])}"></div></div>'
@@ -835,19 +860,19 @@ def sub_hero(*, crumbs: list[tuple[str, str | None]], label: str, lines: list[st
     <div class="hero-panel sub">
       <div class="hero-copy">
         <nav class="crumbs" aria-label="Breadcrumb" data-hi>{cr}</nav>
-        <div class="label" data-hi style="margin-bottom:22px">{e(label)}</div>
+        {pill}<div class="label" data-hi style="margin-bottom:22px">{e(label)}</div>
         {h1(lines)}
         <p class="lede">{e(lede)}</p>
         <div class="actions" data-hi>{actions}{watch}</div>
         {facts_dl(facts, 'stats') if facts else ''}
       </div>
-      <div class="hero-film{' tall' if tall else ''}"{' data-float' if float_ else ''} data-hi>
+      {'<div class="hero-side">' if feed else ''}<div class="hero-film{' tall' if tall else ''}"{' data-float' if float_ else ''} data-hi>
         {media}
         <p class="film-note">{e(note)}</p>
-      </div>
+      </div>{feed + '</div>' if feed else ''}
     </div>
     {f'<div class="chips" data-hi>{chip}</div>' if chip else ''}
-  </div>
+  </div>{chr(10) + '  ' + marquee(ticker) if ticker else ''}
 </section>"""
 
 
@@ -1023,7 +1048,7 @@ def service_page(s: dict) -> str:
     return head(s["title"], s["description"], path, f"{SITE}{still}", schema, preload=PHOTO if img and img.get("viz") else still) + sub_hero(
         crumbs=[("Home", "/"), (name, None)], label=f"Service {num} / {len(SERVICES):02d} · {name}", lines=s["h1"], lede=s["lede"],
         actions=actions, chips=[], facts=s["glass"], film=s["film"], poster=s["film"], name=name, tall=s["tall"], note=s["note"], start=0,
-        image=img, float_=s.get("motion", False)) + f"""
+        image=img, float_=s.get("motion", False), status=s.get("status"), events=s.get("events"), ticker=s.get("ticker")) + f"""
 
 <section class="sec" aria-labelledby="offer-h">
   <div class="container">
@@ -1167,7 +1192,8 @@ def project_tile(p: dict, own_link: bool = False) -> str:
     site = p.get("site") if own_link else None
     ext = bool(site and site.startswith("http"))
     href = site or f"/projects#{p['slug']}"
-    more = (p.get("site_label") or "Open it") + (" ↗" if ext else "") if site else "See it in the archive"
+    # A live site shows its real address, so a visitor sees exactly where the link goes.
+    more = (site.split("//", 1)[1].rstrip("/") + " ↗" if ext else (p.get("site_label") or "Open it")) if site else "See it in the archive"
     target = ' target="_blank" rel="noopener"' if ext else ""
     return f"""<a class="tile" href="{href}"{target} data-rv>
         <div class="proj-viz" data-viz="{p['viz']}"></div>
