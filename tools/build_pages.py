@@ -866,7 +866,9 @@ def sub_hero(*, crumbs: list[tuple[str, str | None]], label: str, lines: list[st
         media = f'<div class="screen"><div class="proj-viz" data-viz="{image["viz"]}" style="aspect-ratio:16/9" role="img" aria-label="{e(image["alt"])}"></div></div>'
     elif image:
         watch = ""
-        media = f'<div class="screen"><img src="{image["src"]}" alt="{e(image["alt"])}" fetchpriority="high" width="{image["w"]}" height="{image["h"]}" style="aspect-ratio:{image["w"]}/{image["h"]};object-fit:contain" /></div>'
+        # .paper: the still sits on a sheet of its own background colour, so a tightly cropped
+        # screenshot (text to the edges, like the SEO-Ray report) gets margins instead of looking cut off.
+        media = f'<div class="screen paper"><img src="{image["src"]}" alt="{e(image["alt"])}" fetchpriority="high" width="{image["w"]}" height="{image["h"]}" style="aspect-ratio:{image["w"]}/{image["h"]};object-fit:contain" /></div>'
     else:
         watch = f'<button type="button" class="btn btn-line" data-watch="/films/{film}.mp4" data-poster="/films/{poster}.jpg"{" data-tall" if tall else ""}>{PLAY}Watch the film</button>'
         media = screen(film, poster, name, tall, hero=True, start=start)
