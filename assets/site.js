@@ -213,9 +213,12 @@
   function countUp(el) {
     var to = parseFloat(el.getAttribute('data-count')), suf = el.getAttribute('data-suffix') || '';
     if (isNaN(to)) return;
-    if (reduce || !window.gsap) { el.textContent = to + suf; return; }
-    var o = { v: 0 };
-    gsap.to(o, { v: to, duration: 1.6, ease: 'power3.out', onUpdate: function () { el.textContent = Math.round(o.v) + suf; } });
+    /* before -> after numbers ("77 → 98", "4.3 → 2.0 s"): the "before" stays, the "after" counts from it */
+    var pre = el.getAttribute('data-pre') || '', from = parseFloat(el.getAttribute('data-from')), dec = +(el.getAttribute('data-dec') || 0);
+    var fmt = function (v) { return pre + (dec ? v.toFixed(dec) : Math.round(v)) + suf; };
+    if (reduce || !window.gsap) { el.textContent = fmt(to); return; }
+    var o = { v: isNaN(from) ? 0 : from };
+    gsap.to(o, { v: to, duration: isNaN(from) ? 1.6 : 2, ease: 'power3.out', onUpdate: function () { el.textContent = fmt(o.v); } });
   }
 
   /* ---------- text decode: characters scramble, then lock in left to right ---------- */
@@ -321,6 +324,22 @@
       $('.hero').addEventListener('mouseleave', function () { rx(0); ry(0); layers.forEach(function (l) { l.x(0); l.y(0); }); });
     }
   }
+
+  /* ---------- service heroes marked data-float: the visual floats and tilts toward the cursor,
+     like the homepage photo ---------- */
+  $$('.hero-film[data-float]').forEach(function (f) {
+    if (reduce) return;
+    gsap.to(f, { y: -10, duration: 3.4, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 1.5 });
+    if (!(fine && desktop)) return;
+    gsap.set(f, { transformPerspective: 1000 });
+    var rx = gsap.quickTo(f, 'rotationY', { duration: 0.9, ease: 'power3.out' }), ry = gsap.quickTo(f, 'rotationX', { duration: 0.9, ease: 'power3.out' });
+    var hero = f.closest('.hero');
+    hero.addEventListener('mousemove', function (e) {
+      var r = f.getBoundingClientRect(), nx = (e.clientX - r.left) / r.width - 0.5, ny = (e.clientY - r.top) / r.height - 0.5;
+      rx(Math.max(-1, Math.min(1, nx)) * 8); ry(-Math.max(-1, Math.min(1, ny)) * 6);
+    });
+    hero.addEventListener('mouseleave', function () { rx(0); ry(0); });
+  });
 
   /* ---------- scroll reveals (from the original homepage) ----------
      cards wipe open behind a scan line and their title decodes; labels decode; the rest rises in. */

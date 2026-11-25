@@ -227,6 +227,7 @@ SERVICES = [
         # the Bresco and Al Munir review requests come back. Every other claim comes from the case data above.
         "slug": "ai-automation-lahore",
         "lastmod": "2026-11-25",
+        "motion": True,  # hero float + cursor tilt, lifting cards (Rayyan asked for more animation, 2026-11-25)
         "area": [{"@type": "City", "name": "Lahore"}, "Pakistan"],
         "whatsapp": True,
         # Hero is an animated scene, not a film: no single client's film fits a general page (Rayyan, 2026-11-25).
@@ -393,6 +394,7 @@ SERVICES = [
         # Process, contact and labels are website-specific (the automation wording was wrong here, 2026-11-25 audit).
         "slug": "website-developer-lahore",
         "lastmod": "2026-11-25",
+        "motion": True,  # hero float + cursor tilt, lifting cards (Rayyan asked for more animation, 2026-11-25)
         "area": [{"@type": "City", "name": "Lahore"}, "Pakistan", "Worldwide"],
         "whatsapp": True,
         "cta": "Get a free consultation",
@@ -451,6 +453,7 @@ SERVICES = [
         # Local SEO (Google Business Profile, Maps) is the first thing a Lahore business buys, so it has a card.
         "slug": "seo-services-lahore",
         "lastmod": "2026-11-25",
+        "motion": True,  # hero float + cursor tilt, lifting cards (Rayyan asked for more animation, 2026-11-25)
         "area": [{"@type": "City", "name": "Lahore"}, "Pakistan"],
         "whatsapp": True,
         "cta": "Get a free SEO audit",
@@ -769,7 +772,14 @@ def facts_dl(facts: list[tuple[str, str]], cls: str) -> str:
     cells = []
     for v, l in facts:
         m = re.fullmatch(r"(\d+)(\D*)", v)
-        dt = f'<dt data-count="{m.group(1)}" data-suffix="{e(m.group(2))}">{e(v)}</dt>' if m else f'<dt class="word">{e(v)}</dt>'
+        ba = re.fullmatch(r"(\d+(?:\.(\d+))?) → (\d+(?:\.\d+)?)(\D*)", v)  # before → after: "77 → 98", "4.3 → 2.0 s"
+        if m:
+            dt = f'<dt data-count="{m.group(1)}" data-suffix="{e(m.group(2))}">{e(v)}</dt>'
+        elif ba:
+            dt = (f'<dt data-count="{ba.group(3)}" data-from="{ba.group(1)}" data-dec="{len(ba.group(2) or "")}" '
+                  f'data-pre="{e(ba.group(1))} → " data-suffix="{e(ba.group(4))}">{e(v)}</dt>')
+        else:
+            dt = f'<dt class="word">{e(v)}</dt>'
         cells.append(f"<div>{dt}<dd>{e(l)}</dd></div>")
     return f'<dl class="{cls}">{"".join(cells)}</dl>'
 
@@ -804,7 +814,7 @@ def work_card(slug: str, tint: str, feat: bool = False, tag: str | None = None) 
 
 def sub_hero(*, crumbs: list[tuple[str, str | None]], label: str, lines: list[str], lede: str, actions: str,
              chips: list[str], facts: list[tuple[str, str]], film: str, poster: str, name: str, tall: bool,
-             note: str, start: int, image: dict | None = None) -> str:
+             note: str, start: int, image: dict | None = None, float_: bool = False) -> str:
     """Case and service pages: copy left, the film's framed screen right, facts under the copy.
     The lede is the LCP text and is visible from the first paint. `image` ({src, w, h, alt}) replaces
     the film with a still, for a page with no film (no "Watch the film" button then)."""
@@ -831,7 +841,7 @@ def sub_hero(*, crumbs: list[tuple[str, str | None]], label: str, lines: list[st
         <div class="actions" data-hi>{actions}{watch}</div>
         {facts_dl(facts, 'stats') if facts else ''}
       </div>
-      <div class="hero-film{' tall' if tall else ''}" data-hi>
+      <div class="hero-film{' tall' if tall else ''}"{' data-float' if float_ else ''} data-hi>
         {media}
         <p class="film-note">{e(note)}</p>
       </div>
@@ -1013,14 +1023,14 @@ def service_page(s: dict) -> str:
     return head(s["title"], s["description"], path, f"{SITE}{still}", schema, preload=PHOTO if img and img.get("viz") else still) + sub_hero(
         crumbs=[("Home", "/"), (name, None)], label=f"Service {num} / {len(SERVICES):02d} · {name}", lines=s["h1"], lede=s["lede"],
         actions=actions, chips=[], facts=s["glass"], film=s["film"], poster=s["film"], name=name, tall=s["tall"], note=s["note"], start=0,
-        image=img) + f"""
+        image=img, float_=s.get("motion", False)) + f"""
 
 <section class="sec" aria-labelledby="offer-h">
   <div class="container">
     <div class="sec-head">
       <div><div class="label" data-rv>{e(s.get("offer_label", "What I build"))}</div><h2 id="offer-h" data-rv>What you <span class="dim">get.</span></h2></div>
     </div>
-    <ul class="offer">{offer}</ul>
+    <ul class="offer{' lift' if s.get('motion') else ''}">{offer}</ul>
   </div>
 </section>
 {extra}
