@@ -17,7 +17,7 @@ from urllib.parse import quote
 
 SITE = "https://rayyankhan.dev"
 NAME = "Agha Muhammad Rayyan Khan"
-EMAIL = "agharayyan@gmail.com"
+EMAIL = "hello@rayyankhan.dev"
 PHONE = "+92 333 9778846"  # WhatsApp too; the one place to change it on the site (the résumé PDF has its own copy)
 WHATSAPP = "https://wa.me/923339778846"
 UPWORK = "https://www.upwork.com/freelancers/~010f3dc36382e38053"
